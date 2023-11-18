@@ -1,6 +1,6 @@
 <?php
 extract($_REQUEST);
-loadModel('contact');
+require_once './models/contactModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/contact/';
 if (isset($act)) {

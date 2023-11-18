@@ -1,6 +1,6 @@
 <?php
 extract($_REQUEST);
-loadModel('user');
+require_once './models/userModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/user/';
 if (isset($act)) {

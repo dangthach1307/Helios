@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once '../system/Database.php';
-require_once '../system/Load.php';
 require_once '../system/myFunction.php';
 require_once '../system/Global.php';
 extract($_REQUEST);
@@ -10,53 +9,54 @@ require_once 'views/header.php';
 if (isset($option)) {
     switch ($option) {
         case 'category':
-            loadController('category');
+            require_once 'controllers/categoryController.php';
             break;
         case 'brand':
-            loadController('brand');
+            require_once 'controllers/brandController.php';
+
             break;
         case 'product':
-            loadController('product');
+            require_once 'controllers/productController.php';
             break;
         case 'user':
-            loadController('user');
+            require_once 'controllers/userController.php';
             break;
         case 'customer':
-            loadController('customer');
+            require_once 'controllers/customerController.php';
             break;
         case 'rank':
-            loadController('rank');
+            require_once 'controllers/rankController.php';
             break;
         case 'menu':
-            loadController('menu');
+            require_once 'controllers/menuController.php';
             break;
         case 'slider':
-            loadController('slider');
+            require_once 'controllers/sliderController.php';
             break;
         case 'banner':
-            loadController('banner');
+            require_once 'controllers/bannerController.php';
             break;
         case 'topic':
-            loadController('topic');
+            require_once 'controllers/topicController.php';
             break;
         case 'post':
-            loadController('post');
+            require_once 'controllers/postController.php';
             break;
         case 'single_page':
-            loadController('singlepage');
+            require_once 'controllers/singlepageController.php';
             break;
         case 'contact':
-            loadController('contact');
+            require_once 'controllers/contactController.php';
             break;
         case 'config':
-            loadController('config');
+            require_once 'controllers/configController.php';
             break;
         default:
-            loadController('dashboard');
+            require_once 'controllers/dashboardController.php';
             break;
     }
 } else {
-    loadController('dashboard');
+    require_once 'controllers/categoryController.php';
 }
 require_once 'views/footer.php';
 require_once 'views/modules/message.php';

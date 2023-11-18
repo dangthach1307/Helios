@@ -1,7 +1,7 @@
 <?php
 extract($_REQUEST);
-loadModel('brand');
-loadModel('product');
+require_once './models/brandModel.php';
+require_once './models/productModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/brand/';
 if (isset($act)) {

@@ -1,6 +1,6 @@
 <?php
 extract($_REQUEST);
-loadmodel('banner');
+require_once './models/bannerModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/banner/';
 if (isset($act)) {

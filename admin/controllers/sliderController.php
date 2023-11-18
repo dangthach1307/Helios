@@ -1,7 +1,7 @@
 <?php
 extract($_REQUEST);
-loadmodel('slider');
-loadModel('category');
+require_once './models/sliderModel.php';
+require_once './models/categoryModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/slider/';
 if (isset($act)) {

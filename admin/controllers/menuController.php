@@ -1,9 +1,9 @@
 <?php
 extract($_REQUEST);
-loadModel('menu');
-loadModel('category');
-loadModel('topic');
-loadModel('singlepage');
+require_once './models/menuModel.php';
+require_once './models/categoryModel.php';
+require_once './models/topicModel.php';
+require_once './models/singlepageModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/menu/';
 if (isset($act)) {

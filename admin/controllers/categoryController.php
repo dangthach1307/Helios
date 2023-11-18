@@ -1,7 +1,7 @@
 <?php
 extract($_REQUEST);
-loadModel('category');
-loadModel('Product');
+require_once './models/categoryModel.php';
+require_once './models/productModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/category/';
 if (isset($act)) {

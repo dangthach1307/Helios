@@ -1,6 +1,6 @@
 <?php
 extract($_REQUEST);
-loadModel('rank');
+require_once './models/rankModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/rank/';
 if (isset($act)) {

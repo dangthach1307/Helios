@@ -1,6 +1,6 @@
 <?php
 extract($_REQUEST);
-loadModel('customer');
+require_once './models/customerModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/customer/';
 if (isset($act)) {

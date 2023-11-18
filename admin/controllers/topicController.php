@@ -1,7 +1,7 @@
 <?php
 extract($_REQUEST);
-loadModel('topic');
-loadModel('post');
+require_once './models/topicModel.php';
+require_once './models/postModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/topic/';
 if (isset($act)) {

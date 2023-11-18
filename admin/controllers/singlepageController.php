@@ -1,6 +1,6 @@
 <?php
 extract($_REQUEST);
-loadModel('singlepage');
+require_once './models/singlepageModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/single_page/';
 if (isset($act)) {

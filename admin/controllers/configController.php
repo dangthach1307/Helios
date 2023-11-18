@@ -1,6 +1,6 @@
 <?php
 extract($_REQUEST);
-loadModel('config');
+require_once './models/configModel.php';
 $path = 'views/pages/config/';
 if (isset($act)) {
     switch ($act) {

@@ -1,9 +1,9 @@
 <?php
 extract($_REQUEST);
-loadModel('brand');
-loadModel('category');
-loadModel('product');
-loadModel('product_image');
+require_once './models/brandModel.php';
+require_once './models/categoryModel.php';
+require_once './models/productModel.php';
+require_once './models/product_imageModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/product/';
 if (isset($act)) {
