@@ -56,7 +56,8 @@ if (isset($option)) {
             break;
     }
 } else {
-    require_once 'controllers/categoryController.php';
+    require_once 'controllers/dashboardController.php';
 }
+require_once 'views/modules/product-detail.php';
 require_once 'views/footer.php';
 require_once 'views/modules/message.php';

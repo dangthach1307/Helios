@@ -105,7 +105,8 @@
                                                     <a class="btn btn-sm btn-danger" style="width:80%; margin:5%"><i class="fa fa-toggle-off"></i> Hết hàng</a>
                                                 <?php endif; ?>
                                                 <br>
-                                                <a class="btn btn-sm btn-info" href="index.php?option=product&act=update&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-eye"></i> Chi tiết</a><br>
+                                                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal" style="width:80%; margin:5%"><i class="fa fa-eye"></i> Chi tiết</button>
+                                                <!-- <a class="btn btn-sm btn-info" href="index.php?option=product&act=update&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-eye"></i> Chi tiết</a><br> -->
                                                 <a class="btn btn-sm btn-info" href="index.php?option=product&act=update&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-edit"></i> Cập nhật</a><br>
                                                 <a class="btn btn-sm btn-danger" href="index.php?option=product&act=deltrash&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-trash"></i> Lưu trữ</a>
                                             </td>
