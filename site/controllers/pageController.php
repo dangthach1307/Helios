@@ -1,9 +1,9 @@
 <?php
 extract($_REQUEST);
-loadModel('brand');
-loadModel('category');
-loadModel('product');
-loadModel('contact');
+require_once './models/brandModel.php';
+require_once './models/categoryModel.php';
+require_once './models/productModel.php';
+require_once './models/contactModel.php';
 
 
 if (isset($act)) {
