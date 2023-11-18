@@ -20,3 +20,4 @@ if (isset($option)) {
 } else {
     header('location: ?option=page&act=home');
 }
+// "tet";
