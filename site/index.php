@@ -11,6 +11,7 @@ require_once 'models/cartModel.php';
 if (isset($_SESSION['cart'])) {
     $cart_count = cart_total();
     $cart_count_product = cart_total_product();
+    $total_price = cart_total_price();
     $list = cart_content();
 } else {
     $cart_count = 0;

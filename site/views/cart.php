@@ -39,12 +39,12 @@
                                                 <table class="shop-cart-table">
                                                     <thead>
                                                         <tr>
-                                                            <th class="product-thumbnail">Image</th>
-                                                            <th class="product-name ">Product Info</th>
-                                                            <th class="product-price ">Unit Price</th>
-                                                            <th class="product-quantity">Quantity</th>
-                                                            <th class="product-subtotal ">Total</th>
-                                                            <th class="product-remove">Remove</th>
+                                                            <th class="product-thumbnail">Hình ảnh</th>
+                                                            <th class="product-name ">Thông tin sản phẩm</th>
+                                                            <th class="product-price ">Giá tiền</th>
+                                                            <th class="product-quantity">Số lượng</th>
+                                                            <th class="product-subtotal ">Tổng tiền</th>
+                                                            <th class="product-remove">Xoá</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -65,16 +65,11 @@
                                                                     <a href="?option=page&act=product-detail&id=<?= $item_cart['slug'] ?>">
                                                                         <?= $item_cart['name'] ?>
                                                                     </a> <br>
-                                                                    <?php
-                                                                    // Lấy thông tin từ mảng $item_cart
-                                                                    $color = implode(',', $item_cart['color']);
-                                                                    $size = implode(',', $item_cart['size']);
-                                                                    ?>
-                                                                    <?php if ($color !== null) : ?>
-                                                                        Màu: <?= $color ?><br>
+                                                                    <?php if ($item_cart['material'] !== null) : ?>
+                                                                        Chất liệu: <?= $item_cart['material'] ?><br>
                                                                     <?php endif; ?>
-                                                                    <?php if ($size !== null) : ?>
-                                                                        Kích cỡ: <?= $size ?><br>
+                                                                    <?php if ($item_cart['size'] !== null) : ?>
+                                                                        Kích cỡ: <?= $item_cart['size'] ?><br>
                                                                     <?php endif; ?>
                                                                 </td>
                                                                 <td class="item-price">
@@ -91,9 +86,7 @@
                                                                                     <input type="text" class="cart-plus-minus-box" title="Qty" value="<?= $item_cart['qty'] ?>" maxlength="12" id="qty<?= $item_cart['id'] ?>" name="qty[]" readonly>
                                                                                     <button onClick="var result = document.getElementById('qty<?= $item_cart['id'] ?>'); var qty = parseInt(result.value); if (!isNaN(qty)) result.value = qty + 1;" class="inc qtybutton" type="button">
                                                                                         <i class="fa fa-plus">&nbsp;</i>
-                                                                                        <!-- <div class="dec qtybutton">-</div>
-                                                                                <input value="2" name="qtybutton" class="cart-plus-minus-box" type="text">
-                                                                                <div class="inc qtybutton">+</div> -->
+                                                                                    </button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -119,31 +112,22 @@
                                                     <div class="col-md-8 col-sm-7 col-xs-12">
                                                         <div class="update-coupne-area">
                                                             <div class="update-continue-btn text-right">
-                                                                <button class="button btn-default" title="Continue Shopping" name="continue_shop_action">
-                                                                    <span><a href="index.php?option=page&act=home">Continue Shopping</a></span>
+                                                                <button class="button btn-default" title="Tiếp tục mua hàng" name="continue_shop_action">
+                                                                    <span><a href="index.php?option=page&act=home">Tiếp tục mua hàng</a></span>
                                                                 </button>
-                                                                <button class="button btn-update" title="Update Cart" value="update_qty" name="update_cart_action" type="submit">
-                                                                    <span>Update Cart</span>
+                                                                <button class="button btn-update" title="Cập nhật giỏ hàng" value="update_qty" name="update_cart_action" type="submit">
+                                                                    <span>Cập nhật giỏ hàng</span>
                                                                 </button>
-                                                                <button class="button btn-empty" title="Clear Cart" value="empty_cart" name="clear_cart_action">
-                                                                    <span><a href="index.php?option=cart&act=cart-delete">Clear Cart</a></span>
+                                                                <button class="button btn-empty" title="Xoá giỏ hàng" value="empty_cart" name="clear_cart_action">
+                                                                    <span><a href="index.php?option=cart&act=cart-delete">Xoá giỏ hàng</a></span>
                                                                 </button>
                                                             </div>
-                                                            <!-- <div class="coupn-area">
-                                                                <div class="discount">
-                                                                    <h3>Discount Codes</h3>
-                                                                    <label for="coupon_code">Enter your coupon code if you have one.</label>
-                                                                    <input type="hidden" value="0" id="remove-coupone" name="remove">
-                                                                    <input type="text" value="" name="coupon_code" id="coupon_code" class="input-text fullwidth">
-                                                                    <button value="Apply Coupon" onclick="discountForm.submit(false)" class="button coupon " title="Apply Coupon" type="button"><span>Apply Coupon</span></button>
-                                                                </div>
-                                                            </div> -->
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-sm-5 col-xs-12">
                                                         <div class="cart-total-area">
                                                             <div class="catagory-title cat-tit-5 text-right">
-                                                                <h3>Cart Totals</h3>
+                                                                <h3>Tổng tiền đơn hàng</h3>
                                                             </div>
                                                             <!-- <div class="sub-shipping">
                                                                 <p>Subtotal <span><?= number_format($total) ?></span></p>

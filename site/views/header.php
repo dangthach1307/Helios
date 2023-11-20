@@ -63,14 +63,14 @@
                                                         <a class="basket-icon" href="index.php?option=cart">
                                                             <i class="fa fa-shopping-basket"></i> Giỏ hàng
                                                             <span>
-                                                                <?php echo $cart_count; ?>
+                                                                <?= $cart_count; ?>
                                                             </span>
                                                         </a>
                                                         <div class="top-cart-content">
                                                             <div class="block-subtitle">
                                                                 <div class="top-subtotal">
-                                                                    <?php echo $cart_count_product; ?> items,
-                                                                    <span class="price"> Vnđ</span>
+                                                                    <?= $cart_count_product; ?> sản phẩm,
+                                                                    <span class="price"><?= number_format($total_price) ?> Vnđ</span>
                                                                 </div>
                                                             </div>
                                                             <ul class="mini-products-list" id="cart-sidebar">
@@ -85,8 +85,8 @@
                                                                                     <div class="access">
                                                                                         <form action="?option=cart&act=cart-delete&pid=<?= $item_cart['id'] ?>" method="post">
                                                                                             <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
-                                                                                            <button type="submit" title="Remove This Item" class="btn-remove1" style="border:none;">
-                                                                                                <span>Remove</span>
+                                                                                            <button type="submit" title="Xoá sản phẩm này" class="btn-remove1" style="border:none;">
+                                                                                                <span>Xoá</span>
                                                                                             </button>
 
                                                                                         </form>
@@ -95,9 +95,9 @@
                                                                                         <a href="?option=page&act=product-detail&id=<?= $item_cart['slug'] ?>">
                                                                                             <?= $item_cart['name'] ?>
                                                                                         </a><br>
-                                                                                        <?= 'Size: ' . (is_array($item_cart['size']) ? implode(', ', $item_cart['size']) : $item_cart['size']) ?>
+                                                                                        <?= '- Chất liệu: ' . $item_cart['material'] . '<br>- Kích cỡ: ' . (is_array($item_cart['size']) ? implode(', ', $item_cart['size']) : $item_cart['size']) ?>
                                                                                     </p>
-                                                                                    <strong><?= $item_cart['qty'] ?></strong> x <span class="price"><?= $item_cart['price'] ?></span>
+                                                                                    <strong><?= $item_cart['qty'] ?></strong> x <span class="price"><?= number_format($item_cart['price']) ?> Vnđ</span>
                                                                                 </div>
                                                                             </div>
                                                                         </li>

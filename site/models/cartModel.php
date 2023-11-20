@@ -105,6 +105,22 @@ function cart_total_product()
         return $number;
     }
 }
+function cart_total_price()
+{
+    if (!isset($_SESSION['cart'])) {
+        return 0;
+    } else {
+        $cart = $_SESSION['cart'];
+        $total_price = 0;
+
+        foreach ($cart as $item) {
+            $total_price += $item['qty'] * $item['price'];
+        }
+
+        return $total_price;
+    }
+}
+
 
 function cart_delete($id = null)
 {
