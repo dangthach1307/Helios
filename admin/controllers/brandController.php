@@ -8,7 +8,7 @@ if (isset($act)) {
     switch ($act) {
         case 'insert':
             $list_brand = brand_all('index');
-            if (isset($_POST['THEMTHUONGHIEU'])) {
+            if (isset($_POST['THEM'])) {
                 $slug = str_slug($_POST['name']);
                 if (brand_slug_exists($slug) == FALSE) {
                     //Kiểm tra trả về FALSE tức là không có slug trùng

@@ -47,7 +47,6 @@
                                         <th class="text-center" width="200px">Thông tin sản phẩm</th>
                                         <th class="text-center" width="100px">Loại</th>
                                         <th class="text-center" width="100px">Thương hiệu</th>
-                                        <th class="text-center" width="100px">Tồn kho</th>
                                         <th class="text-center" width="100px">Thống kê</th>
                                         <th class="text-center" width="100px">Chức năng</th>
                                     </tr>
@@ -79,14 +78,12 @@
                                             </td>
                                             <td class="text-center"><?= $row['category_name']; ?></td>
                                             <td class="text-center"><?= $row['brand_name']; ?></td>
-                                            <td class="text-center">
-                                                <?php if ($row['quantity'] > 0) : ?>
-                                                    <?= $row['quantity']; ?>
-                                                <?php else : ?>
-                                                    Hết hàng
-                                                <?php endif; ?>
-                                            </td>
                                             <td class="text-left">
+                                                <?php if ($row['quantity'] > 0) : ?>
+                                                    - Kho: <?= $row['quantity']; ?><br>
+                                                <?php else : ?>
+                                                    - Hết hàng<br>
+                                                <?php endif; ?>
                                                 - Lượt xem: <?= $row['view']; ?><br>
                                                 - Đã bán: <?= $row['sold_count']; ?>
                                             </td>
