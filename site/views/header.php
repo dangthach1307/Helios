@@ -59,42 +59,58 @@
                                         <div class="menu_top">
                                             <div class="top-cart-contain pull-right">
                                                 <div class="mini-cart">
-                                                    <div class="basket"><a class="basket-icon" href="#"><i class="fa fa-shopping-basket"></i> Shopping Cart <span>3</span></a>
+                                                    <div class="basket">
+                                                        <a class="basket-icon" href="index.php?option=cart">
+                                                            <i class="fa fa-shopping-basket"></i> Giỏ hàng
+                                                            <span>
+                                                                <?php echo $cart_count; ?>
+                                                            </span>
+                                                        </a>
                                                         <div class="top-cart-content">
                                                             <div class="block-subtitle">
-                                                                <div class="top-subtotal">3 items, <span class="price">$399.49</span></div>
+                                                                <div class="top-subtotal">
+                                                                    <?php echo $cart_count_product; ?> items,
+                                                                    <span class="price"> Vnđ</span>
+                                                                </div>
                                                             </div>
                                                             <ul class="mini-products-list" id="cart-sidebar">
-                                                                <li class="item">
-                                                                    <div class="item-inner"><a class="product-image" title="product tilte is here" href="product-detail.html"><img alt="product tilte is here" src="../public/images/product/giap-thong-kho-0.jpg"></a>
-                                                                        <div class="product-details">
-                                                                            <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="fa fa-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                                            <p class="product-name"><a href="product-detail.html">Product tilte is here</a></p>
-                                                                            <strong>1</strong> x <span class="price">$119.99</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="item">
-                                                                    <div class="item-inner"><a class="product-image" title="Product tilte is here" href="product-detail.html"><img alt="Product tilte is here" src="../public/images/product/giap-thong-kho-0.jpg"></a>
-                                                                        <div class="product-details">
-                                                                            <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="fa fa-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                                            <p class="product-name"><a href="product-detail.html">Product tilte is here</a></p>
-                                                                            <strong>1</strong> x <span class="price">$79.66</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="item">
-                                                                    <div class="item-inner"><a class="product-image" title="Product tilte is here" href="product-detail.html"><img alt="Product tilte is here" src="../public/images/product/giap-thong-kho-0.jpg"></a>
-                                                                        <div class="product-details">
-                                                                            <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="fa fa-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                                                                            <p class="product-name"><a href="product-detail.html">Product tilte is here</a></p>
-                                                                            <strong>1</strong> x <span class="price">$99.89</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
+                                                                <?php if ($cart_count > 0) : ?>
+                                                                    <?php foreach ($list as $item_cart) : ?>
+                                                                        <li class="item">
+                                                                            <div class="item-inner">
+                                                                                <a class="product-image" title="<?= $item_cart['name'] ?>" href="?option=page&act=product-detail&id=<?= $item_cart['slug'] ?>">
+                                                                                    <img alt="<?= $item_cart['name'] ?>" src="../public/images/product/<?= $item_cart['img'] ?>">
+                                                                                </a>
+                                                                                <div class="product-details">
+                                                                                    <div class="access">
+                                                                                        <form action="?option=cart&act=cart-delete&pid=<?= $item_cart['id'] ?>" method="post">
+                                                                                            <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
+                                                                                            <button type="submit" title="Remove This Item" class="btn-remove1" style="border:none;">
+                                                                                                <span>Remove</span>
+                                                                                            </button>
+
+                                                                                        </form>
+                                                                                    </div>
+                                                                                    <p class="product-name">
+                                                                                        <a href="?option=page&act=product-detail&id=<?= $item_cart['slug'] ?>">
+                                                                                            <?= $item_cart['name'] ?>
+                                                                                        </a><br>
+                                                                                        <?= 'Size: ' . (is_array($item_cart['size']) ? implode(', ', $item_cart['size']) : $item_cart['size']) ?>
+                                                                                    </p>
+                                                                                    <strong><?= $item_cart['qty'] ?></strong> x <span class="price"><?= $item_cart['price'] ?></span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    <?php endforeach; ?>
+                                                                <?php else : ?>
+                                                                    <li class="item">
+                                                                        <p class="text-center">Chưa có sản phẩm trong giỏ hàng</p>
+                                                                    </li>
+                                                                <?php endif; ?>
                                                             </ul>
-                                                            <div class="actions"> <a href="shopping-cart.html" class="view-cart"><span>View Cart</span></a>
-                                                                <button onclick="window.location.href='checkout.html'" class="btn-checkout" title="Checkout" type="button"><span>Checkout</span></button>
+                                                            <div class="actions">
+                                                                <a href="?option=cart&act=cart-view" class="view-cart"><span>Giỏ hàng</span></a>
+                                                                <button onclick="window.location.href='?option=cart&act=cart-checkout'" class="btn-checkout" title="Checkout" type="button"><span>Thanh toán</span></button>
                                                             </div>
                                                         </div>
                                                     </div>

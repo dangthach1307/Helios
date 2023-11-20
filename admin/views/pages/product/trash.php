@@ -10,8 +10,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item"><a href="index.php?option=product">Sản phẩm</a></li>
-                        <li class="breadcrumb-item active">Thùng rác sản phẩm</li>
+                        <li class="breadcrumb-item active">Danh sách sản phẩm</li>
                     </ol>
                 </div>
             </div>
@@ -27,7 +26,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
-                                <h3 class="card-title font-weight-bold py-2">Quản lý thùng rác sản phẩm</h3>
+                                <h3 class="card-title font-weight-bold py-2">Danh sách sản phẩm</h3>
                                 <div class="card-tools">
                                     <a class="btn btn-info" href="index.php?option=product">
                                         <i class="fa fa-arrow-left"></i> Thoát
@@ -37,16 +36,16 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" class="table table-bordered table-striped table-compact table-hover">
+                            <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="text-left" width="10px">#</th>
-                                        <th class="text-left" width="100px">Hình</th>
-                                        <th class="text-left" width="200px">Thông tin sản phẩm</th>
-                                        <th class="text-left" width="100px">Thương hiệu</th>
-                                        <th class="text-left" width="100px">Tồn kho</th>
-                                        <th class="text-left" width="100px">Thống kê</th>
-                                        <th class="text-left" width="100px">Chức năng</th>
+                                        <th class="text-center" width="10px">#</th>
+                                        <th class="text-center" width="100px">Hình</th>
+                                        <th class="text-center" width="200px">Thông tin sản phẩm</th>
+                                        <th class="text-center" width="100px">Loại</th>
+                                        <th class="text-center" width="100px">Thương hiệu</th>
+                                        <th class="text-center" width="100px">Thống kê</th>
+                                        <th class="text-center" width="100px">Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,29 +71,22 @@
                                             </td>
                                             <td class="text-left">
                                                 Tên: <?= $row['name']; ?> <br>
-                                                Loại: <?= $row['category_name']; ?> <br>
-                                                Thương hiệu: <?= $row['brand_name']; ?> <br>
-                                                ---------------------<br>
-                                                Chất liệu: <?= $row['material']; ?><br>
-                                                Kích cỡ: <?= $row['size']; ?><br>
-                                                Giá: <?= number_format($row['price']); ?><br>
-                                                Khuyến mãi : <?= $row['promotion']; ?>(%) <br>
+                                                SKU: <?= $row['SKU']; ?><br>
                                             </td>
+                                            <td class="text-center"><?= $row['category_name']; ?></td>
                                             <td class="text-center"><?= $row['brand_name']; ?></td>
-                                            <td class="text-center">
-                                                <?php if ($row['quantity'] > 0) : ?>
-                                                    <?= $row['quantity']; ?>
-                                                <?php else : ?>
-                                                    Hết hàng
-                                                <?php endif; ?>
-                                            </td>
                                             <td class="text-left">
+                                                <?php if ($row['quantity'] > 0) : ?>
+                                                    - Kho: <?= $row['quantity']; ?><br>
+                                                <?php else : ?>
+                                                    - Hết hàng<br>
+                                                <?php endif; ?>
                                                 - Lượt xem: <?= $row['view']; ?><br>
-                                                - Số lượng bán: <?= $row['sold_count']; ?>
+                                                - Đã bán: <?= $row['sold_count']; ?>
                                             </td>
                                             <td class="text-center">
-                                                <a class="btn btn-sm btn-info" href="index.php?option=product&act=retrash&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-undo"></i> Khôi phục</a><br>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=product&act=delete&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-trash"></i> Xoá</a>
+                                                <a class="btn btn-sm btn-info" style="margin:2%" href="index.php?option=product&act=retrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-undo"></i></a>
+                                                <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

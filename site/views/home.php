@@ -4,7 +4,7 @@
   <div class="container">
       <div class="support-policy-box">
           <div class="row">
-                <div class="col-md-3 col-sm-4 col-xs-12">
+              <div class="col-md-3 col-sm-4 col-xs-12">
                   <div class="support-policy"> <i class="fa fa-money"></i>
                       <div class="content">Tiết kiệm chi tiêu</div>
                   </div>
@@ -48,12 +48,20 @@
                                                           <a class="product-image" title="<?= $item['slug'] ?>" href="?option=page&act=product-detail&slug=<?= $item['slug'] ?>">
                                                               <img alt="<?= $item['slug'] ?>" src="../public/images/product/<?= $item['img'] ?>" height="250px">
                                                           </a>
-                                                          <!-- <div class="new-label new-top-left">new</div> -->
-                                                          <!-- <a class="quickview-btn" href="quick-view.html"><span>Quick View</span></a> <a href="wishlist.html">
-                                                              <div class="mask-left-shop"><i class="fa fa-heart"></i></div>
-                                                          </a> <a href="compare.html">
-                                                              <div class="mask-right-shop"><i class="fa fa-signal"></i></div>
+                                                          <div class="new-label new-top-left">new</div>
+                                                          <!-- <a class="quickview-btn" href="quick-view.html">
+                                                              <span>Quick View</span>
                                                           </a> -->
+                                                          <a href="index.php?option=cart&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
+                                                              <div class="mask-left-shop">
+                                                                  <i class="fa fa-heart"></i>
+                                                              </div>
+                                                          </a>
+                                                          <a href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Thêm giỏ hàng">
+                                                              <div class="mask-right-shop">
+                                                                  <i class="fa fa-shopping-cart"></i>
+                                                              </div>
+                                                          </a>
                                                       </div>
                                                   </div>
                                                   <div class="item-info">
@@ -73,7 +81,7 @@
                                                                               </span>
                                                                           </span>
                                                                           <p class="old-price">
-                                                                              <span class="price-label">Regular Price:</span>
+                                                                              <span class="price-label">Giá gốc:</span>
                                                                               <span class="price"> <?= number_format($item['price']) ?> Vnđ </span>
                                                                           </p>
                                                                       <?php else : ?>
@@ -83,19 +91,6 @@
                                                                               </span>
                                                                           </span>
                                                                       <?php endif; ?>
-                                                                  </div>
-                                                              </div>
-                                                              <div class="actions">
-                                                                  <div class="add_cart">
-                                                                      <form action="?option=cart&act=add-cart&pid=<?= $item['id'] ?>" method="post" enctype="multipart/form-data" class="product_addtocart_form">
-                                                                          <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
-                                                                          <button class="button btn-cart" type="submit">
-                                                                              <span>
-                                                                                  <i class="fa fa-shopping-cart"></i>
-                                                                                  Thêm giỏ hàng
-                                                                              </span>
-                                                                          </button>
-                                                                      </form>
                                                                   </div>
                                                               </div>
                                                           </div>
@@ -123,18 +118,33 @@
                                               <div class="item-img">
                                                   <div class="item-img-info">
                                                       <a class="product-image" title="<?= $item['slug'] ?>" href="?option=page&act=product-detail&slug=<?= $item['slug'] ?>">
-                                                          <img alt="<?= $item['slug'] ?>" src="../public/images/product/<?= $item['img'] ?>"> </a>
-
-                                                      <!-- <a class="quickview-btn" href="quick-view.html"><span>Quick View</span></a> <a href="wishlist.html">
-                                                              <div class="mask-left-shop"><i class="fa fa-heart"></i></div>
-                                                          </a> <a href="compare.html">
-                                                              <div class="mask-right-shop"><i class="fa fa-signal"></i></div>
+                                                          <img alt="<?= $item['slug'] ?>" src="../public/images/product/<?= $item['img'] ?>" height="250px">
+                                                      </a>
+                                                      <?php if ($item['promotion'] > 0) : ?>
+                                                          <div class="sale-label sale-top-right">Sale</div>
+                                                      <?php endif; ?>
+                                                      <!-- <a class="quickview-btn" href="quick-view.html">
+                                                              <span>Quick View</span>
                                                           </a> -->
+                                                      <a href="index.php?option=cart&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
+                                                          <div class="mask-left-shop">
+                                                              <i class="fa fa-heart"></i>
+                                                          </div>
+                                                      </a>
+                                                      <a href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Thêm giỏ hàng">
+                                                          <div class="mask-right-shop">
+                                                              <i class="fa fa-shopping-cart"></i>
+                                                          </div>
+                                                      </a>
                                                   </div>
                                               </div>
                                               <div class="item-info">
                                                   <div class="info-inner">
-                                                      <div class="item-title"> <a title="<?= $item['slug'] ?>" href="?option=page&act=product-detail&slug=<?= $item['slug'] ?>"><?= $item['name'] ?></a> </div>
+                                                      <div class="item-title">
+                                                          <a title="<?= $item['slug'] ?>" href="?option=page&act=product-detail&slug=<?= $item['slug'] ?>">
+                                                              <?= $item['name'] ?>
+                                                          </a>
+                                                      </div>
                                                       <div class="item-content">
                                                           <div class="item-price">
                                                               <div class="price-box">
@@ -145,7 +155,7 @@
                                                                           </span>
                                                                       </span>
                                                                       <p class="old-price">
-                                                                          <span class="price-label">Regular Price:</span>
+                                                                          <span class="price-label">Giá gốc:</span>
                                                                           <span class="price"> <?= number_format($item['price']) ?> Vnđ </span>
                                                                       </p>
                                                                   <?php else : ?>
@@ -155,19 +165,6 @@
                                                                           </span>
                                                                       </span>
                                                                   <?php endif; ?>
-                                                              </div>
-                                                          </div>
-                                                          <div class="actions">
-                                                              <div class="add_cart">
-                                                                  <form action="?option=cart&act=add-cart&pid=<?= $item['id'] ?>" method="post" enctype="multipart/form-data" class="product_addtocart_form">
-                                                                      <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
-                                                                      <button class="button btn-cart" type="submit">
-                                                                          <span>
-                                                                              <i class="fa fa-shopping-cart"></i>
-                                                                              Thêm giỏ hàng
-                                                                          </span>
-                                                                      </button>
-                                                                  </form>
                                                               </div>
                                                           </div>
                                                       </div>

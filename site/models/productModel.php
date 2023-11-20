@@ -162,7 +162,29 @@ function product_rowslug($slug)
 
     return $product;
 }
+function product_rowid($id)
+{
+    $sql = "SELECT p.*, i.image AS product_img
+        FROM db_product AS p
+        LEFT JOIN db_product_img AS i ON p.id = i.product_id
+        WHERE p.id=?";
+    $product = pdo_query_one($sql, $id);
 
+    // Lấy tất cả hình ảnh có cùng productid từ bảng db_product_img
+    $sqlImg = "SELECT image FROM db_product_img WHERE product_id = ?";
+    $productImages = pdo_query_all($sqlImg, $product['id']);
+
+    // Tạo một mảng chứa đường dẫn đến hình ảnh
+    $imagePaths = array();
+    foreach ($productImages as $img) {
+        $imagePaths[] = $img['image'];
+    }
+
+    // Thêm mảng hình ảnh vào kết quả trả về
+    $product['more_images'] = $imagePaths;
+
+    return $product;
+}
 //Hàm tăng lượt view khi nhấp vào link sản phẩm
 function product_view_increase($id)
 {
