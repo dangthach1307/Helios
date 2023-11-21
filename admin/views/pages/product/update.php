@@ -45,7 +45,7 @@ foreach ($list_brand as $item) {
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title font-weight-bold py-2">Cập nhật thông tin sản phẩm</h3>
                         <div class="card-tools">
-                            <button type="submit" name="CAPNHAT" class="btn btn-success"><i class="fa fa-save"></i> Lưu[Thêm]</button>
+                            <button type="submit" name="CAPNHAT" class="btn btn-success"><i class="fa fa-save"></i> Lưu[CẬP NHẬT]</button>
                             <a class="btn btn-secondary" href="index.php?option=product">
                                 <i class="fa fa-arrow-left"></i> Thoát
                             </a>
@@ -169,7 +169,7 @@ foreach ($list_brand as $item) {
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title font-weight-bold py-2"></h3>
                         <div class="card-tools">
-                            <button type="submit" name="CAPNHAT" class="btn btn-success"><i class="fa fa-save"></i> Lưu[Thêm]</button>
+                            <button type="submit" name="CAPNHAT" class="btn btn-success"><i class="fa fa-save"></i> Lưu[CẬP NHẬT]</button>
                             <a class="btn btn-secondary" href="index.php?option=product">
                                 <i class="fa fa-arrow-left"></i> Thoát
                             </a>

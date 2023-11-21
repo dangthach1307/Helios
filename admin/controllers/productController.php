@@ -53,7 +53,7 @@ if (isset($act)) {
             $list_img = product_imglist($id);
             if (isset($_POST['CAPNHAT'])) {
                 $slug = str_slug($name);
-                if (count($_FILES['img']['name']) > 1) {
+                if (!empty($_FILES['img']['name'][0])) {
                     //Thay đổi thông tin và upload hình ảnh mới
                     //Kiểm tra và xoá hình cũ trong folder & trong database
                     product_imglist_folder_delete($id);
@@ -71,7 +71,7 @@ if (isset($act)) {
                         $upload_path = '../public/images/product/' . $name_img;
                         if (!move_uploaded_file($file_tmp_name, $upload_path)) {
                             set_flash('message', ['type' => 'warning', 'msg' => 'Lỗi upload hình ảnh!']);
-                            redirect('index.php?option=product');
+                            header('Location: index.php?option=product&act=update&id=' . $id);
                         }
                         $image_list[] = $name_img;
                     }
@@ -82,7 +82,7 @@ if (isset($act)) {
                     //Cập nhật thông tin giữ nguyên hình ảnh cũ
                     product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id);
                     set_flash('message', ['type' => 'success', 'msg' => 'Cập nhật thông tin sản phẩm thành công!']);
-                    redirect('index.php?option=product');
+                    header('Location: index.php?option=product&act=update&id=' . $id);
                 }
             }
             require_once $path . 'update.php';

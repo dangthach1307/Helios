@@ -18,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.min.css" media="all">
     <link rel="stylesheet" type="text/css" href="../public/css/styles.css" media="all">
 </head>
 
@@ -94,8 +95,7 @@
                                                                                     <p class="product-name">
                                                                                         <a href="?option=page&act=product-detail&id=<?= $item_cart['slug'] ?>">
                                                                                             <?= $item_cart['name'] ?>
-                                                                                        </a><br>
-                                                                                        <?= '- Chất liệu: ' . $item_cart['material'] . '<br>- Kích cỡ: ' . (is_array($item_cart['size']) ? implode(', ', $item_cart['size']) : $item_cart['size']) ?>
+                                                                                        </a>
                                                                                     </p>
                                                                                     <strong><?= $item_cart['qty'] ?></strong> x <span class="price"><?= number_format($item_cart['price']) ?> Vnđ</span>
                                                                                 </div>
@@ -153,5 +153,6 @@
                     </div>
                 </div>
             </div>
+            <!-- Button trigger modal -->
         </header>
         <!-- end header -->

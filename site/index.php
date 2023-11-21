@@ -16,6 +16,7 @@ if (isset($_SESSION['cart'])) {
 } else {
     $cart_count = 0;
     $cart_count_product = 0;
+    $total_price=0;
     // $cart_content = array();
 }
 if (isset($option)) {

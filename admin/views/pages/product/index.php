@@ -88,18 +88,26 @@
                                                 - Đã bán: <?= $row['sold_count']; ?>
                                             </td>
                                             <td class="text-center">
-                                                <?php if ($row['quantity'] > 0) : ?>
-                                                    <?php if ($row['status'] == 1) : ?>
-                                                        <a class="btn btn-sm btn-success" style="margin:2%" href="index.php?option=product&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Mở bán"><i class="fa fa-toggle-on"></i></a>
-                                                    <?php else : ?>
-                                                        <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Tạm ngưng"><i class="fa fa-toggle-off"></i></a>
-                                                    <?php endif; ?>
-                                                <?php else : ?>
-                                                    <a class="btn btn-sm btn-danger" style="margin:2%" data-toggle="tooltip" title="Tạm ngưng"><i class="fa fa-toggle-off"></i></a>
-                                                <?php endif; ?>
-                                                <button type="button" class="btn btn-sm btn-info" style="margin:2%" data-toggle="modal" data-target="#detail-<?= $row['id']; ?>" data-toggle="tooltip" title="Xem chi tiết"><i class="fa fa-eye"></i></button>
-                                                <a class="btn btn-sm btn-info" style="margin:2%" href="index.php?option=product&act=update&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Cập nhật"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=deltrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <?php if ($row['quantity'] > 0) : ?>
+                                                            <?php if ($row['status'] == 1) : ?>
+                                                                <a class="btn btn-sm btn-success" style="margin:2%" href="index.php?option=product&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Mở bán"><i class="fa fa-toggle-on"></i></a>
+                                                            <?php else : ?>
+                                                                <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Tạm ngưng"><i class="fa fa-toggle-off"></i></a>
+                                                            <?php endif; ?>
+                                                        <?php else : ?>
+                                                            <a class="btn btn-sm btn-danger" style="margin:2%" data-toggle="tooltip" title="Tạm ngưng"><i class="fa fa-toggle-off"></i></a>
+                                                        <?php endif; ?>
+                                                        <button type="button" class="btn btn-sm btn-info" style="margin:2%" data-toggle="modal" data-target="#detail-<?= $row['id']; ?>" data-toggle="tooltip" title="Xem chi tiết"><i class="fa fa-eye"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <a class="btn btn-sm btn-info" style="margin:2%" href="index.php?option=product&act=update&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Cập nhật"><i class="fa fa-edit"></i></a>
+                                                        <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=deltrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <div id="detail-<?= $row['id'] ?>" class="modal fade" role="dialog">
