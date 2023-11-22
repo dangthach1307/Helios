@@ -8,13 +8,6 @@ require_once './models/contactModel.php';
 
 if (isset($act)) {
     switch ($act) {
-        case 'register':
-            //Xử lý luồng dữ liệu cho trang đăng ký thành viên
-            //Gọi view
-            require_once 'views/header.php';
-            require_once 'views/register.php';
-            require_once 'views/footer.php';
-            break;
         case 'search':
             $keyword = $_REQUEST['keyword'];
             $sp_search = product_search($keyword);

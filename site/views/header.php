@@ -18,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- CSS Style -->
-    <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.min.css" media="all">
+    <!-- <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.min.css" media="all"> -->
     <link rel="stylesheet" type="text/css" href="../public/css/styles.css" media="all">
 </head>
 

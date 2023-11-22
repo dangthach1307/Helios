@@ -48,6 +48,9 @@ function displayCategories($categories, $parentId = 0)
 
 
 
+
+
+
 function str_slug($slug)
 {
     $slug = html_entity_decode($slug);

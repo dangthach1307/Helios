@@ -120,19 +120,19 @@
           </li> -->
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="../public/images/user/" class="user-image img-circle elevation-2" alt="User Image">
+                <img src="../public/images/user/<?= $_SESSION['user']['img'] ?>" class="user-image img-circle elevation-2" alt="User Image">
                 <span class="d-none d-md-inline"></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-primary">
-                    <img src="../public/images/user/" class="img-circle elevation-2" alt="User Image">
+                    <img src="../public/images/user/<?= $_SESSION['user']['img'] ?>" class="img-circle elevation-2" alt="User Image">
                     <p>
-                        fullname - role
+                        <?= $_SESSION['user']['fullname'] ?> - <?= $_SESSION['user']['role'] ?>
                     </p>
                 </li>
                 <!-- Menu Body -->
-                <li class="user-body">
+                <!-- <li class="user-body">
                     <div class="row">
                         <div class="col-4 text-center">
                             <a href="#">Followers</a>
@@ -144,8 +144,7 @@
                             <a href="#">Friends</a>
                         </div>
                     </div>
-                    <!-- /.row -->
-                </li>
+                </li> -->
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
