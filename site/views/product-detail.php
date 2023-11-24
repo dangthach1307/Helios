@@ -102,7 +102,7 @@
                             </div>
                             <div class="product-shop" data-toggle="buttons">
                                 <h4 class="mt-3">Kích cỡ: </h4>
-                                <?php $sizeOpts = explode(',', $row['size']); ?>
+                                <?php $sizeOpts = explode(', ', $row['size']); ?>
                                 <?php foreach ($sizeOpts as $index => $option) : ?>
                                     <label style="background-color: white; border: 1px solid #ddd;" for="size-<?= $index ?>" class="btn btn-default text-center">
                                         <input type="checkbox" name="size[]" id="size-<?= $index ?>" autocomplete="off" value="<?= $option ?>">

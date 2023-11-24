@@ -83,7 +83,6 @@
   <script src="../public/js/countdown.js"></script>
   <script src="../public/js/mob-menu.js"></script>
   <script src="../public/js/cloud-zoom.js"></script>
-  <script src="../public/js/product_info.js"></script>
   <script>
       jQuery(document).ready(function() {
           jQuery('#rev_slider_1').show().revolution({
