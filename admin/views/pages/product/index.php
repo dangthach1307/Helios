@@ -135,11 +135,11 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="material">Chất liệu:</label>
-                                                                    <input type="text" class="form-control" name="material" id="material" value="<?= $row['material'] ?>" readonly>
+                                                                    <input type="text" class="form-control" name="material" id="material" value="<?= $row['material_name']; ?>" readonly>
                                                                 </div>
                                                                 <div class="form-group ">
                                                                     <label for="size">Kích cỡ:</label>
-                                                                    <input type="text" class="form-control" name="size" id="size" value="<?= $row['size'] ?>" readonly>
+                                                                    <input type="text" class="form-control" name="size" id="size" value="<?= implode(', ', explode(',', $row['size_names'])); ?>" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">

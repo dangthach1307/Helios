@@ -4,23 +4,32 @@
 function product_all($page = 'index')
 {
     if ($page == 'index') {
-        $sql = "SELECT p.*, c.name AS category_name, b.name AS brand_name
+        $sql = "SELECT p.*, c.name AS category_name, b.name AS brand_name, GROUP_CONCAT(s.name) AS size_names, m.name AS material_name
         FROM db_product p
         JOIN db_category c ON p.category_id = c.id
         JOIN db_brand b ON p.brand_id = b.id
+        LEFT JOIN db_product_size ps ON p.id = ps.product_id
+        LEFT JOIN db_size s ON ps.size_id = s.id
+        LEFT JOIN db_material m ON p.material_id = m.id
         WHERE p.status != 0
+        GROUP BY p.id
         ORDER BY p.id ASC";
     } else {
-        $sql = "SELECT p.*, c.name AS category_name, b.name AS brand_name
+        $sql = "SELECT p.*, c.name AS category_name, b.name AS brand_name, GROUP_CONCAT(s.name) AS size_names, m.name AS material_name
         FROM db_product p
         JOIN db_category c ON p.category_id = c.id
         JOIN db_brand b ON p.brand_id = b.id
+        LEFT JOIN db_product_size ps ON p.id = ps.product_id
+        LEFT JOIN db_size s ON ps.size_id = s.id
+        LEFT JOIN db_material m ON p.material_id = m.id
         WHERE p.status = 0
+        GROUP BY p.id
         ORDER BY p.id ASC";
-        // return pdo_query_all($sql);
     }
     return pdo_query_all($sql);
 }
+
+
 //Lấy ra sản phẩm mới nhất dựa theo id cuối cùng được thêm
 function product_lastid()
 {
@@ -65,18 +74,15 @@ function product_generate_sku($brand_id, $category_id, $product_name, $product_i
 }
 //Kiểm tra xem product có tồn tại sản phẩm không dựa theo product_id của bảng product
 //Thêm sản phẩm
-function product_insert($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status)
+function product_insert($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status)
 {
-    $size = implode(',', $size);
-    // $sql = "INSERT INTO db_product (category_id,brand_id,name,slug,smdetail,detail,material,size,quantity,price,promotion,status) VALUE ($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status)";
+    $sql = "INSERT INTO db_product (category_id,brand_id,name,slug,smdetail,detail,material_id,quantity,price,promotion,status, SKU) VALUE (?,?,?,?,?,?,?,?,?,?,?,?)";
     // var_dump($sql);
-    $sql = "INSERT INTO db_product (category_id,brand_id,name,slug,smdetail,detail,material,size,quantity,price,promotion,status, SKU) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
     // Tính toán giá trị cho SKU
-    $brand_name = brand_name_id($brand_id); // Hàm get_brand_name_by_id cần được định nghĩa để lấy tên thương hiệu từ ID
-    $category_name = category_name_id($category_id); // Hàm get_category_name_by_id cần được định nghĩa để lấy tên danh mục từ ID
+    $brand_name = brand_name_id($brand_id);
+    $category_name = category_name_id($category_id);
 
-    pdo_execute($sql, $category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, '');
+    pdo_execute($sql, $category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status, '');
     // Lấy ID của sản phẩm vừa thêm
     $product_id = product_lastid();
 
@@ -100,27 +106,29 @@ function generate_sku($brand_name, $category_name, $product_name, $product_id)
 }
 
 //Cập nhật thông tin sản phẩm
-function product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id)
+function product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status, $id)
 {
-    $size = implode(',', $size);
     // Cập nhật thông tin sản phẩm
-    $update_sql = "UPDATE db_product SET category_id=?,brand_id=?,name=?,slug=?,smdetail=?,detail=?,material=?,size=?,quantity=?,price=?,promotion=?,status=? WHERE id=?";
-    $success = pdo_execute($update_sql, $category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id);
+    $update_sql = "UPDATE db_product SET category_id=?,brand_id=?,name=?,slug=?,smdetail=?,detail=?,material_id=?,quantity=?,price=?,promotion=?,status=? WHERE id=?";
+    $success = pdo_execute($update_sql, $category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status, $id);
 
     if ($success) {
         // Lấy thông tin sản phẩm sau khi cập nhật
         $updated_product = product_rowid($id);
         $brand_name = brand_name_id($updated_product['brand_id']);
         $category_name = category_name_id($updated_product['category_id']);
+
         // Tạo SKU mới dựa trên thông tin cập nhật
         $product_name = $updated_product['slug'];
         $product_id = $id;
-
         $sku = generate_sku($brand_name, $category_name, $product_name, $product_id);
 
         // Cập nhật SKU vào bảng db_product
         $update_sku_sql = "UPDATE db_product SET sku=? WHERE id=?";
         pdo_execute($update_sku_sql, $sku, $id);
+    } else {
+        // Log lỗi nếu có
+        error_log("Lỗi cập nhật thông tin sản phẩm. ID sản phẩm: $id");
     }
 }
 

@@ -4,6 +4,9 @@ require_once './models/brandModel.php';
 require_once './models/categoryModel.php';
 require_once './models/productModel.php';
 require_once './models/product_imageModel.php';
+require_once './models/sizeModel.php';
+require_once './models/materialModel.php';
+
 //Lấy đường dẫn mặc định
 $path = 'views/pages/product/';
 if (isset($act)) {
@@ -11,7 +14,8 @@ if (isset($act)) {
         case 'insert':
             $list_category = category_all('index');
             $list_brand = brand_all('index');
-
+            $list_size = size_all();
+            $list_material = material_all();
             if (isset($_POST['THEM'])) {
                 $slug = str_slug($name);
                 if (product_slug_exists($slug) == FALSE) {
@@ -32,9 +36,13 @@ if (isset($act)) {
                         }
                         $image_list[] = $name_img;
                     }
-                    product_insert($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status);
+                    product_insert($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status);
                     $product_id = product_lastid();
                     product_imglist_insert($product_id, $image_list);
+                    // Lấy giá trị từ trường size[] và chèn vào bảng db_product_size
+                    if (isset($_POST['size']) && is_array($_POST['size'])) {
+                        product_size_insert($product_id, $_POST['size']);
+                    }
                     set_flash('message', ['type' => 'success', 'msg' => 'Thêm sản phẩm thành công!']);
                     redirect('index.php?option=product');
                 } else {
@@ -50,16 +58,20 @@ if (isset($act)) {
             $row = product_rowid($id);
             $list_category = category_all('index');
             $list_brand = brand_all('index');
+            $list_size = size_all();
+            $row['sizes'] = product_size_list($id);
+            $list_material = material_all();
             $list_img = product_imglist($id);
             if (isset($_POST['CAPNHAT'])) {
                 $slug = str_slug($name);
+                $size_ids = isset($_POST['size']) ? $_POST['size'] : array();
                 if (!empty($_FILES['img']['name'][0])) {
                     //Thay đổi thông tin và upload hình ảnh mới
                     //Kiểm tra và xoá hình cũ trong folder & trong database
                     product_imglist_folder_delete($id);
                     product_imglist_delete($id);
                     //Cập nhật thông tin sản phẩm
-                    product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id);
+                    product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status, $id);
                     //Upload hình ảnh mới
                     //Xử lý hình ảnh
                     $image_list = array();
@@ -76,13 +88,17 @@ if (isset($act)) {
                         $image_list[] = $name_img;
                     }
                     product_imglist_insert($id, $image_list);
+                    // Cập nhật kích cỡ sản phẩm
+                    update_product_sizes($id, $size_ids);
                     set_flash('message', ['type' => 'success', 'msg' => 'Cập nhật thông tin sản phẩm thành công!']);
-                    redirect('index.php?option=product');
+                    header('Location: index.php?option=product');
                 } else {
                     //Cập nhật thông tin giữ nguyên hình ảnh cũ
-                    product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id);
+                    product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status, $id);
+                    // Cập nhật kích cỡ sản phẩm
+                    update_product_sizes($id, $size_ids);
                     set_flash('message', ['type' => 'success', 'msg' => 'Cập nhật thông tin sản phẩm thành công!']);
-                    header('Location: index.php?option=product&act=update&id=' . $id);
+                    header('Location: index.php?option=product');
                 }
             }
             require_once $path . 'update.php';

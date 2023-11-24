@@ -1,8 +1,8 @@
 <?php
-$materials = ALL_MATERIAL;
-$sizes = ALL_SIZES;
 $html_catid = '';
 $html_brandid = '';
+$html_material = '';
+$html_size = '';
 foreach ($list_category as $item) {
     if ($item['id'] == $row['category_id']) {
         $html_catid .= '<option selected value="' . $item['id'] . '">' . $item['name'] . '</option>';
@@ -16,6 +16,17 @@ foreach ($list_brand as $item) {
     } else {
         $html_brandid .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
     }
+}
+foreach ($list_material as $item) {
+    if ($item['id'] == $row['material_id']) {
+        $html_material .= '<option selected value="' . $item['id'] . '">' . $item['name'] . '</option>';
+    } else {
+        $html_material .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
+    }
+}
+foreach ($list_size as $item) {
+    $selected = in_array($item['id'], array_column($row['sizes'], 'id')) ? 'selected' : '';
+    $html_size .= '<option ' . $selected . ' value="' . $item['id'] . '">' . $item['name'] . '</option>';
 }
 ?>
 <div class="content-wrapper">
@@ -62,26 +73,15 @@ foreach ($list_brand as $item) {
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-6">
-                                    <label for="material">Chất liệu:</label>
-                                    <select class="select2 form-control" id="material" name="material" data-placeholder="Chọn chất liệu" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                        <?php
-                                        foreach ($materials as $material) {
-                                            $isSelected = ($row['material'] == $material) ? 'selected' : '';
-                                            echo "<option value=\"$material\" $isSelected>$material</option>";
-                                        }
-                                        ?>
+                                    <label for="material_id">Chất liệu:</label>
+                                    <select class="select2 form-control" id="material_id" name="material_id" data-placeholder="Chọn chất liệu" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                        <?= $html_material ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label for="size">Kích cỡ:</label>
                                     <select class="select2 form-control" id="size" name="size[]" multiple="multiple" data-placeholder="Chọn size" style="width: 100%;">
-                                        <?php
-                                        $selectedSizes = explode(',', str_replace(' ', '', $row['size'])); // Loại bỏ khoảng trắng sau dấu phẩy nếu có
-                                        foreach ($sizes as $size) {
-                                            $isSelected = in_array($size, $selectedSizes) ? 'selected' : '';
-                                            echo "<option value=\"$size\" $isSelected>$size</option>";
-                                        }
-                                        ?>
+                                        <?= $html_size ?>
                                     </select>
                                 </div>
                             </div>

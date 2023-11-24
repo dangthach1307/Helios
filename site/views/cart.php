@@ -57,12 +57,12 @@
                                                             <tr class="cart_item">
                                                                 <input type="hidden" name="pid[]" value="<?= $item_cart['id'] ?>">
                                                                 <td class="item-img">
-                                                                    <a href="?option=page&act=product-detail&id=<?= $item_cart['slug'] ?>">
+                                                                    <a href="?option=page&act=product-detail&slug=<?= $item_cart['slug'] ?>">
                                                                         <img src="../public/images/product/<?= $item_cart['img'] ?>" alt="<?= $item_cart['name'] ?>">
                                                                     </a>
                                                                 </td>
                                                                 <td class="item-title">
-                                                                    <a href="?option=page&act=product-detail&id=<?= $item_cart['slug'] ?>">
+                                                                    <a href="?option=page&act=product-detail&slug=<?= $item_cart['slug'] ?>">
                                                                         <?= $item_cart['name'] ?>
                                                                     </a> <br>
                                                                     <?php if ($item_cart['material'] !== null) : ?>

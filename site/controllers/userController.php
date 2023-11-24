@@ -82,11 +82,6 @@ if (isset($act)) {
                         $user = auth_guard($email, $password);
                         if ($user !== FALSE) {
                             $_SESSION['user'] = $user;
-                            // $_SESSION['user_id'] = $user['id'];
-                            // $_SESSION['user_fullname'] = $user['fullname'];
-                            // $_SESSION['user_role'] = $user['role'];
-                            // $_SESSION['user_image'] = $user['img'];
-                            // $_SESSION['user_created_at'] = $user['created_at'];
                             header("Location: index.php", true, 302);
                             exit();
                         } else {
