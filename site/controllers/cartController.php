@@ -9,10 +9,11 @@ if (isset($act)) {
             if (isset($act) && $act == 'add-cart') {
                 $sp = product_rowid($id);
                 $list_size = product_by_size($sp['id']);
+                $material_name = get_material_name($sp['material_id']);
                 $qty = isset($_POST['qty']) ? $_POST['qty'] : 1;
-                $selected_size = isset($_POST['selected_size']) ? $_POST['selected_size'] : '';
+                $selected_size = isset($_POST['selected_size']) ? $_POST['selected_size'] : $list_size[0]['name_size'];
                 // Tính toán giá dựa trên điều kiện promotion
-                $calculated_price = isset($_POST['calculated_price']) ? $_POST['calculated_price'] : $list_size[0]['temp_price'];
+                $calculated_price = isset($_POST['calculated_price']) ? $_POST['calculated_price'] : $list_size[0]['temp_price'] - ($list_size[0]['temp_price'] * $sp['promotion'] / 100);
                 // Kiểm tra URL hiện tại để xác định cách xử lý
                 // Nếu thêm từ trang product-detail, sử dụng giá trị từ form
                 if (strpos($_SERVER['REQUEST_URI'], 'act=product-detail') != TRUE) {
@@ -21,19 +22,20 @@ if (isset($act)) {
                         'name' => $sp['name'],
                         'slug' => $sp['slug'],
                         'img' => $sp['more_images'][0],
-                        'material' => $sp['material'],
+                        'material' =>$material_name,
                         'size' => $selected_size,
                         'price' => $calculated_price,
                         'qty' => $qty
                     );
                 } else {
+                    //Trường hợp không phải trang product-detail
                     $data = array(
                         'id' => $sp['id'],
                         'name' => $sp['name'],
                         'slug' => $sp['slug'],
                         'img' => $sp['more_images'][0],
-                        'material' => $sp['material'],
-                        'size' => explode(',', $sp['size'])[0],
+                        'material' => $list_material,
+                        'size' => $selected_size,
                         'price' => $calculated_price,
                         'qty' => 1
                     );

@@ -171,6 +171,13 @@ function product_by_size($product_id)
             WHERE db_product_size.product_id = ?";
     return pdo_query_all($sql, $product_id);
 }
+function get_material_name($id)
+{
+    $sql = "SELECT * FROM db_material WHERE id=?";
+    $result = pdo_query_one($sql, $id);
+    return $result['name'];
+}
+
 function product_rowid($id)
 {
     $sql = "SELECT p.*, i.image AS product_img

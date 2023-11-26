@@ -130,6 +130,7 @@ if (isset($act)) {
             $product_list_newest = product_list_home('newest');
             $product_list_topview = product_list_home('topview');
             $size_list_newest = product_by_size($product_list_newest[0]['id']);
+            $size_list_topview = product_by_size($product_list_topview[0]['id']);
             require_once 'views/header.php';
             require_once 'views/home.php';
             require_once 'views/footer.php';
@@ -139,6 +140,7 @@ if (isset($act)) {
     $product_list_newest = product_list_home('newest');
     $product_list_topview = product_list_home('topview');
     $size_list_newest = product_by_size($product_list_newest[0]['id']);
+    $size_list_topview = product_by_size($product_list_topview[0]['id']);
     require_once 'views/header.php';
     require_once 'views/home.php';
     require_once 'views/footer.php';
