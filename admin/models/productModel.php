@@ -68,16 +68,15 @@ function product_generate_sku($brand_id, $category_id, $product_name, $product_i
 }
 //Kiểm tra xem product có tồn tại sản phẩm không dựa theo product_id của bảng product
 //Thêm sản phẩm
-function product_insert($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status)
+function product_insert($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status)
 {
-    $size = implode(', ', $size);
-    $sql = "INSERT INTO db_product (category_id,brand_id,name,slug,smdetail,detail,material,size,quantity,price,promotion,status, SKU) VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    // var_dump($sql);
+    // $size = implode(', ', $size);
+    $sql = "INSERT INTO db_product (category_id,brand_id,name,slug,smdetail,detail,material_id,quantity,price,promotion,status, SKU) VALUE (?,?,?,?,?,?,?,?,?,?,?,?)";
     // Tính toán giá trị cho SKU
     $brand_name = brand_name_id($brand_id);
     $category_name = category_name_id($category_id);
 
-    pdo_execute($sql, $category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, '');
+    pdo_execute($sql, $category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status, '');
     // Lấy ID của sản phẩm vừa thêm
     $product_id = product_lastid();
 
@@ -103,7 +102,7 @@ function generate_sku($brand_name, $category_name, $product_name, $product_id)
 //Cập nhật thông tin sản phẩm
 function product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id)
 {
-    $size = implode(',', $size);
+    // $size = implode(',', $size);
     // Cập nhật thông tin sản phẩm
     $update_sql = "UPDATE db_product SET category_id=?,brand_id=?,name=?,slug=?,smdetail=?,detail=?,material=?,size=?,quantity=?,price=?,promotion=?,status=? WHERE id=?";
     $success = pdo_execute($update_sql, $category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id);
