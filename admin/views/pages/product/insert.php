@@ -3,11 +3,15 @@ $materials = ALL_MATERIAL;
 $sizes = ALL_SIZES;
 $html_catid = '';
 $html_brandid = '';
+$html_sizeid = '';
 foreach ($list_category as $item) {
     $html_catid .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
 }
 foreach ($list_brand as $item) {
     $html_brandid .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
+}
+foreach ($list_size as $item) {
+    $html_sizeid .= '<option value="' . $item['id'] . '">' . $item['name_size'] . '</option>';
 }
 ?>
 <div class="content-wrapper">
@@ -65,11 +69,7 @@ foreach ($list_brand as $item) {
                                 <div class="form-group col-sm-6">
                                     <label for="size">Kích cỡ:</label>
                                     <select class="select2 form-control" id="size" name="size[]" multiple="multiple" data-placeholder="Chọn size" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                        <?php
-                                        foreach ($sizes as $size) {
-                                            echo "<option value=\"$size\">$size</option>";
-                                        }
-                                        ?>
+                                        <?= $html_sizeid ?>
                                     </select>
                                 </div>
                             </div>

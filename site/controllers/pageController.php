@@ -87,12 +87,15 @@ if (isset($act)) {
             require_once 'views/product-category.php';
             require_once 'views/footer.php';
             break;
-
         case 'product-detail':
             //Trang chi tiết sản phẩm
             $slug = $_REQUEST['slug'];
             $row = product_rowslug($slug);
+            $list_size = product_by_size($row['id']);
+
+
             product_view_increase($slug);
+
             $list_catid = category_listcatid($row['category_id']);
             $list_other = product_other($list_catid, $row['id']);
             require_once 'views/header.php';
@@ -126,6 +129,7 @@ if (isset($act)) {
         case 'home':
             $product_list_newest = product_list_home('newest');
             $product_list_topview = product_list_home('topview');
+            $size_list_newest = product_by_size($product_list_newest[0]['id']);
             require_once 'views/header.php';
             require_once 'views/home.php';
             require_once 'views/footer.php';
@@ -134,6 +138,7 @@ if (isset($act)) {
 } else {
     $product_list_newest = product_list_home('newest');
     $product_list_topview = product_list_home('topview');
+    $size_list_newest = product_by_size($product_list_newest[0]['id']);
     require_once 'views/header.php';
     require_once 'views/home.php';
     require_once 'views/footer.php';

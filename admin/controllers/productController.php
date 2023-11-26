@@ -4,6 +4,7 @@ require_once './models/brandModel.php';
 require_once './models/categoryModel.php';
 require_once './models/productModel.php';
 require_once './models/product_imageModel.php';
+require_once './models/sizeModel.php';
 
 //Lấy đường dẫn mặc định
 $path = 'views/pages/product/';
@@ -12,12 +13,18 @@ if (isset($act)) {
         case 'insert':
             $list_category = category_all('index');
             $list_brand = brand_all('index');
+            $list_size = size_all();
+            // echo "<pre>";
+            // var_dump($list_size);
+
             if (isset($_POST['THEM'])) {
                 $slug = str_slug($name);
                 if (product_slug_exists($slug) == FALSE) {
                     //Kết quả trả về = FALSE => Không tồn tại slug => có thể thêm
                     //Tiến hành lấy dữ liệu
-                    $size = isset($_POST['size']) ? $_POST['size'] : []; // Lấy dữ liệu Size dưới dạng mảng
+                    $size = isset($_POST['size']) ? $_POST['size'] : [];
+                    // var_dump($size); // Lấy dữ liệu Size dưới dạng mảng
+
                     //Xử lý hình ảnh
                     $image_list = array();
                     // Xử lý hình ảnh
@@ -32,8 +39,9 @@ if (isset($act)) {
                         }
                         $image_list[] = $name_img;
                     }
-                    product_insert($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status);
+                    product_insert($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $quantity, $price, $promotion, $status);
                     $product_id = product_lastid();
+                    product_size_price($size, $product_id, $price);
                     product_imglist_insert($product_id, $image_list);
                     set_flash('message', ['type' => 'success', 'msg' => 'Thêm sản phẩm thành công!']);
                     redirect('index.php?option=product');

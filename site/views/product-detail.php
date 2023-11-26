@@ -63,28 +63,28 @@
                             </div>
                             <div class="price-block">
                                 <div class="price-box">
-                                    <?php if ($row['promotion'] > 0) : ?>
-                                        <span class="regular-price">
-                                            <span class="price">
-                                                Giá:
-                                                <?= number_format($row['price'] - ($row['price'] * $row['promotion'] / 100)) ?>
-                                                Vnđ
-                                            </span>
-                                        </span>
-                                        <p class="old-price">
-                                            <span class="price-label">Giá :</span>
-                                            <span class="price">
-                                                <?= number_format($row['price']) ?> Vnđ
-                                            </span>
-                                        </p>
-                                    <?php else : ?>
-                                        <span class="regular-price">
-                                            <span class="price">
-                                                Giá:
-                                                <?= number_format($row['price']) ?> Vnđ
-                                            </span>
-                                        </span>
-                                    <?php endif; ?>
+                                    <?php
+                                    $firstSizePrinted = false;
+                                    foreach ($list_size as $item) :
+                                        if (!$firstSizePrinted) :
+                                            $firstSizePrinted = true; // Đánh dấu là đã in ra giá tiền kích thước đầu tiên
+                                            $calculated_price = $row['promotion'] > 0 ? $item['temp_price'] - ($item['temp_price'] * $row['promotion'] / 100) : $item['temp_price'];
+                                    ?>
+                                            <p class="regular-price">
+                                                <span class="price" id="displayedPrice">
+                                                    Giá: <?= number_format($calculated_price) ?> VNĐ
+                                                </span>
+                                            </p>
+                                            <?php if ($row['promotion'] > 0) : ?>
+                                                <p class="old-price">
+                                                    <span class="price">
+                                                        <span id="originalPrice"><?= number_format($item['temp_price']) ?></span> VNĐ
+                                                    </span>
+                                                </p>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+
                                     <?php if ($row['status'] == 1) : ?>
                                         <p class="availability in-stock">
                                             <span>Còn hàng</span>
@@ -102,13 +102,17 @@
                             </div>
                             <div class="product-shop" data-toggle="buttons">
                                 <h4 class="mt-3">Kích cỡ: </h4>
-                                <?php $sizeOpts = explode(', ', $row['size']); ?>
-                                <?php foreach ($sizeOpts as $index => $option) : ?>
-                                    <label style="background-color: white; border: 1px solid #ddd;" for="size-<?= $index ?>" class="btn btn-default text-center">
-                                        <input type="checkbox" name="size[]" id="size-<?= $index ?>" autocomplete="off" value="<?= $option ?>">
-                                        <span class="text-xl">
-                                            <?= $option ?>
-                                        </span>
+                                <input type="hidden" name="selected_size" id="selectedSize" value="<?= isset($selected_size) ? $selected_size : (isset($list_size[0]['name_size']) ? $list_size[0]['name_size'] : ''); ?>">
+                                <input type="hidden" name="calculated_price" id="calculatedPrice" value="<?= isset($calculated_price) ? $calculated_price : (isset($list_size[0]['temp_price']) ? $list_size[0]['temp_price'] : ''); ?>">
+
+                                <?php foreach ($list_size as $id => $item) : ?>
+                                    <!-- Thay thế class bằng id -->
+                                    <label class="btn btn-default text-center" id="size-<?= $item['id'] ?>" for="size-<?= $item['id'] ?>" style="background-color: white;">
+                                        <a class="size-label" data-temp-price="<?= $item['temp_price'] ?>" data-size="<?= $item['name_size'] ?>">
+                                            <span class="text-xl">
+                                                <?= $item['name_size'] ?>
+                                            </span>
+                                        </a>
                                     </label>
                                 <?php endforeach; ?>
                             </div>

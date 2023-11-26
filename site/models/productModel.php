@@ -162,6 +162,15 @@ function product_rowslug($slug)
 
     return $product;
 }
+
+function product_by_size($product_id)
+{
+    $sql = "SELECT *, db_size.name_size
+            FROM db_product_size
+            JOIN db_size ON db_size.id = db_product_size.size_id
+            WHERE db_product_size.product_id = ?";
+    return pdo_query_all($sql, $product_id);
+}
 function product_rowid($id)
 {
     $sql = "SELECT p.*, i.image AS product_img
