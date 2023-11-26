@@ -11,6 +11,7 @@ if (isset($act)) {
         case 'search':
             $keyword = $_REQUEST['keyword'];
             $sp_search = product_search($keyword);
+            $list_size = product_by_size($sp_search[0]['id']);
             $list_categories = category_list(0);
             // Đưa dữ liệu vào các trang header, danh sách sản phẩm theo danh mục và footer để hiển thị trên trang web.
             require_once 'views/header.php';
@@ -32,6 +33,7 @@ if (isset($act)) {
 
             // Gọi function show sản phẩm và danh mục với các tham số lọc giá và sắp xếp
             $list_product = product_site_all(0, PHP_INT_MAX, $min_price, $max_price, $sort);
+            $list_size = product_by_size($list_product[0]['id']);
             $total = count($list_product);
 
             // Phân trang nếu cần
@@ -81,6 +83,7 @@ if (isset($act)) {
 
             // Lấy danh sách sản phẩm thuộc danh mục với phân trang, lọc và sắp xếp.
             $list_product = product_category($list_catid, $first, $limit, $min_price, $max_price, $sort);
+            $list_size = product_by_size($list_product[0]['id']);
 
             // Đưa dữ liệu vào các trang header, danh sách sản phẩm theo danh mục và footer để hiển thị trên trang web.
             require_once 'views/header.php';

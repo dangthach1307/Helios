@@ -89,19 +89,20 @@
                                         <div class="item-img">
                                             <div class="item-img-info">
                                                 <a class="product-image" title="<?= $item['name'] ?>" href="?option=page&act=product-detail&slug=<?= $item['slug'] ?>">
-                                                    <img alt="<?= $item['name'] ?>" src="../public/images/product/<?= $item['img'] ?>">
+                                                    <img alt="<?= $item['name'] ?>" src="../public/images/product/<?= $item['img'] ?>" height="250px">
                                                 </a>
-                                                <?php
-                                                $labels = '';
-                                                $labels .= ($item['trending'] == 1) ? '<div class="new-label new-top-left">New</div>' : '';
-                                                if ($item['promotion'] > 0) {
-                                                    $labels .= '<div class="sale-label sale-top-right">Sale</div>';
-                                                }
-                                                if (!empty($labels)) {
-                                                    echo $labels;
-                                                }
-                                                ?>
+
                                                 <div class="mask-shop-white"></div>
+                                                <a href="index.php?option=cart&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
+                                                    <div class="mask-left-shop">
+                                                        <i class="fa fa-heart"></i>
+                                                    </div>
+                                                </a>
+                                                <a href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Thêm giỏ hàng">
+                                                    <div class="mask-right-shop">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </div>
+                                                </a>
 
                                             </div>
                                         </div>
@@ -113,34 +114,27 @@
                                                 <div class="item-content">
                                                     <div class="item-price">
                                                         <div class="price-box">
-                                                            <?php if ($item['promotion'] > 0) : ?>
-                                                                <span class="regular-price">
-                                                                    <span class="price">
-                                                                        <?= number_format($item['price'] - ($item['price'] * $item['promotion'] / 100)) ?> Vnđ
-                                                                    </span>
-                                                                </span>
-                                                                <p class="old-price">
-                                                                    <span class="price-label">Regular Price:</span>
-                                                                    <span class="price"> <?= number_format($item['price']) ?> Vnđ </span>
-                                                                </p>
-                                                            <?php else : ?>
-                                                                <span class="regular-price">
-                                                                    <span class="price">
-                                                                        <?= number_format($item['price']) ?> Vnđ
-                                                                    </span>
-                                                                </span>
-                                                            <?php endif; ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="actions">
-                                                        <div class="add_cart">
-                                                            <button class="button btn-cart" type="button">
-                                                                <a href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>">
-                                                                    <span>
-                                                                        <i class="fa fa-shopping-cart"></i>
-                                                                        Add to Cart</span>
-                                                                </a>
-                                                            </button>
+                                                            <?php
+                                                            $firstSizePrinted = false;
+                                                            foreach ($list_size as $row) :
+                                                                if (!$firstSizePrinted) :
+                                                                    $firstSizePrinted = true; // Đánh dấu là đã in ra giá tiền kích thước đầu tiên
+                                                                    $calculated_price = $item['promotion'] > 0 ? $row['temp_price'] - ($row['temp_price'] * $item['promotion'] / 100) : $row['temp_price'];
+                                                            ?>
+                                                                    <p class="regular-price">
+                                                                        <span class="price" id="displayedPrice">
+                                                                            <?= number_format($calculated_price) ?> VNĐ
+                                                                        </span>
+                                                                    </p>
+                                                                    <?php if ($item['promotion'] > 0) : ?>
+                                                                        <p class="old-price">
+                                                                            <span class="price">
+                                                                                <span id="originalPrice"><?= number_format($row['temp_price']) ?></span> VNĐ
+                                                                            </span>
+                                                                        </p>
+                                                                    <?php endif; ?>
+                                                                <?php endif; ?>
+                                                            <?php endforeach; ?>
                                                         </div>
                                                     </div>
                                                 </div>
