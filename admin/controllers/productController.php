@@ -4,6 +4,8 @@ require_once './models/brandModel.php';
 require_once './models/categoryModel.php';
 require_once './models/productModel.php';
 require_once './models/product_imageModel.php';
+require_once './models/sizeModel.php';
+require_once './models/materialModel.php';
 
 //Lấy đường dẫn mặc định
 $path = 'views/pages/product/';
@@ -12,12 +14,19 @@ if (isset($act)) {
         case 'insert':
             $list_category = category_all('index');
             $list_brand = brand_all('index');
+            $list_size = size_all();
+            $list_material = material_all();
+            // echo "<pre>";
+            // var_dump($list_size);
+
             if (isset($_POST['THEM'])) {
                 $slug = str_slug($name);
                 if (product_slug_exists($slug) == FALSE) {
                     //Kết quả trả về = FALSE => Không tồn tại slug => có thể thêm
                     //Tiến hành lấy dữ liệu
-                    $size = isset($_POST['size']) ? $_POST['size'] : []; // Lấy dữ liệu Size dưới dạng mảng
+                    $size = isset($_POST['size']) ? $_POST['size'] : [];
+                    // var_dump($size); // Lấy dữ liệu Size dưới dạng mảng
+
                     //Xử lý hình ảnh
                     $image_list = array();
                     // Xử lý hình ảnh
@@ -32,8 +41,9 @@ if (isset($act)) {
                         }
                         $image_list[] = $name_img;
                     }
-                    product_insert($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status);
+                    product_insert($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status);
                     $product_id = product_lastid();
+                    product_temp_price($size, $product_id, $price, $material_id);
                     product_imglist_insert($product_id, $image_list);
                     set_flash('message', ['type' => 'success', 'msg' => 'Thêm sản phẩm thành công!']);
                     redirect('index.php?option=product');
@@ -154,6 +164,8 @@ if (isset($act)) {
             break;
         default:
             $list_product = product_all('index');
+            $list_size = size_all();
+            $list_material = material_all();
             foreach ($list_product as $key => $value) {
                 $list = product_imglist($value['id']);
                 $list_product[$key]['image_list'] = $list;
@@ -163,6 +175,8 @@ if (isset($act)) {
     }
 } else {
     $list_product = product_all('index');
+    $list_size = size_all();
+    $list_material = material_all();
     foreach ($list_product as $key => $value) {
         $list = product_imglist($value['id']);
         $list_product[$key]['image_list'] = $list;

@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-dark text-sm dropdown-legacy">
+<nav class="main-header navbar navbar-expand navbar-dark text-sm dropdown-legacy" hidden>
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <!-- <li class="nav-item">

@@ -3,11 +3,19 @@ $materials = ALL_MATERIAL;
 $sizes = ALL_SIZES;
 $html_catid = '';
 $html_brandid = '';
+$html_sizeid = '';
+$html_materalid = '';
 foreach ($list_category as $item) {
     $html_catid .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
 }
 foreach ($list_brand as $item) {
     $html_brandid .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
+}
+foreach ($list_size as $item) {
+    $html_sizeid .= '<option value="' . $item['id'] . '">' . $item['name_size'] . '</option>';
+}
+foreach ($list_material as $item) {
+    $html_materalid .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
 }
 ?>
 <div class="content-wrapper">
@@ -53,23 +61,15 @@ foreach ($list_brand as $item) {
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-6">
-                                    <label for="material">Chất liệu:</label>
-                                    <select class="select2 form-control" id="material" name="material" data-placeholder="Chọn chất liệu" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                        <?php
-                                        foreach ($materials as $material) {
-                                            echo "<option value=\"$material\">$material</option>";
-                                        }
-                                        ?>
+                                    <label for="material_id">Chất liệu:</label>
+                                    <select class="select2 form-control" id="material_id" name="material_id" data-placeholder="Chọn chất liệu" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                        <?= $html_materalid; ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label for="size">Kích cỡ:</label>
                                     <select class="select2 form-control" id="size" name="size[]" multiple="multiple" data-placeholder="Chọn size" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                        <?php
-                                        foreach ($sizes as $size) {
-                                            echo "<option value=\"$size\">$size</option>";
-                                        }
-                                        ?>
+                                        <?= $html_sizeid ?>
                                     </select>
                                 </div>
                             </div>

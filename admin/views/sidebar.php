@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" hidden>
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link">
         <img src="../public/images/logo.png" alt="Fabulous Logo" class="brand-image mx-auto my-auto" style="opacity: .8">

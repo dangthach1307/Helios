@@ -83,6 +83,7 @@
   <script src="../public/js/countdown.js"></script>
   <script src="../public/js/mob-menu.js"></script>
   <script src="../public/js/cloud-zoom.js"></script>
+
   <script>
       jQuery(document).ready(function() {
           jQuery('#rev_slider_1').show().revolution({
@@ -170,6 +171,55 @@
       var iid1 = "countbox_1";
       CountBack_slider(gsecs1, "countbox_1", 1);
   </script>
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const qs = (selector) => document.querySelector(selector);
+          const qsa = (selector) => document.querySelectorAll(selector);
+          const originalPrices = <?= json_encode(array_column($list_size, 'temp_price')) ?>;
+          const sizeLabels = qsa('.product-shop .size-label');
+          const promotion = <?= $row['promotion'] ?>;
+          const originalPriceElement = qs('#originalPrice');
+          const displayedPrice = qs('#displayedPrice');
+          const sizeInput = qs('#selectedSize');
+          const calculatedPriceInput = qs('#calculatedPrice');
+
+          const defaultSize = '<?= $selected_size ?? ($list_size[0]['name_size'] ?? '') ?>';
+          const defaultTempPrice = '<?= $calculated_price ?? ($list_size[0]['temp_price'] ?? '') ?>';
+
+          sizeInput.value = defaultSize;
+          calculatedPriceInput.value = defaultTempPrice;
+          displayedPrice.textContent = 'Giá: ' + formatCurrency(defaultTempPrice) + ' VNĐ';
+
+          sizeLabels.forEach((label, index) => {
+              label.addEventListener('click', (event) => {
+                  event.preventDefault();
+                  updateSelectedSize(label.getAttribute('data-size'), originalPrices[index]);
+              });
+          });
+
+          function updateSelectedSize(size, tempPrice) {
+              sizeLabels.forEach((otherLabel) => otherLabel.classList.remove('selected'));
+              sizeInput.value = size;
+              updateUrlParameter('size', size);
+              const discountedPrice = promotion > 0 ? tempPrice - (tempPrice * promotion / 100) : tempPrice;
+              calculatedPriceInput.value = discountedPrice;
+              displayedPrice.textContent = 'Giá: ' + formatCurrency(discountedPrice) + ' VNĐ';
+              originalPriceElement.textContent = formatCurrency(tempPrice);
+          }
+
+          function updateUrlParameter(key, value) {
+              const currentUrl = window.location.href;
+              const newUrl = currentUrl.replace(new RegExp(`([?&])${key}=[^&]*`), '');
+              const separator = newUrl.includes('?') ? '&' : '?';
+              history.pushState({}, null, `${newUrl}${separator}${key}=${encodeURIComponent(value)}`);
+          }
+
+          function formatCurrency(amount) {
+              return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          }
+      });
+  </script>
+
   </body>
 
   </html>
