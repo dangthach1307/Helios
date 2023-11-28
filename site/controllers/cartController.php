@@ -81,9 +81,9 @@ if (isset($act)) {
             exit();
         case 'cart-view':
             $list = cart_content();
-            require_once 'views/header.php';
+            // require_once 'views/header.php';
             require_once 'views/cart.php';
-            require_once 'views/footer.php';
+            // require_once 'views/footer.php';
             break;
         case 'cart-checkout':
             if (!isset($_SESSION['user']) || (!isset($_SESSION['cart']) || empty($_SESSION['cart']))) {
@@ -91,9 +91,9 @@ if (isset($act)) {
                 exit();
             }
             $list = cart_content();
-            require_once 'views/header.php';
+            // require_once 'views/header.php';
             require_once 'views/checkout.php';
-            require_once 'views/footer.php';
+            // require_once 'views/footer.php';
             break;
         case 'insert-order':
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -112,7 +112,7 @@ if (isset($act)) {
                     $created_at = date('Y-m-d H:i:s');
                     $exported_at = date('Y-m-d H:i:s');
                     // Gọi hàm insert_order với thông tin địa chỉ mới
-                    cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
+
                 } else {
                     // Trường hợp không chọn địa chỉ khác
                     $user_id = $_SESSION['user']['id'];
@@ -126,14 +126,17 @@ if (isset($act)) {
                     $created_at = date('Y-m-d H:i:s');
                     $exported_at = date('Y-m-d H:i:s');
                     // Gọi hàm insert_order với thông tin địa chỉ từ session
-                    cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
                 }
+                cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
+                unset($_SESSION['cart']);
+                header('location: index.php');
             }
+
             break;
     }
 } else {
     $list = cart_content();
-    require_once 'views/header.php';
+    // require_once 'views/header.php';
     require_once 'views/cart.php';
-    require_once 'views/footer.php';
+    // require_once 'views/footer.php';
 }

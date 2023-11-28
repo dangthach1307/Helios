@@ -185,15 +185,29 @@
 
           const defaultSize = '<?= $selected_size ?? ($list_size[0]['name_size'] ?? '') ?>';
           const defaultTempPrice = '<?= $calculated_price ?? ($list_size[0]['temp_price'] ?? '') ?>';
+          // Lấy ra label của size đầu tiên từ NodeList
+          const defaultSizeLabel = sizeLabels[0];
+
+          // Thêm CSS inline để làm nổi bật size đầu tiên
+          defaultSizeLabel.parentElement.style.border = '1px solid red';
 
           sizeInput.value = defaultSize;
           calculatedPriceInput.value = defaultTempPrice;
           displayedPrice.textContent = 'Giá: ' + formatCurrency(defaultTempPrice) + ' VNĐ';
 
+          // Xử lý sự kiện khi người dùng chọn kích thước
           sizeLabels.forEach((label, index) => {
               label.addEventListener('click', (event) => {
                   event.preventDefault();
                   updateSelectedSize(label.getAttribute('data-size'), originalPrices[index]);
+                  // Loại bỏ nổi bật từ tất cả các kích thước khác
+                  sizeLabels.forEach((otherLabel) => {
+                      if (otherLabel !== label) {
+                          otherLabel.parentElement.style.border = '2px solid #ddd';
+                      }
+                  });
+                  // Làm nổi bật kích thước được chọn
+                  label.parentElement.style.border = '1px solid red';
               });
           });
 

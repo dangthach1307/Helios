@@ -3,7 +3,7 @@ extract($_REQUEST);
 ob_start();
 if (!isset($_SESSION)) {
     session_start();
-  }
+}
 require_once '../system/Database.php';
 require_once '../system/myFunction.php';
 require_once '../system/form_control.php';
@@ -23,6 +23,7 @@ if (isset($_SESSION['cart'])) {
     $total_price = 0;
     // $cart_content = array();
 }
+require_once 'views/header.php';
 if (isset($option)) {
     switch ($option) {
         case 'page':
@@ -38,4 +39,6 @@ if (isset($option)) {
 } else {
     header('location: ?option=page&act=home');
 }
+require_once 'views/footer.php';
+
 // "tet";

@@ -104,10 +104,9 @@
                                 <h4 class="mt-3">Kích cỡ: </h4>
                                 <input type="hidden" name="selected_size" id="selectedSize" value="<?= isset($selected_size) ? $selected_size : (isset($list_size[0]['name_size']) ? $list_size[0]['name_size'] : ''); ?>">
                                 <input type="hidden" name="calculated_price" id="calculatedPrice" value="<?= isset($calculated_price) ? $calculated_price : (isset($list_size[0]['temp_price']) ? $list_size[0]['temp_price'] : ''); ?>">
-
                                 <?php foreach ($list_size as $id => $item) : ?>
                                     <!-- Thay thế class bằng id -->
-                                    <label class="btn btn-default text-center" id="size-<?= $item['id'] ?>" for="size-<?= $item['id'] ?>" style="background-color: white;">
+                                    <label class="btn btn-default text-center" id="size-<?= $item['id'] ?>" for="size-<?= $item['id'] ?>" style="background-color: white;border:1px solid #ddd">
                                         <a class="size-label" data-temp-price="<?= $item['temp_price'] ?>" data-size="<?= $item['name_size'] ?>">
                                             <span class="text-xl">
                                                 <?= $item['name_size'] ?>

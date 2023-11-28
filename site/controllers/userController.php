@@ -112,11 +112,42 @@ if (isset($act)) {
             require_once 'views/header.php';
             require_once 'views/forgot-password.php';
             require_once 'views/footer.php';
+            break;
         case 'account-detail':
             //Trang thông tin tai khoản
             require_once 'views/header.php';
-            require_once 'views/account-information.php';
+            require_once 'views/account-detail.php';
             require_once 'views/footer.php';
+            break;
+        case 'update_info':
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                //Có chọn thay đỏi mật khẩu
+                if (isset($_POST['change_password'])) {
+                    //Xét 2 mật khẩu mới giống nhau
+                    if ($npassword == $cnewpassword) {
+                        if ($npassword != $cpassword) {
+                            //Mật khẩu mới khác mật khẩu cũ
+                            $fullname = $_POST['fullname'];
+                            $email = $_POST['email'];
+                            $address = $_POST['address'];
+                            $phone = $_POST['phone'];
+                            $password = $cnewpassword; //gán xác nhận mật khẩu mới vào mật khẩu cũ
+                        } else {
+                            //Báo lỗi
+                        }
+                    } else {
+                        //Báo lỗi
+                    }
+                } else {
+                    //Không chọn thay đổi mật khẩu
+                    $fullname = $_POST['fullname'];
+                    $email = $_POST['email'];
+                    $address = $_POST['address'];
+                    $phone = $_POST['phone'];
+                    $password = $_SESSION['user']['password'];
+                }
+            }
+            break;
         case 'account':
             //Trang tài khoản
             require_once 'views/header.php';

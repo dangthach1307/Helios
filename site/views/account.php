@@ -6,166 +6,74 @@
             </div>
             <div class="my-account-page">
                 <div class="row">
-                    <!-- <div class="col-sm-4 col-md-4 col-xs-12"> 
-                        <a href="#">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-icon"> <i class="fa fa-gift"></i> </div>
-                                    <div class="service-desc">
-                                        <h4>Your Orders</h4>
-                                        <p>Track, return, or buy things again</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div> -->
-                    <div class="col-sm-4 col-md-4 col-xs-12">
-                        <a href="?option=user&act=account-detail">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-icon"> <i class="fa fa-lock"></i> </div>
-                                    <div class="service-desc">
-                                        <h4>Login & security</h4>
-                                        <p>Edit login, name, and mobile number</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- <div class="col-sm-4 col-md-4 col-xs-12"> 
-                        <a href="#">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-icon"> <i class="fa fa-location-arrow"></i> </div>
-                                    <div class="service-desc">
-                                        <h4>Your Addresses</h4>
-                                        <p>Edit addresses for orders and gifts</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a> 
-                    </div> -->
-                    <!-- <div class="col-sm-4 col-md-4 col-xs-12"> <a href="#">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-icon"> <i class="fa fa-credit-card"></i> </div>
-                                    <div class="service-desc">
-                                        <h4>Payment options</h4>
-                                        <p>Edit or add payment methods</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a> </div> -->
-                    <!-- <div class="col-sm-4 col-md-4 col-xs-12"> <a href="#">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-icon"> <i class="fa fa-paypal"></i> </div>
-                                    <div class="service-desc">
-                                        <h4>PayPal</h4>
-                                        <p>View benefits and payment settings</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a> </div> -->
-                    <!-- <div class="col-sm-4 col-md-4 col-xs-12"> <a href="#">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-icon"> <i class="fa fa-amazon"></i> </div>
-                                    <div class="service-desc">
-                                        <h4>Amazon Pay balance</h4>
-                                        <p>Add money to your balance</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a> </div> -->
-                </div>
-                <div class="bottom-box">
-                    <div class="row">
-                        <!-- <div class="col-sm-4 col-md-4 col-xs-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Gold & Diamond Jewellery</h4>
-                                        <ul>
-                                            <li><a href="#">Apps and more</a></li>
-                                            <li><a href="#">Content and devices</a></li>
-                                            <li><a href="#">Music settings</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-sm-4 col-md-4 col-xs-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Handloom & Handicraft Store</h4>
-                                        <ul>
-                                            <li><a href="#">Advertising preferences </a></li>
-                                            <li><a href="#">Communication preferences</a></li>
-                                            <li><a href="#">SMS alert preferences</a></li>
-                                            <li><a href="#">Message center</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-sm-4 col-md-4 col-xs-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>The Designer Boutique</h4>
-                                        <ul>
-                                            <li><a href="#">Amazon Pay</a></li>
-                                            <li><a href="#">Bank accounts for refunds</a></li>
-                                            <li><a href="#">Coupons</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-sm-4 col-md-4 col-xs-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Gift Boxes, Gift Tags, Greeting Cards</h4>
-                                        <ul>
-                                            <li><a href="#">Leave delivery feedback</a></li>
-                                            <li><a href="#">Lists</a></li>
-                                            <li><a href="#">Photo ID proofs</a></li>
-                                            <li><a href="#">Profile</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <?php if ($_SESSION['user']['role'] !== 'customer') : ?>
-                            <div class="col-sm-4 col-md-4 col-xs-12">
-                                <div class="account-box">
-                                    <div class="service-box">
-                                        <div class="service-desc">
-                                            <h4>Admin dashboard</h4>
-                                            <ul>
-                                                <li><a href="../admin/index.php">Go to Admin dashboard</a></li>
-                                            </ul>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-xs-12">
+                                <div class="col-md-5">
+                                    <div class="text-center">
+                                        <img class="img img-fluid img-circle" style="margin-top: 15px;" height="250px" width="250px" src="../public/images/user/<?= $_SESSION["user"]["img"] ?>">
+
+                                        <div class="service-desc text-center" style="margin-top: 10px;">
+                                            <h4>Cấp thành viên</h4>
+                                            <p><?= $_SESSION["user"]["rank_id"] ?></p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endif; ?>
-                        <!-- <div class="col-sm-4 col-md-4 col-xs-12">
-                            <div class="account-box">
-                                <div class="service-box">
-                                    <div class="service-desc">
-                                        <h4>Shopping programs and rentals</h4>
-                                        <ul>
-                                            <li><a href="#">Subscribe & Save</a></li>
-                                        </ul>
+                                <div class="col-md-7">
+                                    <div class="service-box">
+                                        <div class="service-desc">
+                                            <strong>Họ tên:</strong><?= $_SESSION["user"]["fullname"] ?>
+                                        </div>
                                     </div>
+                                    <div class="service-box">
+                                        <div class="service-desc">
+                                            <strong>Email:</strong><?= $_SESSION["user"]["email"] ?>
+                                        </div>
+                                    </div>
+                                    <div class="service-box">
+                                        <div class="service-desc">
+                                            <strong>Địa chỉ:</strong><?= $_SESSION["user"]["address"] ?>
+                                        </div>
+                                    </div>
+                                    <div class="service-box">
+                                        <div class="service-desc">
+                                            <strong>Số điện thoại:</strong><?= $_SESSION["user"]["phone"] ?>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="col-sm-12 col-md-12 col-xs-12">
+                            <a href="#">
+                                <div class="account-box">
+                                    <div class="service-box">
+                                        <div class="service-icon"> <i class="fa fa-gift"></i> </div>
+                                        <div class="service-desc">
+                                            <h4>Lịch sử đơn hàng</h4>
+                                            <p>Track, return, or buy things again</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-xs-12">
+                            <a href="?option=user&act=account-detail">
+                                <div class="account-box">
+                                    <div class="service-box">
+                                        <div class="service-icon"> <i class="fa fa-lock"></i> </div>
+                                        <div class="service-desc">
+                                            <h4>Cập nhật thông tin</h4>
+                                            <p>Edit login, name, and mobile number</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

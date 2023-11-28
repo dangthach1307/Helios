@@ -5,7 +5,7 @@ require_once './models/categoryModel.php';
 require_once './models/productModel.php';
 require_once './models/contactModel.php';
 
-
+// require_once 'views/header.php';
 if (isset($act)) {
     switch ($act) {
         case 'search':
@@ -14,9 +14,9 @@ if (isset($act)) {
             $list_size = product_by_size($sp_search[0]['id']);
             $list_categories = category_list(0);
             // Đưa dữ liệu vào các trang header, danh sách sản phẩm theo danh mục và footer để hiển thị trên trang web.
-            require_once 'views/header.php';
+
             require_once 'views/product-search.php';
-            require_once 'views/footer.php';
+
             break;
         case 'product':
             // Lọc sản phẩm theo khoảng giá
@@ -46,9 +46,9 @@ if (isset($act)) {
 
             $list_categories = category_list(0);
             // Đưa dữ liệu vào các trang header, danh sách sản phẩm theo danh mục và footer để hiển thị trên trang web.
-            require_once 'views/header.php';
+            // require_once 'views/header.php';
             require_once 'views/product.php';
-            require_once 'views/footer.php';
+            // require_once 'views/footer.php';
             break;
         case 'category':
             // Lọc sản phẩm theo khoảng giá
@@ -86,9 +86,9 @@ if (isset($act)) {
             $list_size = product_by_size($list_product[0]['id']);
 
             // Đưa dữ liệu vào các trang header, danh sách sản phẩm theo danh mục và footer để hiển thị trên trang web.
-            require_once 'views/header.php';
+            // require_once 'views/header.php';
             require_once 'views/product-category.php';
-            require_once 'views/footer.php';
+            // require_once 'views/footer.php';
             break;
         case 'product-detail':
             //Trang chi tiết sản phẩm
@@ -101,16 +101,16 @@ if (isset($act)) {
 
             $list_catid = category_listcatid($row['category_id']);
             $list_other = product_other($list_catid, $row['id']);
-            require_once 'views/header.php';
+            // require_once 'views/header.php';
             require_once 'views/product-detail.php';
-            require_once 'views/footer.php';
+            // require_once 'views/footer.php';
             break;
         case 'blog':
             //Xử lý luồng dữ liệu cho trang bài viết
             //Gọi view
-            require_once 'views/header.php';
+            // require_once 'views/header.php';
             require_once 'views/blog.php';
-            require_once 'views/footer.php';
+            // require_once 'views/footer.php';
             break;
         case 'contact':
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -125,18 +125,18 @@ if (isset($act)) {
                 $thongbao = "Gửi liên hệ thành công";
                 redirect("?option=page&act=contact");
             }
-            require_once 'views/header.php';
+            // require_once 'views/header.php';
             require_once 'views/contact.php';
-            require_once 'views/footer.php';
+            // require_once 'views/footer.php';
             break;
         case 'home':
             $product_list_newest = product_list_home('newest');
             $product_list_topview = product_list_home('topview');
             $size_list_newest = product_by_size($product_list_newest[0]['id']);
             $size_list_topview = product_by_size($product_list_topview[0]['id']);
-            require_once 'views/header.php';
+            // require_once 'views/header.php';
             require_once 'views/home.php';
-            require_once 'views/footer.php';
+            // require_once 'views/footer.php';
             break;
     }
 } else {
@@ -144,7 +144,9 @@ if (isset($act)) {
     $product_list_topview = product_list_home('topview');
     $size_list_newest = product_by_size($product_list_newest[0]['id']);
     $size_list_topview = product_by_size($product_list_topview[0]['id']);
-    require_once 'views/header.php';
+    // require_once 'views/header.php';
     require_once 'views/home.php';
-    require_once 'views/footer.php';
+    // require_once 'views/footer.php';
 }
+// require_once 'views/footer.php';
+// require_once 'views/modules/message.php';
