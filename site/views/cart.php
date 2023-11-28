@@ -18,15 +18,6 @@
         <div class="row">
             <div class="col-sm-12 col-xs-12">
                 <div class="product-area">
-                    <div class="title-tab-product-category">
-                        <div class="text-center">
-                            <ul class="nav jtv-heading-style" role="tablist">
-                                <li role="presentation" class="active"><a href="#cart" aria-controls="cart" role="tab" data-toggle="tab">Shopping cart</a></li>
-                                <li role="presentation" class=""><a href="#checkout" aria-controls="checkout" role="tab" data-toggle="tab">Checkout</a></li>
-                                <!-- <li role="presentation" class=""><a href="#complete-order" aria-controls="complete-order" role="tab" data-toggle="tab">3 Complete Order</a></li> -->
-                            </ul>
-                        </div>
-                    </div>
                     <div class="content-tab-product-category">
                         <!-- Tab panes -->
                         <div class="tab-content">
@@ -80,12 +71,12 @@
                                                                         <div class="product-qty">
                                                                             <div class="cart-quantity">
                                                                                 <div class="cart-plus-minus">
-                                                                                    <button onClick="var result = document.getElementById('qty<?= $item_cart['id'] ?>'); var qty = parseInt(result.value); if (!isNaN(qty) && qty > 1) result.value = qty - 1;" class="dec qtybutton" type="button">
-                                                                                        <i class="fa fa-minus">&nbsp;</i>
+                                                                                    <button onClick="var result = document.getElementById('qty<?= $item_cart['id'] ?>_<?= $item_cart['size'] ?>'); var qty = parseInt(result.value); if (!isNaN(qty) && qty > 1) result.value = qty - 1;" class="dec qtybutton" type="button">
+                                                                                        <i class="fa fa-minus"></i>
                                                                                     </button>
-                                                                                    <input type="text" class="cart-plus-minus-box" title="Qty" value="<?= $item_cart['qty'] ?>" maxlength="12" id="qty<?= $item_cart['id'] ?>" name="qty[]" readonly>
-                                                                                    <button onClick="var result = document.getElementById('qty<?= $item_cart['id'] ?>'); var qty = parseInt(result.value); if (!isNaN(qty)) result.value = qty + 1;" class="inc qtybutton" type="button">
-                                                                                        <i class="fa fa-plus">&nbsp;</i>
+                                                                                    <input type="text" class="cart-plus-minus-box" title="Qty" value="<?= $item_cart['qty'] ?>" maxlength="12" id="qty<?= $item_cart['id'] ?>_<?= $item_cart['size'] ?>" name="qty[]" readonly>
+                                                                                    <button onClick="var result = document.getElementById('qty<?= $item_cart['id'] ?>_<?= $item_cart['size'] ?>'); var qty = parseInt(result.value); if (!isNaN(qty)) result.value = qty + 1;" class="inc qtybutton" type="button">
+                                                                                        <i class="fa fa-plus"></i>
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
@@ -148,7 +139,7 @@
                                                                 <p>Total <span><?= number_format($total) ?> Vnđ</span></p>
                                                             </div>
                                                             <div class="process-checkout-btn text-right">
-                                                                <button class="button btn-proceed-checkout" title="Proceed to Checkout" type="button" onclick="document.querySelector('a[href=\'#checkout\']').click();"><span>Proceed to Checkout</span></button>
+                                                                <button class="button btn-proceed-checkout" title="Proceed to Checkout" type="button" onclick="window.location.href='?option=cart&act=cart-checkout';"><span>Thanh toán</span></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -163,270 +154,6 @@
                                 </form>
                                 <!-- cart are end-->
                             </div>
-                            <?php if ($list != NULL) : ?>
-                                <div role="tabpanel" class="tab-pane  fade in " id="checkout">
-                                    <!-- Checkout are start-->
-                                    <div class="checkout-area">
-                                        <div class="">
-                                            <div class="row">
-                                                <div class="col-md-7 col-sm-12 col-xs-12">
-                                                    <div class="coupne-customer-area mb50">
-                                                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                                            <!-- <div class="panel panel-checkout">
-                                                                <div class="panel-heading" role="tab" id="headingThree">
-                                                                    <h4 class="panel-title"> <img src="images/acc.jpg" alt=""> Have A Coupon? <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Click here to enter your code </a> </h4>
-                                                                </div>
-                                                                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                                    <div class="panel-body coupon-body">
-                                                                        <div class="first-last-area">
-                                                                            <div class="input-box">
-                                                                                <input type="text" placeholder="Coupon Code" class="info" name="code">
-                                                                            </div>
-                                                                            <div class="frm-action">
-                                                                                <div class="input-box tci-box"> <a href="#" class="btn-def btn2">Apply Coupon</a> </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div> -->
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12 col-xs-12">
-                                                            <div class="billing-details">
-                                                                <div class="contact-text right-side">
-                                                                    <h2>Billing Details</h2>
-                                                                    <form action="#">
-                                                                        <div class="row">
-                                                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                <div class="input-box">
-                                                                                    <label>Full Name <em>*</em></label>
-                                                                                    <input type="text" name="fullname" class="info" placeholder="First Name">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                <div class="input-box">
-                                                                                    <label>Email Address<em>*</em></label>
-                                                                                    <input type="email" name="email" class="info" placeholder="Your Email">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                <div class="input-box">
-                                                                                    <label>Phone Number<em>*</em></label>
-                                                                                    <input type="text" name="phone" class="info" placeholder="Phone Number">
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                                <div class="input-box">
-                                                                                    <label>Address <em>*</em></label>
-                                                                                    <input type="text" name="Address" class="info mb-10" placeholder="Your Address">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- <div class="col-md-6 col-xs-12">
-                                                            <div class="billing-details">
-                                                                <div class="right-side">
-                                                                    <div class="ship-acc clearfix">
-                                                                        <div class="ship-toggle">
-                                                                            <input type="checkbox" id="ship-toggle">
-                                                                            <label for="ship-toggle">Ship to a different address?</label>
-                                                                        </div>
-                                                                        <div class="ship-acc-body">
-                                                                            <form action="#">
-                                                                                <div class="row">
-                                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                        <div class="input-box">
-                                                                                            <label>First Name <em>*</em></label>
-                                                                                            <input type="text" name="namm" class="info" placeholder="First Name">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                        <div class="input-box">
-                                                                                            <label>Last Name<em>*</em></label>
-                                                                                            <input type="text" name="namm" class="info" placeholder="Last Name">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                                        <div class="input-box">
-                                                                                            <label>Company Name</label>
-                                                                                            <input type="text" name="cpany" class="info" placeholder="Company Name">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                        <div class="input-box">
-                                                                                            <label>Email Address<em>*</em></label>
-                                                                                            <input type="email" name="email" class="info" placeholder="Your Email">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                        <div class="input-box">
-                                                                                            <label>Phone Number<em>*</em></label>
-                                                                                            <input type="text" name="phone" class="info" placeholder="Phone Number">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                                        <div class="input-box">
-                                                                                            <label>Country <em>*</em></label>
-                                                                                            <select class="selectpicker select-custom" data-live-search="true">
-                                                                                                <option data-tokens="Bangladesh">Bangladesh</option>
-                                                                                                <option data-tokens="India">India</option>
-                                                                                                <option data-tokens="Pakistan">Pakistan</option>
-                                                                                                <option data-tokens="Pakistan">Pakistan</option>
-                                                                                                <option data-tokens="Srilanka">Srilanka</option>
-                                                                                                <option data-tokens="Nepal">Nepal</option>
-                                                                                                <option data-tokens="Butan">Butan</option>
-                                                                                                <option data-tokens="USA">USA</option>
-                                                                                                <option data-tokens="England">England</option>
-                                                                                                <option data-tokens="Brazil">Brazil</option>
-                                                                                                <option data-tokens="Canada">Canada</option>
-                                                                                                <option data-tokens="China">China</option>
-                                                                                                <option data-tokens="Koeria">Koeria</option>
-                                                                                                <option data-tokens="Soudi">Soudi Arabia</option>
-                                                                                                <option data-tokens="Spain">Spain</option>
-                                                                                                <option data-tokens="France">France</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                                        <div class="input-box">
-                                                                                            <label>Address <em>*</em></label>
-                                                                                            <input type="text" name="add1" class="info mb-10" placeholder="Street Address">
-                                                                                            <input type="text" name="add2" class="info mt10" placeholder="Apartment, suite, unit etc. (optional)">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                                        <div class="input-box">
-                                                                                            <label>Town/City <em>*</em></label>
-                                                                                            <input type="text" name="add1" class="info" placeholder="Town/City">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                        <div class="input-box">
-                                                                                            <label>State/Divison <em>*</em></label>
-                                                                                            <select class="selectpicker select-custom" data-live-search="true">
-                                                                                                <option data-tokens="Barisal">Barisal</option>
-                                                                                                <option data-tokens="Dhaka">Dhaka</option>
-                                                                                                <option data-tokens="Kulna">Kulna</option>
-                                                                                                <option data-tokens="Rajshahi">Rajshahi</option>
-                                                                                                <option data-tokens="Sylet">Sylet</option>
-                                                                                                <option data-tokens="Chittagong">Chittagong</option>
-                                                                                                <option data-tokens="Rangpur">Rangpur</option>
-                                                                                                <option data-tokens="Maymanshing">Maymanshing</option>
-                                                                                                <option data-tokens="Cox">Cox's Bazar</option>
-                                                                                                <option data-tokens="Saint">Saint Martin</option>
-                                                                                                <option data-tokens="Kuakata">Kuakata</option>
-                                                                                                <option data-tokens="Sajeq">Sajeq</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                                        <div class="input-box">
-                                                                                            <label>Post Code/Zip Code<em>*</em></label>
-                                                                                            <input type="text" name="zipcode" class="info" placeholder="Zip Code">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form">
-                                                                        <div class="input-box">
-                                                                            <label>Order Notes</label>
-                                                                            <textarea placeholder="Notes about your order, e.g. special notes for delivery." class="area-tex"></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div> -->
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-5 col-sm-12 col-xs-12">
-                                                    <div class="checkout-payment-area">
-                                                        <div class="checkout-total">
-                                                            <h3>Your order</h3>
-                                                            <form action="#" method="post">
-                                                                <div class="table-responsive">
-                                                                    <table class="checkout-area table">
-                                                                        <thead>
-                                                                            <tr class="cart_item check-heading">
-                                                                                <td class="ctg-type"> Product</td>
-                                                                                <td class="cgt-des"> Total</td>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <?php foreach ($list as $item_cart) : ?>
-                                                                                <?php
-                                                                                // $sub_total = $item_cart['qty'] * $item_cart['price'];
-                                                                                // $total += $sub_total;
-                                                                                ?>
-                                                                                <tr class="cart_item check-item prd-name">
-                                                                                    <td class="ctg-type"> <?= $item_cart['name'] ?> × <span><?= $item_cart['qty'] ?></span></td>
-                                                                                    <td class="cgt-des"> <?php echo number_format($item_cart['qty'] * $item_cart['price']); ?></td>
-                                                                                </tr>
-                                                                            <?php endforeach; ?>
-                                                                            <!-- <tr class="cart_item">
-                                                                    <td class="ctg-type"> Subtotal</td>
-                                                                    <td class="cgt-des"><?php echo number_format($total); ?></td>
-                                                                </tr> -->
-                                                                            <!-- <tr class="cart_item">
-                                                                    <td class="ctg-type">Shipping</td>
-                                                                    <td class="cgt-des ship-opt">
-                                                                        <div class="shipp">
-                                                                            <input type="radio" id="pay-toggle" name="ship">
-                                                                            <label for="pay-toggle">Flat Rate: <span>$05</span></label>
-                                                                        </div>
-                                                                        <div class="shipp">
-                                                                            <input type="radio" id="pay-toggle2" name="ship">
-                                                                            <label for="pay-toggle2">Free Shipping</label>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr> -->
-                                                                            <tr class="cart_item">
-                                                                                <td class="ctg-type crt-total"> Total</td>
-                                                                                <td class="cgt-des prc-total"> <?php echo number_format($total); ?> Vnđ </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                        <div class="payment-section">
-                                                            <div class="pay-toggle">
-                                                                <form action="#">
-                                                                    <!-- <div class="pay-type-total">
-                                                            <div class="pay-type">
-                                                                <input type="radio" id="pay-toggle01" name="pay">
-                                                                <label for="pay-toggle01">Direct Bank Transfer</label>
-                                                            </div>
-                                                            <div class="pay-type">
-                                                                <input type="radio" id="pay-toggle02" name="pay">
-                                                                <label for="pay-toggle02">Cheque Payment</label>
-                                                            </div>
-                                                            <div class="pay-type">
-                                                                <input type="radio" id="pay-toggle03" name="pay">
-                                                                <label for="pay-toggle03">Cash on Delivery</label>
-                                                            </div>
-                                                            <div class="pay-type">
-                                                                <input type="radio" id="pay-toggle04" name="pay">
-                                                                <label for="pay-toggle04">Paypal</label>
-                                                            </div>
-                                                        </div> -->
-                                                                    <div class="input-box"> <a class="btn-def btn2" href="#">Place order</a> </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Checkout are end-->
-                                </div>
-                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

@@ -9,47 +9,32 @@ function cart_content()
 }
 function cart_insert($data)
 {
-    // if (!isset($_SESSION['cart'])) {
-    //     $row_cart[] = $data; //Row cart là mảng 2 chiều
-    //     $_SESSION['cart'] = $row_cart;
-    // } else {
-    //     $cart = $_SESSION['cart']; //Mảng 2 chiều
-    //     if (cart_check_product($data) == true) {
-    //         //Đã có mã sp -> tăng qty
-    //         $cart = cart_update_qty($cart, $data);
-    //     } else {
-    //         //Chưa có mã sp -> thêm mới
-    //         $cart[] = $data;
-    //     }
-    //     $_SESSION['cart'] = $cart;
-    // }
     if (!isset($_SESSION['cart'])) {
-        $row_cart[] = $data;
-        $_SESSION['cart'] = $row_cart;
+        $_SESSION['cart'][] = $data;
     } else {
         $cart = $_SESSION['cart'];
         $existing_product_key = null;
 
-        // Kiểm tra xem sản phẩm đã tồn tại trong giỏ hàng chưa
+        // Kiểm tra xem sản phẩm với kích thước tương ứng đã tồn tại trong giỏ hàng chưa
         foreach ($cart as $key => $item) {
-            if ($item['id'] == $data['id']) {
+            if ($item['id'] == $data['id'] && $item['size'] == $data['size']) {
                 $existing_product_key = $key;
                 break;
             }
         }
 
         if ($existing_product_key !== null) {
-            // Nếu sản phẩm đã tồn tại, thì cập nhật giá trị
-            $cart[$existing_product_key]['size'] = $data['size'];
+            // Nếu sản phẩm với kích thước tương ứng đã tồn tại, thì cập nhật số lượng
             $cart[$existing_product_key]['qty'] += $data['qty'];
         } else {
-            // Nếu sản phẩm chưa tồn tại, thêm sản phẩm mới
+            // Nếu sản phẩm với kích thước tương ứng chưa tồn tại, thêm sản phẩm mới
             $cart[] = $data;
         }
 
         $_SESSION['cart'] = $cart;
     }
 }
+
 function cart_check_product($data)
 {
     $cart = cart_content();
@@ -138,5 +123,29 @@ function cart_delete($id = null)
             }
         }
         $_SESSION['cart'] = $cart;
+    }
+}
+function get_last_order_id()
+{
+    $sql = "SELECT * FROM db_order ORDER BY id DESC LIMIT 1";
+    $result = pdo_query_one($sql);
+    return $result["id"];
+}
+function  cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list)
+{
+    //thêm đơn hàng
+    $sql_order = "INSERT INTO db_order(user_id,delivery_fullname, delivery_address, delivery_phone, delivery_email, created_at, exported_at, total_price, payment_method, note) VALUES(?,?,?,?,?,?,?,?,?,?)";
+    pdo_execute($sql_order, $user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note);
+    $last_order_id = get_last_order_id();
+    // Chèn chi tiết đơn hàng
+    foreach ($list as $item) {
+        $product_id = $item['id'];
+        $material = $item['material'];
+        $size = $item['size'];
+        $price = $item['price'];
+        $quantity = $item['qty'];
+
+        $sql_orderdetail = "INSERT INTO db_orderdetail (order_id, product_id, material, size, price, quantity) VALUES (?,?,?,?,?,?)";
+        pdo_execute($sql_orderdetail, $last_order_id, $product_id, $material, $size, $price, $quantity);
     }
 }

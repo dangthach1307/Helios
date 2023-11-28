@@ -6,6 +6,12 @@ if (isset($act)) {
             $act = $_REQUEST['act'];
             $id = isset($_REQUEST['pid']) ? $_REQUEST['pid'] : null;
             $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'index.php'; // Nếu không có trang trước đó, quay lại trang chủ
+            if (!isset($_SESSION['user'])) {
+                // Nếu không có session user, chuyển hướng đến trang đăng nhập và lưu lại trang trước đó
+                $_SESSION['redirect_url'] = $referer;
+                header("Location: index.php?option=user&act=login");
+                exit();
+            }
             if (isset($act) && $act == 'add-cart') {
                 $sp = product_rowid($id);
                 $list_size = product_by_size($sp['id']);
@@ -22,7 +28,7 @@ if (isset($act)) {
                         'name' => $sp['name'],
                         'slug' => $sp['slug'],
                         'img' => $sp['more_images'][0],
-                        'material' =>$material_name,
+                        'material' => $material_name,
                         'size' => $selected_size,
                         'price' => $calculated_price,
                         'qty' => $qty
@@ -78,6 +84,51 @@ if (isset($act)) {
             require_once 'views/header.php';
             require_once 'views/cart.php';
             require_once 'views/footer.php';
+            break;
+        case 'cart-checkout':
+            if (!isset($_SESSION['user']) || (!isset($_SESSION['cart']) || empty($_SESSION['cart']))) {
+                header('location: index.php?option=page&act=home');
+                exit();
+            }
+            $list = cart_content();
+            require_once 'views/header.php';
+            require_once 'views/checkout.php';
+            require_once 'views/footer.php';
+            break;
+        case 'insert-order':
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $list = cart_content();
+
+                // Kiểm tra checkbox "Địa chỉ Khác"
+                if (isset($_POST['new_info'])) {
+                    // Lấy thông tin địa chỉ mới từ biểu mẫu
+                    $user_id = $_SESSION['user']['id'];
+                    $delivery_fullname = $_POST['other_fullname'];
+                    $delivery_email = $_POST['other_email'];
+                    $delivery_phone = $_POST['other_phone'];
+                    $delivery_address = $_POST['other_address'];
+                    $note = $_POST['order_notes'];
+                    $total_price = $_POST['total'];
+                    $created_at = date('Y-m-d H:i:s');
+                    $exported_at = date('Y-m-d H:i:s');
+                    // Gọi hàm insert_order với thông tin địa chỉ mới
+                    cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
+                } else {
+                    // Trường hợp không chọn địa chỉ khác
+                    $user_id = $_SESSION['user']['id'];
+                    $delivery_fullname = $_SESSION['user']['fullname'];
+                    $delivery_email = $_SESSION['user']['email'];
+                    $delivery_phone = $_SESSION['user']['phone'];
+                    $delivery_address = $_SESSION['user']['address'];
+                    $payment_method = $_POST['payment_method'];
+                    $total_price = $_POST['total'];
+                    $note = $_POST['order_notes'];
+                    $created_at = date('Y-m-d H:i:s');
+                    $exported_at = date('Y-m-d H:i:s');
+                    // Gọi hàm insert_order với thông tin địa chỉ từ session
+                    cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
+                }
+            }
             break;
     }
 } else {

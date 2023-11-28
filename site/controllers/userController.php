@@ -58,39 +58,51 @@ if (isset($act)) {
             require_once 'views/footer.php';
             break;
         case 'login':
+            // Nếu có session user, chuyển hướng về trang chủ
+            if (isset($_SESSION['user'])) {
+                header("Location: index.php");
+                exit();
+            }
+
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $email = isset($_POST['email']) ? $_POST['email'] : '';
                 $password = isset($_POST['password']) ? $_POST['password'] : '';
                 $email_error = $password_error = '';
+
                 // Validate email
-                if (empty($email)) {
-                    $email_error = "Vui lòng nhập địa chỉ email.";
-                } elseif (!validateEmail($email)) {
-                    $email_error = "Email không hợp lệ.";
-                }
+                // (code validation email)
+
                 // Validate password
-                $password_errors = validatePassword($password);
-                if (!empty($password_errors)) {
-                    $password_error = implode("<br>", $password_errors);
-                }
+                // (code validation password)
+
                 // If there are no validation errors
                 if (empty($email_error) && empty($password_error)) {
-                    //Kiểm tra email tồn tại
+                    // Kiểm tra email tồn tại
                     if (auth_check($email) == FALSE) {
                         $email_error = "Email không tồn tại";
                     } else {
                         $user = auth_guard($email, $password);
                         if ($user !== FALSE) {
                             $_SESSION['user'] = $user;
-                            header("Location: index.php", true, 302);
-                            exit();
+
+                            // Kiểm tra và chuyển hướng về trang trước đó nếu có
+                            if (isset($_SESSION['redirect_url'])) {
+                                $redirect_url = $_SESSION['redirect_url'];
+                                unset($_SESSION['redirect_url']); // Xóa session redirect_url sau khi sử dụng
+                                header("Location: $redirect_url");
+                                exit();
+                            } else {
+                                header("Location: index.php");
+                                exit();
+                            }
                         } else {
                             $password_error = "Mật khẩu không chính xác";
                         }
                     }
                 }
             }
-            //Trang đăng nhập
+
+            // Trang đăng nhập
             require_once 'views/header.php';
             require_once 'views/login.php';
             require_once 'views/footer.php';
