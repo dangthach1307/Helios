@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2023 at 12:43 PM
+-- Generation Time: Nov 29, 2023 at 08:07 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -212,6 +212,7 @@ INSERT INTO `db_material` (`id`, `name`, `rate`) VALUES
 CREATE TABLE `db_member_rank` (
   `id` int(11) NOT NULL COMMENT 'Mã cấp bậc thành viên',
   `name` varchar(50) NOT NULL DEFAULT 'Member' COMMENT 'Tên loại cấp bậc, ví dụ: Bronze, Silver, Gold, Diamond...',
+  `img` varchar(225) NOT NULL,
   `promotion` int(11) NOT NULL COMMENT 'Mức giảm giá (%) dựa trên loại rank đạt được',
   `info1` varchar(50) DEFAULT NULL COMMENT 'Thông tin 1',
   `info2` varchar(50) DEFAULT NULL COMMENT 'Thông tin 2',
@@ -222,11 +223,11 @@ CREATE TABLE `db_member_rank` (
 -- Dumping data for table `db_member_rank`
 --
 
-INSERT INTO `db_member_rank` (`id`, `name`, `promotion`, `info1`, `info2`, `status`) VALUES
-(1, 'Bronze', 10, NULL, NULL, 0),
-(2, 'Silver', 15, NULL, NULL, 0),
-(3, 'Gold', 20, NULL, NULL, 0),
-(4, 'Diamond', 25, NULL, NULL, 0);
+INSERT INTO `db_member_rank` (`id`, `name`, `img`, `promotion`, `info1`, `info2`, `status`) VALUES
+(1, 'Bronze', 'bronze.png', 10, NULL, NULL, 0),
+(2, 'Silver', 'silver.png', 15, NULL, NULL, 0),
+(3, 'Gold', 'gold.png', 20, NULL, NULL, 0),
+(4, 'Diamond', 'diamond.png', 25, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -269,9 +270,9 @@ CREATE TABLE `db_order` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Ngày tạo hoá đơn',
   `exported_at` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Ngày xuất hoá đơn',
   `total_price` int(11) NOT NULL COMMENT 'Tổng tiền đơn hàng',
-  `payment_method` int(11) NOT NULL DEFAULT 1 COMMENT '1: Thanh toán khi nhận hàng\r\n2: Chuyển khoản\r\n3: Ví điện tử',
+  `payment_method` int(11) NOT NULL COMMENT '1: Thanh toán khi nhận hàng\r\n2: Chuyển khoản\r\n3: Ví điện tử',
   `stage` int(1) NOT NULL DEFAULT 1 COMMENT 'Quy định trạng thái vận chuyển:\r\n1: Chờ duyệt\r\n2: Đang giao\r\n3: bom- huỷ đơn\r\n4: Đã giao hàng',
-  `status` int(11) NOT NULL DEFAULT 0 COMMENT 'Quy định trạng thái đơn hàng:\r\n0: Chưa thanh toán\r\n1: Đã thanh toán',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT 'Quy định trạng thái đơn hàng:\r\n0: Đang xử lý\r\n1: Đã hoàn thành\r\n2: Đã huỷ đơn',
   `note` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -280,13 +281,28 @@ CREATE TABLE `db_order` (
 --
 
 INSERT INTO `db_order` (`id`, `user_id`, `delivery_fullname`, `delivery_address`, `delivery_phone`, `delivery_email`, `created_at`, `exported_at`, `total_price`, `payment_method`, `stage`, `status`, `note`) VALUES
-(1, 1, 'đăng thạch', '98/12/3/4', '0902471714', 'dangttps28346@fpt.edu.vn', '2023-11-27 08:19:48', '2023-11-27 08:19:48', 4648000, 1, 1, 0, 'xzcxzczxczxczc'),
+(1, 1, 'đăng thạch', '98/12/3/4', '0902471714', 'dangttps28346@fpt.edu.vn', '2023-11-27 08:19:48', '2023-11-27 08:19:48', 4648000, 1, 3, 2, 'xzcxzczxczxczc'),
 (2, 1, '', '', '', '', '2023-11-27 08:24:12', '2023-11-27 08:24:12', 4648000, 3, 1, 0, ''),
 (3, 1, '', '', '', '', '2023-11-27 08:31:25', '2023-11-27 08:31:25', 7742000, 3, 1, 0, 'zxczxcz'),
-(4, 1, '', '', '', '', '2023-11-27 08:33:57', '2023-11-27 08:33:57', 7728000, 1, 1, 0, 'zczxc'),
-(5, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-27 08:57:58', '2023-11-27 08:57:58', 3094000, 1, 1, 0, 'zxczxc'),
-(6, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-27 08:59:13', '2023-11-27 08:59:13', 3094000, 1, 1, 0, 'zxczxc'),
-(7, 1, 'đăng thạch', '98/12/3/4', '0902471714', 'dangttps28346@fpt.edu.vn', '2023-11-27 09:00:11', '2023-11-27 09:00:11', 21616000, 3, 1, 0, 'Giàu mà');
+(4, 1, '', '', '', '', '2023-11-27 08:33:57', '2023-11-27 08:33:57', 7728000, 1, 2, 0, 'zczxc'),
+(5, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-27 08:57:58', '2023-11-27 08:57:58', 3094000, 1, 3, 0, 'zxczxc'),
+(6, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-27 08:59:13', '2023-11-27 08:59:13', 3094000, 1, 4, 0, 'zxczxc'),
+(7, 1, 'đăng thạch', '98/12/3/4', '0902471714', 'dangttps28346@fpt.edu.vn', '2023-11-27 09:00:11', '2023-11-27 09:00:11', 21616000, 3, 3, 2, 'Giàu mà'),
+(8, 1, 'Hoàng', 'xc,.mzvnx,mcn', '146781264', 'hoang@gmail.com', '2023-11-28 04:08:32', '2023-11-28 04:08:32', 7728000, 3, 0, 0, 'mnbzcv,mxbjkhsdabnjìg'),
+(9, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:09:58', '2023-11-28 04:09:58', 7728000, 1, 0, 0, ''),
+(10, 1, 'Hoàng', 'xc,.mzvnx,mcn', '124312412', 'hoang@gmail.com', '2023-11-28 04:10:23', '2023-11-28 04:10:23', 7728000, 2, 0, 0, 'zxczxcz'),
+(11, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:20:39', '2023-11-28 04:20:39', 7728000, 1, 1, 0, 'zczxczxcsxzc'),
+(12, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:21:34', '2023-11-28 04:21:34', 1540000, 1, 1, 0, ''),
+(13, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:23:42', '2023-11-28 04:23:42', 6160000, 1, 1, 0, ''),
+(14, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:25:04', '2023-11-28 04:25:04', 10780000, 1, 1, 0, ''),
+(15, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:26:20', '2023-11-28 04:26:20', 7770000, 2, 0, 0, ''),
+(16, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:28:28', '2023-11-28 04:28:28', 1540000, 1, 0, 0, ''),
+(17, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:31:07', '2023-11-28 04:31:07', 4620000, 1, 3, 2, ''),
+(18, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:33:05', '2023-11-28 04:33:05', 1540000, 1, 3, 2, ''),
+(19, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:34:23', '2023-11-28 04:34:23', 1540000, 3, 1, 0, ''),
+(20, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:35:36', '2023-11-28 04:35:36', 3080000, 3, 1, 0, ''),
+(21, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:40:37', '2023-11-28 04:40:37', 1540000, 1, 1, 1, ''),
+(22, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:48:18', '2023-11-28 04:48:18', 1540000, 1, 1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -320,7 +336,24 @@ INSERT INTO `db_orderdetail` (`id`, `order_id`, `product_id`, `material`, `size`
 (9, 6, 21, 'Vàng 10K', 10, 1554000, 1),
 (10, 6, 21, 'Vàng 10K', 9, 1540000, 1),
 (11, 7, 21, 'Vàng 10K', 10, 1554000, 4),
-(12, 7, 21, 'Vàng 10K', 9, 1540000, 10);
+(12, 7, 21, 'Vàng 10K', 9, 1540000, 10),
+(13, 9, 21, 'Vàng 10K', 9, 1540000, 3),
+(14, 9, 21, 'Vàng 10K', 10, 1554000, 2),
+(15, 10, 21, 'Vàng 10K', 9, 1540000, 3),
+(16, 10, 21, 'Vàng 10K', 10, 1554000, 2),
+(17, 11, 21, 'Vàng 10K', 9, 1540000, 3),
+(18, 11, 21, 'Vàng 10K', 10, 1554000, 2),
+(19, 12, 21, 'Vàng 10K', 9, 1540000, 1),
+(20, 13, 21, 'Vàng 10K', 9, 1540000, 4),
+(21, 14, 21, 'Vàng 10K', 9, 1540000, 7),
+(22, 15, 21, 'Vàng 10K', 10, 1554000, 5),
+(23, 16, 21, 'Vàng 10K', 9, 1540000, 1),
+(24, 17, 21, 'Vàng 10K', 9, 1540000, 3),
+(25, 18, 21, 'Vàng 10K', 9, 1540000, 1),
+(26, 19, 21, 'Vàng 10K', 9, 1540000, 1),
+(27, 20, 21, 'Vàng 10K', 9, 1540000, 2),
+(28, 21, 21, 'Vàng 10K', 9, 1540000, 1),
+(29, 22, 21, 'Vàng 10K', 9, 1540000, 1);
 
 -- --------------------------------------------------------
 
@@ -409,7 +442,7 @@ INSERT INTO `db_product` (`id`, `category_id`, `brand_id`, `name`, `slug`, `SKU`
 (18, 6, 2, 'test size nữa nè tiếp lần nữa', 'test-size-nua-ne-tiep-lan-nua', 'PNJNHA018-TES', '<p>xzczx</p>', '<p>czxczxc</p>', 4, 1000000, 6, 1, NULL, 0, 0, 0),
 (19, 6, 1, 'test size nữa nữa', 'test-size-nua-nua', 'TESNHA019-TES', '<p>xcvzxcv</p>', '<p>vzcxv</p>', 1, 2000000, 6, 1, NULL, 0, 0, 0),
 (20, 6, 2, 'test size nữa nữa nè', 'test-size-nua-nua-ne', 'PNJNHA020-THE', '<p>xzczxc</p>', '<p>zxczxc</p>', 1, 2000000, 6, 1, NULL, 391, 0, 1),
-(21, 6, 2, 'thêm lại sản phẩm sửa', 'them-lai-san-pham-sua', 'PNJNHA021-THE', '<p>xzczxc</p>', '<p>zxczxc</p>', 1, 2000000, 30, 1, NULL, 73, 0, 1);
+(21, 6, 2, 'thêm lại sản phẩm sửa', 'them-lai-san-pham-sua', 'PNJNHA021-THE', '<p>xzczxc</p>', '<p>zxczxc</p>', 1, 2000000, 30, 1, NULL, 128, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -617,7 +650,7 @@ CREATE TABLE `db_user` (
 --
 
 INSERT INTO `db_user` (`id`, `fullname`, `password`, `email`, `address`, `gender`, `phone`, `img`, `role`, `rank_id`, `status`) VALUES
-(1, 'Thạch Thế Đăng', 'Dang@123', 'dangthach1307@gmail.com', '97/10', 1, '0902471714', 'avatar.png', 'superadmin', 4, 1),
+(1, 'Thạch Thế Đăng', 'Dang@123', 'dangthach1307@gmail.com', '97/10', 1, '+84902471714', 'dang137.jpg', 'superadmin', 4, 1),
 (2, 'Đăng thạch', 'dang@123', 'dangthach123@gmail.com', NULL, 1, '0902471714', 'avatar.png', 'admin', 1, 1),
 (3, 'Đăng thạch', 'dang@123', 'dang137@gmail.com', '2138', 1, '9024224732', 'dang137.jpg', 'customer', 4, 2),
 (7, 'Thạch Thế Đăng', 'dang@123', 'dangthach123@gmail.com', '97/10', 0, '0902471714', 'avatar.png', 'customer', 1, 1),
@@ -856,13 +889,13 @@ ALTER TABLE `db_menu`
 -- AUTO_INCREMENT for table `db_order`
 --
 ALTER TABLE `db_order`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã đơn hàng', AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã đơn hàng', AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `db_orderdetail`
 --
 ALTER TABLE `db_orderdetail`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'mã chi tiết đon hàng', AUTO_INCREMENT=13;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'mã chi tiết đon hàng', AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `db_post`

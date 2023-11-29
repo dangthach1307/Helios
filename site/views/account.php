@@ -13,9 +13,9 @@
                                     <div class="text-center">
                                         <img class="img img-fluid img-circle" style="margin-top: 15px;" height="250px" width="250px" src="../public/images/user/<?= $_SESSION["user"]["img"] ?>">
 
-                                        <div class="service-desc text-center" style="margin-top: 10px;">
-                                            <h4>Cấp thành viên</h4>
-                                            <p><?= $_SESSION["user"]["rank_id"] ?></p>
+                                        <div class="service-desc text-center" style="margin: 15px 0 0 30px;display:flex;width:100%">
+                                            <h4 style="margin-top: 30px; ">Cấp thành viên:</h4>
+                                            <img class="img-responsive" style="margin-top: -10px;width:50%;height:50%" src="../public/images/rank/<?= $rank_img ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="col-sm-12 col-md-12 col-xs-12">
-                            <a href="#">
+                            <a href="?option=user&act=history-orders">
                                 <div class="account-box">
                                     <div class="service-box">
                                         <div class="service-icon"> <i class="fa fa-gift"></i> </div>

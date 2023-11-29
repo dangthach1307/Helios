@@ -77,13 +77,31 @@
   <!-- JavaScript -->
   <script src="../public/js/jquery.min.js"></script>
   <script src="../public/js/bootstrap.min.js"></script>
+  <script src="../public/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="../public/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../public/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="../public/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="../public/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="../public/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
   <script src="../public/js/main.js"></script>
   <script src="../public/js/revslider.js"></script>
   <script src="../public/js/owl.carousel.min.js"></script>
   <script src="../public/js/countdown.js"></script>
   <script src="../public/js/mob-menu.js"></script>
   <script src="../public/js/cloud-zoom.js"></script>
-
+  <script>
+      $(function() {
+          $('.datatable').DataTable({
+              "paging": true,
+              pagingType: 'full_numbers',
+              "searching": true,
+              "ordering": true,
+              "info": true,
+              "autoWidth": true,
+              "responsive": true,
+          });
+      });
+  </script>
   <script>
       jQuery(document).ready(function() {
           jQuery('#rev_slider_1').show().revolution({

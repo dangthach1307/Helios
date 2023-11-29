@@ -15,35 +15,60 @@
                                     <input type="file" name="img" class="form-control" style="width:250px; margin-top: 15px;margin-left:35px">
                                 </div>
                                 <div class="col-sm-12 col-md-7 col-xs-12">
+                                    <?php
+                                    // Kiểm tra xem session thongbao có tồn tại hay không
+                                    if (isset($_SESSION['thongbao'])) {
+                                        $thongbao = $_SESSION['thongbao'];
+                                        echo '<script type="text/javascript">';
+                                        echo 'alert("' . $thongbao . '");';
+                                        echo '</script>';
+
+                                        // Xóa session thongbao để tránh hiển thị lại
+                                        unset($_SESSION['thongbao']);
+                                    }
+                                    ?>
                                     <div class="title-box">
                                         <h3>Thông tin tài khoản</h3>
+                                        <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id'] ?>">
                                     </div>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            <div class="form-group">
-                                                <label for="fullname">Họ tên <span class="required">*</span></label>
-                                                <input type="text" name="fullname" id="fullname" class="form-control" value="<?= $_SESSION['user']['fullname'] ?>">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-group">
-                                                <label for="email">Địa chỉ email <span class="required">*</span></label>
-                                                <input type="email" name="email" id="emailAddress" class="form-control" value="<?= $_SESSION['user']['email'] ?>">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-group">
-                                                <label for="address">Địa chỉ: <span class="required">*</span></label>
-                                                <input type="text" name="address" id="address" class="form-control" value="<?= $_SESSION['user']['address'] ?>">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-group">
-                                                <label for="phone">Số điện thoại: <span class="required">*</span></label>
-                                                <input type="phone" name="phone" id="phone" class="form-control" value="<?= $_SESSION['user']['phone'] ?>">
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <div class="form-group">
+                                        <label for="fullname">Họ tên <span class="required">*</span></label>
+                                        <input type="text" name="fullname" id="fullname" class="form-control" value="<?= isset($_SESSION['user']['fullname']) ? $_SESSION['user']['fullname'] : '' ?>" required>
+                                        <span class="error-message" id="fullname-error"><?php echo isset($fullname_error) ? $fullname_error : ''; ?></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Địa chỉ email <span class="required">*</span></label>
+                                        <input type="email" name="email" id="emailAddress" class="form-control" value="<?= isset($_SESSION['user']['email']) ? $_SESSION['user']['email'] : '' ?>" required>
+                                        <span class="error-message" id="email-error"><?php echo isset($email_error) ? $email_error : ''; ?></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="address">Địa chỉ: <span class="required">*</span></label>
+                                        <input type="text" name="address" id="address" class="form-control" value="<?= isset($_SESSION['user']['address']) ? $_SESSION['user']['address'] : '' ?>">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone">Số điện thoại: <span class="required">*</span></label>
+                                        <input type="phone" name="phone" id="phone" class="form-control" value="<?= isset($_SESSION['user']['phone']) ? $_SESSION['user']['phone'] : '' ?>" required>
+                                        <span class="error-message" id="phone-error"><?php echo isset($phone_error) ? $phone_error : ''; ?></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="gender" class="control-label col-sm-2" style="font-size:14px;padding:11px 0px;text-align:left">Giới tính <span class="required">*</span></label>
+                                        <div class="col-sm-10 radio">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="gender" value="1" <?php echo (isset($_SESSION['user']['gender']) && $_SESSION['user']['gender'] == '1') ? 'checked' : ''; ?>>
+                                                Nam
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="gender" value="0" <?php echo (isset($_SESSION['user']['gender']) && $_SESSION['user']['gender'] == '0') ? 'checked' : ''; ?>>
+                                                Nữ
+                                            </label>
+                                            <span class="error-message" id="gender-error"><?php echo isset($gender_error) ? $gender_error : ''; ?></span>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="row">
@@ -73,7 +98,6 @@
                                         </ul>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="buttons-set">
                                 <button id="send2" name="send" type="submit" class="button submit"><span>Cập nhật</span></button>
@@ -90,7 +114,7 @@
                         <ul>
                             <li><a href="?option=user&act=account"><i class="fa fa-angle-right"></i> Tài khoản</a></li>
                             <li class="current"><a href="?option=user&act=account-detail"><i class="fa fa-angle-right"></i> Thông tin tài khoản</a></li>
-                            <li><a href="?option=user&act=history-order"><i class="fa fa-angle-right"></i> Lịch sử đơn hàng</a></li>
+                            <li><a href="?option=user&act=history-orders"><i class="fa fa-angle-right"></i> Lịch sử đơn hàng</a></li>
                         </ul>
                     </div>
                 </div>
