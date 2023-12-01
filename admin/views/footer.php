@@ -1,5 +1,5 @@
 <!-- Main Footer -->
-<footer class="main-footer text-sm">
+<footer class="main-footer footer-sm">
     <strong>Copyright &copy; 2023 <a href="https://www.facebook.com/traicay.thach.9/">Thế Đăng Thạch</a>.</strong>
     <div class="float-right d-none d-sm-inline-block">
         <b>Version</b> 1.0.0

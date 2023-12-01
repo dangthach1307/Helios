@@ -162,9 +162,8 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr class="cart_item">
-                                                                        <td class="ctg-type crt-total"> Thàn tiền</td>
-                                                                        <?= $final = $total - ($total * $rank['promotion'] / 100) ?>
-                                                                        <td class="cgt-des prc-total"> <span name="total"><?= number_format($final); ?> VNĐ</span></td>
+                                                                        <td class="ctg-type crt-total"> Thành tiền</td>
+                                                                        <td class="cgt-des prc-total"> <span name="total"><?= number_format($final = $total - ($total * $rank['promotion'] / 100)); ?> VNĐ</span></td>
                                                                         <input type="hidden" name="total" value="<?= $final ?>">
                                                                     </tr>
                                                                 </tbody>

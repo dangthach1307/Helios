@@ -10,6 +10,7 @@ if (isset($act)) {
             $id = $_REQUEST['id'];
             $value = $_REQUEST['value'];
             $row = order_rowid($id);
+            $user = user_getid($row['user_id']);
             if ($row == NULL) {
                 //Tránh trường hợp người quản trị viết id trực tiếp trên url
                 set_flash('message', ['type' => 'success', 'msg' => 'Đơn hàng này không tồn tại!']);
@@ -33,6 +34,7 @@ if (isset($act)) {
             break;
         default:
             $list_order = order_all('index');
+
             require_once $path . 'index.php';
             break;
     }

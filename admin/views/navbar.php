@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-dark text-sm dropdown-legacy">
+<nav class="main-header navbar navbar-expand navbar-dark text-sm dropdown-legacy ">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <!-- <li class="nav-item">
@@ -146,11 +146,13 @@
                     </div>
                 </li> -->
                 <!-- Menu Footer-->
-                <li class="user-footer">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    <a href="logout.php" class="btn btn-default btn-flat float-right">Sign out</a>
-                </li>
+             
             </ul>
+        <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+                <i class="fas fa-th-large"></i>
+            </a>
+        </li>
         </li>
     </ul>
 </nav>
