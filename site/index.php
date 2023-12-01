@@ -8,10 +8,13 @@ require_once '../system/Database.php';
 require_once '../system/myFunction.php';
 require_once '../system/form_control.php';
 require_once '../system/auth.php';
+require_once 'models/brandModel.php';
 require_once 'models/categoryModel.php';
 require_once 'models/productModel.php';
 require_once 'models/cartModel.php';
-// require_once 'models/userModel.php';
+require_once 'models/customerModel.php';
+require_once 'models/contactModel.php';
+require_once 'models/orderModel.php';
 if (isset($_SESSION['cart'])) {
     $cart_count = cart_total();
     $cart_count_product = cart_total_product();

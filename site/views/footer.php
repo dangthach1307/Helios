@@ -90,6 +90,13 @@
   <script src="../public/js/mob-menu.js"></script>
   <script src="../public/js/cloud-zoom.js"></script>
   <script>
+      $(document).ready(function() {
+          setTimeout(function() {
+              $("#myAlert").fadeOut(500);
+          }, 2500);
+      });
+  </script>
+  <script>
       $(function() {
           $('.datatable').DataTable({
               "paging": true,

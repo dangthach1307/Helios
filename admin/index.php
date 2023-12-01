@@ -54,6 +54,9 @@ if (!isset($_SESSION['user'])) {
             case 'single_page':
                 require_once 'controllers/singlepageController.php';
                 break;
+            case 'order':
+                require_once 'controllers/orderController.php';
+                break;
             case 'contact':
                 require_once 'controllers/contactController.php';
                 break;

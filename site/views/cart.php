@@ -118,25 +118,10 @@
                                                     <div class="col-md-4 col-sm-5 col-xs-12">
                                                         <div class="cart-total-area">
                                                             <div class="catagory-title cat-tit-5 text-right">
-                                                                <h3>Tổng tiền đơn hàng</h3>
+                                                                <h3>Tạm tính</h3>
                                                             </div>
-                                                            <!-- <div class="sub-shipping">
-                                                                <p>Subtotal <span><?= number_format($total) ?></span></p>
-                                                                <p>Shipping <span>20,000</span></p>
-                                                            </div> -->
-                                                            <!-- <div class="shipping-method text-right">
-                                                                <div class="shipp">
-                                                                    <input type="radio" name="ship" id="pay-toggle1">
-                                                                    <label for="pay-toggle1">Flat Rate</label>
-                                                                </div>
-                                                                <div class="shipp">
-                                                                    <input type="radio" name="ship" id="pay-toggle3">
-                                                                    <label for="pay-toggle3">Direct Bank Transfer</label>
-                                                                </div>
-                                                                <p><a href="#">Calculate Shipping</a></p>
-                                                            </div> -->
                                                             <div class="process-cart-total">
-                                                                <p>Total <span><?= number_format($total) ?> Vnđ</span></p>
+                                                                <p>Tổng tiền <span><?= number_format($total) ?> Vnđ</span></p>
                                                             </div>
                                                             <div class="process-checkout-btn text-right">
                                                                 <button class="button btn-proceed-checkout" title="Proceed to Checkout" type="button" onclick="window.location.href='?option=cart&act=cart-checkout';"><span>Thanh toán</span></button>

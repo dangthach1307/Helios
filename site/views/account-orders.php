@@ -6,7 +6,20 @@
                 <div class="col-main">
                     <div class="my-account">
                         <div class="page-title">
-                            <h2>Danh sách đơn hàng</h2>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h2>Danh sách đơn hàng</h2>
+                                </div>
+                                <div class="col-sm-6">
+                                    <?php if (has_flash('message')) : ?>
+                                        <?php $error = get_flash('message'); ?>
+                                        <div id="myAlert" style="margin: auto;" class="alert alert-<?= $error['type'] ?> " role="alert">
+                                            <i class="fa fa-check"></i>
+                                            <?= $error['msg']; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
                         <div class="dashboard">
                             <div class="recent-orders">
@@ -24,7 +37,7 @@
                                         </thead>
                                         <tbody>
                                             <?php foreach ($list_order as $row) : ?>
-                                                <?php if ($row['status'] === 0 && ($row['stage'] == 1 || $row['stage'] == 2)) : ?>
+                                                <?php if ($row['status'] == 0 && in_array($row['stage'], [1, 2, 4, 5, 6]) && !in_array($row['stage'], [3, 7])) : ?>
                                                     <?php $orderdetails = $row['order_details']; ?>
                                                     <tr>
                                                         <td><?= $row['id'] ?></td>
@@ -34,9 +47,15 @@
                                                         <td class="text-primary">
                                                             <em>
                                                                 <?php if ($row['stage'] == 1) : ?>
-                                                                    Đang xử lý
+                                                                    Chờ duyệt
                                                                 <?php elseif ($row['stage'] == 2) : ?>
-                                                                    Đang vận chuyển
+                                                                    Đang giao
+                                                                <?php elseif ($row['stage'] == 4) : ?>
+                                                                    Giao thành công
+                                                                <?php elseif ($row['stage'] == 5) : ?>
+                                                                    Trả hàng/Đổi hàng
+                                                                <?php elseif ($row['stage'] == 6) : ?>
+                                                                    Đã giao hàng
                                                                 <?php endif; ?>
                                                             </em>
                                                         </td>
@@ -53,44 +72,6 @@
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="detail-modal" tabindex="-1" role="dialog" aria-labelledby="detailmodal" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="detailmodal">Chi tiết đơn hàng</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body" id="order-details-content">
-                                        <table width="100%" class="table table-striped table-responsive table-bordered text-left datatable my-orders-table">
-                                            <thead>
-                                                <tr class="first last">
-                                                    <th>#</th>
-                                                    <th>Tên sản phẩm</th>
-                                                    <th>Hình ảnh</th>
-                                                    <th>Chất liệu</th>
-                                                    <th>Số lượng</th>
-                                                    <th><span class="nobr">Đơn giá</span></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($row['order_details'] as $item) : ?>
-                                                    <tr>
-                                                        <td><?= $item['id'] ?></td>
-                                                        <td><?= $item['product_name'] ?></td>
-                                                        <td><?= $item['product_img_first'] ?></td>
-                                                        <td><?= $item['material'] ?></td>
-                                                        <td><?= $item['quantity'] ?></td>
-                                                        <td><span class="price"><?= number_format($item['price']) ?></span></td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +99,7 @@
                                         </thead>
                                         <tbody>
                                             <?php foreach ($list_order as $row) : ?>
-                                                <?php if ($row['status'] != 0 && ($row['stage'] != 1 || $row['stage'] != 2)) : ?>
+                                                <?php if ($row['status'] != 0 || ($row['status'] == 0 && in_array($row['stage'], [3, 7]))) : ?>
                                                     <tr>
                                                         <td><?= $row['id'] ?></td>
                                                         <td><?= $row['created_at'] ?></td>
@@ -135,7 +116,7 @@
                                                         </td>
                                                         <td class="text-center last">
                                                             <div class="btn-group">
-                                                                <a href="#" class="btn btn-view-order">Xem chi tiết</a>
+                                                                <a href="?option=user&act=view-order&id=<?= $row['id'] ?>" class="btn btn-view-order">Xem chi tiết</a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -148,10 +129,11 @@
                         </div>
                     </div>
                 </div>
+
             </section>
             <aside class="col-right sidebar col-sm-3 col-xs-12">
                 <div class="block block-account">
-                    <div class="block-title">Tài khoản</div>
+                    <div class="block-title">Quản lý tài khoản</div>
                     <div class="block-content">
                         <ul>
                             <li><a href="?option=user&act=account"><i class="fa fa-angle-right"></i> Tài khoản</a></li>

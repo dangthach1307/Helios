@@ -112,17 +112,6 @@
                                                             <?php endforeach; ?>
                                                         </div>
                                                     </div>
-                                                    <div class="actions">
-                                                        <div class="add_cart">
-                                                            <button class="button btn-cart" type="button">
-                                                                <a href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>">
-                                                                    <span>
-                                                                        <i class="fa fa-shopping-cart"></i>
-                                                                        Add to Cart</span>
-                                                                </a>
-                                                            </button>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

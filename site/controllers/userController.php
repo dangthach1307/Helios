@@ -1,7 +1,5 @@
 <?php
 extract($_REQUEST);
-require_once './models/customerModel.php';
-require_once './models/orderModel.php';
 $email_error = $fullname_error = $phone_error = $gender_error = $address_error = $password_error = '';
 if (isset($act)) {
     switch ($act) {
@@ -179,10 +177,10 @@ if (isset($act)) {
                             $_SESSION['user']['img'] = $img;
                             // Kiểm tra kết quả cập nhật
                             if ($update_result) {
-                                $thongbao = "Cập nhật thông tin thành công!";
-                                $_SESSION['thongbao'] = $thongbao;
-                                header('Location: index.php?option=user&act=account-detail');
-                                exit();
+                                // $thongbao = "Cập nhật thông tin thành công!";
+                                set_flash('message', ['type' => 'success', 'msg' => 'Tạo banner mới thành công!']);
+                                // header('Location: index.php?option=user&act=account-detail');
+                                // exit();
                             }
                         }
                     } else {
@@ -225,8 +223,8 @@ if (isset($act)) {
                         $_SESSION['user']['img'] = $img;
                         // Kiểm tra kết quả cập nhật
                         if ($update_result) {
-                            $thongbao = "Cập nhật thông tin thành công!";
-                            $_SESSION['thongbao'] = $thongbao;
+                            // $thongbao = "Cập nhật thông tin thành công!";
+                            set_flash('message', ['type' => 'success', 'msg' => 'Tạo banner mới thành công!']);
                             header('Location: index.php?option=user&act=account-detail');
                             exit();
                         }
@@ -257,7 +255,7 @@ if (isset($act)) {
             $result = cancel_order($order_id);
             if ($result) {
                 $thongbao = "Huỷ đơn hàng thành công!";
-                $_SESSION['thongbao'] = $thongbao;
+                set_flash('message', ['type' => 'success', 'msg' => 'Huỷ đơn hàng thành công!']);
                 header('Location: index.php?option=user&act=history-orders');
                 exit();
             }

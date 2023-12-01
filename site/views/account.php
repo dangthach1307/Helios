@@ -63,7 +63,7 @@
                             <a href="?option=user&act=account-detail">
                                 <div class="account-box">
                                     <div class="service-box">
-                                        <div class="service-icon"> <i class="fa fa-lock"></i> </div>
+                                        <div class="service-icon"> <i class="fa fa-user"></i> </div>
                                         <div class="service-desc">
                                             <h4>Cập nhật thông tin</h4>
                                             <p>Edit login, name, and mobile number</p>
@@ -72,6 +72,21 @@
                                 </div>
                             </a>
                         </div>
+                        <?php if ($_SESSION['user']['role'] !== 'customer') : ?>
+                            <div class="col-sm-12 col-md-12 col-xs-12">
+                                <a href="../admin/index.php">
+                                    <div class="account-box">
+                                        <div class="service-box">
+                                            <div class="service-icon"> <i class="fa fa-lock"></i> </div>
+                                            <div class="service-desc">
+                                                <h4>Trang quản lý</h4>
+                                                <p>Đi tới trang quản lý</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
                 </div>

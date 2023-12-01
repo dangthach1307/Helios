@@ -91,9 +91,10 @@ if (isset($act)) {
                 exit();
             }
             $list = cart_content();
-            // require_once 'views/header.php';
+            $user_id = $_SESSION['user']['id'];
+            $rank = get_rank_user($user_id);
+            $rank_img = get_rank_img($rank['id']);
             require_once 'views/checkout.php';
-            // require_once 'views/footer.php';
             break;
         case 'insert-order':
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -136,7 +137,5 @@ if (isset($act)) {
     }
 } else {
     $list = cart_content();
-    // require_once 'views/header.php';
     require_once 'views/cart.php';
-    // require_once 'views/footer.php';
 }

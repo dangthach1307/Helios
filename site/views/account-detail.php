@@ -7,7 +7,20 @@
                     <div class="col-main">
                         <div class="my-account">
                             <div class="page-title">
-                                <h2>Cập nhật thông tin tài khoản</h2>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h2>Cập nhật thông tin tài khoản</h2>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <?php if (has_flash('message')) : ?>
+                                            <?php $error = get_flash('message'); ?>
+                                            <div id="myAlert" style="margin: auto;" class="alert alert-<?= $error['type'] ?> " role="alert">
+                                                <i class="fa fa-check"></i>
+                                                <?= $error['msg']; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 col-md-5 col-xs-12">
@@ -15,18 +28,6 @@
                                     <input type="file" name="img" class="form-control" style="width:250px; margin-top: 15px;margin-left:35px">
                                 </div>
                                 <div class="col-sm-12 col-md-7 col-xs-12">
-                                    <?php
-                                    // Kiểm tra xem session thongbao có tồn tại hay không
-                                    if (isset($_SESSION['thongbao'])) {
-                                        $thongbao = $_SESSION['thongbao'];
-                                        echo '<script type="text/javascript">';
-                                        echo 'alert("' . $thongbao . '");';
-                                        echo '</script>';
-
-                                        // Xóa session thongbao để tránh hiển thị lại
-                                        unset($_SESSION['thongbao']);
-                                    }
-                                    ?>
                                     <div class="title-box">
                                         <h3>Thông tin tài khoản</h3>
                                         <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id'] ?>">
@@ -109,7 +110,7 @@
             </section>
             <aside class="col-right sidebar col-sm-3 col-xs-12">
                 <div class="block block-account">
-                    <div class="block-title">My Account</div>
+                    <div class="block-title">Quản lý tài khoản</div>
                     <div class="block-content">
                         <ul>
                             <li><a href="?option=user&act=account"><i class="fa fa-angle-right"></i> Tài khoản</a></li>

@@ -45,10 +45,7 @@ if (isset($act)) {
             $totalPages = ceil($total / $limit);
 
             $list_categories = category_list(0);
-            // Đưa dữ liệu vào các trang header, danh sách sản phẩm theo danh mục và footer để hiển thị trên trang web.
-            // require_once 'views/header.php';
             require_once 'views/product.php';
-            // require_once 'views/footer.php';
             break;
         case 'category':
             // Lọc sản phẩm theo khoảng giá
