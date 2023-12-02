@@ -86,6 +86,9 @@ if (isset($act)) {
             // require_once 'views/footer.php';
             break;
         case 'cart-checkout':
+            echo '<pre>';
+            print_r($_SESSION['cart']);
+            echo '</pre>';
             if (!isset($_SESSION['user']) || (!isset($_SESSION['cart']) || empty($_SESSION['cart']))) {
                 header('location: index.php?option=page&act=home');
                 exit();
@@ -129,7 +132,13 @@ if (isset($act)) {
                     // Gọi hàm insert_order với thông tin địa chỉ từ session
                 }
                 cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
-                unset($_SESSION['cart']);
+                sendMail([
+                    'name' => $delivery_fullname,
+                    'email' => $delivery_email,
+                    'subject' => 'Xác nhận đơn hàng',
+                    'cart' => $_SESSION['cart']
+                ],'receipt');
+                // unset($_SESSION['cart']);
                 header('location: index.php');
             }
 

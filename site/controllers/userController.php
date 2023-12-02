@@ -51,6 +51,11 @@ if (isset($act)) {
                     customer_insert($fullname, $password, $email, $address, $gender, $phone, $img, $role, $rank_id, $status);
                     $thongbao = "Đăng ký tài khoản thành viên thành công.";
                 }
+                sendMail([
+                    'name' => $fullname,
+                    'email' => $email,
+                    'subject' => 'Đăng ký thành công'
+                ],'welcome');
             }
             require_once 'views/header.php';
             require_once 'views/register.php';

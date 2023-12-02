@@ -166,3 +166,42 @@ function str_slug($slug)
     $slug = preg_replace('/^(\-)/', '', $slug);
     return strtolower($slug);
 }
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+function getTemplatEmail($data, $template) {
+    require_once 'templateEmail.php';
+    return $template($data);
+}
+
+function sendMail($data, $template) {
+    require_once 'PHPMailer/src/Exception.php';
+    require_once 'PHPMailer/src/PHPMailer.php';
+    require_once 'PHPMailer/src/SMTP.php';
+    extract($data);
+    $mail = new PHPMailer(true);
+
+      $mail->isSMTP();
+      $mail->Host = 'smtp.gmail.com';
+      $mail->SMTPAuth = true;
+      $mail->Username = 'zerefs124@gmail.com';
+      $mail->Password = 'kxpi hupu xqkr eqpb';
+      $mail->SMTPSecure = 'ssl';
+      $mail->Port = 465;
+
+      $mail->setFrom('zerefs124@gmail.com');
+
+      $mail->addAddress($email);
+
+      $mail->isHTML(true);
+
+
+      $subject = iconv('UTF-8', 'UTF-8', $subject);
+
+      $mail->Subject = $subject;
+      $mail->Body = getTemplatEmail($data,$template);
+      $mail->CharSet = 'UTF-8';
+
+      $mail->send();
+}
