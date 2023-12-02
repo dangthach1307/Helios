@@ -78,8 +78,8 @@ if (isset($act)) {
             }
             //Tạo liên kết custom cho menu
             if (isset($_POST['ADD_CUSTOM'])) {
-                if (isset($_POST['name'], $_POST['link']) && strlen($_POST['name'] != 0) && strlen($_POST['link'] != 0)) {
-                    $name = $row['name'];
+                if (isset($_POST['name']) && isset($_POST['link']) && strlen($_POST['name'] > 0) && strlen($_POST['link'] > 0)) {
+                    $name = $_POST['name'];
                     $type = 'custom';
                     $link = $_POST['link'];
                     $table_id = null;
@@ -87,10 +87,6 @@ if (isset($act)) {
                     $orders = 0;
                     $position = $_POST['position'];
                     $status = 2;
-                    $created_at = date('Y-m-d H:i:s');
-                    $created_by = $_SESSION['user']['id'];
-                    $updated_at = date('Y-m-d H:i:s');
-                    $updated_by = $_SESSION['user']['id'];
                     menu_insert($name, $type, $link, $table_id, $parent_id, $orders, $position, $status);
                     set_flash('message', ['type' => 'success', 'msg' => 'Tạo menu custom thành công!']);
                 } else {
@@ -115,34 +111,6 @@ if (isset($act)) {
                 redirect('index.php?option=menu');
             }
             require_once $path . 'update.php';
-            break;
-        case 'deltrash':
-            $id = $_REQUEST['id'];
-            $row = menu_rowid($id);
-            if ($row == NULL) {
-                set_flash('message', ['type' => 'error', 'msg' => 'Không có menu này']);
-                redirect('index.php?option=menu');
-            } else {
-                $status = 0;
-                //Cập nhật lại dữ liệu
-                menu_status($status, $id);
-                set_flash('message', ['type' => 'success', 'msg' => 'Di chuyển menu vào kho lưu trữ thành công']);
-                redirect('index.php?option=menu');
-            }
-            break;
-        case 'retrash':
-            $id = $_REQUEST['id'];
-            $row = menu_rowid($id);
-            if ($row == NULL) {
-                set_flash('message', ['type' => 'error', 'msg' => 'Không có menu này']);
-                redirect('index.php?option=menu&act=trash');
-            } else {
-                $status = 2;
-                //Cập nhật lại dữ liệu
-                menu_status($status, $id);
-                set_flash('message', ['type' => 'success', 'msg' => 'Khôi phục menu thành công']);
-                redirect('index.php?option=menu&act=trash');
-            }
             break;
         case 'status':
             $id = $_REQUEST['id'];
@@ -175,7 +143,9 @@ if (isset($act)) {
             }
             break;
         default:
-            $list_menu = menu_all('index');
+            $list_menu_header = menu_all('index', "header");
+            $list_menu_main = menu_all('index', "megamenu");
+            $list_menu_footer = menu_all('index', "footer");
             $list_category = category_all('index');
             $list_topic = topic_all('index');
             $list_singlepage = singlepage_all('index');
@@ -183,7 +153,10 @@ if (isset($act)) {
             break;
     }
 } else {
-    $list_menu = menu_all('index');
+    $list_menu_header = menu_all('index', "headermenu");
+    $list_menu_main = menu_all('index', "megamenu");
+    $list_menu_footer = menu_all('index', "footermenu");
+    $list_menu_custom = menu_all('index');
     $list_category = category_all('index');
     $list_topic = topic_all('index');
     $list_singlepage = singlepage_all('index');

@@ -27,6 +27,12 @@ if (!isset($_SESSION['user'])) {
             case 'product':
                 require_once 'controllers/productController.php';
                 break;
+            case 'size':
+                require_once 'controllers/sizeController.php';
+                break;
+            case 'material':
+                require_once 'controllers/materialController.php';
+                break;
             case 'user':
                 require_once 'controllers/userController.php';
                 break;

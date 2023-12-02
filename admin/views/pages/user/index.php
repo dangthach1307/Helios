@@ -67,7 +67,7 @@
                                                 + Giới tính: <?= $row['gender'] == 1 ? 'Nam' : 'Nữ'; ?>
                                             </td>
                                             <td>
-                                                <?= $row['username']; ?>
+                                                <?= $row['email']; ?>
                                             </td>
                                             <td><?= $row['role']; ?></td>
                                             <td>

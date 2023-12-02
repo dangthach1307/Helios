@@ -7,7 +7,7 @@ if (isset($act)) {
     switch ($act) {
         case 'insert':
             if (isset($_POST['THEM'])) {
-                if (user_exists($username) == FALSE) {
+                if (user_exists($email) == FALSE) {
                     if ($repassword == $password) {
                         $rank_id = 4; //Cấp thẻ usercard cao nhất
                         // Xử lý hình ảnh
@@ -15,16 +15,15 @@ if (isset($act)) {
                             // Kiểm tra nếu file không rỗng
                             $file_name = $_FILES['img']['name'];
                             $file_tmp_name = $_FILES['img']['tmp_name'];
-                            $name_img = $username . '.' . get_duoi_file($file_name);
-                            $upload_path = '../public/images/user/' . $name_img;
+                            $upload_path = '../public/images/user/' . $file_name;
                             if (!move_uploaded_file($file_tmp_name, $upload_path)) {
                                 // Lỗi trong quá trình xử lý upload
                                 set_flash('message', ['type' => 'warning', 'msg' => 'Lỗi upload hình ảnh!']);
                                 redirect('index.php?option=user&act=insert');
                             }
-                            $img = $name_img;
+                            $img = $file_name;
                         }
-                        user_insert($fullname, $username, $password, $email, $address, $gender,  $phone, $img, $role, $rank_id, $status);
+                        user_insert($fullname, $password, $email, $address, $gender,  $phone, $img, $role, $rank_id, $status);
                         set_flash('message', ['type' => 'success', 'msg' => 'Thêm quản trị viên mới thành công!']);
                         redirect('index.php?option=user');
                     }
@@ -39,7 +38,7 @@ if (isset($act)) {
             $id = $_REQUEST['id'];
             $row = user_getid($id);
             if (isset($_POST['UPDATE'])) {
-                if (user_exists($username, $id) == FALSE) {
+                if (user_exists($email, $id) == FALSE) {
                     if ($repassword == $password) {
                         // Xử lý hình ảnh (chỉ khi người dùng thay đổi hình ảnh)
                         if (isset($_FILES['img']) && !empty($_FILES['img']['name'])) {
@@ -49,18 +48,17 @@ if (isset($act)) {
                             // Kiểm tra nếu file không rỗng
                             $file_name = $_FILES['img']['name'];
                             $file_tmp_name = $_FILES['img']['tmp_name'];
-                            $name_img = $slug . '.' . get_duoi_file($file_name);
-                            $upload_path = '../public/images/user/' . $name_img;
+                            $upload_path = '../public/images/user/' . $file_name;
                             if (!move_uploaded_file($file_tmp_name, $upload_path)) {
                                 //Lỗi trong quá trình xử lý upload
                                 set_flash('message', ['type' => 'warning', 'msg' => 'Lỗi upload hình ảnh!']);
-                                redirect('index.php?option=user&act=update');
+                                redirect('index.php?option=user&act=update&id=' . $id);
                             }
-                            $img = $name_img;
+                            $img = $file_name;
                         } else {
                             $img = $row['img'];
                         }
-                        user_update($fullname, $username, $password, $email, $address, $gender,  $phone, $img, $role, $status, $id);
+                        user_update($fullname, $password, $email, $address, $gender,  $phone, $img, $role, $status, $id);
                         set_flash('message', ['type' => 'success', 'msg' => 'Cập nhật quản trị viên thành công!']);
                         redirect('index.php?option=user');
                     } else {

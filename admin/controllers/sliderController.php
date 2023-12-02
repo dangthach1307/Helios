@@ -105,18 +105,18 @@ if (isset($act)) {
             break;
         case 'delete':
             $id = $_REQUEST['id'];
-            $row = brand_rowid($id);
+            $row = slider_rowid($id);
             if ($row == NULL) {
                 //Tránh trường hợp người quản trị viết id trực tiếp trên url
-                set_flash('message', ['type' => 'error', 'msg' => 'Thương hiệu này không tồn tại!']);
-                redirect('index.php?option=brand&act=trash');
+                set_flash('message', ['type' => 'error', 'msg' => 'Slider này không tồn tại!']);
+                redirect('index.php?option=slider&act=trash');
             } else {
                 if (file_exists('../public/images/slider/' . $row['img'])) {
                     unlink('../public/images/slider/' . $row['img']);
                 }
-                brand_delete($id);
-                set_flash('message', ['type' => 'success', 'msg' => 'Xoá thương hiệu thành công']);
-                redirect('index.php?option=brand&act=trash');
+                slider_delete($id);
+                set_flash('message', ['type' => 'success', 'msg' => 'Xoá Slider thành công']);
+                redirect('index.php?option=slider&act=trash');
             }
             break;
         default:

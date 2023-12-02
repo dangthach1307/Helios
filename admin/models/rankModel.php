@@ -14,12 +14,14 @@ function rank_rowid($id)
 function rank_insert($name, $promotion, $info1, $info2, $status)
 {
     $sql = "INSERT INTO db_member_rank (name,promotion,info1,info2,status) VALUES(?,?,?,?,?)";
-    return pdo_execute($sql, $name, $promotion, $info1, $info2, $status);
+    $result = pdo_execute($sql, $name, $promotion, $info1, $info2, $status);
+    return  $result;
 }
 function rank_update($name, $promotion, $info1, $info2, $status, $id)
 {
     $sql = "UPDATE db_member_rank SET name=?,promotion=?,info1=?,info2=?,status=? WHERE id=?";
-    return pdo_execute($sql, $name, $promotion, $info1, $info2, $status, $id);
+    $result = pdo_execute($sql, $name, $promotion, $info1, $info2, $status, $id);
+    return $result;
 }
 function rank_update_status($status, $id)
 {

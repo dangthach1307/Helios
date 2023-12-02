@@ -23,11 +23,6 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3 class="card-title font-weight-bold py-2">Quản lý menu</h3>
-                    <div class="card-tools">
-                        <a class="btn btn-danger" href="index.php?option=menu&act=trash">
-                            <i class="fa fa-trash"></i> Kho lưu trữ
-                        </a>
-                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -60,7 +55,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="card-body" style="height: 300px; overflow-y: scroll;">
+                                <div class="card-body" style="height: 250px; overflow-y: scroll;">
                                     <?php foreach ($list_category as $rcat) : ?>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
@@ -85,7 +80,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="card-body" style="height: 300px; overflow-y: scroll;">
+                                <div class="card-body" style="height: 250px; overflow-y: scroll;">
                                     <?php foreach ($list_singlepage as $rpage) : ?>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
@@ -110,7 +105,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="card-body" style="height: 300px; overflow-y: scroll;">
+                                <div class="card-body" style="height: 250px; overflow-y: scroll;">
                                     <?php foreach ($list_topic as $rtopic) : ?>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
@@ -141,8 +136,8 @@
                                         <input type="text" id="name" name="name" class="form-control" placeholder="Tên menu">
                                     </div>
                                     <div class="form-group">
-                                        <label for="slug">Liên kết</label>
-                                        <input type="text" id="slug" name="slug" class="form-control" placeholder="#">
+                                        <label for="link">Liên kết</label>
+                                        <input type="text" id="link" name="link" class="form-control" placeholder="#">
                                     </div>
                                 </div>
                                 <div class="card-footer text-center">
@@ -151,10 +146,14 @@
                                 <!-- /.card-body -->
                             </div>
                         </div>
+
+
+
                         <div class="col-md-9">
+                            <!-- Menu vị trí header -->
                             <div class="card card-secondary">
                                 <div class="card-header">
-                                    <h3 class="card-title">Danh sách menu</h3>
+                                    <h3 class="card-title">Danh sách menu vị trí Header</h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                             <i class="fas fa-minus"></i>
@@ -162,24 +161,24 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
+                                    <table id="datatable" style="width:100%" class="display table datatable table-bordered table-striped table-hover">
                                         <thead>
                                             <tr>
                                                 <th class="text-center" width="20px">#</th>
                                                 <th class="text-center">Thông tin menu</th>
-                                                <th class="text-center">Vị trí</th>
+                                                <th class="text-center">loại</th>
                                                 <th class="text-center" width="100px">Chức năng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($list_menu as $item) : ?>
+                                            <?php foreach ($list_menu_header as $item) : ?>
                                                 <tr>
                                                     <td class="text-center"><?= $item['id']; ?></td>
                                                     <td>
                                                         <?= $item['name']; ?> <br>
                                                         <?= $item['link']; ?>
                                                     </td>
-                                                    <td class="text-center"><?= $item['position']; ?></td>
+                                                    <td class="text-center"><?= $item['type']; ?></td>
                                                     <td class="text-center">
                                                         <?php if ($item['status'] == 1) : ?>
                                                             <a class="btn btn-sm btn-success" href="index.php?option=menu&act=status&id=<?= $item['id']; ?>"><i class="fa fa-toggle-on"></i></a>
@@ -195,10 +194,99 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
+                            <!-- Menu vị trí megamenu -> menu chính -->
+                            <div class="card card-secondary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Danh sách menu vị trí megamenu</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table id="datatable" style="width:100%" class="display table datatable table-bordered table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" width="20px">#</th>
+                                                <th class="text-center">Thông tin menu</th>
+                                                <th class="text-center">Loại</th>
+                                                <th class="text-center" width="150px">Chức năng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($list_menu_main as $item) : ?>
+                                                <tr>
+                                                    <td class="text-center"><?= $item['id']; ?></td>
+                                                    <td>
+                                                        <?= $item['name']; ?> <br>
+                                                        <?= $item['link']; ?>
+                                                    </td>
+                                                    <td class="text-center"><?= $item['type']; ?></td>
+                                                    <td class="text-center">
+                                                        <?php if ($item['status'] == 1) : ?>
+                                                            <a class="btn btn-sm btn-success" href="index.php?option=menu&act=status&id=<?= $item['id']; ?>"><i class="fa fa-toggle-on"></i></a>
+                                                        <?php else : ?>
+                                                            <a class="btn btn-sm btn-danger" href="index.php?option=menu&act=status&id=<?= $item['id']; ?>"><i class="fa fa-toggle-off"></i></a>
+                                                        <?php endif; ?>
+                                                        <a class="btn btn-sm btn-info" href="index.php?option=menu&act=update&id=<?= $item['id']; ?>"><i class="fa fa-edit"></i></a>
+                                                        <a class="btn btn-sm btn-danger" href="index.php?option=menu&act=deltrash&id=<?= $item['id']; ?>"><i class="fa fa-trash"></i></a>
+                                                    </td>
+
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- Menu vị trí footer -->
+                            <div class="card card-secondary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Danh sách menu vị trí footer</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table id="datatable" style="width:100%" class="display table datatable table-bordered table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center" width="20px">#</th>
+                                                <th class="text-center">Thông tin menu</th>
+                                                <th class="text-center">Loại</th>
+                                                <th class="text-center" width="150px">Chức năng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($list_menu_footer as $item) : ?>
+                                                <tr>
+                                                    <td class="text-center"><?= $item['id']; ?></td>
+                                                    <td>
+                                                        <?= $item['name']; ?> <br>
+                                                        <?= $item['link']; ?>
+                                                    </td>
+                                                    <td class="text-center"><?= $item['type']; ?></td>
+                                                    <td class="text-center">
+                                                        <?php if ($item['status'] == 1) : ?>
+                                                            <a class="btn btn-sm btn-success" href="index.php?option=menu&act=status&id=<?= $item['id']; ?>"><i class="fa fa-toggle-on"></i></a>
+                                                        <?php else : ?>
+                                                            <a class="btn btn-sm btn-danger" href="index.php?option=menu&act=status&id=<?= $item['id']; ?>"><i class="fa fa-toggle-off"></i></a>
+                                                        <?php endif; ?>
+                                                        <a class="btn btn-sm btn-info" href="index.php?option=menu&act=update&id=<?= $item['id']; ?>"><i class="fa fa-edit"></i></a>
+                                                        <a class="btn btn-sm btn-danger" href="index.php?option=menu&act=deltrash&id=<?= $item['id']; ?>"><i class="fa fa-trash"></i></a>
+                                                    </td>
+
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </form>
             </div>

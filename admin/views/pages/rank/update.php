@@ -9,7 +9,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item"><a href="index.php?option=category">Danh mục sản phẩm</a></li>
+                        <li class="breadcrumb-item"><a href="index.php?option=rank">Danh mục sản phẩm</a></li>
                         <li class="breadcrumb-item active">Thêm mới</li>
                     </ol>
                 </div>
@@ -19,14 +19,14 @@
 
     <!-- Main content -->
     <section class="content">
-        <form action="index.php?option=category&act=update" method="post" enctype="multipart/form-data">
+        <form action="index.php?option=rank&act=update" method="post" enctype="multipart/form-data">
             <div class="card card-primary">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title font-weight-bold py-2">Thêm danh mục</h3>
                         <div class="card-tools">
                             <button type="submit" name="CAPNHATDANHMUC" class="btn btn-success"><i class="fa fa-save"></i> Lưu[Thêm]</button>
-                            <a class="btn btn-secondary" href="index.php?option=category">
+                            <a class="btn btn-secondary" href="index.php?option=rank">
                                 <i class="fa fa-arrow-left"></i> Thoát
                             </a>
                         </div>
@@ -77,7 +77,7 @@
                         <h3 class="card-title font-weight-bold py-2"></h3>
                         <div class="card-tools">
                             <button type="submit" name="CAPNHATDANHMUC" class="btn btn-success"><i class="fa fa-save"></i> Lưu[Thêm]</button>
-                            <a class="btn btn-secondary" href="index.php?option=category">
+                            <a class="btn btn-secondary" href="index.php?option=rank">
                                 <i class="fa fa-arrow-left"></i> Thoát
                             </a>
                         </div>

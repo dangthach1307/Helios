@@ -40,11 +40,7 @@
                                 <input type="text" id="fullname" name="fullname" class="form-control" required>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="username">Tên tài khoản (*)</label>
-                                    <input type="text" id="username" name="username" class="form-control" required>
-                                </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-12">
                                     <label for="email">Email (*)</label>
                                     <input type="email" id="email" name="email" class="form-control" required>
                                 </div>
@@ -55,7 +51,7 @@
                                     <input type="text" id="address" name="address" class="form-control">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="phone">Phone (*)</label>
+                                    <label for="phone">Điện thoại (*)</label>
                                     <input type="text" id="phone" name="phone" class="form-control">
                                 </div>
                             </div>

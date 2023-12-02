@@ -9,6 +9,18 @@ function size_by_id($id)
     $sql = "SELECT * FROM db_size WHERE id =?";
     return pdo_query_one($sql, $id);
 }
+function size_insert($name_size, $rate)
+{
+    $sql = "INSERT INTO db_size (name_size,rate) VALUES(?,?)";
+    $result = pdo_execute($sql, $name_size, $rate);
+    return $result;
+}
+function size_update($name_size, $rate, $id)
+{
+    $sql = "UPDATE db_size SET name_size=?,rate=? WHERE id=?";
+    $result = pdo_execute($sql, $name_size, $rate, $id);
+    return $result;
+}
 // function product_size_price($size_id, $product_id, $price)
 // {
 //     $size = implode(', ', $size_id);
@@ -41,4 +53,3 @@ function product_temp_price($size_id, $product_id, $price, $material_id)
         pdo_execute($sql, $product_id, $size_one_id, $temp_price);
     }
 }
-

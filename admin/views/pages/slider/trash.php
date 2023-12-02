@@ -37,7 +37,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" class="table table-bordered table-striped table-compact table-hover">
+                            <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="10px">#</th>
@@ -46,7 +46,6 @@
                                         <th class="text-center">Đường dẫn</th>
                                         <th class="text-center" width="100px">Vị trí</th>
                                         <th class="text-center" width="150px">Chức năng</th>
-                                        <th class="text-center" width="10px">ID</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,22 +56,23 @@
                                                 <img src="../public/images/slider/<?= $row['img']; ?>" style="width: 100%;" class="img img-fuild img-thumbnail">
                                             </td>
                                             <td class="text-center">
-                                                Name: <?= $row['name']; ?>
+                                                + Name: <?= $row['name']; ?> <br>
                                                 <?php if (isset($row['info1'])) : ?>
-                                                    Thông tin 1: <?= $row['info1']; ?>
+                                                    Thông tin 1: <?= $row['info1']; ?> <br>
                                                 <?php endif; ?>
                                                 <?php if (isset($row['info2'])) : ?>
-                                                    Thông tin 2: <?= $row['info2']; ?>
+                                                    Thông tin 2: <?= $row['info2']; ?> <br>
                                                 <?php endif; ?>
                                                 <?php if (isset($row['info3'])) : ?>
-                                                    Thông tin 3: <?= $row['info3']; ?>
+                                                    Thông tin 3: <?= $row['info3']; ?> <br>
                                                 <?php endif; ?>
                                             </td>
+                                            <td class="text-center"><?= $row['link']; ?></td>
+                                            <td class="text-center"><?= $row['position']; ?></td>
                                             <td class="text-center">
-                                                <a class="btn btn-sm btn-info" href="index.php?option=slider&act=retrash&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-unđo"></i> Khôi phục</a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=slider&act=delete&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-trash"></i> Xoá</a>
+                                                <a class="btn btn-sm btn-info" href="index.php?option=slider&act=retrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-undo"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="index.php?option=slider&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
-
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

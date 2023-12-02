@@ -56,7 +56,7 @@
 
 <script>
     $(function() {
-        $('#datatable').DataTable({
+        $('.datatable').DataTable({
             "paging": true,
             pagingType: 'full_numbers',
             "searching": true,

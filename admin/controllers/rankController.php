@@ -7,18 +7,28 @@ if (isset($act)) {
     switch ($act) {
         case 'insert':
             if (isset($_POST['THEM'])) {
-                rank_insert($name, $promotion, $info1, $info2, $status);
-                set_flash('message', ['type' => 'success', 'msg' => 'Tạo cấp bậc mới thành công!']);
-                redirect('index.php?option=rank');
+                $result = rank_insert($name, $promotion, $info1, $info2, $status);
+                if ($result) {
+                    set_flash('message', ['type' => 'success', 'msg' => 'Tạo cấp bậc mới thành công!']);
+                    redirect('index.php?option=rank');
+                } else {
+                    set_flash('message', ['type' => 'warning', 'msg' => 'Tạo cấp bậc mới thất bại!']);
+                    redirect('index.php?option=rank&act=insert');
+                }
             }
             require_once $path . 'insert.php';
             break;
         case 'update':
             $id = $_REQUEST['id'];
             if (isset($_POST['CAPNHAT'])) {
-                rank_update($name, $promotion, $info1, $info2, $status, $id);
-                set_flash('message', ['type' => 'success', 'msg' => 'Sửa thông tin cấp bậc mới thành công!']);
-                redirect('index.php?option=rank');
+                $result = rank_update($name, $promotion, $info1, $info2, $status, $id);
+                if ($result) {
+                    set_flash('message', ['type' => 'success', 'msg' => 'Sửa thông tin cấp bậc thành công!']);
+                    redirect('index.php?option=rank');
+                } else {
+                    set_flash('message', ['type' => 'success', 'msg' => 'Sửa thông tin cấp bậc thất bại!']);
+                    redirect('index.php?option=rank&act=update&id=' . $id);
+                }
             }
             require_once $path . 'update.php';
             break;

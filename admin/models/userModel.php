@@ -8,21 +8,21 @@ function user_all($page = 'index')
     }
     return pdo_query_all($sql);
 }
-function user_insert($fullname, $username, $password, $email, $address, $gender, $phone, $img, $role, $rank_id, $status)
+function user_insert($fullname, $password, $email, $address, $gender, $phone, $img, $role, $rank_id, $status)
 {
-    $sql = "INSERT INTO db_user(fullname,username,password,email,address,gender,phone,img,role,rank_id,status) 
-    VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO db_user(fullname,password,email,address,gender,phone,img,role,rank_id,status) 
+    VALUES(?,?,?,?,?,?,?,?,?,?)";
     // var_dump($sql);
-    return pdo_execute($sql, $fullname, $username, $password, $email, $address, $gender, $phone, $img, $role, $rank_id, $status);
+    return pdo_execute($sql, $fullname, $password, $email, $address, $gender, $phone, $img, $role, $rank_id, $status);
 }
-function user_exists($username, $id = null)
+function user_exists($email, $id = null)
 {
     if ($id == null) {
-        $sql = "SELECT count(*) FROM db_user WHERE username=?";
-        return pdo_query_value($sql, $username) > 0;
+        $sql = "SELECT count(*) FROM db_user WHERE email=?";
+        return pdo_query_value($sql, $email) > 0;
     } else {
-        $sql = "SELECT count(*) FROM db_user WHERE username=? AND id!=?";
-        return pdo_query_value($sql, $username, $id) > 0;
+        $sql = "SELECT count(*) FROM db_user WHERE email=? AND id!=?";
+        return pdo_query_value($sql, $email, $id) > 0;
     }
 }
 function user_getid($id)
@@ -30,10 +30,10 @@ function user_getid($id)
     $sql = "SELECT * FROM db_user WHERE id=?";
     return pdo_query_one($sql, $id);
 }
-function user_update($fullname, $username, $password, $email, $address, $gender, $phone, $img, $role, $status, $id)
+function user_update($fullname, $password, $email, $address, $gender, $phone, $img, $role, $status, $id)
 {
-    $sql = "UPDATE db_user SET fullname=?,username=?,password=?,email=?,address=?,gender=?,phone=?,img=?,role=?,status=? WHERE id=?";
-    return pdo_execute($sql, $fullname, $username, $password, $email, $address, $gender, $phone, $img, $role, $status, $id);
+    $sql = "UPDATE db_user SET fullname=?,password=?,email=?,address=?,gender=?,phone=?,img=?,role=?,status=? WHERE id=?";
+    return pdo_execute($sql, $fullname, $password, $email, $address, $gender, $phone, $img, $role, $status, $id);
 }
 function user_update_status($status, $id)
 {

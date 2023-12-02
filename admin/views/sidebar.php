@@ -54,7 +54,19 @@
                         <li class="nav-item">
                             <a href="index.php?option=product" class="nav-link">
                                 <i class="fa fa-box-open nav-icon"></i>
-                                <p>Tất cả cả sản phẩm</p>
+                                <p>Quản lý sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?option=size" class="nav-link">
+                                <i class="fa fa-compress-arrows-alt nav-icon"></i>
+                                <p>Quản lý kích cỡ</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.php?option=material" class="nav-link">
+                                <i class="fa fa-folder nav-icon"></i>
+                                <p>Quản lý chất liệu</p>
                             </a>
                         </li>
                         <li class="nav-item">
