@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2023 at 08:07 AM
+-- Generation Time: Dec 02, 2023 at 06:34 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -172,6 +172,18 @@ INSERT INTO `db_contact` (`id`, `fullname`, `email`, `phone`, `title`, `detail`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `db_email`
+--
+
+CREATE TABLE `db_email` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL COMMENT 'tiêu đề',
+  `type_email` varchar(255) NOT NULL COMMENT 'Loại email'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `db_hotdeal`
 --
 
@@ -201,7 +213,8 @@ CREATE TABLE `db_material` (
 
 INSERT INTO `db_material` (`id`, `name`, `rate`) VALUES
 (1, 'Vàng 10K', 0.02),
-(2, 'Vàng 14K', 0.03);
+(2, 'Vàng 14K', 0.03),
+(3, 'Vàng 18K', 0.05);
 
 -- --------------------------------------------------------
 
@@ -214,7 +227,7 @@ CREATE TABLE `db_member_rank` (
   `name` varchar(50) NOT NULL DEFAULT 'Member' COMMENT 'Tên loại cấp bậc, ví dụ: Bronze, Silver, Gold, Diamond...',
   `img` varchar(225) NOT NULL,
   `promotion` int(11) NOT NULL COMMENT 'Mức giảm giá (%) dựa trên loại rank đạt được',
-  `info1` varchar(50) DEFAULT NULL COMMENT 'Thông tin 1',
+  `condition` int(11) NOT NULL COMMENT 'Điều kiện tổng tiền',
   `info2` varchar(50) DEFAULT NULL COMMENT 'Thông tin 2',
   `status` tinyint(4) NOT NULL COMMENT 'Trạng thái'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -223,11 +236,12 @@ CREATE TABLE `db_member_rank` (
 -- Dumping data for table `db_member_rank`
 --
 
-INSERT INTO `db_member_rank` (`id`, `name`, `img`, `promotion`, `info1`, `info2`, `status`) VALUES
-(1, 'Bronze', 'bronze.png', 10, NULL, NULL, 0),
-(2, 'Silver', 'silver.png', 15, NULL, NULL, 0),
-(3, 'Gold', 'gold.png', 20, NULL, NULL, 0),
-(4, 'Diamond', 'diamond.png', 25, NULL, NULL, 0);
+INSERT INTO `db_member_rank` (`id`, `name`, `img`, `promotion`, `condition`, `info2`, `status`) VALUES
+(1, 'Member', '', 0, 0, NULL, 1),
+(2, 'Bronze', 'bronze.png', 3, 50000000, NULL, 1),
+(3, 'Silver', 'silver.png', 5, 100000000, NULL, 1),
+(4, 'Gold', 'gold.png', 7, 150000000, NULL, 1),
+(5, 'Diamond', 'diamond.png', 10, 200000000, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -252,7 +266,11 @@ CREATE TABLE `db_menu` (
 --
 
 INSERT INTO `db_menu` (`id`, `name`, `type`, `link`, `table_id`, `parent_id`, `orders`, `position`, `status`) VALUES
-(23, 'Chủng loại', 'category', 'index.php?option=page&act=category&slug=chung-loai', 1, 0, 0, 'megamenu', 2);
+(23, 'Chủng loại', 'category', 'index.php?option=page&act=category&slug=chung-loai', 1, 0, 0, 'megamenu', 2),
+(24, 'Trang chủ', 'custom', 'index.php', NULL, 0, 0, 'headermenu', 2),
+(25, 'Trang chủ', 'custom', 'index.php', NULL, 0, 0, 'footermenu', 2),
+(26, 'Giới thiệu', 'custom', 'index.php?option=page&act=gioi-thieu', NULL, 0, 0, 'headermenu', 2),
+(27, 'Nhẫn', 'category', 'index.php?option=page&act=category&slug=nhan', 6, 0, 0, 'headermenu', 0);
 
 -- --------------------------------------------------------
 
@@ -268,10 +286,10 @@ CREATE TABLE `db_order` (
   `delivery_phone` varchar(11) DEFAULT NULL COMMENT 'số điện thoại người nhận',
   `delivery_email` varchar(255) DEFAULT NULL COMMENT 'email người nhận',
   `created_at` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Ngày tạo hoá đơn',
-  `exported_at` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Ngày xuất hoá đơn',
+  `exported_at` datetime DEFAULT current_timestamp() COMMENT 'Ngày xuất hoá đơn',
   `total_price` int(11) NOT NULL COMMENT 'Tổng tiền đơn hàng',
   `payment_method` int(11) NOT NULL COMMENT '1: Thanh toán khi nhận hàng\r\n2: Chuyển khoản\r\n3: Ví điện tử',
-  `stage` int(1) NOT NULL DEFAULT 1 COMMENT 'Quy định trạng thái vận chuyển:\r\n1: Chờ duyệt\r\n2: Đang giao\r\n3: bom- huỷ đơn\r\n4: Đã giao hàng',
+  `stage` int(1) NOT NULL DEFAULT 1 COMMENT 'Quy định trạng thái vận chuyển:\r\n1: Chờ duyệt\r\n2: Đang xử lý\r\n3: Huỷ đơn\r\n4: Đang giao\r\n5: Giao thành công\r\n6: Trả hàng/Đổi hàng\r\n7: Hoàn thành',
   `status` int(11) NOT NULL DEFAULT 0 COMMENT 'Quy định trạng thái đơn hàng:\r\n0: Đang xử lý\r\n1: Đã hoàn thành\r\n2: Đã huỷ đơn',
   `note` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -282,11 +300,11 @@ CREATE TABLE `db_order` (
 
 INSERT INTO `db_order` (`id`, `user_id`, `delivery_fullname`, `delivery_address`, `delivery_phone`, `delivery_email`, `created_at`, `exported_at`, `total_price`, `payment_method`, `stage`, `status`, `note`) VALUES
 (1, 1, 'đăng thạch', '98/12/3/4', '0902471714', 'dangttps28346@fpt.edu.vn', '2023-11-27 08:19:48', '2023-11-27 08:19:48', 4648000, 1, 3, 2, 'xzcxzczxczxczc'),
-(2, 1, '', '', '', '', '2023-11-27 08:24:12', '2023-11-27 08:24:12', 4648000, 3, 1, 0, ''),
-(3, 1, '', '', '', '', '2023-11-27 08:31:25', '2023-11-27 08:31:25', 7742000, 3, 1, 0, 'zxczxcz'),
-(4, 1, '', '', '', '', '2023-11-27 08:33:57', '2023-11-27 08:33:57', 7728000, 1, 2, 0, 'zczxc'),
+(2, 1, 'đăng thạch', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-27 08:24:12', '2023-11-27 08:24:12', 4648000, 3, 3, 2, ''),
+(3, 1, 'đăng thạch', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-27 08:31:25', '2023-11-27 08:31:25', 7742000, 3, 3, 2, 'zxczxcz'),
+(4, 1, 'đăng thạch', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-27 08:33:57', '2023-11-27 08:33:57', 7728000, 1, 7, 1, 'zczxc'),
 (5, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-27 08:57:58', '2023-11-27 08:57:58', 3094000, 1, 3, 0, 'zxczxc'),
-(6, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-27 08:59:13', '2023-11-27 08:59:13', 3094000, 1, 4, 0, 'zxczxc'),
+(6, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-27 08:59:13', '2023-11-27 08:59:13', 3094000, 1, 4, 1, 'zxczxc'),
 (7, 1, 'đăng thạch', '98/12/3/4', '0902471714', 'dangttps28346@fpt.edu.vn', '2023-11-27 09:00:11', '2023-11-27 09:00:11', 21616000, 3, 3, 2, 'Giàu mà'),
 (8, 1, 'Hoàng', 'xc,.mzvnx,mcn', '146781264', 'hoang@gmail.com', '2023-11-28 04:08:32', '2023-11-28 04:08:32', 7728000, 3, 0, 0, 'mnbzcv,mxbjkhsdabnjìg'),
 (9, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:09:58', '2023-11-28 04:09:58', 7728000, 1, 0, 0, ''),
@@ -299,10 +317,13 @@ INSERT INTO `db_order` (`id`, `user_id`, `delivery_fullname`, `delivery_address`
 (16, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:28:28', '2023-11-28 04:28:28', 1540000, 1, 0, 0, ''),
 (17, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:31:07', '2023-11-28 04:31:07', 4620000, 1, 3, 2, ''),
 (18, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:33:05', '2023-11-28 04:33:05', 1540000, 1, 3, 2, ''),
-(19, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:34:23', '2023-11-28 04:34:23', 1540000, 3, 1, 0, ''),
-(20, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:35:36', '2023-11-28 04:35:36', 3080000, 3, 1, 0, ''),
+(19, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:34:23', '2023-11-28 04:34:23', 1540000, 3, 7, 1, ''),
+(20, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:35:36', '2023-11-28 04:35:36', 3080000, 3, 7, 1, ''),
 (21, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:40:37', '2023-11-28 04:40:37', 1540000, 1, 1, 1, ''),
-(22, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:48:18', '2023-11-28 04:48:18', 1540000, 1, 1, 1, '');
+(22, 1, 'Thạch Thế Đăng', '97/10', '0902471714', 'dangthach1307@gmail.com', '2023-11-28 04:48:18', '2023-11-28 04:48:18', 1540000, 1, 1, 1, ''),
+(23, 1, 'Thạch Thế Đăng', '97/10 đường 9', '+8490247171', 'dangthach1307@gmail.com', '2023-12-01 07:17:36', '2023-12-01 07:17:36', 6202000, 1, 7, 1, 'Test'),
+(24, 1, 'Thạch Thế Đăng', '97/10 đường 9', '+8490247171', 'dangthach1307@gmail.com', '2023-12-01 08:33:30', '2023-12-01 08:33:30', 156940000, 1, 7, 1, 'test'),
+(25, 1, 'Thạch Thế Đăng', '97/10 đường 9', '+8490247171', 'dangthach1307@gmail.com', '2023-12-01 08:46:03', '2023-12-01 08:46:03', 38668000, 1, 7, 1, 'test');
 
 -- --------------------------------------------------------
 
@@ -353,7 +374,13 @@ INSERT INTO `db_orderdetail` (`id`, `order_id`, `product_id`, `material`, `size`
 (26, 19, 21, 'Vàng 10K', 9, 1540000, 1),
 (27, 20, 21, 'Vàng 10K', 9, 1540000, 2),
 (28, 21, 21, 'Vàng 10K', 9, 1540000, 1),
-(29, 22, 21, 'Vàng 10K', 9, 1540000, 1);
+(29, 22, 21, 'Vàng 10K', 9, 1540000, 1),
+(30, 23, 21, 'Vàng 10K', 9, 1540000, 1),
+(31, 23, 21, 'Vàng 10K', 10, 1554000, 3),
+(32, 24, 21, 'Vàng 10K', 9, 1540000, 1),
+(33, 24, 21, 'Vàng 10K', 10, 1554000, 100),
+(34, 25, 21, 'Vàng 10K', 10, 1554000, 12),
+(35, 25, 21, 'Vàng 10K', 9, 1540000, 13);
 
 -- --------------------------------------------------------
 
@@ -442,7 +469,7 @@ INSERT INTO `db_product` (`id`, `category_id`, `brand_id`, `name`, `slug`, `SKU`
 (18, 6, 2, 'test size nữa nè tiếp lần nữa', 'test-size-nua-ne-tiep-lan-nua', 'PNJNHA018-TES', '<p>xzczx</p>', '<p>czxczxc</p>', 4, 1000000, 6, 1, NULL, 0, 0, 0),
 (19, 6, 1, 'test size nữa nữa', 'test-size-nua-nua', 'TESNHA019-TES', '<p>xcvzxcv</p>', '<p>vzcxv</p>', 1, 2000000, 6, 1, NULL, 0, 0, 0),
 (20, 6, 2, 'test size nữa nữa nè', 'test-size-nua-nua-ne', 'PNJNHA020-THE', '<p>xzczxc</p>', '<p>zxczxc</p>', 1, 2000000, 6, 1, NULL, 391, 0, 1),
-(21, 6, 2, 'thêm lại sản phẩm sửa', 'them-lai-san-pham-sua', 'PNJNHA021-THE', '<p>xzczxc</p>', '<p>zxczxc</p>', 1, 2000000, 30, 1, NULL, 128, 0, 1);
+(21, 6, 2, 'thêm lại sản phẩm sửa', 'them-lai-san-pham-sua', 'PNJNHA021-THE', '<p>xzczxc</p>', '<p>zxczxc</p>', 1, 2000000, 30, 1, NULL, 137, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -572,9 +599,16 @@ CREATE TABLE `db_size` (
 --
 
 INSERT INTO `db_size` (`id`, `name_size`, `rate`) VALUES
-(1, 9, 0.05),
+(1, 9, 0.04),
 (2, 10, 0.06),
-(3, 11, 0.06);
+(3, 11, 0.06),
+(4, 12, 0.07),
+(5, 13, 0.06),
+(6, 14, 0.07),
+(7, 14, 0.06),
+(8, 15, 0.07),
+(9, 19, 0.05),
+(10, 18, 0.08);
 
 -- --------------------------------------------------------
 
@@ -594,13 +628,6 @@ CREATE TABLE `db_slider` (
   `orders` int(11) NOT NULL COMMENT 'Sắp xếp',
   `status` int(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `db_slider`
---
-
-INSERT INTO `db_slider` (`id`, `name`, `link`, `position`, `info1`, `info2`, `info3`, `img`, `orders`, `status`) VALUES
-(7, 'Test thêm slideshow 1', 'http://localhost:8080/fabulous', 'home', 'Test thêm slideshow 1', 'Test thêm slideshow 1', 'Test thêm slideshow 1', '38725356_422699981553300_2052493458337169408_n.jpg', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -642,6 +669,7 @@ CREATE TABLE `db_user` (
   `img` varchar(100) DEFAULT NULL COMMENT 'ảnh đại diện',
   `role` varchar(255) NOT NULL DEFAULT 'customer' COMMENT 'vai trò',
   `rank_id` int(11) NOT NULL DEFAULT 1 COMMENT 'Cấp thành viên',
+  `price_spent` int(11) NOT NULL DEFAULT 0 COMMENT 'Số tiền đã chi',
   `status` int(11) NOT NULL DEFAULT 1 COMMENT 'Trạng thái'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -649,17 +677,18 @@ CREATE TABLE `db_user` (
 -- Dumping data for table `db_user`
 --
 
-INSERT INTO `db_user` (`id`, `fullname`, `password`, `email`, `address`, `gender`, `phone`, `img`, `role`, `rank_id`, `status`) VALUES
-(1, 'Thạch Thế Đăng', 'Dang@123', 'dangthach1307@gmail.com', '97/10', 1, '+84902471714', 'dang137.jpg', 'superadmin', 4, 1),
-(2, 'Đăng thạch', 'dang@123', 'dangthach123@gmail.com', NULL, 1, '0902471714', 'avatar.png', 'admin', 1, 1),
-(3, 'Đăng thạch', 'dang@123', 'dang137@gmail.com', '2138', 1, '9024224732', 'dang137.jpg', 'customer', 4, 2),
-(7, 'Thạch Thế Đăng', 'dang@123', 'dangthach123@gmail.com', '97/10', 0, '0902471714', 'avatar.png', 'customer', 1, 1),
-(8, 'Thạch Thế Đăng', 'dang@123', 'dangthach123@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 1, 1),
-(9, 'Thạch Thế Đăng', 'dang@123', 'dangthach1234@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 1, 1),
-(10, 'Thạch Thế Đăng', 'Dang@123', 'dangthach1234@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 1, 1),
-(11, 'Thạch Thế Đăng', 'dang@123', 'dangthach12345@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 1, 1),
-(12, 'Thạch Thế Đăng', 'dang@123', 'dangthach123455@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 1, 1),
-(13, 'Thạch Thế Đăng', 'dang', 'dangthach1223455@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 1, 1);
+INSERT INTO `db_user` (`id`, `fullname`, `password`, `email`, `address`, `gender`, `phone`, `img`, `role`, `rank_id`, `price_spent`, `status`) VALUES
+(1, 'Thạch Thế Đăng', 'Dang@123', 'dangthach1307@gmail.com', '97/10 đường 9', 1, '+84902471714', 'dang137.jpg', 'superadmin', 2, 91280000, 1),
+(2, 'Đăng thạch', 'dang@123', 'dangthach123@gmail.com', NULL, 1, '0902471714', 'avatar.png', 'admin', 2, 0, 1),
+(3, 'Đăng thạch', 'dang@123', 'dang137@gmail.com', '2138', 1, '9024224732', 'dang137.jpg', 'customer', 5, 0, 2),
+(7, 'Thạch Thế Đăng', 'dang@123', 'dangthach123@gmail.com', '97/10', 0, '0902471714', 'avatar.png', 'customer', 2, 0, 1),
+(8, 'Thạch Thế Đăng', 'dang@123', 'dangthach123@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 2, 0, 1),
+(9, 'Thạch Thế Đăng', 'dang@123', 'dangthach1234@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 2, 0, 1),
+(10, 'Thạch Thế Đăng', 'Dang@123', 'dangthach1234@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 2, 0, 1),
+(11, 'Thạch Thế Đăng', 'dang@123', 'dangthach12345@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 2, 0, 1),
+(12, 'Thạch Thế Đăng', 'dang@123', 'dangthach123455@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 2, 0, 1),
+(13, 'Thạch Thế Đăng', 'dang', 'dangthach1223455@gmail.com', '97/10', 0, '0902471714', NULL, 'customer', 2, 0, 1),
+(14, 'Dang Thach', 'Tuong@123', 'dangthach137@gmail.com', '97/10', 1, '0902312472', 'gnxmxmy006396-nhan-vang-18k-dinh-da-cz-pnj.png', 'super_admin', 4, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -705,6 +734,12 @@ ALTER TABLE `db_config`
 -- Indexes for table `db_contact`
 --
 ALTER TABLE `db_contact`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_email`
+--
+ALTER TABLE `db_email`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -862,6 +897,12 @@ ALTER TABLE `db_contact`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã liên hệ', AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `db_email`
+--
+ALTER TABLE `db_email`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `db_hotdeal`
 --
 ALTER TABLE `db_hotdeal`
@@ -871,31 +912,31 @@ ALTER TABLE `db_hotdeal`
 -- AUTO_INCREMENT for table `db_material`
 --
 ALTER TABLE `db_material`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `db_member_rank`
 --
 ALTER TABLE `db_member_rank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã cấp bậc thành viên', AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã cấp bậc thành viên', AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `db_menu`
 --
 ALTER TABLE `db_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã menu', AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã menu', AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `db_order`
 --
 ALTER TABLE `db_order`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã đơn hàng', AUTO_INCREMENT=23;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Mã đơn hàng', AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `db_orderdetail`
 --
 ALTER TABLE `db_orderdetail`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'mã chi tiết đon hàng', AUTO_INCREMENT=30;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'mã chi tiết đon hàng', AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `db_post`
@@ -925,7 +966,7 @@ ALTER TABLE `db_product_size`
 -- AUTO_INCREMENT for table `db_size`
 --
 ALTER TABLE `db_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'mã size', AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'mã size', AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `db_slider`
@@ -943,7 +984,7 @@ ALTER TABLE `db_topic`
 -- AUTO_INCREMENT for table `db_user`
 --
 ALTER TABLE `db_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã thành viên', AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã thành viên', AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `db_wishlist`
