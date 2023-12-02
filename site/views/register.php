@@ -11,7 +11,7 @@
                         <div class="form-group">
                             <label for="email" class="control-label col-sm-3" style="font-size:14px;padding:13px 0px;text-align:left">Email <span class="required">*</span></label>
                             <div class="col-sm-9">
-                                <input type="email" title="Email Address" class="form-control" id="email" name="email">
+                                <input type="email" title="Email Address" class="form-control" id="email" name="email" placeholder="Ví dụ: example@gmail.com">
                                 <span class="error-message" id="email-error"><?php echo isset($email_error) ? $email_error : ''; ?></span>
                             </div>
                         </div>
@@ -47,6 +47,7 @@
                             <label for="Password" class="control-label col-sm-3" style="font-size:14px;padding:13px 0px;text-align:left">Mật khẩu <span class="required">*</span></label>
                             <div class="col-sm-9">
                                 <input type="password" title="Password" id="Password" class="form-control" name="password">
+                                <h4><span>Mật khẩu phải dài ít nhất 8 ký tự và có ít nhất 1 chữ hoa, 1 ký tự đặc biệt và 1 ký tự số </span></h4>
                                 <span class="error-message" id="password-error"><?php echo isset($password_error) ? $password_error : ''; ?></span>
                             </div>
                         </div>
@@ -70,7 +71,7 @@
                                 <button id="login-button" name="BTN_REGISTER" type="submit" class="button login" style="width:100%">
                                     <span>Gửi đi</span>
                                 </button>
-                                <span>Bạn đã có tài khoản? <a href="?option=user&act=login">Đăng nhập ngay</a></span>
+                                <h4><span>Bạn đã có tài khoản? <a href="?option=user&act=login">Đăng nhập ngay</a></span></h4>
                             </div>
                         </div>
                     </div>

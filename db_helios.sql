@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2023 at 06:34 AM
+-- Generation Time: Dec 02, 2023 at 07:11 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -469,7 +469,8 @@ INSERT INTO `db_product` (`id`, `category_id`, `brand_id`, `name`, `slug`, `SKU`
 (18, 6, 2, 'test size nữa nè tiếp lần nữa', 'test-size-nua-ne-tiep-lan-nua', 'PNJNHA018-TES', '<p>xzczx</p>', '<p>czxczxc</p>', 4, 1000000, 6, 1, NULL, 0, 0, 0),
 (19, 6, 1, 'test size nữa nữa', 'test-size-nua-nua', 'TESNHA019-TES', '<p>xcvzxcv</p>', '<p>vzcxv</p>', 1, 2000000, 6, 1, NULL, 0, 0, 0),
 (20, 6, 2, 'test size nữa nữa nè', 'test-size-nua-nua-ne', 'PNJNHA020-THE', '<p>xzczxc</p>', '<p>zxczxc</p>', 1, 2000000, 6, 1, NULL, 391, 0, 1),
-(21, 6, 2, 'thêm lại sản phẩm sửa', 'them-lai-san-pham-sua', 'PNJNHA021-THE', '<p>xzczxc</p>', '<p>zxczxc</p>', 1, 2000000, 30, 1, NULL, 137, 0, 1);
+(21, 6, 2, 'thêm lại sản phẩm sửa', 'them-lai-san-pham-sua', 'PNJNHA021-THE', '<p>xzczxc</p>', '<p>zxczxc</p>', 1, 2000000, 30, 1, NULL, 138, 0, 1),
+(22, 6, 2, 'Test thêm sản phẩm mới', 'test-them-san-pham-moi', 'PNJNHA022-TES', '<p>zxczxc</p>', '<p>zxczxc</p>', 1, 2000000, 10, 1, NULL, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -554,7 +555,12 @@ INSERT INTO `db_product_img` (`id`, `product_id`, `image`) VALUES
 (88, 21, 'them-lai-sanp-ham-1.png'),
 (89, 21, 'them-lai-sanp-ham-2.png'),
 (90, 21, 'them-lai-sanp-ham-3.jpg'),
-(91, 21, 'them-lai-sanp-ham-4.jpg');
+(91, 21, 'them-lai-sanp-ham-4.jpg'),
+(92, 22, 'test-them-san-pham-moi-0.png'),
+(93, 22, 'test-them-san-pham-moi-1.png'),
+(94, 22, 'test-them-san-pham-moi-2.png'),
+(95, 22, 'test-them-san-pham-moi-3.jpg'),
+(96, 22, 'test-them-san-pham-moi-4.jpg');
 
 -- --------------------------------------------------------
 
@@ -580,7 +586,10 @@ INSERT INTO `db_product_size` (`id`, `product_id`, `size_id`, `temp_price`) VALU
 (4, 20, 1, 2100000),
 (5, 20, 2, 2120000),
 (11, 21, 1, 2200000),
-(12, 21, 2, 2220000);
+(12, 21, 2, 2220000),
+(13, 22, 2, 2160000),
+(14, 22, 4, 2180000),
+(15, 22, 6, 2180000);
 
 -- --------------------------------------------------------
 
@@ -948,19 +957,19 @@ ALTER TABLE `db_post`
 -- AUTO_INCREMENT for table `db_product`
 --
 ALTER TABLE `db_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'mã sản phẩm', AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'mã sản phẩm', AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `db_product_img`
 --
 ALTER TABLE `db_product_img`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `db_product_size`
 --
 ALTER TABLE `db_product_size`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `db_size`

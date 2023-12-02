@@ -83,7 +83,7 @@
                                                                     <?php foreach ($list as $item_cart) : ?>
                                                                         <li class="item">
                                                                             <div class="item-inner">
-                                                                                <a class="product-image" title="<?= $item_cart['name'] ?>" href="?option=page&act=product-detail&id=<?= $item_cart['slug'] ?>">
+                                                                                <a class="product-image" title="<?= $item_cart['name'] ?>" href="?option=page&act=product-detail&slug=<?= $item_cart['slug'] ?>">
                                                                                     <img alt="<?= $item_cart['name'] ?>" src="../public/images/product/<?= $item_cart['img'] ?>">
                                                                                 </a>
                                                                                 <div class="product-details">
@@ -97,7 +97,7 @@
                                                                                         </form>
                                                                                     </div>
                                                                                     <p class="product-name">
-                                                                                        <a href="?option=page&act=product-detail&id=<?= $item_cart['slug'] ?>">
+                                                                                        <a href="?option=page&act=product-detail&slug=<?= $item_cart['slug'] ?>">
                                                                                             <?= $item_cart['name'] ?>
                                                                                         </a>
                                                                                     </p>

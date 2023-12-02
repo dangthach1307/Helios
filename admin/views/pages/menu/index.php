@@ -175,8 +175,8 @@
                                                 <tr>
                                                     <td class="text-center"><?= $item['id']; ?></td>
                                                     <td>
-                                                        <?= $item['name']; ?> <br>
-                                                        <?= $item['link']; ?>
+                                                        + Tên: <?= $item['name']; ?> <br>
+                                                        + Đường dẫn: <?= $item['link']; ?>
                                                     </td>
                                                     <td class="text-center"><?= $item['type']; ?></td>
                                                     <td class="text-center">
@@ -220,8 +220,8 @@
                                                 <tr>
                                                     <td class="text-center"><?= $item['id']; ?></td>
                                                     <td>
-                                                        <?= $item['name']; ?> <br>
-                                                        <?= $item['link']; ?>
+                                                        + Tên: <?= $item['name']; ?> <br>
+                                                        + Đường dẫn: <?= $item['link']; ?>
                                                     </td>
                                                     <td class="text-center"><?= $item['type']; ?></td>
                                                     <td class="text-center">
@@ -265,8 +265,8 @@
                                                 <tr>
                                                     <td class="text-center"><?= $item['id']; ?></td>
                                                     <td>
-                                                        <?= $item['name']; ?> <br>
-                                                        <?= $item['link']; ?>
+                                                        + Tên: <?= $item['name']; ?> <br>
+                                                        + Đường dẫn: <?= $item['link']; ?>
                                                     </td>
                                                     <td class="text-center"><?= $item['type']; ?></td>
                                                     <td class="text-center">
