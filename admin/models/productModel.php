@@ -100,12 +100,12 @@ function generate_sku($brand_name, $category_name, $product_name, $product_id)
 }
 
 //Cập nhật thông tin sản phẩm
-function product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id)
+function product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status, $id)
 {
     // $size = implode(',', $size);
     // Cập nhật thông tin sản phẩm
-    $update_sql = "UPDATE db_product SET category_id=?,brand_id=?,name=?,slug=?,smdetail=?,detail=?,material=?,size=?,quantity=?,price=?,promotion=?,status=? WHERE id=?";
-    $success = pdo_execute($update_sql, $category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id);
+    $update_sql = "UPDATE db_product SET category_id=?,brand_id=?,name=?,slug=?,smdetail=?,detail=?,material_id=?,quantity=?,price=?,promotion=?,status=? WHERE id=?";
+    $success = pdo_execute($update_sql, $category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status, $id);
 
     if ($success) {
         // Lấy thông tin sản phẩm sau khi cập nhật

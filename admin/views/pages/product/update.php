@@ -24,10 +24,11 @@ foreach ($list_material as $item) {
         $html_material .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
     }
 }
-foreach ($list_size as $item) {
-    $selected = in_array($item['id'], array_column($row['sizes'], 'id')) ? 'selected' : '';
-    $html_size .= '<option ' . $selected . ' value="' . $item['id'] . '">' . $item['name'] . '</option>';
+foreach ($list_all_sizes as $size) {
+    $selected = in_array($size['id'], array_column($list_product_sizes, 'size_id')) ? 'selected' : '';
+    $html_size .= '<option ' . $selected . ' value="' . $size['id'] . '">' . $size['name_size'] . '</option>';
 }
+
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

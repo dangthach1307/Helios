@@ -60,17 +60,35 @@ if (isset($act)) {
             $row = product_rowid($id);
             $list_category = category_all('index');
             $list_brand = brand_all('index');
+            $list_all_sizes = size_all();
+            $list_product_sizes = get_size_by_product_id($row['id']);
+            $list_material = material_all();
             $list_img = product_imglist($id);
             if (isset($_POST['CAPNHAT'])) {
                 $slug = str_slug($name);
-                $size_ids = isset($_POST['size']) ? $_POST['size'] : array();
+                // Lấy giá trị cũ của size để so sánh sau này
+                $old_sizes = array_column($list_product_sizes, 'size_id');
+
+                // Lấy giá trị mới từ form
+                $new_sizes = isset($_POST['size']) ? $_POST['size'] : array();
+
+                // Kiểm tra xem người dùng đã cập nhật lại size hay không
+                $sizes_updated = ($old_sizes != $new_sizes);
+
+                // Xoá các size cũ nếu người dùng đã cập nhật lại size
+                if ($sizes_updated) {
+                    // Xoá các size cũ trong db_product_size
+                    product_size_delete_by_product_id($row['id']);
+                    //Thêm lại các size mới
+                    product_temp_price($new_sizes, $id, $price, $material_id);
+                }
                 if (!empty($_FILES['img']['name'][0])) {
                     //Thay đổi thông tin và upload hình ảnh mới
                     //Kiểm tra và xoá hình cũ trong folder & trong database
                     product_imglist_folder_delete($id);
                     product_imglist_delete($id);
                     //Cập nhật thông tin sản phẩm
-                    product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id);
+                    product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status, $id);
                     //Upload hình ảnh mới
                     //Xử lý hình ảnh
                     $image_list = array();
@@ -83,17 +101,20 @@ if (isset($act)) {
                         if (!move_uploaded_file($file_tmp_name, $upload_path)) {
                             set_flash('message', ['type' => 'warning', 'msg' => 'Lỗi upload hình ảnh!']);
                             header('Location: index.php?option=product&act=update&id=' . $id);
+                            exit();
                         }
                         $image_list[] = $name_img;
                     }
                     product_imglist_insert($id, $image_list);
                     set_flash('message', ['type' => 'success', 'msg' => 'Cập nhật thông tin sản phẩm thành công!']);
                     header('Location: index.php?option=product');
+                    exit();
                 } else {
                     //Cập nhật thông tin giữ nguyên hình ảnh cũ
-                    product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material, $size, $quantity, $price, $promotion, $status, $id);
+                    product_update($category_id, $brand_id, $name, $slug, $smdetail, $detail, $material_id, $quantity, $price, $promotion, $status, $id);
                     set_flash('message', ['type' => 'success', 'msg' => 'Cập nhật thông tin sản phẩm thành công!']);
                     header('Location: index.php?option=product');
+                    exit();
                 }
             }
             require_once $path . 'update.php';
@@ -164,22 +185,24 @@ if (isset($act)) {
             break;
         default:
             $list_product = product_all('index');
-            $list_size = size_all();
-            $list_material = material_all();
+            $list_material = material_by_id($list_product[10]['material_id']);
             foreach ($list_product as $key => $value) {
                 $list = product_imglist($value['id']);
                 $list_product[$key]['image_list'] = $list;
+                $sizes = get_size_by_product_id_index($value['id']); // Gọi hàm hoặc thực hiện truy vấn SQL tương ứng
+                $list_product[$key]['sizes'] = $sizes;
             }
             require_once $path . 'index.php';
             break;
     }
 } else {
     $list_product = product_all('index');
-    $list_size = size_all();
-    $list_material = material_all();
+    $list_material = material_by_id($list_product[10]['material_id']);
     foreach ($list_product as $key => $value) {
         $list = product_imglist($value['id']);
         $list_product[$key]['image_list'] = $list;
+        $sizes = get_size_by_product_id_index($value['id']); // Gọi hàm hoặc thực hiện truy vấn SQL tương ứng
+        $list_product[$key]['sizes'] = $sizes;
     }
     require_once $path . 'index.php';
 }

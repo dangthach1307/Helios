@@ -39,7 +39,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
+                            <table id="datatable" style="width:100%" class="datatable table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="10px">#</th>
@@ -135,12 +135,18 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="material">Chất liệu:</label>
-                                                                    <input type="text" class="form-control" name="material" id="material" value="<?= $row['material']; ?>" readonly>
+                                                                    <input type="text" class="form-control" name="material" id="material" value="<?= $list_material['name']; ?>" readonly>
                                                                 </div>
-                                                                <div class="form-group ">
+                                                                <div class="form-group">
                                                                     <label for="size">Kích cỡ:</label>
-                                                                    <input type="text" class="form-control" name="size" id="size" value="<?= $row['size']; ?>" readonly>
+                                                                    <?php if (!empty($row['sizes'])) : ?>
+                                                                        <?php $sizeString = implode(', ', array_column($row['sizes'], 'name_size')); ?>
+                                                                        <input type="text" class="form-control" name="size" id="size" value="<?= $sizeString; ?>" readonly>
+                                                                    <?php else : ?>
+                                                                        <p>No sizes available</p>
+                                                                    <?php endif; ?>
                                                                 </div>
+
                                                             </div>
                                                             <div class="col-md-4">
 
