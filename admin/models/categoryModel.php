@@ -49,10 +49,10 @@ function category_insert($name, $slug, $parent_id, $orders, $status)
     return pdo_execute($sql, $name, $slug, $parent_id, $orders, $status);
 }
 //Cập nhật thông tin thương hiệu
-function category_update($name, $slug, $parentid,  $orders, $status, $id)
+function category_update($name, $slug, $parent_id,  $orders, $status, $id)
 {
     $sql = "UPDATE db_category SET name=?,slug=?,parent_id=?,orders=?,status=? WHERE id=?";
-    return pdo_execute($sql, $name, $slug, $parentid, $orders, $status, $id);
+    return pdo_execute($sql, $name, $slug, $parent_id, $orders, $status, $id);
 }
 //Cập nhật trạng thái thương hiệu
 function category_update_status($status, $id)

@@ -39,20 +39,20 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
+                            <table id="datatable" style="width:100%" class="datatable table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="10px">#</th>
                                         <th class="text-center" width="200px">Thông tin danh mục</th>
                                         <th class="text-center" width="100px">Cấp cha</th>
                                         <th class="text-center" width="100px">Chức năng</th>
-                                        <th class="text-center" width="10px">ID</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($list_category as $row) : ?>
                                         <tr>
-                                            <td class="text-center"><input type="checkbox" name="checkid[]" value="<?= $row['id']; ?>"></td>
+                                            <td class="text-center"><?= $row['id']; ?></td>
                                             <td class="text-center">
                                                 Name: <?= $row['name']; ?>
                                             </td>
@@ -69,14 +69,14 @@
                                             </td>
                                             <td class="text-center">
                                                 <?php if ($row['status'] == 1) : ?>
-                                                    <a class="btn btn-sm btn-success" href="index.php?option=category&act=status&id=<?= $row['id']; ?>"><i class="fa fa-toggle-on"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="index.php?option=category&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Kích hoạt"><i class="fa fa-toggle-on"></i></a>
                                                 <?php else : ?>
-                                                    <a class="btn btn-sm btn-danger" href="index.php?option=category&act=status&id=<?= $row['id']; ?>"><i class="fa fa-toggle-off"></i></a>
+                                                    <a class="btn btn-sm btn-danger" href="index.php?option=category&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Không kích hoạt"><i class="fa fa-toggle-off"></i></a>
                                                 <?php endif; ?>
-                                                <a class="btn btn-sm btn-info" href="index.php?option=category&act=update&id=<?= $row['id']; ?>"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=category&act=deltrash&id=<?= $row['id']; ?>"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-sm btn-info" href="index.php?option=category&act=update&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Cập nhật"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="index.php?option=category&act=deltrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
-                                            <td class="text-center"><?= $row['id']; ?></td>
+
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

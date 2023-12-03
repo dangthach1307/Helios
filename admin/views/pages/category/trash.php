@@ -44,22 +44,23 @@
                                         <th class="text-center" width="200px">Thông tin danh mục</th>
                                         <th class="text-center" width="100px">Cấp cha</th>
                                         <th class="text-center" width="100px">Chức năng</th>
-                                        <th class="text-center" width="10px">ID</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($list_category as $row) : ?>
                                         <tr>
-                                            <td class="text-center"><input type="checkbox" name="checkid[]" value="<?= $row['id']; ?>"></td>
+                                            <td class="text-center"><?= $row['id']; ?></td>
                                             <td class="text-center">
                                                 Name: <?= $row['name']; ?>
                                             </td>
-                                            <td class="text-center"><?= $row['parent_id'] ?></td>
+                                            <td class="text-center">
+                                            <?= $row['parent_id']; ?>
+                                            </td>
                                             <td class="text-center">
                                                 <a class="btn btn-sm btn-info" href="index.php?option=category&act=retrash&id=<?= $row['id']; ?>"><i class="fa fa-undo"></i></a>
                                                 <a class="btn btn-sm btn-danger" href="index.php?option=category&act=delete&id=<?= $row['id']; ?>"><i class="fa fa-trash"></i></a>
                                             </td>
-                                            <td class="text-center"><?= $row['id']; ?></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

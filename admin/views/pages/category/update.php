@@ -1,3 +1,19 @@
+<?php
+$html_parent_id = '';
+$html_orders = '';
+foreach ($list_category as $item) {
+    if ($item['id'] == $row['parent_id']) {
+        $html_parent_id .= '<option selected value="' . $item['id'] . '">' . $item['name'] . '</option>';
+    } else {
+        $html_parent_id .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
+    }
+    if ($item['orders'] == ($row['orders'] - 1)) {
+        $html_orders .= '<option selected value="' . $item['orders'] . '">Sau ' . $item['name'] . '</option>';
+    } else {
+        $html_orders .= '<option value="' . $item['orders'] . '">Sau ' . $item['name'] . '</option>';
+    }
+}
+?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -43,15 +59,17 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="parentid">Cấp cha (*):</label>
-                                <select id="parentid" name="parentid" class="form-control custom-select">
+                                <label for="parent_id">Cấp cha (*):</label>
+                                <select id="parent_id" name="parent_id" class="form-control custom-select">
                                     <option value="0">[--- Cấp cha ---]</option>
+                                    <?=$html_parent_id?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="orders">Sắp xếp (*):</label>
                                 <select id="orders" name="orders" class="form-control custom-select">
                                     <option value="0">[--- Mặc định ---]</option>
+                                    <?=$html_orders?>
                                 </select>
                             </div>
                             <div class="form-group">

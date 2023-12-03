@@ -14,7 +14,7 @@ if (isset($act)) {
                 if (category_slug_exists($slug) == FALSE) {
                     //FALSE = không tồn tại slug đó
                     //Tiến hành lấy dữ liệu và thêm
-                    category_insert($name, $slug, $parentid, ($_POST['orders'] + 1), $status);
+                    category_insert($name, $slug, $parent_id, ($_POST['orders'] + 1), $status);
                     set_flash('message', ['type' => 'success', 'msg' => 'Tạo danh mục mới thành công!']);
                     redirect('index.php?option=category');
                 } else {
@@ -41,16 +41,18 @@ if (isset($act)) {
                     //Kiểm tra danh mục có tồn tại danh mục con hay không
                     if (!category_has_children($id)) {
                         //Không tồn tại danh mục con
-                        category_update($name, $slug, $parentid, $orders + 1, $status, $id);
+                        category_update($name, $slug, $parent_id, $orders + 1, $status, $id);
                         set_flash('message', ['type' => 'success', 'msg' => 'Cập nhật thông tin danh mục thành công!']);
+                        redirect('index.php?option=category');
                     } else {
                         //Có tồn tại danh mục con thì không cho sửa trạng thái danh mục
                         set_flash('message', ['type' => 'warning', 'msg' => 'Danh mục này có danh mục con, không thể chuyển trạng thái!']);
+                        redirect('index.php?option=category&act=update&id=' . $id);
                     }
                 } else {
                     //Ngược lại là đã tồn  tại slug rồi, nên không thể thêm
                     set_flash('message', ['type' => 'warning', 'msg' => 'Tên danh mục đã tồn tại!']);
-                    redirect('index.php?option=category&act=insert');
+                    redirect('index.php?option=category&act=update&id=' . $id);
                 }
             }
             require_once $path . 'update.php';

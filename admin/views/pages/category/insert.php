@@ -41,38 +41,31 @@ foreach ($list_category as $item) {
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label for="name">Tên danh mục (*)</label>
-                                <input type="text" id="name" name="name" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="parent_id">Cấp cha (*):</label>
-                                <select id="parent_id" name="parent_id" class="form-control custom-select">
-                                    <option value="0">[--- Mặc định ---]</option>
-                                    <?= $html_parentid ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="orders">Sắp xếp (*):</label>
-                                <select id="orders" name="orders" class="form-control custom-select">
-                                    <option value="0">[--- Mặc định ---]</option>
-                                    <?= $html_orders ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Trạng thái (*): </label>
-                                <select id="status" name="status" class="form-control custom-select">
-                                    <option selected>[--- Trạng thái danh mục ---]</option>
-                                    <option value="1">Xuất bản</option>
-                                    <option value="2">Không xuất bản</option>
-                                    <option value="0">Lưu trữ</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="name">Tên danh mục (*)</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="parent_id">Cấp cha (*):</label>
+                        <select id="parent_id" name="parent_id" class="form-control custom-select">
+                            <option value="0">[--- Mặc định ---]</option>
+                            <?= $html_parentid ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="orders">Sắp xếp (*):</label>
+                        <select id="orders" name="orders" class="form-control custom-select">
+                            <option value="0">[--- Mặc định ---]</option>
+                            <?= $html_orders ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Trạng thái (*): </label>
+                        <select id="status" name="status" class="form-control custom-select">
+                            <option selected>[--- Trạng thái danh mục ---]</option>
+                            <option value="1">Xuất bản</option>
+                            <option value="2">Không xuất bản</option>
+                        </select>
                     </div>
                 </div>
                 <div class="card-footer">
