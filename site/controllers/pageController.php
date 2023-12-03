@@ -4,6 +4,7 @@ require_once './models/brandModel.php';
 require_once './models/categoryModel.php';
 require_once './models/productModel.php';
 require_once './models/contactModel.php';
+require_once './models/product_commentModel.php';
 
 // require_once 'views/header.php';
 if (isset($act)) {
@@ -97,19 +98,37 @@ if (isset($act)) {
             $slug = $_REQUEST['slug'];
             $row = product_rowslug($slug);
             $list_size = product_by_size($row['id']);
-
+            $list_comment = product_list_comment($row['id']);
             product_view_increase($slug);
 
             $list_catid = category_listcatid($row['category_id']);
             $list_other = product_other($list_catid, $row['id']);
             require_once 'views/product-detail.php';
             break;
+        case 'review':
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $slug = $_POST['slug'];
+                $product_id = $_POST['product_id'];
+                $user_id = $_POST['user_id'];
+                $fullname = $_POST['fullname'];
+                $title =  $_POST['title'];
+                $detail = $_POST['detail'];
+                $created_at = date('Y-m-d H:i:s');
+                $result = product_insert_comment($product_id, $user_id, $fullname, $title, $detail, $created_at);
+                if ($result) {
+                    set_flash('message', ['type' => 'success', 'msg' => 'Gửi đánh giá thành công!']);
+                } else {
+                    set_flash('message', ['type' => 'error', 'msg' => 'Gửi đánh giá thất bại!']);
+                }
+                // Sau khi xử lý xong, sử dụng header để quay trở lại trang trước đó
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit();
+            }
+            break;
         case 'blog':
             //Xử lý luồng dữ liệu cho trang bài viết
             //Gọi view
-            // require_once 'views/header.php';
             require_once 'views/blog.php';
-            // require_once 'views/footer.php';
             break;
         case 'contact':
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
