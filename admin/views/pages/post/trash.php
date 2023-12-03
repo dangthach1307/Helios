@@ -59,8 +59,8 @@
                                             </td>
                                             <td class="text-center"><?= $row['nametopic']; ?></td>
                                             <td class="text-center">
-                                                <a class="btn btn-sm btn-info" href="index.php?option=post&act=retrash&id=<?= $id; ?>"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=post&act=deleteh&id=<?= $id; ?>"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-sm btn-info" href="index.php?option=post&act=retrash&id=<?= $id; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="index.php?option=post&act=deleteh&id=<?= $id; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
                                             <td class="text-center"><?= $id; ?></td>
                                         </tr>

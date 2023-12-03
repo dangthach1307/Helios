@@ -85,8 +85,8 @@
                                                 - Đã bán: <?= $row['sold_count']; ?>
                                             </td>
                                             <td class="text-center">
-                                                <a class="btn btn-sm btn-info" style="margin:2%" href="index.php?option=product&act=retrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-undo"></i></a>
-                                                <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-sm btn-info" href="index.php?option=product&act=retrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-undo"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="index.php?option=product&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

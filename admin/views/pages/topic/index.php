@@ -69,12 +69,12 @@
                                             </td>
                                             <td class="text-center">
                                                 <?php if ($row['status'] == 1) : ?>
-                                                    <a class="btn btn-sm btn-success" href="index.php?option=topic&act=status&id=<?= $row['id']; ?>" style="width:80%; margin:2%"><i class="fa fa-toggle-on"></i> Hoạt động</a>
+                                                    <a class="btn btn-sm btn-success" href="index.php?option=topic&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Hoạt động"><i class="fa fa-toggle-on"></i></a>
                                                 <?php else : ?>
-                                                    <a class="btn btn-sm btn-danger" href="index.php?option=topic&act=status&id=<?= $row['id']; ?>" style="width:80%; margin:2%"><i class="fa fa-toggle-off"></i> Ngưng hoạt động</a>
+                                                    <a class="btn btn-sm btn-danger" href="index.php?option=topic&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Tạm ngưng"><i class="fa fa-toggle-off"></i></a>
                                                 <?php endif; ?>
-                                                <a class="btn btn-sm btn-info" href="index.php?option=topic&act=update&id=<?= $row['id']; ?>" style="width:80%; margin:2%"><i class="fa fa-edit"></i> Chỉnh sửa</a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=topic&act=deltrash&id=<?= $row['id']; ?>" style="width:80%; margin:2%"><i class="fa fa-trash"></i> Lưu trữ</a>
+                                                <a class="btn btn-sm btn-info" href="index.php?option=topic&act=update&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Cập nhật"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="index.php?option=topic&act=deltrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
 
                                         </tr>

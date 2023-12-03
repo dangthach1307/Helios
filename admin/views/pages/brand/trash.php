@@ -58,8 +58,8 @@
                                                 Name: <?= $row['name']; ?>
                                             </td>
                                             <td class="text-center">
-                                                <a class="btn btn-sm btn-info" href="index.php?option=brand&act=retrash&id=<?= $row['id']; ?>"><i class="fa fa-undo"></i></a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=brand&act=delete&id=<?= $row['id']; ?>"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-sm btn-info" href="index.php?option=brand&act=retrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-undo"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="index.php?option=brand&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
                                             <td class="text-center"><?= $row['id']; ?></td>
                                         </tr>

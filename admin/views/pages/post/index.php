@@ -39,20 +39,21 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
+                            <table id="datatable" style="width:100%" class="datatable table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
+                                        <th class="text-center" width="20px">#</th>
                                         <th class="text-center" width="100px">Hình</th>
                                         <th class="text-center" width="200px">Tên bài viết</th>
                                         <th class="text-center" width="100px">Chủ đề</th>
                                         <th class="text-center" width="100px">Chức năng</th>
-                                        <th class="text-center" width="20px">#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($list_post as $row) : ?>
                                         <?php $id = $row['id'] ?>
                                         <tr>
+                                            <td class="text-center"><?= $id; ?></td>
                                             <td class="text-center">
                                                 <img src="<?= '../public/images/post/' . $row['img']; ?>" style="width: 100%;" class="img img-fuild img-thumbnail">
                                             </td>
@@ -62,14 +63,14 @@
                                             <td class="text-center"><?= $row['nametopic']; ?></td>
                                             <td class="text-center">
                                                 <?php if ($row['status'] == 1) : ?>
-                                                    <a class="btn btn-sm btn-success" href="index.php?option=post&act=status&id=<?= $id; ?>"><i class="fa fa-toggle-on"></i></a>
+                                                    <a class="btn btn-sm btn-success" href="index.php?option=post&act=status&id=<?= $id; ?>" data-toggle="tooltip" title="Xuất bản"><i class="fa fa-toggle-on"></i></a>
                                                 <?php else : ?>
-                                                    <a class="btn btn-sm btn-danger" href="index.php?option=post&act=status&id=<?= $id; ?>"><i class="fa fa-toggle-off"></i></a>
+                                                    <a class="btn btn-sm btn-danger" href="index.php?option=post&act=status&id=<?= $id; ?>" data-toggle="tooltip" title="Tạm ngưng"><i class="fa fa-toggle-off"></i></a>
                                                 <?php endif; ?>
-                                                <a class="btn btn-sm btn-info" href="index.php?option=post&act=update&id=<?= $id; ?>"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=post&act=deltrash&id=<?= $id; ?>"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-sm btn-info" href="index.php?option=post&act=update&id=<?= $id; ?>" data-toggle="tooltip" title="Cập nhật"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="index.php?option=post&act=deltrash&id=<?= $id; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
-                                            <td class="text-center"><?= $id; ?></td>
+
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

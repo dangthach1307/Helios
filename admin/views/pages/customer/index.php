@@ -75,12 +75,12 @@
                                             </td>
                                             <td class="text-center">
                                                 <?php if ($row['status'] == 1) : ?>
-                                                    <a class="btn btn-sm btn-success" href="index.php?option=customer&act=status&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-toggle-on"></i> Kích hoạt</a>
+                                                    <a class="btn btn-sm btn-success" href="index.php?option=customer&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Kích hoạt"><i class="fa fa-toggle-on"></i></a>
                                                 <?php else : ?>
-                                                    <a class="btn btn-sm btn-danger" href="index.php?option=customer&act=status&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-toggle-off"></i> Tạm ngưng</a>
+                                                    <a class="btn btn-sm btn-danger" href="index.php?option=customer&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Tạm ngưng"><i class="fa fa-toggle-off"></i></a>
                                                 <?php endif; ?>
-                                                <a class="btn btn-sm btn-info" href="index.php?option=customer&act=update&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-edit"></i> Cập nhật</a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=customer&act=deltrash&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-trash"></i> Lưu trữ</a>
+                                                <a class="btn btn-sm btn-info" href="index.php?option=customer&act=update&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Cập nhật"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="index.php?option=customer&act=deltrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>

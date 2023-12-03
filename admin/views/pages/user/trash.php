@@ -69,8 +69,8 @@
                                             </td>
                                             <td><?= $row['role']; ?></td>
                                             <td>
-                                                <a class="btn btn-sm btn-info" href="index.php?option=user&act=retrash&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-undo"></i> Khôi phục</a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=user&act=delete&id=<?= $row['id']; ?>" style="width:80%; margin:5%"><i class="fa fa-trash"></i> Xoá</a>
+                                                <a class="btn btn-sm btn-info" href="index.php?option=user&act=retrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-undo"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="index.php?option=user&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
 
                                         </tr>
