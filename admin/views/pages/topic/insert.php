@@ -34,7 +34,7 @@ foreach ($list_topic as $item) {
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title font-weight-bold py-2">Tạo chủ đề</h3>
                         <div class="card-tools">
-                            <button type="submit" name="THEMMOI" class="btn btn-success"><i class="fa fa-save"></i> Lưu[Thêm]</button>
+                            <button type="submit" name="THEM" class="btn btn-success"><i class="fa fa-save"></i> Lưu[Thêm]</button>
                             <a class="btn btn-secondary" href="index.php?option=topic">
                                 <i class="fa fa-arrow-left"></i> Thoát
                             </a>
@@ -42,46 +42,38 @@ foreach ($list_topic as $item) {
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label for="name">Tên Chủ đề (*)</label>
-                                <input type="text" id="name" name="name" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="parentid">Cấp cha (*):</label>
-                                <select id="parentid" name="parentid" class="form-control custom-select">
-                                    <option>[--- Chọn cấp cha ---]</option>
-                                    <option value="0">[--- Không có cấp cha ---]</option>
-                                    <?= $html_parentid ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="orders">Sắp xếp (*):</label>
-                                <select id="orders" name="orders" class="form-control custom-select">
-                                    <option value="0">[--- Mặc định ---]</option>
-                                    <?= $html_orders ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Trạng thái (*): </label>
-                                <select id="status" name="status" class="form-control custom-select">
-                                    <option selected>[--- Trạng thái Chủ đề ---]</option>
-                                    <option value="1">Xuất bản</option>
-                                    <option value="2">Không xuất bản</option>
-                                    <option value="0">Lưu trữ</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="name">Tên Chủ đề (*)</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="parentid">Cấp cha (*):</label>
+                        <select id="parentid" name="parentid" class="form-control custom-select">
+                            <option value="0">[--- Không có cấp cha ---]</option>
+                            <?= $html_parentid ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="orders">Sắp xếp (*):</label>
+                        <select id="orders" name="orders" class="form-control custom-select">
+                            <option value="0">[--- Mặc định ---]</option>
+                            <?= $html_orders ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Trạng thái (*): </label>
+                        <select id="status" name="status" class="form-control custom-select">
+                            <option selected>[--- Trạng thái Chủ đề ---]</option>
+                            <option value="1">Xuất bản</option>
+                            <option value="2">Không xuất bản</option>
+                        </select>
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title font-weight-bold py-2"></h3>
                         <div class="card-tools">
-                            <button type="submit" name="THEMMOI" class="btn btn-success"><i class="fa fa-save"></i> Lưu[Thêm]</button>
+                            <button type="submit" name="THEM" class="btn btn-success"><i class="fa fa-save"></i> Lưu[Thêm]</button>
                             <a class="btn btn-secondary" href="index.php?option=topic">
                                 <i class="fa fa-arrow-left"></i> Thoát
                             </a>
@@ -94,12 +86,3 @@ foreach ($list_topic as $item) {
     </section>
     <!-- /.content -->
 </div>
-<script>
-    $(function() {
-        //Initialize Elements
-        $('.select2').select2()
-    });
-    $("input[data-bootstrap-switch]").each(function() {
-        $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-</script>

@@ -14,7 +14,7 @@ if (isset($act)) {
                 if (topic_slug_exists($slug) == FALSE) {
                     //FALSE = không tồn tại slug đó
                     //Tiến hành lấy dữ liệu và thêm
-                    topic_insert($name, $slug, $parentid, ($_POST['orders'] + 1), $status);
+                    topic_insert($name, $slug, $parent_id, ($_POST['orders'] + 1), $status);
                     set_flash('message', ['type' => 'success', 'msg' => 'Tạo Chủ đề mới thành công!']);
                     redirect('index.php?option=topic');
                 } else {
@@ -41,7 +41,7 @@ if (isset($act)) {
                     //Kiểm tra Chủ đề có tồn tại Chủ đề con hay không
                     if (!topic_has_children($id)) {
                         //Không tồn tại Chủ đề con
-                        topic_update($name, $slug, $parentid, $orders + 1, $status, $id);
+                        topic_update($name, $slug, $parent_id, $orders + 1, $status, $id);
                         set_flash('message', ['type' => 'success', 'msg' => 'Cập nhật thông tin Chủ đề thành công!']);
                         redirect('index.php?option=topic&act=update&id=' . $id);
                     } else {

@@ -60,9 +60,9 @@
                                                 <?php if ($row['parent_id'] == '0') : ?>
                                                     Không có cấp cha
                                                 <?php else : ?>
-                                                    <?php foreach ($list_category as $parent_category) : ?>
-                                                        <?php if ($parent_category['id'] == $row['parent_id']) : ?>
-                                                            Cấp cha: <?= $parent_category['name']; ?>
+                                                    <?php foreach ($list_topic as $parent_topic) : ?>
+                                                        <?php if ($parent_topic['id'] == $row['parent_id']) : ?>
+                                                            Cấp cha: <?= $parent_topic['name']; ?>
                                                         <?php endif; ?>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>

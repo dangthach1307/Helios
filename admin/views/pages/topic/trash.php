@@ -55,15 +55,7 @@
                                                 Slug: <?= $row['slug']; ?>
                                             </td>
                                             <td class="text-center">
-                                                <?php if ($row['parent_id'] == '0') : ?>
-                                                    Không có cấp cha
-                                                <?php else : ?>
-                                                    <?php foreach ($list_category as $parent_category) : ?>
-                                                        <?php if ($parent_category['id'] == $row['parent_id']) : ?>
-                                                            Cấp cha: <?= $parent_category['name']; ?>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                <?php endif; ?>
+                                                <?= $row['parent_id'] ?>
                                             </td>
                                             <td class="text-center">
                                                 <a class="btn btn-sm btn-info" href="index.php?option=topic&act=retrash&id=<?= $row['id']; ?>" style="width:80%; margin:2%"><i class="fa fa-undo"></i> Khôi phục</a>

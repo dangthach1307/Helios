@@ -49,45 +49,39 @@ foreach ($list_topic as $item) {
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div class="form-group">
-                                <label for="name">Tên Chủ đề (*)</label>
-                                <input type="text" id="name" name="name" value="<?= $row['name'] ?>" class="form-control" required>
-                                <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="parentid">Cấp cha (*):</label>
-                                <select id="parentid" name="parentid" class="form-control custom-select">
-                                    <option value="0">[--- Cấp cha ---]</option>
-                                    <?= $html_parentid ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="orders">Sắp xếp (*):</label>
-                                <select id="orders" name="orders" class="form-control custom-select">
-                                    <option value="0">[--- Mặc định ---]</option>
-                                    <?= $html_orders ?>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="status">Trạng thái (*): </label>
-                                <select id="status" name="status" class="form-control custom-select">
-                                    <option selected>[--Trạng thái sản phẩm--]</option>
-                                    <option value="1" <?php if ($row['status'] == 1) {
-                                                            echo "selected";
-                                                        } ?>>Xuất bản</option>
-                                    <option value="2" <?php if ($row['status'] == 2) {
-                                                            echo "selected";
-                                                        } ?>>Không xuất bản</option>
-                                    <option value="0" <?php if ($row['status'] == 0) {
-                                                            echo "selected";
-                                                        } ?>>Lưu trữ</option>
-                                </select>
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label for="name">Tên Chủ đề (*)</label>
+                        <input type="text" id="name" name="name" value="<?= $row['name'] ?>" class="form-control" required>
+                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="parent_id">Cấp cha (*):</label>
+                        <select id="parent_id" name="parent_id" class="form-control custom-select">
+                            <option value="0">[--- Cấp cha ---]</option>
+                            <?= $html_parentid ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="orders">Sắp xếp (*):</label>
+                        <select id="orders" name="orders" class="form-control custom-select">
+                            <option value="0">[--- Mặc định ---]</option>
+                            <?= $html_orders ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Trạng thái (*): </label>
+                        <select id="status" name="status" class="form-control custom-select">
+                            <option selected>[--Trạng thái sản phẩm--]</option>
+                            <option value="1" <?php if ($row['status'] == 1) {
+                                                    echo "selected";
+                                                } ?>>Xuất bản</option>
+                            <option value="2" <?php if ($row['status'] == 2) {
+                                                    echo "selected";
+                                                } ?>>Không xuất bản</option>
+                            <option value="0" <?php if ($row['status'] == 0) {
+                                                    echo "selected";
+                                                } ?>>Lưu trữ</option>
+                        </select>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -107,12 +101,3 @@ foreach ($list_topic as $item) {
     </section>
     <!-- /.content -->
 </div>
-<script>
-    $(function() {
-        //Initialize Elements
-        $('.select2').select2()
-    });
-    $("input[data-bootstrap-switch]").each(function() {
-        $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-</script>
