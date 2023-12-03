@@ -25,7 +25,7 @@
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title font-weight-bold py-2">Cập nhật thông tin khách hàng</h3>
                         <div class="card-tools">
-                            <button type="submit" name="UPDATE" class="btn btn-success">
+                            <button type="submit" name="CAPNHAT" class="btn btn-success">
                                 <i class="fa fa-save"></i> Lưu[CẬP NHẬT]
                             </button>
                             <a class="btn btn-secondary" href="index.php?option=customer">
@@ -37,11 +37,6 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="username">Tên đăng nhập (*)</label>
-                                <input type="text" id="username" name="username" class="form-control" placeholder="Nhập tên tài khoản" value="<?= $row['username'] ?>" required>
-                                <!-- <input type="hidden" name="id" value=""> -->
-                            </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="text" id="email" name="email" class="form-control" placeholder="Nhập email" value="<?= $row['email'] ?>" required>
@@ -106,7 +101,7 @@
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title font-weight-bold py-2"></h3>
                         <div class="card-tools">
-                            <button type="submit" name="UPDATE" class="btn btn-success"><i class="fa fa-save"></i> Lưu[CẬP NHẬT]</button>
+                            <button type="submit" name="CAPNHAT" class="btn btn-success"><i class="fa fa-save"></i> Lưu[CẬP NHẬT]</button>
                             <a class="btn btn-secondary" href="index.php?option=customer">
                                 <i class="fa fa-arrow-left"></i> Thoát
                             </a>
@@ -119,12 +114,3 @@
     </section>
     <!-- /.content -->
 </div>
-<script>
-    $(function() {
-        //Initialize Elements
-        $('.select2').select2()
-    });
-    $("input[data-bootstrap-switch]").each(function() {
-        $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-</script>

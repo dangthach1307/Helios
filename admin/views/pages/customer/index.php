@@ -39,7 +39,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
+                            <table id="datatable" style="width:100%" class="datatable table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="10px">#</th>
@@ -68,7 +68,7 @@
                                                 Giới tính: <?= $row['gender'] == 1 ? 'Nam' : 'Nữ'; ?>
                                             </td>
                                             <td class="text-center">
-                                                <?= $row['username']; ?>
+                                                <?= $row['email']; ?>
                                             </td>
                                             <td class="text-center">
                                                 <?= $row['rank_name']; ?>

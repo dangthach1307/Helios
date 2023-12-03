@@ -25,7 +25,7 @@
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title font-weight-bold py-2">Thêm Khách hàng</h3>
                         <div class="card-tools">
-                            <button type="submit" name="INSERT" class="btn btn-success">
+                            <button type="submit" name="THEM" class="btn btn-success">
                                 <i class="fa fa-save"></i> Lưu[Thêm]
                             </button>
                             <a class="btn btn-secondary" href="index.php?option=customer">
@@ -37,10 +37,6 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="username">Tên đăng nhập (*)</label>
-                                <input type="text" id="username" name="username" class="form-control" placeholder="Nhập tên tài khoản" required>
-                            </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="text" id="email" name="email" class="form-control" placeholder="Nhập email" required>
@@ -76,7 +72,7 @@
                                 </select>
                             </div>
                             <div class="form-group align-items-center">
-                                <label for="img">Hình ảnh Khách hàng (*):</label>
+                                <label for="img">Hình đại diện (*):</label>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="img" name="img">
                                     <label class="custom-file-label" for="img">Choose file</label>
@@ -85,10 +81,9 @@
                             <div class="form-group">
                                 <label for="status">Trạng thái (*): </label>
                                 <select id="status" name="status" class="form-control custom-select">
-                                    <option selected>[--- Trạng thái Khách hàng ---]</option>
+                                    <option selected>[--- Trạng thái ---]</option>
                                     <option value="1">Kích hoạt</option>
                                     <option value="2">Không kích hoạt</option>
-                                    <option value="0">Lưu trữ</option>
                                 </select>
                             </div>
                         </div>
@@ -98,7 +93,7 @@
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title font-weight-bold py-2"></h3>
                         <div class="card-tools">
-                            <button type="submit" name="INSERT" class="btn btn-success"><i class="fa fa-save"></i> Lưu[Thêm]</button>
+                            <button type="submit" name="THEM" class="btn btn-success"><i class="fa fa-save"></i> Lưu[Thêm]</button>
                             <a class="btn btn-secondary" href="index.php?option=customer">
                                 <i class="fa fa-arrow-left"></i> Thoát
                             </a>
@@ -111,12 +106,3 @@
     </section>
     <!-- /.content -->
 </div>
-<script>
-    $(function() {
-        //Initialize Elements
-        $('.select2').select2()
-    });
-    $("input[data-bootstrap-switch]").each(function() {
-        $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-</script>
