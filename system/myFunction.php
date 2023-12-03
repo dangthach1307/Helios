@@ -185,12 +185,12 @@ function sendMail($data, $template) {
       $mail->isSMTP();
       $mail->Host = 'smtp.gmail.com';
       $mail->SMTPAuth = true;
-      $mail->Username = 'zerefs124@gmail.com';
+      $mail->Username = _ROOT_EMAIL_;
       $mail->Password = 'kxpi hupu xqkr eqpb';
       $mail->SMTPSecure = 'ssl';
       $mail->Port = 465;
 
-      $mail->setFrom('zerefs124@gmail.com');
+      $mail->setFrom(_ROOT_EMAIL_);
 
       $mail->addAddress($email);
 

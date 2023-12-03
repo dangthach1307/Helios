@@ -8,3 +8,5 @@ define('ALL_MATERIAL', [
 define('ALL_SIZES', [
     '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'
 ]);
+
+define('_ROOT_EMAIL_', 'zerefs124@gmail.com');
