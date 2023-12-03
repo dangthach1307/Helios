@@ -43,13 +43,13 @@ $_SESSION['source'] = 'productcategory';
                 </div>
                 <article class="col-main">
                     <div class="page-title">
-                        <h2>All product: <?= $row_cat['name'] ?></h2>
+                        <h2>Sản phẩm thuộc: <?= $row_cat['name'] ?></h2>
                     </div>
                     <div class="toolbar">
                         <!-- <div class="sorter">
                             <div class="view-mode"> <span title="Grid" class="button button-active button-grid">&nbsp;</span><a href="shop-list-sidebar.html" title="List" class="button-list">&nbsp;</a> </div>
                         </div> -->
-                        <div id="sort-by">
+                        <!-- <div id="sort-by">
                             <label class="left">Sort By: </label>
                             <ul>
                                 <li style="width:130px">
@@ -65,8 +65,8 @@ $_SESSION['source'] = 'productcategory';
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="pager">
+                        </div> -->
+                        <!-- <div class="pager">
                             <div id="limiter">
                                 <label>View: </label>
                                 <ul>
@@ -79,7 +79,7 @@ $_SESSION['source'] = 'productcategory';
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <?php if (count($list_product)) : ?>
                         <div class="category-products">

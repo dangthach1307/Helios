@@ -28,34 +28,34 @@ function product_list_home($option = null)
     }
     return pdo_query_all($sql);
 }
-function product_category($list_catid, $first, $limit, $minPrice = 0, $maxPrice = PHP_INT_MAX, $sort = 'default')
+function product_category($list_catid, $first, $limit, $minPrice = 0, $maxPrice = PHP_INT_MAX)
 {
     $strin = implode(',', $list_catid);
-    $orderBy = '';
+    // $orderBy = '';
 
-    switch ($sort) {
-        case 'name_asc':
-            $orderBy = 'ORDER BY p.name ASC';
-            break;
-        case 'name_desc':
-            $orderBy = 'ORDER BY p.name DESC';
-            break;
-        case 'price_asc':
-            $orderBy = 'ORDER BY p.price ASC';
-            break;
-        case 'price_desc':
-            $orderBy = 'ORDER BY p.price DESC';
-            break;
-        case 'newest':
-            $orderBy = 'ORDER BY p.id DESC';
-            break;
-        case 'oldest':
-            $orderBy = 'ORDER BY p.id ASC';
-            break;
-        default:
-            $orderBy = 'ORDER BY p.id DESC';
-            break;
-    }
+    // switch ($sort) {
+    //     case 'name_asc':
+    //         $orderBy = 'ORDER BY p.name ASC';
+    //         break;
+    //     case 'name_desc':
+    //         $orderBy = 'ORDER BY p.name DESC';
+    //         break;
+    //     case 'price_asc':
+    //         $orderBy = 'ORDER BY p.price ASC';
+    //         break;
+    //     case 'price_desc':
+    //         $orderBy = 'ORDER BY p.price DESC';
+    //         break;
+    //     case 'newest':
+    //         $orderBy = 'ORDER BY p.id DESC';
+    //         break;
+    //     case 'oldest':
+    //         $orderBy = 'ORDER BY p.id ASC';
+    //         break;
+    //     default:
+    //         $orderBy = 'ORDER BY p.id DESC';
+    //         break;
+    // }
 
     $sql = "SELECT p.*, i.img_id, i.product_id, i.img
         FROM db_product p
@@ -67,7 +67,7 @@ function product_category($list_catid, $first, $limit, $minPrice = 0, $maxPrice 
         WHERE p.category_id IN ($strin) 
         AND p.status != 0
         AND p.price >= ? 
-        AND p.price <= ? $orderBy LIMIT $first,$limit";
+        AND p.price <= ? LIMIT $first,$limit";
 
     return pdo_query_all($sql, $minPrice, $maxPrice);
 }
@@ -77,34 +77,46 @@ function product_category_count($list_catid)
     $sql = "SELECT * FROM db_product WHERE category_id IN($strin) AND status =1";
     return count(pdo_query_all($sql));
 }
-//Hàm Show danh sách sản phẩm có điều kiện ở trang tất cả sản phẩm
-function product_site_all($first, $limit, $minPrice = 0, $maxPrice = PHP_INT_MAX, $sort = 'default')
+function buildPriceFiltersQuery()
 {
-    $orderBy = '';
+    $min_price = isset($_GET['min_price']) ? intval($_GET['min_price']) : null;
+    $max_price = isset($_GET['max_price']) ? intval($_GET['max_price']) : null;
 
-    switch ($sort) {
-        case 'name_asc':
-            $orderBy = 'ORDER BY p.name ASC';
-            break;
-        case 'name_desc':
-            $orderBy = 'ORDER BY p.name DESC';
-            break;
-        case 'price_asc':
-            $orderBy = 'ORDER BY p.price ASC';
-            break;
-        case 'price_desc':
-            $orderBy = 'ORDER BY p.price DESC';
-            break;
-        case 'newest':
-            $orderBy = 'ORDER BY p.id DESC';
-            break;
-        case 'oldest':
-            $orderBy = 'ORDER BY p.id ASC';
-            break;
-        default:
-            $orderBy = 'ORDER BY p.id DESC';
-            break;
+    if ($min_price !== null || $max_price !== null) {
+        return "&min_price=$min_price&max_price=$max_price";
+    } else {
+        return '';
     }
+}
+
+//Hàm Show danh sách sản phẩm có điều kiện ở trang tất cả sản phẩm
+function product_site_all($first, $limit, $minPrice = 0, $maxPrice = PHP_INT_MAX)
+{
+    // $orderBy = '';
+
+    // switch ($sort) {
+    //     case 'name_asc':
+    //         $orderBy = 'ORDER BY p.name ASC';
+    //         break;
+    //     case 'name_desc':
+    //         $orderBy = 'ORDER BY p.name DESC';
+    //         break;
+    //     case 'price_asc':
+    //         $orderBy = 'ORDER BY p.price ASC';
+    //         break;
+    //     case 'price_desc':
+    //         $orderBy = 'ORDER BY p.price DESC';
+    //         break;
+    //     case 'newest':
+    //         $orderBy = 'ORDER BY p.id DESC';
+    //         break;
+    //     case 'oldest':
+    //         $orderBy = 'ORDER BY p.id ASC';
+    //         break;
+    //     default:
+    //         $orderBy = 'ORDER BY p.id DESC';
+    //         break;
+    // }
 
     $sql = "SELECT p.*, i.img_id, i.product_id, i.img
         FROM db_product p
@@ -115,7 +127,7 @@ function product_site_all($first, $limit, $minPrice = 0, $maxPrice = PHP_INT_MAX
         ) i ON p.id = i.product_id
         WHERE p.status !=0
         AND p.price >= ? 
-        AND p.price <= ? $orderBy LIMIT $first,$limit";
+        AND p.price <= ? LIMIT $first,$limit";
 
     return pdo_query_all($sql, $minPrice, $maxPrice);
 }

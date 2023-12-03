@@ -49,7 +49,7 @@
                         <!-- <div class="sorter">
                             <div class="view-mode"> <span title="Grid" class="button button-active button-grid">&nbsp;</span><a href="shop-list-sidebar.html" title="List" class="button-list">&nbsp;</a> </div>
                         </div> -->
-                        <div id="sort-by">
+                        <!-- <div id="sort-by">
                             <label class="left">Sort By: </label>
                             <ul>
                                 <li style="width:130px">
@@ -57,16 +57,16 @@
                                     <ul>
                                         <li style="width:100%"><a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'name_asc', 'pages' => null])) ?>">Name (A-Z)</a></li>
                                         <li style="width:100%"><a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'name_desc', 'pages' => null])) ?>">Name (Z-A)</a></li>
-                                        <li style="width:100%"><a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'price_asc', 'pages' => null])) ?>">Price increase</a></li>
-                                        <li style="width:100%"><a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'price_desc', 'pages' => null])) ?>">Price decrease</a></li>
+                                        <li style="width:100%"><a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'temp_price_asc', 'pages' => null])) ?>">Price increase</a></li>
+                                        <li style="width:100%"><a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'temp_price_desc', 'pages' => null])) ?>">Price decrease</a></li>
                                         <li style="width:100%"><a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'newest', 'pages' => null])) ?>">Newest</a></li>
                                         <li style="width:100%"><a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'oldest', 'pages' => null])) ?>">Oldest</a></li>
-
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="pager">
+                        </div> -->
+
+                        <!-- <div class="pager">
                             <div id="limiter">
                                 <label>View: </label>
                                 <ul>
@@ -79,7 +79,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="category-products">
                         <ul class="products-grid">
@@ -117,7 +117,7 @@
                                                             $firstSizePrinted = false;
                                                             foreach ($list_size as $row) :
                                                                 if (!$firstSizePrinted) :
-                                                                    $firstSizePrinted = true; // Đánh dấu là đã in ra giá tiền kích thước đầu tiên
+                                                                    $firstSizePrinted = true;
                                                                     $calculated_price = $item['promotion'] > 0 ? $row['temp_price'] - ($row['temp_price'] * $item['promotion'] / 100) : $row['temp_price'];
                                                             ?>
                                                                     <p class="regular-price">
@@ -148,36 +148,45 @@
                         <div class="row">
                             <div class="col-sm-12 text-center">
                                 <div class="pages">
-                                    <?php
-                                    $current = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
+                                    <?php if (isset($totalPages) > 0) : ?>
+                                        <?php
+                                        $current = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
 
-                                    echo '<ul class="pagination">';
+                                        echo '<ul class="pagination">';
 
-                                    if ($current > 1) {
-                                        echo "<li><a href='?option=page&act=product&pages=1" . ($min_price ? "&min_price=$min_price" : "") . ($max_price ? "&max_price=$max_price" : "") . "'>&lt;&lt;</a></li>";
-                                        echo "<li><a href='?option=page&act=product&pages=" . ($current - 1) . ($min_price ? "&min_price=$min_price" : "") . ($max_price ? "&max_price=$max_price" : "") . "'>&lt;</a></li>";
-                                    } else {
-                                        echo "<li class='disabled'><span>&lt;&lt;</span></li>";
-                                        echo "<li class='disabled'><span>&lt;</span></li>";
-                                    }
-
-                                    for ($i = 1; $i <= $totalPages; $i++) {
-                                        if ($i == $current) {
-                                            echo "<li class='active'><span>$i</span></li>";
+                                        if ($current > 1) {
+                                            $baseLink = '?option=page&act=product&pages=1' . buildPriceFiltersQuery();
+                                            echo "<li><a href='$baseLink'>&lt;&lt;</a></li>";
+                                            echo "<li><a href='?option=page&act=product&pages=" . ($current - 1) . buildPriceFiltersQuery() . "'>&lt;</a></li>";
                                         } else {
-                                            echo "<li><a href='?option=page&act=product&pages=$i" . ($min_price ? "&min_price=$min_price" : "") . ($max_price ? "&max_price=$max_price" : "") . "'>$i</a></li>";
+                                            echo "<li class='disabled'><span>&lt;&lt;</span></li>";
+                                            echo "<li class='disabled'><span>&lt;</span></li>";
                                         }
-                                    }
 
-                                    if ($current < $totalPages) {
-                                        echo "<li><a href='?option=page&act=product&pages=" . ($current + 1) . ($min_price ? "&min_price=$min_price" : "") . ($max_price ? "&max_price=$max_price" : "") . "'>&gt;</a></li>";
-                                        echo "<li><a href='?option=page&act=product&pages=$totalPages" . ($min_price ? "&min_price=$min_price" : "") . ($max_price ? "&max_price=$max_price" : "") . "'>&gt;&gt;</a></li>";
-                                    } else {
-                                        echo "<li class='disabled'><span>&gt;</span></li>";
-                                        echo "<li class='disabled'><span>&gt;&gt;</span></li>";
-                                    }
-                                    echo '</ul>';
-                                    ?>
+                                        for ($i = 1; $i <= $totalPages; $i++) {
+                                            $baseLink = '?option=page&act=product&pages=' . $i . buildPriceFiltersQuery();
+                                            if ($i == $current) {
+                                                echo "<li class='active'><span>$i</span></li>";
+                                            } else {
+                                                echo "<li><a href='$baseLink'>$i</a></li>";
+                                            }
+                                        }
+
+                                        if ($current < $totalPages) {
+                                            $baseLink = '?option=page&act=product&pages=' . ($current + 1) . buildPriceFiltersQuery();
+                                            echo "<li><a href='$baseLink'>&gt;</a></li>";
+                                            $baseLink = '?option=page&act=product&pages=' . $totalPages . buildPriceFiltersQuery();
+                                            echo "<li><a href='$baseLink'>&gt;&gt;</a></li>";
+                                        } else {
+                                            echo "<li class='disabled'><span>&gt;</span></li>";
+                                            echo "<li class='disabled'><span>&gt;&gt;</span></li>";
+                                        }
+                                        echo '</ul>';
+                                        ?>
+                                    <?php else : ?>
+                                        <p>Không có sản phẩm</p>
+                                    <?php endif; ?>
+
                                 </div>
                             </div>
                         </div>

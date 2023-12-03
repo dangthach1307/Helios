@@ -120,9 +120,8 @@ foreach ($list_material as $item) {
                                 <label for="status">Trạng thái (*): </label>
                                 <select id="status" name="status" class="form-control custom-select">
                                     <option selected>[--- Trạng thái sản phẩm ---]</option>
-                                    <option value="1">Xuất bản</option>
-                                    <option value="2">Không xuất bản</option>
-                                    <option value="0">Lưu trữ</option>
+                                    <option value="1">Mở bán</option>
+                                    <option value="2">Không mở bán</option>
                                 </select>
                             </div>
                         </div>

@@ -11,12 +11,14 @@ if (isset($act)) {
         case 'search':
             $keyword = $_REQUEST['keyword'];
             $sp_search = product_search($keyword);
-            $list_size = product_by_size($sp_search[0]['id']);
+            if (isset($sp_search)) {
+                $list_size = product_by_size($sp_search[0]['id']);
+            } else {
+                $list_size = 0;
+            }
             $list_categories = category_list(0);
-            // Đưa dữ liệu vào các trang header, danh sách sản phẩm theo danh mục và footer để hiển thị trên trang web.
 
             require_once 'views/product-search.php';
-
             break;
         case 'product':
             // Lọc sản phẩm theo khoảng giá
@@ -24,25 +26,29 @@ if (isset($act)) {
             $max_price = isset($_GET['max_price']) ? intval($_GET['max_price']) : 99999999999;
 
             // Sắp xếp sản phẩm
-            $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default'; // Sắp xếp mặc định
-            $validSorts = ['default', 'name_asc', 'name_desc', 'price_asc', 'price_desc', 'newest', 'oldest'];
+            // $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default'; // Sắp xếp mặc định
+            // $validSorts = ['default', 'name_asc', 'name_desc', 'temp_price_asc', 'temp_price_desc', 'newest', 'oldest'];
 
-            if (!in_array($sort, $validSorts)) {
-                $sort = 'default'; // Sắp xếp mặc định nếu giá trị sort không hợp lệ
-            }
-
+            // if (!in_array($sort, $validSorts)) {
+            //     $sort = 'default'; // Sắp xếp mặc định nếu giá trị sort không hợp lệ
+            // }
+            $priceFiltersQuery = buildPriceFiltersQuery();
             // Gọi function show sản phẩm và danh mục với các tham số lọc giá và sắp xếp
-            $list_product = product_site_all(0, PHP_INT_MAX, $min_price, $max_price, $sort);
-            $list_size = product_by_size($list_product[0]['id']);
-            $total = count($list_product);
+            $list_product = product_site_all(0, PHP_INT_MAX, $min_price, $max_price);
 
-            // Phân trang nếu cần
-            $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
-            $limit = 3;
-            $first = ($page - 1) * $limit;
+            // Kiểm tra xem mảng $list_product có tồn tại và có ít nhất một phần tử hay không
+            if (!empty($list_product) && isset($list_product[0])) {
+                $list_size = product_by_size($list_product[0]['id']);
+                $total = count($list_product);
 
-            $list_product = array_slice($list_product, $first, $limit);
-            $totalPages = ceil($total / $limit);
+                // Phân trang nếu cần
+                $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
+                $limit = 6;
+                $first = ($page - 1) * $limit;
+
+                $list_product = array_slice($list_product, $first, $limit);
+                $totalPages = ceil($total / $limit);
+            }
 
             $list_categories = category_list(0);
             require_once 'views/product.php';
@@ -53,12 +59,12 @@ if (isset($act)) {
             $max_price = isset($_GET['max_price']) ? intval($_GET['max_price']) : 9999999;
 
             // Sắp xếp sản phẩm
-            $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default'; // Sắp xếp mặc định
-            $validSorts = ['default', 'name_asc', 'name_desc', 'price_asc', 'price_desc', 'newest', 'oldest'];
+            // $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default'; // Sắp xếp mặc định
+            // $validSorts = ['default', 'name_asc', 'name_desc', 'price_asc', 'price_desc', 'newest', 'oldest'];
 
-            if (!in_array($sort, $validSorts)) {
-                $sort = 'default'; // Sắp xếp mặc định nếu giá trị sort không hợp lệ
-            }
+            // if (!in_array($sort, $validSorts)) {
+            //     $sort = 'default'; // Sắp xếp mặc định nếu giá trị sort không hợp lệ
+            // }
 
             // Trang hiển thị sản phẩm theo danh mục
             $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
@@ -79,13 +85,12 @@ if (isset($act)) {
             $total = product_category_count($list_catid);
 
             // Lấy danh sách sản phẩm thuộc danh mục với phân trang, lọc và sắp xếp.
-            $list_product = product_category($list_catid, $first, $limit, $min_price, $max_price, $sort);
-            $list_size = product_by_size($list_product[0]['id']);
+            $list_product = product_category($list_catid, $first, $limit, $min_price, $max_price);
+            if (!empty($list_product) && isset($list_product[0])) {
+                $list_size = product_by_size($list_product[0]['id']);
+            }
 
-            // Đưa dữ liệu vào các trang header, danh sách sản phẩm theo danh mục và footer để hiển thị trên trang web.
-            // require_once 'views/header.php';
             require_once 'views/product-category.php';
-            // require_once 'views/footer.php';
             break;
         case 'product-detail':
             //Trang chi tiết sản phẩm
@@ -93,14 +98,11 @@ if (isset($act)) {
             $row = product_rowslug($slug);
             $list_size = product_by_size($row['id']);
 
-
             product_view_increase($slug);
 
             $list_catid = category_listcatid($row['category_id']);
             $list_other = product_other($list_catid, $row['id']);
-            // require_once 'views/header.php';
             require_once 'views/product-detail.php';
-            // require_once 'views/footer.php';
             break;
         case 'blog':
             //Xử lý luồng dữ liệu cho trang bài viết
