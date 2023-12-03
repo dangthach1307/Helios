@@ -49,7 +49,7 @@
                             <?php if (isset($row['img'])) : ?>
                                 <div class="form-group">
                                     <label for="img">Hình ảnh hiện tại:</label>
-                                    <img src="../public/images/brand/<?= $row['img'] ?>" class="img-responsive w-100">
+                                    <img src="../public/images/singlepage/<?= $row['img'] ?>" class="img-responsive w-100">
                                 </div>
                             <?php endif; ?>
                             <div class="form-group align-items-center">
