@@ -45,19 +45,19 @@ function topic_has_products($id)
 function topic_insert($name, $slug, $parent_id, $orders, $status)
 {
     $sql = "INSERT INTO db_topic (name,slug,parent_id,orders,status) VALUES(?,?,?,?,?)";
-    return pdo_execute($sql, $name, $slug, $parent_id, $orders, $status);
+    pdo_execute($sql, $name, $slug, $parent_id, $orders, $status);
 }
 //Cập nhật thông tin thương hiệu
-function topic_update($name, $slug, $parentid,  $orders, $status, $id)
+function topic_update($name, $slug, $parent_id,  $orders, $status, $id)
 {
     $sql = "UPDATE db_topic SET name=?,slug=?,parent_id=?,orders=?,status=? WHERE id=?";
-    return pdo_execute($sql, $name, $slug, $parentid, $orders, $status, $id);
+    pdo_execute($sql, $name, $slug, $parent_id, $orders, $status, $id);
 }
 //Cập nhật trạng thái thương hiệu
 function topic_update_status($status, $id)
 {
     $sql = "UPDATE db_topic SET status=? WHERE id=?";
-    return pdo_execute($sql, $status, $id);
+    pdo_execute($sql, $status, $id);
 }
 //Xoá thương hiệu
 function topic_delete($id)

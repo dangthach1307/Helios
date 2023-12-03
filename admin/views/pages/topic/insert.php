@@ -47,8 +47,8 @@ foreach ($list_topic as $item) {
                         <input type="text" id="name" name="name" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="parentid">Cấp cha (*):</label>
-                        <select id="parentid" name="parentid" class="form-control custom-select">
+                        <label for="parent_id">Cấp cha (*):</label>
+                        <select id="parent_id" name="parent_id" class="form-control custom-select">
                             <option value="0">[--- Không có cấp cha ---]</option>
                             <?= $html_parentid ?>
                         </select>

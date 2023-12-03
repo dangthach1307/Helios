@@ -8,7 +8,7 @@ if (isset($act)) {
     switch ($act) {
         case 'insert':
             $list_topic = topic_all('index');
-            if (isset($_POST['THEMMOI'])) {
+            if (isset($_POST['THEM'])) {
                 $slug = str_slug($_POST['name']);
                 //Kiểm tra xem đã tồn tại slug chưa
                 if (topic_slug_exists($slug) == FALSE) {
