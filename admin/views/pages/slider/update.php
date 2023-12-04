@@ -1,6 +1,6 @@
 <?php
 $html_orders = '';
-foreach ($list_brand as $item) {
+foreach ($list_slider as $item) {
     $html_orders .= '<option value="' . $item['orders'] . '">Sau ' . $item['name'] . '</option>';
 }
 ?>
@@ -15,7 +15,7 @@ foreach ($list_brand as $item) {
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item"><a href="index.php?option=brand">Danh sách thương hiệu</a></li>
+                        <li class="breadcrumb-item"><a href="index.php?option=slider">Danh sách thương hiệu</a></li>
                         <li class="breadcrumb-item active">Cập nhật</li>
                     </ol>
                 </div>
@@ -25,14 +25,14 @@ foreach ($list_brand as $item) {
 
     <!-- Main content -->
     <section class="content">
-        <form action="index.php?option=brand&act=update" method="post" enctype="multipart/form-data">
+        <form action="index.php?option=slider&act=update" method="post" enctype="multipart/form-data">
             <div class="card card-primary">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title font-weight-bold py-2">Cập nhật thông tin thương hiệu</h3>
                         <div class="card-tools">
                             <button type="submit" name="CAPNHAT" class="btn btn-success"><i class="fa fa-save"></i> Lưu[CẬP NHẬT]</button>
-                            <a class="btn btn-secondary" href="index.php?option=brand">
+                            <a class="btn btn-secondary" href="index.php?option=slider">
                                 <i class="fa fa-arrow-left"></i> Thoát
                             </a>
                         </div>
@@ -42,33 +42,25 @@ foreach ($list_brand as $item) {
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
-                                <label for="name">Tên thương hiệu (*)</label>
+                                <label for="name">Tên slider (*)</label>
                                 <input type="text" id="name" name="name" value="<?= $row['name'] ?>" class="form-control" required>
                                 <input type="hidden" name="id" value="<?= $row['id'] ?>">
                             </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="orders">Sắp xếp (*):</label>
-                                    <select id="orders" name="orders" class="form-control custom-select">
-                                        <option value="0">[--- Mặc định ---]</option>
-                                        <?= $html_orders; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="status">Trạng thái (*): </label>
-                                    <select id="status" name="status" class="form-control custom-select">
-                                        <option selected>[--Trạng thái sản phẩm--]</option>
-                                        <option value="1" <?php if ($row['status'] == 1) {
-                                                                echo "selected";
-                                                            } ?>>Xuất bản</option>
-                                        <option value="2" <?php if ($row['status'] == 2) {
-                                                                echo "selected";
-                                                            } ?>>Không xuất bản</option>
-                                        <option value="0" <?php if ($row['status'] == 0) {
-                                                                echo "selected";
-                                                            } ?>>Lưu trữ</option>
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label for="link">Đường dẫn (*)</label>
+                                <input type="text" id="link" name="link" value="<?= $row['link'] ?>" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="info1">Thông tin 1 (*)</label>
+                                <input type="text" id="info1" name="info1" value="<?= $row['info1'] ?>" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="info2">Thông tin 2 (*)</label>
+                                <input type="text" id="info2" name="info2" value="<?= $row['info2'] ?>" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="info3">Thông tin 3 (*)</label>
+                                <input type="text" id="info3" name="info3" value="<?= $row['info3'] ?>" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -80,8 +72,30 @@ foreach ($list_brand as $item) {
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="img">Hình ảnh hiện tại:</label>
-                                <img src="../public/images/brand/<?= $row['img'] ?>" class="img-responsive w-100">
+                                <label for="current-img">Hình ảnh hiện tại:</label>
+                                <img src="../public/images/slider/<?= $row['img'] ?>" class="img-responsive w-100" style="height:124px">
+                            </div>
+                            <div class="form-group">
+                                <label for="orders">Sắp xếp (*):</label>
+                                <select id="orders" name="orders" class="form-control custom-select">
+                                    <option value="0">[--- Mặc định ---]</option>
+                                    <?= $html_orders; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Trạng thái (*): </label>
+                                <select id="status" name="status" class="form-control custom-select">
+                                    <option selected>[--Trạng thái sản phẩm--]</option>
+                                    <option value="1" <?php if ($row['status'] == 1) {
+                                                            echo "selected";
+                                                        } ?>>Xuất bản</option>
+                                    <option value="2" <?php if ($row['status'] == 2) {
+                                                            echo "selected";
+                                                        } ?>>Không xuất bản</option>
+                                    <option value="0" <?php if ($row['status'] == 0) {
+                                                            echo "selected";
+                                                        } ?>>Lưu trữ</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -91,7 +105,7 @@ foreach ($list_brand as $item) {
                         <h3 class="card-title font-weight-bold py-2"></h3>
                         <div class="card-tools">
                             <button type="submit" name="CAPNHAT" class="btn btn-success"><i class="fa fa-save"></i> Lưu[CẬP NHẬT]</button>
-                            <a class="btn btn-secondary" href="index.php?option=brand">
+                            <a class="btn btn-secondary" href="index.php?option=slider">
                                 <i class="fa fa-arrow-left"></i> Thoát
                             </a>
                         </div>
@@ -103,12 +117,3 @@ foreach ($list_brand as $item) {
     </section>
     <!-- /.content -->
 </div>
-<script>
-    $(function() {
-        //Initialize Elements
-        $('.select2').select2()
-    });
-    $("input[data-bootstrap-switch]").each(function() {
-        $(this).bootstrapSwitch('state', $(this).prop('checked'));
-    })
-</script>

@@ -24,10 +24,10 @@ function slider_insert($name, $link, $position, $info1, $info2, $info3, $img, $o
     return pdo_execute($sql, $name, $link, $position, $info1, $info2, $info3, $img, $orders, $status);
 }
 //Cập nhật thông tin thương hiệu
-function slider_update($name, $link, $position, $info1, $info2, $info3, $img, $orders, $status, $id)
+function slider_update($name, $link, $info1, $info2, $info3, $img, $orders, $status, $id)
 {
-    $sql = "UPDATE db_slider SET name=?,link=?,position=?,info1=?,info2=?,info3=?,img=?,orders=?,status=? WHERE id=?";
-    return pdo_execute($sql, $name, $link, $position, $info1, $info2, $info3, $img, $orders, $status, $id);
+    $sql = "UPDATE db_slider SET name=?,link=?,info1=?,info2=?,info3=?,img=?,orders=?,status=? WHERE id=?";
+    return pdo_execute($sql, $name, $link, $info1, $info2, $info3, $img, $orders, $status, $id);
 }
 //Cập nhật trạng thái thương hiệu
 function slider_update_status($status, $id)

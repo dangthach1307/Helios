@@ -31,7 +31,7 @@ if (isset($act)) {
         case 'update':
             $id = $_REQUEST['id'];
             $row = slider_rowid($id);
-            $slider_list = slider_all('index');
+            $list_slider = slider_all('index');
             if (isset($_POST['CAPNHAT'])) {
                 if (isset($_FILES['img']) && !empty($_FILES['img']['name'])) {
                     //Kiểm tra nếu có tồN tại hình cũ thì xoá hình cũ trong folder đi
@@ -45,15 +45,15 @@ if (isset($act)) {
                     if (!move_uploaded_file($file_tmp_name, $upload_path)) {
                         //Lỗi trong quá trình xử lý upload
                         set_flash('message', ['type' => 'warning', 'msg' => 'Lỗi upload hình ảnh!']);
-                        redirect('index.php?option=slider&act=insert');
+                        redirect('index.php?option=slider&act=update&id=' . $id);
                     }
                     $img = $file_name;
                 } else {
                     $img = $row['img'];
                 }
                 slider_update($name, $link, $position, $info1, $info2, $info3, $img, ($orders + 1), $status, $id);
-                set_flash('message', ['type' => 'success', 'msg' => 'SỬa thông tin slider mới thành công!']);
-                redirect('index.php?option=slider');
+                set_flash('message', ['type' => 'success', 'msg' => 'SỬa thông tin slider thành công!']);
+                redirect('index.php?option=slider&act=update&id=' . $id);
             }
             require_once $path . 'update.php';
             break;
