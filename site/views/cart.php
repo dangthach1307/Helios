@@ -104,7 +104,7 @@
                                                         <div class="update-coupne-area">
                                                             <div class="update-continue-btn text-right">
                                                                 <button class="button btn-default" title="Tiếp tục mua hàng" name="continue_shop_action">
-                                                                    <span><a href="index.php?option=page&act=home">Tiếp tục mua hàng</a></span>
+                                                                    <span><a href="index.php?option=page&act=product">Tiếp tục mua hàng</a></span>
                                                                 </button>
                                                                 <button class="button btn-update" title="Cập nhật giỏ hàng" value="update_qty" name="update_cart_action" type="submit">
                                                                     <span>Cập nhật giỏ hàng</span>

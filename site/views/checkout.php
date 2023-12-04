@@ -74,25 +74,25 @@
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                                 <div class="input-box">
                                                                                     <label>Họ tên <em>*</em></label>
-                                                                                    <input type="text" name="other_fullname" class="info">
+                                                                                    <input type="text" name="other_fullname" class="info" required>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                                 <div class="input-box">
                                                                                     <label>Địa chỉ email<em>*</em></label>
-                                                                                    <input type="email" name="other_email" class="info">
+                                                                                    <input type="email" name="other_email" class="info" required>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                                 <div class="input-box">
                                                                                     <label>Số điện thoại <em>*</em></label>
-                                                                                    <input type="text" name="other_phone" class="info">
+                                                                                    <input type="text" name="other_phone" class="info" required>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                                                 <div class="input-box">
                                                                                     <label>Địa chỉ mới <em>*</em></label>
-                                                                                    <input type="text" name="other_address" class="info mb-10">
+                                                                                    <input type="text" name="other_address" class="info mb-10" required>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

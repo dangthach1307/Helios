@@ -135,7 +135,7 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="material">Chất liệu:</label>
-                                                                    <input type="text" class="form-control" name="material" id="material" value="<?= $list_material['name']; ?>" readonly>
+                                                                    <input type="text" class="form-control" name="material" id="material" value="<?= $material["name"]; ?>" readonly>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="size">Kích cỡ:</label>

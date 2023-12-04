@@ -185,24 +185,24 @@ if (isset($act)) {
             break;
         default:
             $list_product = product_all('index');
-            $list_material = material_by_id($list_product[10]['material_id']);
             foreach ($list_product as $key => $value) {
                 $list = product_imglist($value['id']);
                 $list_product[$key]['image_list'] = $list;
                 $sizes = get_size_by_product_id_index($value['id']); // Gọi hàm hoặc thực hiện truy vấn SQL tương ứng
                 $list_product[$key]['sizes'] = $sizes;
+                $material = material_by_id($value['id']);
             }
             require_once $path . 'index.php';
             break;
     }
 } else {
     $list_product = product_all('index');
-    $list_material = material_by_id($list_product[10]['material_id']);
     foreach ($list_product as $key => $value) {
         $list = product_imglist($value['id']);
         $list_product[$key]['image_list'] = $list;
         $sizes = get_size_by_product_id_index($value['id']); // Gọi hàm hoặc thực hiện truy vấn SQL tương ứng
         $list_product[$key]['sizes'] = $sizes;
+        $material = material_by_id($value['material_id']);
     }
     require_once $path . 'index.php';
 }
