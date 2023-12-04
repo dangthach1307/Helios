@@ -36,14 +36,14 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
+                            <table id="datatable" style="width:100%" class="display datatable table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="10px">ID</th>
                                         <th class="text-center">Thông tin liên hệ</th>
                                         <th class="text-center">Tiêu đề</th>
                                         <th class="text-center">Trạng thái</th>
-                                        <th class="text-center" width="150px">Chức năng</th>
+                                        <!-- <th class="text-center" width="150px">Chức năng</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -64,9 +64,9 @@
                                                     Chưa trả lời
                                                 <?php endif; ?>
                                             </td>
-                                            <td class="text-center">
+                                            <!-- <td class="text-center">
                                                 <a class="btn btn-sm btn-danger" href="index.php?option=contact&act=delete&id=<?= $row['id']; ?>" style="width:80%; margin:2%"><i class="fa fa-trash"></i> Xoá</a>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>

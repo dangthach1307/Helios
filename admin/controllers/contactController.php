@@ -8,10 +8,10 @@ if (isset($act)) {
         case 'update':
             $id = $_REQUEST['id'];
             $row = contact_rowid($id);
-            if(isset($_POST['TRALOILIENHE'])){
+            if (isset($_POST['TRALOILIENHE'])) {
                 $contact_return = trim($_POST['contact_return']);
-                $status=1;
-                contact_update($contact_return,$status,$id);
+                $status = 1;
+                contact_update($contact_return, $status, $id);
                 set_flash('message', ['type' => 'success', 'msg' => 'Trả lời liên hệ thành công!']);
                 redirect('index.php?option=contact');
             }
@@ -38,8 +38,8 @@ if (isset($act)) {
             $list_contact = contact_list('trash');
             require_once $path . 'trash.php';
             break;
-        case 'delete':
-            break;
+            // case 'delete':
+            //     break;
         default:
             $list_contact = contact_list('index');
             require_once $path . 'index.php';

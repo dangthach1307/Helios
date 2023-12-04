@@ -57,6 +57,7 @@
 <script>
     $(function() {
         $('.datatable').DataTable({
+            order: [[0, 'desc']],
             "paging": true,
             pagingType: 'full_numbers',
             "searching": true,
