@@ -19,7 +19,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <form action="index.php?option=user&act=insert" method="post" enctype="multipart/form-data">
+        <form action="index.php?option=user&act=update&id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
             <div class="card card-primary">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
@@ -37,36 +37,28 @@
                         <div class="col-md-9">
                             <div class="form-group">
                                 <label for="fullname">Họ tên (*)</label>
-                                <input type="text" id="fullname" name="fullname" class="form-control" required>
+                                <input type="text" id="fullname" name="fullname" class="form-control" value="<?= $row['fullname'] ?>" required>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="username">Tên tài khoản (*)</label>
-                                    <input type="text" id="username" name="username" class="form-control" required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="email">Email (*)</label>
-                                    <input type="email" id="email" name="email" class="form-control" required>
-                                </div>
+                            <div class="form-group">
+                                <label for="email">Email (*)</label>
+                                <input type="email" id="email" name="email" class="form-control" value="<?= $row['email'] ?>" required>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="address">Địa chỉ</label>
-                                    <input type="text" id="address" name="address" class="form-control">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="phone">Phone (*)</label>
-                                    <input type="text" id="phone" name="phone" class="form-control">
-                                </div>
+                            <div class="form-group">
+                                <label for="address">Địa chỉ</label>
+                                <input type="text" id="address" name="address" value="<?= $row['address'] ?>" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone (*)</label>
+                                <input type="text" id="phone" name="phone" value="<?= $row['phone'] ?>" class="form-control">
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="password">Mật khẩu (*)</label>
-                                    <input type="password" id="password" name="password" class="form-control" required>
+                                    <input type="password" id="password" name="password" value="<?= $row['password'] ?>" class="form-control" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="repassword">Xác nhận Mật khẩu (*)</label>
-                                    <input type="password" id="repassword" name="repassword" class="form-control" required>
+                                    <input type="password" id="repassword" name="repassword" value="<?= $row['password'] ?>" class="form-control" required>
                                 </div>
                             </div>
 
@@ -75,12 +67,16 @@
                             <div class="form-group">
                                 <label for="role">Phân quyền:</label>
                                 <select id="role" name="role" class="form-control custom-select">
-                                    <option value="super_admin">Super admin</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="seo_manager">SEO Manager</option>
-                                    <option value="content">content</option>
-                                    <option value="writer">Writer</option>
+                                    <option value="super_admin" <?php if ($row['role'] == 'super_admin') echo 'selected'; ?>>Super admin</option>
+                                    <option value="admin" <?php if ($row['role'] == 'admin') echo 'selected'; ?>>Admin</option>
+                                    <option value="seo_manager" <?php if ($row['role'] == 'seo_manager') echo 'selected'; ?>>SEO Manager</option>
+                                    <option value="content" <?php if ($row['role'] == 'content') echo 'selected'; ?>>content</option>
+                                    <option value="writer" <?php if ($row['role'] == 'writer') echo 'selected'; ?>>Writer</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="current-img">Hình ảnh hiện tại:</label>
+                                <img src="../public/images/user/<?= $row['img'] ?>" class="img-responsive img-thumbnail w-100">
                             </div>
                             <div class="form-group align-items-center">
                                 <label for="img">Hình ảnh đại diện (*):</label>
@@ -106,10 +102,10 @@
                                     <option selected>[--Trạng thái sản phẩm--]</option>
                                     <option value="1" <?php if ($row['status'] == 1) {
                                                             echo "selected";
-                                                        } ?>>Xuất bản</option>
+                                                        } ?>>Kích hoạt</option>
                                     <option value="2" <?php if ($row['status'] == 2) {
                                                             echo "selected";
-                                                        } ?>>Không xuất bản</option>
+                                                        } ?>>Ngưng kích hoạt</option>
                                     <option value="0" <?php if ($row['status'] == 0) {
                                                             echo "selected";
                                                         } ?>>Lưu trữ</option>

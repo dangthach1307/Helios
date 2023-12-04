@@ -37,7 +37,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" class="table table-bordered table-striped table-compact table-hover">
+                            <table id="datatable" style="width:100%" class="datatable table table-bordered table-striped table-compact table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="10px">#</th>
@@ -51,8 +51,8 @@
                                 <tbody>
                                     <?php foreach ($list_user as $row) : ?>
                                         <tr>
-                                            <td><?= $row['id']; ?></td>
-                                            <td>
+                                            <td class="text-center"><?= $row['id']; ?></td>
+                                            <td class="text-center">
                                                 <img src="<?= '../public/images/user/' . $row['img']; ?>" style="width: 100%;" class="img img-fuild img-thumbnail">
                                             </td>
                                             <td>
@@ -64,11 +64,11 @@
                                                 <br>
                                                 + Giới tính: <?= $row['gender'] == 1 ? 'Nam' : 'Nữ'; ?>
                                             </td>
-                                            <td>
-                                                <?= $row['username']; ?>
+                                            <td class="text-center">
+                                                <?= $row['email']; ?>
                                             </td>
-                                            <td><?= $row['role']; ?></td>
-                                            <td>
+                                            <td class="text-center"><?= $row['role']; ?></td>
+                                            <td class="text-center">
                                                 <a class="btn btn-sm btn-info" href="index.php?option=user&act=retrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-undo"></i></a>
                                                 <a class="btn btn-sm btn-danger" href="index.php?option=user&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>

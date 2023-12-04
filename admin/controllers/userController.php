@@ -37,7 +37,7 @@ if (isset($act)) {
         case 'update':
             $id = $_REQUEST['id'];
             $row = user_getid($id);
-            if (isset($_POST['UPDATE'])) {
+            if (isset($_POST['CAPNHAT'])) {
                 if (user_exists($email, $id) == FALSE) {
                     if ($repassword == $password) {
                         // Xử lý hình ảnh (chỉ khi người dùng thay đổi hình ảnh)

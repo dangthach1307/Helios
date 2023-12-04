@@ -39,7 +39,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
+                            <table id="datatable" style="width:100%" class="datatable display table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="10px">#</th>
@@ -53,8 +53,8 @@
                                 <tbody>
                                     <?php foreach ($list_user as $row) : ?>
                                         <tr>
-                                            <td><?= $row['id']; ?></td>
-                                            <td>
+                                            <td class="text-center"><?= $row['id']; ?></td>
+                                            <td class="text-center">
                                                 <img src="<?= '../public/images/user/' . $row['img']; ?>" style="width: 100%;" class="img img-fuild img-thumbnail">
                                             </td>
                                             <td>
@@ -66,11 +66,11 @@
                                                 <br>
                                                 + Giới tính: <?= $row['gender'] == 1 ? 'Nam' : 'Nữ'; ?>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <?= $row['email']; ?>
                                             </td>
-                                            <td><?= $row['role']; ?></td>
-                                            <td>
+                                            <td class="text-center"><?= $row['role']; ?></td>
+                                            <td class="text-center">
                                                 <?php if ($row['status'] == 1) : ?>
                                                     <a class="btn btn-sm btn-success" href="index.php?option=user&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Kích hoạt"><i class="fa fa-toggle-on"></i></a>
                                                 <?php else : ?>
@@ -79,7 +79,6 @@
                                                 <a class="btn btn-sm btn-info" href="index.php?option=user&act=update&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Cập nhật"><i class="fa fa-edit"></i></a>
                                                 <a class="btn btn-sm btn-danger" href="index.php?option=user&act=deltrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
-
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
