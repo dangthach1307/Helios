@@ -28,11 +28,8 @@
                             <div class="d-flex justify-content-between">
                                 <h3 class="card-title font-weight-bold py-2">Danh sách đơn hàng</h3>
                                 <div class="card-tools">
-                                    <a class="btn btn-primary" href="index.php?option=order&act=insert">
-                                        <i class="fa fa-plus"></i> Thêm mới
-                                    </a>
                                     <a class="btn btn-secondary" href="index.php?option=order&act=trash">
-                                        <i class="fa fa-trash"></i> Thùng rác
+                                        <i class="fa fa-trash"></i> Lưu trữ
                                     </a>
                                 </div>
                             </div>

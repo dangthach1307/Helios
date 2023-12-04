@@ -36,7 +36,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" class=" datatable table table-bordered table-striped table-compact table-hover">
+                            <table id="datatable" class="datatable table table-bordered table-striped table-compact table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="100px">Hình</th>
