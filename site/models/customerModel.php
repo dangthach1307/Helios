@@ -16,15 +16,20 @@ function get_rank_img($id)
 function customer_insert($fullname, $password, $email, $address, $gender, $phone, $img, $role, $rank_id, $status)
 {
     $sql = "INSERT INTO db_user (fullname,password,email,address,gender,phone,img,role,rank_id,status) VALUES(?,?,?,?,?,?,?,?,?,?)";
-    pdo_execute($sql, $fullname, $password, $email, $address, $gender, $phone, $img, $role, $rank_id, $status);
+    $result = pdo_execute($sql, $fullname, $password, $email, $address, $gender, $phone, $img, $role, $rank_id, $status);
+    if ($result) {
+        return true;
+    } else {
+        return false;
+    }
 }
 function customer_update($fullname, $password, $email, $address, $gender, $phone, $img, $id)
 {
     $sql = "UPDATE db_user SET fullname=?,password=?,email=?,address=?,gender=?,phone=?,img=? WHERE id=?";
     $result = pdo_execute($sql, $fullname, $password, $email, $address, $gender, $phone, $img, $id);
-    if($result){
+    if ($result) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
