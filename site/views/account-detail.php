@@ -3,7 +3,7 @@
     <div class="main container">
         <div class="row">
             <section class="col-sm-9 col-xs-12">
-                <form action="index.php?option=user&act=update_info" method="post" enctype="multipart/form-data">
+                <form action="index.php?option=user&act=account-detail" method="post" enctype="multipart/form-data">
                     <div class="col-main">
                         <div class="my-account">
                             <div class="page-title">
@@ -40,7 +40,7 @@
 
                                     <div class="form-group">
                                         <label for="email">Địa chỉ email <span class="required">*</span></label>
-                                        <input type="email" name="email" id="emailAddress" class="form-control" value="<?= isset($_SESSION['user']['email']) ? $_SESSION['user']['email'] : '' ?>" required>
+                                        <input type="email" name="email" id="emailAddress" class="form-control" value="<?= isset($_SESSION['user']['email']) ? $_SESSION['user']['email'] : '' ?>" readonly>
                                         <span class="error-message" id="email-error"><?php echo isset($email_error) ? $email_error : ''; ?></span>
                                     </div>
 
@@ -59,11 +59,11 @@
                                         <label for="gender" class="control-label col-sm-2" style="font-size:14px;padding:11px 0px;text-align:left">Giới tính <span class="required">*</span></label>
                                         <div class="col-sm-10 radio">
                                             <label class="radio-inline">
-                                                <input type="radio" name="gender" value="1" <?php echo (isset($_SESSION['user']['gender']) && $_SESSION['user']['gender'] == '1') ? 'checked' : ''; ?>>
+                                                <input type="radio" name="gender" value="1" <?php if($_SESSION['user']['gender'] == '1') echo 'checked' ?>>
                                                 Nam
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="gender" value="0" <?php echo (isset($_SESSION['user']['gender']) && $_SESSION['user']['gender'] == '0') ? 'checked' : ''; ?>>
+                                                <input type="radio" name="gender" value="0" <?php if($_SESSION['user']['gender'] == '0') echo 'checked' ?>>
                                                 Nữ
                                             </label>
                                             <span class="error-message" id="gender-error"><?php echo isset($gender_error) ? $gender_error : ''; ?></span>
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
                             <div class="buttons-set">
-                                <button id="send2" name="send" type="submit" class="button submit"><span>Cập nhật</span></button>
+                                <button id="send2" name="BTN_UPDATE" type="submit" class="button submit"><span>Cập nhật</span></button>
                                 <span class="required pull-right"><b>*</b> Thông tin bắt buộc</span>
                             </div>
                         </div>

@@ -6,6 +6,7 @@ require_once './models/productModel.php';
 require_once './models/product_imageModel.php';
 require_once './models/sizeModel.php';
 require_once './models/materialModel.php';
+require_once './models/product_commentModel.php';
 
 //Lấy đường dẫn mặc định
 $path = 'views/pages/product/';
@@ -118,6 +119,11 @@ if (isset($act)) {
                 }
             }
             require_once $path . 'update.php';
+            break;
+        case 'comment':
+            $id = $_REQUEST['id'];
+            $list_comment = product_comment_all($id);
+            require_once $path . 'comment.php';
             break;
         case 'deltrash':
             $id = $_REQUEST['id'];

@@ -1,3 +1,43 @@
+<?php
+// Kiểm tra xem có thông báo không
+if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
+    // Lấy thông báo và loại thông báo
+    $flash_message = $_SESSION['message'];
+    $type = $flash_message['type'];
+    $msg = $flash_message['msg'];
+
+    // Xóa session để tránh hiển thị thông báo lần tiếp theo
+    unset($_SESSION['message']);
+?>
+    <script>
+        // Hiển thị modal Bootstrap thay thế cho alert
+        $(document).ready(function() {
+            $('#myModal').modal('show');
+        });
+    </script>
+
+    <!-- Modal Bootstrap -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">
+                        <?php echo $type === "success" ? "Đăng ký thành viên thành công" : "Đăng ký thành viên thất bại"; ?>
+                        <button type="button" class="close" style="padding-top:15px" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </h2>
+                </div>
+                <div class="modal-body">
+                    <h3><?php echo $msg; ?></h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="window.location.href = '?option=user&act=login';">Đăng nhập ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
 <section class="main-container">
     <div class="main container">
         <div class="account-login">
@@ -5,7 +45,7 @@
                 <h2>Thông tin đăng ký tài khoản</h2>
             </div>
             <fieldset class="col2-set">
-                <form action="?option=user&act=register" method="post" class="col-md-7 form-horizontal">
+                <form action="?option=user&act=register" method="post" enctype="multipart/form-data" class="col-md-7 form-horizontal">
                     <div class="col-2 registered-users">
                         <strong class="text-center">Thông tin đăng ký tài khoản: </strong>
                         <div class="form-group">
@@ -30,10 +70,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="gender" class="control-label col-sm-3" style="font-size:14px;padding:13px 0px;text-align:left">Giới tính <span class="required">*</span></label>
-                            <div class="col-sm-9 radio">
-                                <label class="radio-inline"><input type="radio" name="gender" value="1" checked>Nam</label>
-                                <label class="radio-inline"><input type="radio" name="gender" value="0">Nữ</label>
+                            <label for="gender-radio" class="control-label col-sm-3" style="font-size:14px;padding:13px 0px;text-align:left">Giới tính <span class="required">*</span></label>
+                            <div class="col-sm-9">
+                                <label class="radio-inline"><input type="radio" name="gender" value="1" checked> Nam</label>
+                                <label class="radio-inline"><input type="radio" name="gender" value="0"> Nữ</label>
                                 <span class="error-message" id="gender-error"><?php echo isset($gender_error) ? $gender_error : ''; ?></span>
                             </div>
                         </div>
@@ -61,7 +101,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-9">
                                 <div class="checkbox">
-                                    <label style="font-size:14px;"><input type="checkbox"> Tôi đã đọc và đồng ý với điều khoản sử dụng của Helios</label>
+                                    <label style="font-size:14px;"><input type="checkbox" required> Tôi đã đọc và đồng ý với điều khoản sử dụng của Helios</label>
                                     <span class="error-message" id="checkbox-error"><?php echo isset($checkbox_error) ? $checkbox_error : ''; ?></span>
                                 </div>
                             </div>
@@ -69,7 +109,7 @@
                         <div class="form-group">
                             <div class="buttons-set col-sm-offset-3 col-sm-9">
                                 <button id="login-button" name="BTN_REGISTER" type="submit" class="button login" style="width:100%">
-                                    <span>Gửi đi</span>
+                                    <span>Đăng ký</span>
                                 </button>
                                 <h4><span>Bạn đã có tài khoản? <a href="?option=user&act=login">Đăng nhập ngay</a></span></h4>
                             </div>

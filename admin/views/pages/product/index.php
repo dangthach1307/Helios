@@ -105,7 +105,13 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <a class="btn btn-sm btn-info" style="margin:2%" href="index.php?option=product&act=update&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Cập nhật"><i class="fa fa-edit"></i></a>
-                                                        <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=deltrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
+                                                        <a class="btn btn-sm btn-warning" style="margin:2%" href="index.php?option=product&act=comment&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Quản lí bình luận"><i class="fa fa-list"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <a class="btn btn-sm btn-danger" style="margin:2%;width:65%" href="index.php?option=product&act=deltrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i> Xoá</a>
+
                                                     </div>
                                                 </div>
                                             </td>

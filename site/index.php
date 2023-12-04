@@ -43,5 +43,4 @@ if (isset($option)) {
     header('location: ?option=page&act=home');
 }
 require_once 'views/footer.php';
-
 // "tet";
