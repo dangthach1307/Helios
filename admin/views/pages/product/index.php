@@ -111,7 +111,6 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <a class="btn btn-sm btn-danger" style="margin:2%;width:65%" href="index.php?option=product&act=deltrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i> Xoá</a>
-
                                                     </div>
                                                 </div>
                                             </td>

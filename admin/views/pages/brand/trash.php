@@ -44,12 +44,12 @@
                                         <th class="text-center" width="100px">Ảnh đại diện</th>
                                         <th class="text-center" width="200px">Thông tin thương hiệu</th>
                                         <th class="text-center" width="100px">Chức năng</th>
-                                        <th class="text-center" width="10px">ID</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($brand_list as $row) : ?>
                                         <tr>
+                                            <td class="text-center"><?= $row['id']; ?></td>
                                             <td class="text-center"><input type="checkbox" name="checkid[]" value="<?= $row['id']; ?>"></td>
                                             <td class="text-center">
                                                 <img src="../public/images/brand/<?= $row['img']; ?>" style="width: 100%;" class="img img-fuild img-thumbnail">
@@ -59,10 +59,32 @@
                                             </td>
                                             <td class="text-center">
                                                 <a class="btn btn-sm btn-info" href="index.php?option=brand&act=retrash&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-undo"></i></a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=brand&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
+                                                <!-- <a class="btn btn-sm btn-danger" href="index.php?option=brand&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a> -->
+                                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#confirmDeleteModal" title="Xoá">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
                                             </td>
-                                            <td class="text-center"><?= $row['id']; ?></td>
                                         </tr>
+                                        <!-- Xác nhận xoá Modal -->
+                                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="confirmDeleteModalLabel">Xác nhận xoá</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn có chắc chắn muốn xoá?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                                        <a id="confirmDeleteButton" class="btn btn-danger" href="index.php?option=brand&act=delete&id=<?= $row['id']; ?>">Xác nhận</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>

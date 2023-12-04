@@ -55,10 +55,39 @@
                                             <td class="text-center"><?= $row['title'] ?></td>
                                             <td class="text-center"><?= $row['created_at'] ?></td>
                                             <td class="text-center">
-                                                <a class="btn btn-sm btn-info" style="margin:2%" href="index.php?option=product&act=update&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xem chi tiết"><i class="fa fa-eye"></i></a>
-                                                <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=comment&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
+                                                <button class="btn btn-sm btn-info" style="margin:2%" data-toggle="modal" data-target="#myModal" data-fullname="<?= $row['fullname'] ?>" data-title="<?= $row['title'] ?>" data-createdat="<?= $row['created_at'] ?>" title="Xem chi tiết">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                                <!-- <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=delete_cmt&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a> -->
                                             </td>
                                         </tr>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title" id="myModalLabel">Chi tiết bình luận: <?= $row['title'] ?></h4>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- Nội dung chi tiết bình luận sẽ được hiển thị ở đây -->
+                                                        <!-- Bạn có thể thêm các trường thông tin chi tiết từ dữ liệu $row -->
+                                                        <p>Người tạo: <span id="modalFullName"><?= $row['fullname'] ?></span></p>
+                                                        <p>Ngày tạo: <span id="modalTitle"><?= $row['created_at'] ?></span></p>
+                                                        <!-- Thêm các trường thông tin khác nếu cần -->
+                                                        <span>Nội dung:</span>
+                                                        <hr>
+                                                        <p><?= $row['detail'] ?></p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>

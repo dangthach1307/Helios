@@ -233,7 +233,6 @@
                                                         <a class="btn btn-sm btn-info" href="index.php?option=menu&act=update&id=<?= $item['id']; ?>"><i class="fa fa-edit"></i></a>
                                                         <a class="btn btn-sm btn-danger" href="index.php?option=menu&act=deltrash&id=<?= $item['id']; ?>"><i class="fa fa-trash"></i></a>
                                                     </td>
-
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>

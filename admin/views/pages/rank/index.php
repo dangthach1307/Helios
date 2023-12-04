@@ -31,15 +31,12 @@
                                     <a class="btn btn-primary" href="index.php?option=rank&act=insert">
                                         <i class="fa fa-plus"></i> Tạo mới
                                     </a>
-                                    <a class="btn btn-secondary" href="index.php?option=rank&act=trash">
-                                        <i class="fa fa-trash"></i> Thùng rác
-                                    </a>
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
+                            <table id="datatable" style="width:100%" class="datatable table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="10px">#</th>
@@ -65,9 +62,32 @@
                                                     <a class="btn btn-sm btn-danger" href="index.php?option=rank&act=status&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Tạm ngưng"><i class="fa fa-toggle-off"></i></a>
                                                 <?php endif; ?>
                                                 <a class="btn btn-sm btn-info" href="index.php?option=rank&act=update&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Cập nhật"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=rank&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
+                                                <!-- <a class="btn btn-sm btn-danger" href="index.php?option=rank&act=delete&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a> -->
+                                                <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#confirmDeleteModal" title="Xoá">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
                                             </td>
                                         </tr>
+                                        <!-- Xác nhận xoá Modal -->
+                                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="confirmDeleteModalLabel">Xác nhận xoá</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn có chắc chắn muốn xoá?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                                        <a id="confirmDeleteButton" class="btn btn-danger" href="index.php?option=rank&act=delete&id=<?= $row['id']; ?>">Xác nhận</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
