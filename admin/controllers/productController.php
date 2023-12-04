@@ -80,8 +80,13 @@ if (isset($act)) {
                 if ($sizes_updated) {
                     // Xoá các size cũ trong db_product_size
                     product_size_delete_by_product_id($row['id']);
-                    //Thêm lại các size mới
+                    //cập nhật lại giá theo size mới
                     product_temp_price($new_sizes, $id, $price, $material_id);
+                } else {
+                    // Xoá các size cũ trong db_product_size
+                    product_size_delete_by_product_id($row['id']);
+                    //cập nhật lại giá theo material mới
+                    product_temp_price($old_sizes, $id, $price, $material_id);
                 }
                 if (!empty($_FILES['img']['name'][0])) {
                     //Thay đổi thông tin và upload hình ảnh mới
