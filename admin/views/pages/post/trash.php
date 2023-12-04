@@ -36,8 +36,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <?php require_once 'views/modules/message.php' ?>
-                            <table id="datatable" class="table table-bordered table-striped table-compact table-hover">
+                            <table id="datatable" class=" datatable table table-bordered table-striped table-compact table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="100px">Hình</th>
@@ -59,8 +58,8 @@
                                             </td>
                                             <td class="text-center"><?= $row['nametopic']; ?></td>
                                             <td class="text-center">
-                                                <a class="btn btn-sm btn-info" href="index.php?option=post&act=retrash&id=<?= $id; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-sm btn-danger" href="index.php?option=post&act=deleteh&id=<?= $id; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-sm btn-info" href="index.php?option=post&act=retrash&id=<?= $id; ?>" data-toggle="tooltip" title="Khôi phục"><i class="fa fa-undo"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="index.php?option=post&act=delete&id=<?= $id; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
                                             <td class="text-center"><?= $id; ?></td>
                                         </tr>
