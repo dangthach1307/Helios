@@ -25,6 +25,28 @@ function product_list_home($option = null)
         WHERE p.status = 1
         ORDER BY p.view DESC
         LIMIT 8";
+    } elseif ($option == 'hotdeal') {
+        $sql = "SELECT p.*, i.img_id, i.product_id, i.img
+        FROM db_product p
+        INNER JOIN (
+            SELECT MIN(id) AS img_id, product_id, MIN(image) AS img
+            FROM db_product_img
+            GROUP BY product_id
+        ) i ON p.id = i.product_id
+        WHERE p.status = 1
+        ORDER BY p.promotion DESC
+        LIMIT 1";
+    } elseif ($option == 'topsold') {
+        $sql = "SELECT p.*, i.img_id, i.product_id, i.img
+        FROM db_product p
+        INNER JOIN (
+            SELECT MIN(id) AS img_id, product_id, MIN(image) AS img
+            FROM db_product_img
+            GROUP BY product_id
+        ) i ON p.id = i.product_id
+        WHERE p.status = 1
+        ORDER BY p.sold_count DESC
+        LIMIT 5";
     }
     return pdo_query_all($sql);
 }

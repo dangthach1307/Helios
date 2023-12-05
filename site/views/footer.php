@@ -182,7 +182,7 @@
       });
   </script>
   <!-- Hot Deals Timer -->
-  <script>
+  <!-- <script>
       var dthen1 = new Date("12/25/17 11:59:00 PM");
       start = "08/04/15 03:02:11 AM";
       start_date = Date.parse(start);
@@ -195,7 +195,7 @@
 
       var iid1 = "countbox_1";
       CountBack_slider(gsecs1, "countbox_1", 1);
-  </script>
+  </script> -->
   <script>
       document.addEventListener('DOMContentLoaded', function() {
           const qs = (selector) => document.querySelector(selector);

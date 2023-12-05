@@ -173,28 +173,28 @@ if (isset($act)) {
                 $thongbao = "Gửi liên hệ thành công";
                 redirect("?option=page&act=contact");
             }
-            // require_once 'views/header.php';
             require_once 'views/contact.php';
-            // require_once 'views/footer.php';
             break;
         case 'home':
             $product_list_newest = product_list_home('newest');
             $product_list_topview = product_list_home('topview');
+            $product_list_hotdeal = product_list_home('hotdeal');
+            $product_list_topsold = product_list_home('topsold');
             $size_list_newest = product_by_size($product_list_newest[0]['id']);
             $size_list_topview = product_by_size($product_list_topview[0]['id']);
-            // require_once 'views/header.php';
+            $size_list_hotdeal = product_by_size($product_list_hotdeal[0]['id']);
+            $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
             require_once 'views/home.php';
-            // require_once 'views/footer.php';
             break;
     }
 } else {
     $product_list_newest = product_list_home('newest');
     $product_list_topview = product_list_home('topview');
+    $product_list_hotdeal = product_list_home('hotdeal');
+    $product_list_topsold = product_list_home('topsold');
     $size_list_newest = product_by_size($product_list_newest[0]['id']);
     $size_list_topview = product_by_size($product_list_topview[0]['id']);
-    // require_once 'views/header.php';
+    $size_list_hotdeal = product_by_size($product_list_hotdeal[0]['id']);
+    $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
     require_once 'views/home.php';
-    // require_once 'views/footer.php';
 }
-// require_once 'views/footer.php';
-// require_once 'views/modules/message.php';

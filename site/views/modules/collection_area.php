@@ -2,44 +2,70 @@
     <div class="col-xs-12 col-sm-4">
         <div class="jtv-hot-deal-product">
             <div class="jtv-new-title">
-                <h2>Deals Of The Day</h2>
+                <h2 class="text-center">Hot deal</h2>
             </div>
             <ul class="products-grid">
-                <li class="right-space two-height item">
-                    <div class="item-inner">
-                        <div class="item-img">
-                            <div class="item-img-info"><a href="#" title="Product tilte is here" class="product-image"><img src="../public/images/product/nhan-cuoi-vang-trang-14k-dinh-da-saphire-pnj-true-love-0.png" alt="Product tilte is here"> </a>
-                                <!-- <div class="hot-label hot-top-left">Hot Deal</div>
-                                <div class="mask-shop-white"></div>
-                                <a class="quickview-btn" href="quick-view.html"><span>Quick View</span></a> <a href="wishlist.html">
-                                    <div class="mask-left-shop"><i class="fa fa-heart"></i></div>
-                                </a> <a href="compare.html">
-                                    <div class="mask-right-shop"><i class="fa fa-signal"></i></div>
-                                </a> -->
+                <?php foreach ($product_list_hotdeal as $item) : ?>
+                    <li class="right-space two-height item">
+                        <div class="item-inner">
+                            <div class="item-img">
+                                <div class="item-img-info">
+                                    <a href="index.php?option=page&act=product-detail&slug=<?= $item['slug'] ?>" title="<?= $item['name'] ?> " class="product-image">
+                                        <img src="../public/images/product/nhan-cuoi-vang-trang-14k-dinh-da-saphire-pnj-true-love-0.png" alt="<?= $item['name'] ?> ">
+                                    </a>
+                                    <div class="hot-label hot-top-left">Hot Deal</div>
+                                    <div class="sale-label sale-top-right"><?= $item['promotion'] ?>%</div>
+                                </div>
                             </div>
-                            <div class="jtv-timer-box">
-                                <div class="countbox_1 timer-grid"></div>
-                            </div>
-                        </div>
 
-                        <div class="item-info">
-                            <div class="info-inner">
-                                <div class="item-title"> <a title="Product tilte is here" href="product-detail.html">Product tilte is here </a> </div>
-                                <div class="item-content">
-                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                    <div class="item-price">
-                                        <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span></span></div>
+                            <div class="item-info">
+                                <div class="info-inner">
+                                    <div class="item-title">
+                                        <a title="<?= $item['name'] ?>" href="index.php?option=page&act=product-detail&slug=<?= $item['slug'] ?>"><?= $item['name'] ?> </a>
+                                    </div>
+                                    <div class="item-content">
+                                        <div class="item-price">
+                                            <?php
+                                            $firstSizePrinted = false;
+                                            foreach ($size_list_hotdeal as $row) :
+                                                if (!$firstSizePrinted) :
+                                                    $firstSizePrinted = true; // Đánh dấu là đã in ra giá tiền kích thước đầu tiên
+                                                    $calculated_price = $item['promotion'] > 0 ? $row['temp_price'] - ($row['temp_price'] * $item['promotion'] / 100) : $row['temp_price'];
+                                            ?>
+                                                    <p class="regular-price">
+                                                        <span class="price" id="displayedPrice">
+                                                            <?= number_format($calculated_price) ?> VNĐ
+                                                        </span>
+                                                    </p>
+                                                    <?php if ($item['promotion'] > 0) : ?>
+                                                        <p class="old-price">
+                                                            <span class="price">
+                                                                <span id="originalPrice"><?= number_format($row['temp_price']) ?></span> VNĐ
+                                                            </span>
+                                                        </p>
+                                                    <?php endif; ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </div>
                                     </div>
                                     <div class="actions">
                                         <div class="add_cart">
-                                            <button class="button btn-cart" type="button"><span><i class="fa fa-shopping-cart"></i> Add to Cart</span></button>
+                                            <button class="button btn-cart" type="button">
+                                                <span>
+                                                    <a href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Thêm giỏ hàng">
+                                                        <div class="mask-right-shop">
+                                                            <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng
+                                                        </div>
+                                                    </a>
+                                                </span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
@@ -58,41 +84,65 @@
                 </div>
                 <div id="top-products-slider" class="product-flexslider hidden-buttons">
                     <div class="slider-items slider-width-col4 products-grid">
-                        <div class="item">
-                            <div class="item-inner">
-                                <div class="item-img">
-                                    <div class="item-img-info">
-                                        <a class="product-image" title="Product tilte is here" href="product-detail.html">
-                                            <img alt="Product tilte is here" src="../public/images/product/nhan-vang-14k-dinh-da-moon-pnj-0.png">
-                                        </a>
-                                        <!-- <div class="mask-shop-white"></div>
-                                        <div class="new-label new-top-left">new</div>
-                                        <a class="quickview-btn" href="quick-view.html"><span>Quick View</span></a> <a href="wishlist.html">
-                                            <div class="mask-left-shop"><i class="fa fa-heart"></i></div>
-                                        </a> <a href="compare.html">
-                                            <div class="mask-right-shop"><i class="fa fa-signal"></i></div>
-                                        </a> -->
+                        <?php foreach ($product_list_topsold as $item) : ?>
+                            <div class="item">
+                                <div class="item-inner">
+                                    <div class="item-img">
+                                        <div class="item-img-info">
+                                            <a href="index.php?option=page&act=product-detail&slug=<?= $item['slug'] ?>" title="<?= $item['name'] ?> " class="product-image">
+                                                <img src="../public/images/product/nhan-cuoi-vang-trang-14k-dinh-da-saphire-pnj-true-love-0.png" alt="<?= $item['name'] ?> ">
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="item-info">
-                                    <div class="info-inner">
-                                        <div class="item-title"> <a title="Product tilte is here" href="product-detail.html">Product tilte is here </a> </div>
-                                        <div class="item-content">
-                                            <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                            <div class="item-price">
-                                                <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span></span></div>
+
+                                    <div class="item-info">
+                                        <div class="info-inner">
+                                            <div class="item-title">
+                                                <a title="<?= $item['name'] ?>" href="index.php?option=page&act=product-detail&slug=<?= $item['slug'] ?>"><?= $item['name'] ?> </a>
+                                            </div>
+                                            <div class="item-content">
+                                                <div class="item-price">
+                                                    <?php
+                                                    $firstSizePrinted = false;
+                                                    foreach ($size_list_hotdeal as $row) :
+                                                        if (!$firstSizePrinted) :
+                                                            $firstSizePrinted = true; // Đánh dấu là đã in ra giá tiền kích thước đầu tiên
+                                                            $calculated_price = $item['promotion'] > 0 ? $row['temp_price'] - ($row['temp_price'] * $item['promotion'] / 100) : $row['temp_price'];
+                                                    ?>
+                                                            <p class="regular-price">
+                                                                <span class="price" id="displayedPrice">
+                                                                    <?= number_format($calculated_price) ?> VNĐ
+                                                                </span>
+                                                            </p>
+                                                            <?php if ($item['promotion'] > 0) : ?>
+                                                                <p class="old-price">
+                                                                    <span class="price">
+                                                                        <span id="originalPrice"><?= number_format($row['temp_price']) ?></span> VNĐ
+                                                                    </span>
+                                                                </p>
+                                                            <?php endif; ?>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
+                                                </div>
                                             </div>
                                             <div class="actions">
                                                 <div class="add_cart">
-                                                    <button class="button btn-cart" type="button"><span><i class="fa fa-shopping-cart"></i> Add to Cart</span></button>
+                                                    <button class="button btn-cart" type="button">
+                                                        <span>
+                                                            <a href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Thêm giỏ hàng">
+                                                                <div class="mask-right-shop">
+                                                                    <i class="fa fa-shopping-cart"></i> Thêm giỏ hàng
+                                                                </div>
+                                                            </a>
+                                                        </span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
