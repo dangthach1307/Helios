@@ -4,6 +4,7 @@ require_once './models/brandModel.php';
 require_once './models/categoryModel.php';
 require_once './models/productModel.php';
 require_once './models/contactModel.php';
+require_once './models/blogModel.php';
 
 // require_once 'views/header.php';
 if (isset($act)) {
@@ -155,10 +156,34 @@ if (isset($act)) {
                 exit();
             }
             break;
-        case 'blog':
+        case 'post':
+            // Xử lý luồng dữ liệu cho trang bài viết
+            $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
+            $limit = 6;
+            $first = ($page - 1) * $limit;
+
+            // Trang hiển thị bài viết theo chủ đề
+            $post_all = post_site_all(null, $first, $limit);
+
+            // Kiểm tra xem mảng $post_all có tồn tại và có ít nhất một phần tử hay không
+            if (!empty($post_all) && isset($post_all[0])) {
+                $total = count($post_all);
+                $totalPages = ceil($total / $limit);
+            }
+
+            // Gọi view
+            require_once 'views/post.php';
+            break;
+
+        case 'post-detail':
             //Xử lý luồng dữ liệu cho trang bài viết
             //Gọi view
-            require_once 'views/blog.php';
+            require_once 'views/post-detail.php';
+            break;
+        case 'post-category':
+            //Xử lý luồng dữ liệu cho trang bài viết
+            //Gọi view
+            require_once 'views/post-category.php';
             break;
         case 'contact':
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -184,6 +209,9 @@ if (isset($act)) {
             $size_list_topview = product_by_size($product_list_topview[0]['id']);
             $size_list_hotdeal = product_by_size($product_list_hotdeal[0]['id']);
             $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
+
+
+            $list_blog = list_post();
             require_once 'views/home.php';
             break;
     }
@@ -196,5 +224,8 @@ if (isset($act)) {
     $size_list_topview = product_by_size($product_list_topview[0]['id']);
     $size_list_hotdeal = product_by_size($product_list_hotdeal[0]['id']);
     $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
+
+
+    $list_blog = list_post();
     require_once 'views/home.php';
 }

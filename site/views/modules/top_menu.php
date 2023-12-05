@@ -3,6 +3,7 @@
     <li><a title="Sản phẩm" href="index.php?option=page&act=product">Sản phẩm</a></li>
     <li><a title="Về chúng tôi" href="index.php?option=page&act=about">Về chúng tôi</a></li>
     <li><a title="Liên hệ" href="index.php?option=page&act=contact">Liên hệ</a></li>
+    <li><a title="Tin tức" href="index.php?option=page&act=post">Tin tức</a></li>
     <li><a title="faq" href="index.php?option=page&act=faq">Faq</a></li>
 </ul>
 <ul class="links pull-right">

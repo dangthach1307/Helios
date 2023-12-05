@@ -193,53 +193,7 @@
                   <!-- End Trending Products Slider -->
                   <?php require_once 'modules/collection_area.php' ?>
                   <!-- Latest Blog -->
-                  <div class="jtv-latest-blog">
-                      <div class="jtv-new-title">
-                          <h2>Tin tức mới nhất</h2>
-                      </div>
-                      <div class="row">
-                          <div class="blog-outer-container">
-                              <div class="blog-inner">
-                                  <div class="col-xs-12 col-sm-4 blog-preview_item">
-                                      <div class="entry-thumb jtv-blog-img-hover"> <a href="blog_single_post.html"> <img alt="Blog" src="../public/images/blog-img1.jpg"> </a> </div>
-                                      <h4 class="blog-preview_title"><a href="blog_single_post.html">Neque porro quisquam est qui</a></h4>
-                                      <div class="blog-preview_info">
-                                          <ul class="post-meta">
-                                              <li><i class="fa fa-user"></i>By <a href="#">admin</a></li>
-                                              <li><i class="fa fa-comments"></i><a href="#">8 comments</a></li>
-                                              <li><i class="fa fa-clock-o"></i><span class="day">12</span><span class="month">Feb</span></li>
-                                          </ul>
-                                          <div class="blog-preview_desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a class="read_btn" href="blog_single_post.html">Read More</a></div>
-                                      </div>
-                                  </div>
-                                  <div class="col-xs-12 col-sm-4 blog-preview_item">
-                                      <div class="entry-thumb jtv-blog-img-hover"> <a href="blog_single_post.html"> <img alt="Blog" src="../public/images/blog-img1.jpg"> </a> </div>
-                                      <h4 class="blog-preview_title"><a href="blog_single_post.html">Neque porro quisquam est qui</a></h4>
-                                      <div class="blog-preview_info">
-                                          <ul class="post-meta">
-                                              <li><i class="fa fa-user"></i>By <a href="#">admin</a></li>
-                                              <li><i class="fa fa-comments"></i><a href="#">20 comments</a></li>
-                                              <li><i class="fa fa-clock-o"></i><span class="day">25</span><span class="month">Feb</span></li>
-                                          </ul>
-                                          <div class="blog-preview_desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a class="read_btn" href="blog_single_post.html">Read More</a></div>
-                                      </div>
-                                  </div>
-                                  <div class="col-xs-12 col-sm-4 blog-preview_item">
-                                      <div class="entry-thumb jtv-blog-img-hover"> <a href="blog_single_post.html"> <img alt="Blog" src="../public/images/blog-img1.jpg"> </a> </div>
-                                      <h4 class="blog-preview_title"><a href="blog_single_post.html">Dolorem ipsum quia dolor sit amet</a></h4>
-                                      <div class="blog-preview_info">
-                                          <ul class="post-meta">
-                                              <li><i class="fa fa-user"></i>By <a href="#">admin</a></li>
-                                              <li><i class="fa fa-comments"></i><a href="#">8 comments</a></li>
-                                              <li><i class="fa fa-clock-o"></i><span class="day">15</span><span class="month">Jan</span></li>
-                                          </ul>
-                                          <div class="blog-preview_desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem dolore lauda. <a class="read_btn" href="blog_single_post.html">Read More</a></div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
+                  <?php require_once 'modules/lasted_blog.php' ?>
                   <!-- End Latest Blog -->
               </div>
           </div>
@@ -249,7 +203,6 @@
   <!-- Brand Logo -->
   <?php require_once 'modules/brand_logo.php' ?>
   <!-- Collection Banner -->
-  <?php require_once 'modules/collection_banner.php' ?>
   <!-- collection area end -->
   <?php
     $message = get_flash('message');

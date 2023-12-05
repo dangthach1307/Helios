@@ -1,12 +1,8 @@
 <aside class="sidebar col-xs-12 col-sm-3">
-    <div class="search">
-        <input class="form-control" type="search" placeholder="Search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </div>
     <!-- Blog category -->
     <div class="block blog-module">
         <div class="block-title">
-            <h3>Danh mục</h3>
+            <h3>Chủ đề</h3>
         </div>
         <div class="block_content">
             <div class="layered layered-category">

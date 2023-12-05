@@ -11,7 +11,7 @@
                             <div class="item-img">
                                 <div class="item-img-info">
                                     <a href="index.php?option=page&act=product-detail&slug=<?= $item['slug'] ?>" title="<?= $item['name'] ?> " class="product-image">
-                                        <img src="../public/images/product/nhan-cuoi-vang-trang-14k-dinh-da-saphire-pnj-true-love-0.png" alt="<?= $item['name'] ?> ">
+                                        <img src="../public/images/product/<?= $item['img'] ?>" alt="<?= $item['name'] ?> ">
                                     </a>
                                     <div class="hot-label hot-top-left">Hot Deal</div>
                                     <div class="sale-label sale-top-right"><?= $item['promotion'] ?>%</div>
@@ -90,7 +90,7 @@
                                     <div class="item-img">
                                         <div class="item-img-info">
                                             <a href="index.php?option=page&act=product-detail&slug=<?= $item['slug'] ?>" title="<?= $item['name'] ?> " class="product-image">
-                                                <img src="../public/images/product/nhan-cuoi-vang-trang-14k-dinh-da-saphire-pnj-true-love-0.png" alt="<?= $item['name'] ?> ">
+                                                <img src="../public/images/product/<?= $item['img'] ?>" alt="<?= $item['name'] ?> ">
                                             </a>
                                         </div>
                                     </div>

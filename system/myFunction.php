@@ -25,6 +25,30 @@ function get_flash($name)
     return NULL; // Hoặc giá trị mặc định phù hợp với ứng dụng của bạn
 }
 
+function string_limit($str, $limit)
+{
+    // Loại bỏ các thẻ HTML
+    $strWithoutTags = strip_tags($str);
+
+    if (strlen($strWithoutTags) <= $limit) {
+        return $str;
+    } else {
+        // Thực hiện giới hạn độ dài trên chuỗi không có thẻ HTML
+        $trimmedStr = substr($strWithoutTags, 0, $limit);
+
+        // Tìm vị trí cuối cùng của một từ (nếu có) để tránh cắt giữa từ
+        $lastSpacePos = strrpos($trimmedStr, ' ');
+
+        // Kiểm tra xem chuỗi đã bị cắt hay chưa
+        if ($lastSpacePos !== false) {
+            // Cắt đến vị trí cuối cùng của từ
+            $trimmedStr = substr($trimmedStr, 0, $lastSpacePos);
+        }
+
+        return $trimmedStr . '...';
+    }
+}
+
 function get_duoi_file($file)
 {
     $mang = explode('.', $file); //hinh.hinh.hinh.jpg -> [hinh,hinh,hinh,jpg]
