@@ -251,3 +251,34 @@
   <!-- Collection Banner -->
   <?php require_once 'modules/collection_banner.php' ?>
   <!-- collection area end -->
+  <?php
+    $message = get_flash('message');
+    if ($message && isset($message['type']) && $message['type'] === 'success') {
+        // Hiển thị modal
+        echo '<script>';
+        echo 'document.addEventListener("DOMContentLoaded", function() {';
+        echo '    $("#successModal").modal("show");'; // Chỉ định ID của modal của bạn
+        echo '});';
+        echo '</script>';
+    }
+    ?>
+  <!-- Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="successModalLabel">Đặt hàng thành công
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </h5>
+              </div>
+              <div class="modal-body">
+                  <?= $message['msg'] ?>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+              </div>
+          </div>
+      </div>
+  </div>

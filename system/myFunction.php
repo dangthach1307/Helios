@@ -17,10 +17,14 @@ function has_flash($name)
 }
 function get_flash($name)
 {
-    $temp = $_SESSION[$name];
-    unset($_SESSION[$name]);
-    return $temp;
+    if (isset($_SESSION[$name])) {
+        $temp = $_SESSION[$name];
+        unset($_SESSION[$name]);
+        return $temp;
+    }
+    return NULL; // Hoặc giá trị mặc định phù hợp với ứng dụng của bạn
 }
+
 function get_duoi_file($file)
 {
     $mang = explode('.', $file); //hinh.hinh.hinh.jpg -> [hinh,hinh,hinh,jpg]

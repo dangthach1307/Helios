@@ -81,9 +81,7 @@ if (isset($act)) {
             exit();
         case 'cart-view':
             $list = cart_content();
-            // require_once 'views/header.php';
             require_once 'views/cart.php';
-            // require_once 'views/footer.php';
             break;
         case 'cart-checkout':
             if (!isset($_SESSION['user']) || (!isset($_SESSION['cart']) || empty($_SESSION['cart']))) {
@@ -97,7 +95,7 @@ if (isset($act)) {
             require_once 'views/checkout.php';
             break;
         case 'insert-order':
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $list = cart_content();
 
                 // Kiểm tra checkbox "Địa chỉ Khác"
@@ -112,8 +110,34 @@ if (isset($act)) {
                     $total_price = $_POST['total'];
                     $created_at = date('Y-m-d H:i:s');
                     $exported_at = date('Y-m-d H:i:s');
-                    // Gọi hàm insert_order với thông tin địa chỉ mới
 
+                    // Kiểm tra và bắt lỗi nếu các trường bắt buộc không được điền
+                    $email_error = empty($delivery_email) ? 'Vui lòng nhập địa chỉ email hợp lệ.' : '';
+                    $fullname_error = empty($delivery_fullname) ? 'Vui lòng nhập họ tên.' : '';
+                    $phone_error = empty($delivery_phone) ? 'Vui lòng nhập số điện thoại.' : '';
+                    $address_error = empty($delivery_address) ? 'Vui lòng nhập địa chỉ mới.' : '';
+
+                    if (empty($email_error) && empty($fullname_error) && empty($phone_error) && empty($address_error)) {
+                        // Gọi hàm insert_order với thông tin địa chỉ mới
+                        cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
+
+
+                        // Đặt flash message và chuyển hướng về trang chủ
+                        set_flash('message', ['type' => 'success', 'msg' => 'Đặt hàng thành công!']);
+                        unset($_SESSION['cart']);
+                        header('location: ?option=cart&act=cart-checkout');
+                        exit();
+                    } else {
+                        // Gán giá trị lỗi vào biến để hiển thị trong form
+                        set_flash('errors', [
+                            'email' => $email_error,
+                            'fullname' => $fullname_error,
+                            'phone' => $phone_error,
+                            'address' => $address_error
+                        ]);
+                        header('location: index.php?option=cart&act=cart-checkout');
+                        exit();
+                    }
                 } else {
                     // Trường hợp không chọn địa chỉ khác
                     $user_id = $_SESSION['user']['id'];
@@ -121,18 +145,30 @@ if (isset($act)) {
                     $delivery_email = $_SESSION['user']['email'];
                     $delivery_phone = $_SESSION['user']['phone'];
                     $delivery_address = $_SESSION['user']['address'];
-                    $payment_method = $_POST['payment_method'];
+
+                    if (isset($_POST['payment_method'])) {
+                        $payment_method = $_POST['payment_method'];
+                    } else {
+                        // Xử lý khi không có phương thức thanh toán được chọn
+                        $payment_method = 0; // Thay thế bằng giá trị mặc định hoặc xử lý khác tùy vào yêu cầu của bạn
+                    }
                     $total_price = $_POST['total'];
                     $note = $_POST['order_notes'];
                     $created_at = date('Y-m-d H:i:s');
                     $exported_at = date('Y-m-d H:i:s');
-                    // Gọi hàm insert_order với thông tin địa chỉ từ session
-                }
-                cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
-                unset($_SESSION['cart']);
-                header('location: index.php');
-            }
 
+                    // Gọi hàm insert_order với thông tin địa chỉ từ session
+                    cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
+
+                    // Đặt flash message và chuyển hướng về trang chủ
+                    set_flash('message', ['type' => 'success', 'msg' => 'Đặt hàng thành công!']);
+                    unset($_SESSION['cart']);
+                    header('location: ?option=cart&act=cart-checkout');
+                    exit();
+                }
+            }
+            break;
+        default:
             break;
     }
 } else {

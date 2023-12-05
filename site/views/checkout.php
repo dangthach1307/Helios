@@ -21,12 +21,12 @@
                 <div class="product-area">
                     <div class="content-tab-product-category">
                         <?php if ($list != NULL) : ?>
-                            <form action="?option=cart&act=insert-order" method="post">
+                            <form action="?option=cart&act=insert-order" method="POST" enctype="multipart/form-data">
                                 <!-- Checkout are start-->
                                 <div class="checkout-area">
                                     <div class="">
                                         <div class="row">
-                                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="col-md-5 col-sm-12 col-xs-12">
                                                 <div class="row">
                                                     <div class="col-md-12 col-xs-12">
                                                         <div class="billing-details">
@@ -74,27 +74,35 @@
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                                 <div class="input-box">
                                                                                     <label>Họ tên <em>*</em></label>
-                                                                                    <input type="text" name="other_fullname" class="info" required>
+                                                                                    <input type="text" name="other_fullname" class="info">
+                                                                                    <span class="error-message" id="fullname-error"><?php echo isset($_SESSION['errors']['fullname']) ? $_SESSION['errors']['fullname'] : ''; ?></span>
                                                                                 </div>
                                                                             </div>
+
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                                 <div class="input-box">
                                                                                     <label>Địa chỉ email<em>*</em></label>
-                                                                                    <input type="email" name="other_email" class="info" required>
+                                                                                    <input type="email" name="other_email" class="info">
+                                                                                    <span class="error-message" id="email-error"><?php echo isset($_SESSION['errors']['email']) ? $_SESSION['errors']['email'] : ''; ?></span>
                                                                                 </div>
                                                                             </div>
+
                                                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                                                 <div class="input-box">
                                                                                     <label>Số điện thoại <em>*</em></label>
-                                                                                    <input type="text" name="other_phone" class="info" required>
+                                                                                    <input type="text" name="other_phone" class="info">
+                                                                                    <span class="error-message" id="phone-error"><?php echo isset($_SESSION['errors']['phone']) ? $_SESSION['errors']['phone'] : ''; ?></span>
                                                                                 </div>
                                                                             </div>
+
                                                                             <div class="col-md-12 col-sm-12 col-xs-12">
                                                                                 <div class="input-box">
                                                                                     <label>Địa chỉ mới <em>*</em></label>
-                                                                                    <input type="text" name="other_address" class="info mb-10" required>
+                                                                                    <input type="text" name="other_address" class="info mb-10">
+                                                                                    <span class="error-message" id="address-error"><?php echo isset($_SESSION['errors']['address']) ? $_SESSION['errors']['address'] : ''; ?></span>
                                                                                 </div>
                                                                             </div>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -109,7 +117,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                            <div class="col-md-7 col-sm-12 col-xs-12">
                                                 <div class="checkout-payment-area">
                                                     <div class="checkout-total">
                                                         <h3>Giỏ hàng của bạn</h3>
@@ -149,15 +157,15 @@
                                                                         <td class="cgt-des ship-opt">
                                                                             <div class="shipp">
                                                                                 <input type="radio" id="pay-toggle1" name="payment_method" value="1" checked>
-                                                                                <label for="pay-toggle">Thanh toán khi nhận hàng</label>
+                                                                                <label for="pay-toggle1">Tiền mặt</label>
                                                                             </div>
                                                                             <div class="shipp">
                                                                                 <input type="radio" id="pay-toggle2" name="payment_method" value="2">
-                                                                                <label for="pay-toggle">Chuyển khoản ngân hàng</label>
+                                                                                <label for="pay-toggle2">Chuyển khoản</label>
                                                                             </div>
                                                                             <div class="shipp">
                                                                                 <input type="radio" id="pay-toggle3" name="payment_method" value="3">
-                                                                                <label for="pay-toggle">Ví điện tử</label>
+                                                                                <label for="pay-toggle3">Ví điện tử</label>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -169,7 +177,7 @@
                                                                 </tbody>
                                                             </table>
                                                             <div class="process-checkout-btn text-right" style="width:50%;">
-                                                                <button class="button btn-proceed-checkout" title="Đặt hàng" type="submit"><span>Thanh toán</span></button>
+                                                                <button class="button btn-proceed-checkout" name="PLACEORDER" title="Đặt hàng" type="submit"><span>Thanh toán</span></button>
                                                             </div>
                                                         </div>
                                                     </div>
