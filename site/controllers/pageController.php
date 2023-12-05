@@ -83,11 +83,11 @@ if (isset($act)) {
             $id = $_REQUEST['id'];
             $result = wishlist_delete($id);
             if ($result) {
-                set_flash('message', ['type' => 'success', 'msg' => 'Xoá sản phẩm yêu thích thành công!']);
+                set_flash('message', ['type' => 'success', 'title' => 'Thao tác thành công', 'msg' => 'Xoá sản phẩm yêu thích thành công!']);
                 header('Location: index.php?option=page&act=wishlist');
                 exit();
             } else {
-                set_flash('message', ['type' => 'error', 'msg' => 'Xoá sản phẩm yêu thích thất bại!']);
+                set_flash('message', ['type' => 'error', 'title' => 'Thao tác thành công', 'msg' => 'Xoá sản phẩm yêu thích thất bại!']);
                 header('Location: index.php?option=page&act=wishlist');
                 exit();
             }
