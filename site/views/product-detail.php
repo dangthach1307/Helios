@@ -116,7 +116,7 @@
                                 <?php endforeach; ?>
                             </div>
                             <div class="add-to-box">
-                                <div class="add-to-cart">
+                                <div class="add-to-cart row">
                                     <div class="pull-left">
                                         <div class="custom pull-left">
                                             <label>Quantity:</label>
@@ -146,18 +146,20 @@
                                 </div>
                                 <div class="email-addto-box">
                                     <ul class="add-to-links">
-                                        <a href="index.php?option=page&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
-                                            <div class="mask-left-shop">
-                                                <i class="fa fa-heart"></i>
-                                            </div>
-                                        </a>
+                                        <li>
+                                            <a class="link-wishlist" href="index.php?option=page&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
+                                                <div class="mask-left-shop">
+                                                    <i class="fa fa-heart"></i> THÊM YÊU THÍCH
+                                                </div>
+                                            </a>
+                                        </li>
                                         <!-- <li><a class="link-compare" href="compare.html"><i class="fa fa-signal"></i><span>Add to Compare</span></a></li>
                                         <li><a class="email-friend" href="#"><i class="fa fa-envelope"></i><span>Email
                                                     to a Friend</span></a></li> -->
                                     </ul>
                                 </div>
                             </div>
-                            <div class="social">
+                            <!-- <div class="social">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -167,7 +169,7 @@
                                     <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="product-next-prev"> <a class="product-next" href="#"><i class="fa fa-angle-left"></i></a> <a class="product-prev" href="#"><i class="fa fa-angle-right"></i></a> </div>
+                            <div class="product-next-prev"> <a class="product-next" href="#"><i class="fa fa-angle-left"></i></a> <a class="product-prev" href="#"><i class="fa fa-angle-right"></i></a> </div> -->
                         </div>
                     </form>
                 </div>
