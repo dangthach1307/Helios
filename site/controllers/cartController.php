@@ -129,6 +129,12 @@ if (isset($act)) {
                     // Gọi hàm insert_order với thông tin địa chỉ từ session
                 }
                 cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
+                sendMail([
+                    'name' => $delivery_fullname,
+                    'email' => $delivery_email,
+                    'subject' => 'Xác nhận đơn hàng',
+                    'cart' => $_SESSION['cart']
+                ],'receipt');
                 unset($_SESSION['cart']);
                 header('location: index.php');
             }
