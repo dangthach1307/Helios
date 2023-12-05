@@ -1,7 +1,7 @@
 <div class="mega-container visible-lg visible-md visible-sm">
     <div class="navleft-container">
         <div class="mega-menu-title">
-            <h3><i class="fa fa-navicon"></i>Categories</h3>
+            <h3><i class="fa fa-navicon" style="color: #33465c;"></i>Categories</h3>
         </div>
         <div class="mega-menu-category">
             <ul class="nav">
