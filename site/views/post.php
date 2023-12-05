@@ -64,16 +64,16 @@
                                 echo '<ul class="pagination">';
 
                                 if ($current > 1) {
-                                    $baseLink = '?option=page&act=product&pages=1' . buildPriceFiltersQuery();
+                                    $baseLink = '?option=page&act=post&pages=1';
                                     echo "<li><a href='$baseLink'>&lt;&lt;</a></li>";
-                                    echo "<li><a href='?option=page&act=product&pages=" . ($current - 1) . buildPriceFiltersQuery() . "'>&lt;</a></li>";
+                                    echo "<li><a href='?option=page&act=post&pages=" . ($current - 1) . "'>&lt;</a></li>";
                                 } else {
                                     echo "<li class='disabled'><span>&lt;&lt;</span></li>";
                                     echo "<li class='disabled'><span>&lt;</span></li>";
                                 }
 
                                 for ($i = 1; $i <= $totalPages; $i++) {
-                                    $baseLink = '?option=page&act=product&pages=' . $i . buildPriceFiltersQuery();
+                                    $baseLink = '?option=page&act=post&pages=' . $i;
                                     if ($i == $current) {
                                         echo "<li class='active'><span>$i</span></li>";
                                     } else {
@@ -82,9 +82,9 @@
                                 }
 
                                 if ($current < $totalPages) {
-                                    $baseLink = '?option=page&act=product&pages=' . ($current + 1) . buildPriceFiltersQuery();
+                                    $baseLink = '?option=page&act=post&pages=' . ($current + 1);
                                     echo "<li><a href='$baseLink'>&gt;</a></li>";
-                                    $baseLink = '?option=page&act=product&pages=' . $totalPages . buildPriceFiltersQuery();
+                                    $baseLink = '?option=page&act=post&pages=' . $totalPages;
                                     echo "<li><a href='$baseLink'>&gt;&gt;</a></li>";
                                 } else {
                                     echo "<li class='disabled'><span>&gt;</span></li>";
