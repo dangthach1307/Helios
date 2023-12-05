@@ -1,4 +1,9 @@
 <?php
+function customer_by_id($id)
+{
+    $sql = "SELECT * FROM db_user WHERE id = ?";
+    return pdo_query_one($sql, $id);
+}
 function get_rank_user($user_id)
 {
     $sql = "SELECT m.* 

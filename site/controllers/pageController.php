@@ -179,10 +179,34 @@ if (isset($act)) {
             require_once 'views/post.php';
             break;
         case 'post-detail':
-            //Xử lý luồng dữ liệu cho trang bài viết
-            //Gọi view
+            $slug = $_REQUEST['slug'];
+            $row = post_rowslug($slug);
             $list_topic = topic_all();
+            $list_comment = post_list_comment($row['id']);
+            foreach ($list_comment as $key => $value) {
+                $user = customer_by_id($value['user_id']);
+            }
+
             require_once 'views/post-detail.php';
+            break;
+        case 'post-comment':
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $post_id = $_POST['post_id'];
+                $user_id = $_POST['user_id'];
+                $fullname = $_POST['fullname'];
+                $title =  $_POST['title'];
+                $detail = $_POST['detail'];
+                $created_at = date('Y-m-d H:i:s');
+                $result = post_insert_comment($post_id, $user_id, $fullname, $title, $detail, $created_at);
+                if ($result) {
+                    set_flash('message', ['type' => 'success', 'title' => 'Thao tác thành công', 'msg' => 'Gửi bình luận thành công!']);
+                } else {
+                    set_flash('message', ['type' => 'warning', 'title' => 'Thao tác không thành công', 'msg' => 'Gửi bình luận thất bại!']);
+                }
+                // Sau khi xử lý xong, sử dụng header để quay trở lại trang trước đó
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit();
+            }
             break;
         case 'post-category':
             $cat = $_REQUEST['cat'];

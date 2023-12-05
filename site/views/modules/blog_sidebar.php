@@ -10,8 +10,8 @@
                     <ul class="tree-menu">
                         <?php foreach ($list_topic as $item) : ?>
                             <li>
-                                <a href="index.php?option=page&act=post-category&cat=<?=$item['slug']?>">
-                                    <i class="fa fa-angle-right"></i>&nbsp; <?=$item['name']?>
+                                <a href="index.php?option=page&act=post-category&cat=<?= $item['slug'] ?>">
+                                    <i class="fa fa-angle-right"></i>&nbsp; <?= $item['name'] ?>
                                 </a>
                             </li>
                         <?php endforeach; ?>
@@ -26,7 +26,7 @@
     </div>
 
     <!-- Popular Posts -->
-    <div class="block blog-module">
+    <!-- <div class="block blog-module">
         <div class="block-title">
             <h3>Bài viết nổi bật</h3>
         </div>
@@ -59,10 +59,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Recent Comments -->
-    <div class="block blog-module">
+    <!-- <div class="block blog-module">
         <div class="block-title">
             <h3>Bình luận mới nhất</h3>
         </div>
@@ -89,5 +89,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </aside>
