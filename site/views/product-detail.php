@@ -190,53 +190,57 @@
                         <div class="box-collateral box-reviews" id="customer-reviews">
                             <div class="box-reviews1">
                                 <div class="form-add">
-                                    <form id="review-form" method="post" action="index.php?option=page&act=review">
-                                        <h3>Viết bình luận & đánh giá về sản phẩm của bạn</h3>
-                                        <fieldset>
-                                            <h4>How do you rate this product? <em class="required">*</em></h4>
-                                            <span id="input-message-box">
-                                                <?php if (has_flash('message')) : ?>
-                                                    <?php $error = get_flash('message'); ?>
-                                                    <div id="myAlert" style="margin: auto;" class="alert alert-<?= $error['type'] ?> " role="alert">
-                                                        <i class="fa fa-check"></i>
-                                                        <?= $error['msg']; ?>
-                                                    </div>
-                                                <?php endif; ?>
-                                            </span>
-                                            <div class="review1">
-                                                <ul class="form-list">
-                                                    <li>
-                                                        <label class="required" for="fullname">Họ tên<em>*</em></label>
-                                                        <div class="input-box">
-                                                            <input type="text" class="input-text" id="fullname" name="fullname" value="<?= $_SESSION['user']['fullname'] ?>">
-                                                            <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
-                                                            <input type="hidden" name="slug" value="<?= $row['slug'] ?>">
-                                                            <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id'] ?>">
+                                    <?php if (isset($_SESSION['user'])) : ?>
+                                        <form id="review-form" method="post" action="index.php?option=page&act=review">
+                                            <h3>Viết bình luận & đánh giá về sản phẩm của bạn</h3>
+                                            <fieldset>
+                                                <h4>How do you rate this product? <em class="required">*</em></h4>
+                                                <span id="input-message-box">
+                                                    <?php if (has_flash('message')) : ?>
+                                                        <?php $error = get_flash('message'); ?>
+                                                        <div id="myAlert" style="margin: auto;" class="alert alert-<?= $error['type'] ?> " role="alert">
+                                                            <i class="fa fa-check"></i>
+                                                            <?= $error['msg']; ?>
                                                         </div>
-                                                    </li>
-                                                    <li>
-                                                        <label class="required" for="title">Tiêu đề<em>*</em></label>
-                                                        <div class="input-box">
-                                                            <input type="text" class="input-text" id="title" name="title">
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="review2">
-                                                <ul>
-                                                    <li>
-                                                        <label class="required " for="detail">Nội dung<em>*</em></label>
-                                                        <div class="input-box">
-                                                            <textarea rows="3" cols="5" id="detail" name="detail"></textarea>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="buttons-set">
-                                                    <button class="button submit" title="Gửi đánh giá" type="submit"><span>Gửi đánh giá</span></button>
+                                                    <?php endif; ?>
+                                                </span>
+                                                <div class="review1">
+                                                    <ul class="form-list">
+                                                        <li>
+                                                            <label class="required" for="fullname">Họ tên<em>*</em></label>
+                                                            <div class="input-box">
+                                                                <input type="text" class="input-text" id="fullname" name="fullname" value="<?= $_SESSION['user']['fullname'] ?>">
+                                                                <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
+                                                                <input type="hidden" name="slug" value="<?= $row['slug'] ?>">
+                                                                <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id'] ?>">
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <label class="required" for="title">Tiêu đề<em>*</em></label>
+                                                            <div class="input-box">
+                                                                <input type="text" class="input-text" id="title" name="title">
+                                                            </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                            </div>
-                                        </fieldset>
-                                    </form>
+                                                <div class="review2">
+                                                    <ul>
+                                                        <li>
+                                                            <label class="required " for="detail">Nội dung<em>*</em></label>
+                                                            <div class="input-box">
+                                                                <textarea rows="3" cols="5" id="detail" name="detail"></textarea>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="buttons-set">
+                                                        <button class="button submit" title="Gửi đánh giá" type="submit"><span>Gửi đánh giá</span></button>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    <?php else : ?>
+                                        <h3>Bạn cần đăng nhập mới có thể bình luận được.</h3>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <div class="box-reviews2">

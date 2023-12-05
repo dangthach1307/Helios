@@ -8,11 +8,17 @@
             <div class="layered layered-category">
                 <div class="layered-content">
                     <ul class="tree-menu">
-                        <li><a href="#"><i class="fa fa-angle-right"></i>&nbsp; Images</a></li>
-                        <li><i class="fa fa-angle-right"></i>&nbsp; <a href="#">Audio</a></li>
+                        <?php foreach ($list_topic as $item) : ?>
+                            <li>
+                                <a href="index.php?option=page&act=post-category&cat=<?=$item['slug']?>">
+                                    <i class="fa fa-angle-right"></i>&nbsp; <?=$item['name']?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                        <!-- <li><i class="fa fa-angle-right"></i>&nbsp; <a href="#">Audio</a></li>
                         <li><i class="fa fa-angle-right"></i>&nbsp; <a href="#">Photos</a></li>
                         <li><i class="fa fa-angle-right"></i>&nbsp; <a href="#">Diet &amp; Fitness</a></li>
-                        <li><i class="fa fa-angle-right"></i>&nbsp; <a href="#">Slider</a></li>
+                        <li><i class="fa fa-angle-right"></i>&nbsp; <a href="#">Slider</a></li> -->
                     </ul>
                 </div>
             </div>

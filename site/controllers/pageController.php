@@ -57,11 +57,17 @@ if (isset($act)) {
         case 'add-wishlist':
             $user_id = $_SESSION['user']['id'];
             $product_id = $_REQUEST['pid'];
+            if (!isset($_SESSION['user'])) {
+                // Nếu không có session user, chuyển hướng đến trang đăng nhập và lưu lại trang trước đó
+                $_SESSION['redirect_url'] = $referer;
+                header("Location: index.php?option=user&act=login");
+                exit();
+            }
             $result = wishlist_insert($product_id, $user_id);
             if ($result) {
-                set_flash('message', ['type' => 'success', 'msg' => 'Thêm sản phẩm yêu thích thành công!']);
+                set_flash('message', ['type' => 'success', 'title' => 'Thao tác thành công', 'msg' => 'Thêm sản phẩm yêu thích thành công!']);
             } else {
-                set_flash('message', ['type' => 'warning', 'msg' => 'Thao tác thất bại!']);
+                set_flash('message', ['type' => 'warning', 'title' => 'Thao tác thất bại', 'msg' => 'Thêm sản phẩm yêu thích không thành công!']);
             }
             header('location: ' . $_SERVER['HTTP_REFERER']);
             exit();
@@ -157,34 +163,46 @@ if (isset($act)) {
             }
             break;
         case 'post':
-            // Xử lý luồng dữ liệu cho trang bài viết
-            $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
-            $limit = 6;
-            $first = ($page - 1) * $limit;
+            $limit = 3; // Số lượng bài viết trên mỗi trang
+            $currentPage = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
+            $first = ($currentPage - 1) * $limit;
 
-            // Trang hiển thị bài viết theo chủ đề
-            $post_all = post_site_all(null, $first, $limit);
+            $post_all = post_site_all($first, $limit);
+            $totalPosts = count_all_posts(); // Viết hàm để đếm tổng số bài viết
 
-            // Kiểm tra xem mảng $post_all có tồn tại và có ít nhất một phần tử hay không
-            if (!empty($post_all) && isset($post_all[0])) {
-                $total = count($post_all);
-                $totalPages = ceil($total / $limit);
+            $totalPages = ceil($totalPosts / $limit);
+
+            foreach ($post_all as $key => $value) {
+                $topic = topic_by_id($value['topic_id']);
             }
-
-            // Gọi view
+            $list_topic = topic_all();
             require_once 'views/post.php';
             break;
-
         case 'post-detail':
             //Xử lý luồng dữ liệu cho trang bài viết
             //Gọi view
+            $list_topic = topic_all();
             require_once 'views/post-detail.php';
             break;
         case 'post-category':
-            //Xử lý luồng dữ liệu cho trang bài viết
-            //Gọi view
+            $cat = $_REQUEST['cat'];
+            $limit = 3; // Số lượng bài viết trên mỗi trang
+            $currentPage = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
+            $first = ($currentPage - 1) * $limit;
+
+            $post_all = post_topic_all($cat, $first, $limit);
+            $totalPosts = count_posts_by_category($cat); // Viết hàm để đếm tổng số bài viết trong một danh mục
+
+            $totalPages = ceil($totalPosts / $limit);
+
+            foreach ($post_all as $key => $value) {
+                $topic = topic_by_id($value['topic_id']);
+            }
+            $list_topic = topic_all();
+            // Gọi view
             require_once 'views/post-category.php';
             break;
+
         case 'contact':
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $fullname = $_POST['fullname'];
@@ -211,7 +229,7 @@ if (isset($act)) {
             $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
 
 
-            $list_blog = list_post();
+            $list_blog = post_list_home();
             require_once 'views/home.php';
             break;
     }
@@ -226,6 +244,6 @@ if (isset($act)) {
     $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
 
 
-    $list_blog = list_post();
+    $list_blog = post_list_home();
     require_once 'views/home.php';
 }

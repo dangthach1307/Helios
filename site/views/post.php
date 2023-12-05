@@ -41,10 +41,10 @@
                                             <div class="entry-meta-data">
                                                 <span class="cat">
                                                     <i class="fa fa-folder"></i>&nbsp;
-                                                    <a href="#">News, </a>
-                                                    <a href="#">Promotions</a>
+                                                    <a href="index.php?option=page&act=post-category&cat=<?= $topic['slug'] ?>"><?= $topic['name'] ?></a>
                                                 </span>
                                             </div>
+
                                             <div class="entry-excerpt"> <?= string_limit($row['detail'], 250); ?></div>
                                             <a href="index.php?option=page&act=post-detail&slug=<?= $row['slug'] ?>" class="read-more">Đọc thêm&nbsp;
                                                 <i class="fa fa-angle-double-right"></i>
