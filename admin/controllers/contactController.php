@@ -9,11 +9,16 @@ if (isset($act)) {
             $id = $_REQUEST['id'];
             $row = contact_rowid($id);
             if (isset($_POST['TRALOILIENHE'])) {
-                $contact_return = trim($_POST['contact_return']);
+                $contact_return = $_POST['contact_return'];
                 $status = 1;
-                contact_update($contact_return, $status, $id);
-                set_flash('message', ['type' => 'success', 'msg' => 'Trả lời liên hệ thành công!']);
-                redirect('index.php?option=contact');
+                $result = contact_update($contact_return, $status, $id);
+                if ($result) {
+                    set_flash('message', ['type' => 'success', 'msg' => 'Trả lời liên hệ thành công!']);
+                    redirect('index.php?option=contact');
+                } else {
+                    set_flash('message', ['type' => 'warning', 'msg' => 'Trả lời liên hệ thất bại!']);
+                    redirect('index.php?option=contact');
+                }
             }
             require_once $path . 'update.php';
             break;

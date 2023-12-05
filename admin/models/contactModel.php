@@ -16,8 +16,14 @@ function contact_rowid($id)
 }
 function contact_update($contact_return, $status, $id)
 {
-    $sql = "UPDATE db_contact SET contact_return=?,status=? WHERE id=?";
-    return pdo_execute($sql, $contact_return, $status, $id);
+    $sql = "UPDATE db_contact SET contact_reply=?,status=? WHERE id=?";
+    // $sql = "UPDATE db_contact SET contact_return=$contact_return,status=$status WHERE id=$id";
+    $result = pdo_execute($sql, $contact_return, $status, $id);
+    if ($result) {
+        return true;
+    } else {
+        return false;
+    }
 }
 function contact_deltrash($isDeleted, $id)
 {
