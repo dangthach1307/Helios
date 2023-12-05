@@ -4,7 +4,6 @@ require_once './models/brandModel.php';
 require_once './models/categoryModel.php';
 require_once './models/productModel.php';
 require_once './models/contactModel.php';
-require_once './models/product_commentModel.php';
 
 // require_once 'views/header.php';
 if (isset($act)) {
@@ -54,6 +53,37 @@ if (isset($act)) {
             $list_categories = category_list(0);
             require_once 'views/product.php';
             break;
+        case 'add-wishlist':
+            $user_id = $_SESSION['user']['id'];
+            $product_id = $_REQUEST['pid'];
+            $result = wishlist_insert($product_id, $user_id);
+            if ($result) {
+                set_flash('message', ['type' => 'success', 'msg' => 'Thêm sản phẩm yêu thích thành công!']);
+            } else {
+                set_flash('message', ['type' => 'warning', 'msg' => 'Thao tác thất bại!']);
+            }
+            header('location: ' . $_SERVER['HTTP_REFERER']);
+            exit();
+        case 'wishlist':
+            $list_wishlist = list_wishlist($_SESSION['user']['id']);
+            foreach ($list_wishlist as &$item) {
+                $item['product'] = product_rowid($item['product_id']);
+                $item['size_list'] = product_by_size($item['product_id']);
+            }
+            require_once 'views/wishlist.php';
+            break;
+        case 'del-wishlist':
+            $id = $_REQUEST['id'];
+            $result = wishlist_delete($id);
+            if ($result) {
+                set_flash('message', ['type' => 'success', 'msg' => 'Xoá sản phẩm yêu thích thành công!']);
+                header('Location: index.php?option=page&act=wishlist');
+                exit();
+            } else {
+                set_flash('message', ['type' => 'error', 'msg' => 'Xoá sản phẩm yêu thích thất bại!']);
+                header('Location: index.php?option=page&act=wishlist');
+                exit();
+            }
         case 'category':
             // Lọc sản phẩm theo khoảng giá
             $min_price = isset($_GET['min_price']) ? intval($_GET['min_price']) : 0;

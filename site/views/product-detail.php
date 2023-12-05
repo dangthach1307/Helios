@@ -146,10 +146,14 @@
                                 </div>
                                 <div class="email-addto-box">
                                     <ul class="add-to-links">
-                                        <li><a class="link-wishlist" href="wishlist.html"><i class="fa fa-heart"></i><span>Add to Wishlist</span></a></li>
-                                        <li><a class="link-compare" href="compare.html"><i class="fa fa-signal"></i><span>Add to Compare</span></a></li>
+                                        <a href="index.php?option=page&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
+                                            <div class="mask-left-shop">
+                                                <i class="fa fa-heart"></i>
+                                            </div>
+                                        </a>
+                                        <!-- <li><a class="link-compare" href="compare.html"><i class="fa fa-signal"></i><span>Add to Compare</span></a></li>
                                         <li><a class="email-friend" href="#"><i class="fa fa-envelope"></i><span>Email
-                                                    to a Friend</span></a></li>
+                                                    to a Friend</span></a></li> -->
                                     </ul>
                                 </div>
                             </div>

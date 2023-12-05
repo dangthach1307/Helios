@@ -52,7 +52,7 @@
                                                           <!-- <a class="quickview-btn" href="quick-view.html">
                                                               <span>Quick View</span>
                                                           </a> -->
-                                                          <a href="index.php?option=cart&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
+                                                          <a href="index.php?option=page&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
                                                               <div class="mask-left-shop">
                                                                   <i class="fa fa-heart"></i>
                                                               </div>
@@ -253,8 +253,7 @@
   <!-- collection area end -->
   <?php
     $message = get_flash('message');
-    if ($message && isset($message['type']) && $message['type'] === 'success') {
-        // Hiển thị modal
+    if ($message && isset($message['type'])) {
         echo '<script>';
         echo 'document.addEventListener("DOMContentLoaded", function() {';
         echo '    $("#successModal").modal("show");'; // Chỉ định ID của modal của bạn

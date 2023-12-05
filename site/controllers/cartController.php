@@ -168,8 +168,6 @@ if (isset($act)) {
                 }
             }
             break;
-        default:
-            break;
     }
 } else {
     $list = cart_content();

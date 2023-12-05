@@ -234,3 +234,36 @@ function product_other($list_catid, $id)
             ORDER BY p.id DESC";
     return pdo_query_all($sql);
 }
+//Bình luận sản phẩm
+function product_insert_comment($product_id, $user_id, $fullname, $title, $detail, $created_at)
+{
+    $sql = "INSERT INTO db_product_comment (product_id,user_id,fullname,title,detail,created_at) VALUES (?,?,?,?,?,?)";
+    return pdo_execute($sql, $product_id, $user_id, $fullname, $title, $detail, $created_at);
+}
+function product_list_comment($product_id)
+{
+    $sql = "SELECT * FROM db_product_comment WHERE product_id=? ORDER BY id DESC LIMIT 5";
+    return pdo_query_all($sql, $product_id);
+}
+
+//Thêm sản phẩm vào yêu thích
+function wishlist_insert($product_id, $user_id)
+{
+    $sql = "INSERT INTO db_wishlist (product_id,customer_id) VALUES(?,?)";
+    $result = pdo_execute($sql, $product_id, $user_id);
+    if ($result) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function list_wishlist($user_id)
+{
+    $sql = "SELECT * FROM db_wishlist WHERE customer_id=?";
+    return pdo_query_all($sql, $user_id);
+}
+function wishlist_delete($id)
+{
+    $sql = "DELETE FROM db_wishlist WHERE id=?";
+    return pdo_execute($sql, $id);
+}
