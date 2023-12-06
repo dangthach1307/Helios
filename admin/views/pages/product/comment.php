@@ -52,10 +52,10 @@
                                         <tr>
                                             <td class="text-center"><?= $row['id'] ?></td>
                                             <td class="text-center"><?= $row['fullname'] ?></td>
-                                            <td class="text-center"><?= $row['title'] ?></td>
+                                            <td class="text-center"><?= $row['email'] ?></td>
                                             <td class="text-center"><?= $row['created_at'] ?></td>
                                             <td class="text-center">
-                                                <button class="btn btn-sm btn-info" style="margin:2%" data-toggle="modal" data-target="#myModal" data-fullname="<?= $row['fullname'] ?>" data-title="<?= $row['title'] ?>" data-createdat="<?= $row['created_at'] ?>" title="Xem chi tiết">
+                                                <button class="btn btn-sm btn-info" style="margin:2%" data-toggle="modal" data-target="#myModal" data-fullname="<?= $row['fullname'] ?>" data-email="<?= $row['email'] ?>" data-createdat="<?= $row['created_at'] ?>" title="Xem chi tiết">
                                                     <i class="fa fa-eye"></i>
                                                 </button>
                                                 <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=delete_cmt&cid=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
@@ -66,7 +66,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h4 class="modal-title" id="myModalLabel">Chi tiết bình luận: <?= $row['title'] ?></h4>
+                                                        <h4 class="modal-title" id="myModalLabel">Chi tiết bình luận:</h4>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
