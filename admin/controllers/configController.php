@@ -6,18 +6,19 @@ if (isset($act)) {
     switch ($act) {
         case 'update':
             $id = $_REQUEST['id'];
+            $row = config_rowid($id);
             if (isset($_POST['CAPNHAT'])) {
                 if (isset($_FILES['logo']) && !empty($_FILES['logo']['name'])) {
-                    //Kiểm tra nếu có tồn tại hình cũ thì xoá hình cũ trong folder đi
+                    // Kiểm tra nếu có tồn tại hình cũ thì xoá hình cũ trong folder đi
                     if (file_exists('../public/images/' . $row['logo'])) {
                         unlink('../public/images/' . $row['logo']);
                     }
-                    // Kiểm tra nếu file không rỗng thf cập nhật hình ảnh mới
+                    // Kiểm tra nếu file không rỗng thì cập nhật hình ảnh mới
                     $file_logo_name = $_FILES['logo']['name'];
                     $file_logo_tmp_name = $_FILES['logo']['tmp_name'];
                     $upload_path = '../public/images/' . $file_logo_name;
                     if (!move_uploaded_file($file_logo_tmp_name, $upload_path)) {
-                        //Lỗi trong quá trình xử lý upload
+                        // Lỗi trong quá trình xử lý upload
                         set_flash('message', ['type' => 'warning', 'msg' => 'Lỗi upload hình ảnh!']);
                         redirect('index.php?option=config');
                     }
@@ -25,6 +26,7 @@ if (isset($act)) {
                 } else {
                     $logo = $row['logo'];
                 }
+
                 if (isset($_FILES['icon']) && !empty($_FILES['icon']['name'])) {
                     //Kiểm tra nếu có tồn tại hình cũ thì xoá hình cũ trong folder đi
                     if (file_exists('../public/images/' . $row['icon'])) {
