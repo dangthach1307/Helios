@@ -43,7 +43,7 @@
                         </ul>
                     </div>
                 </div>
-                <form action="index.php?option=page&act=post-comment" method="post">
+                <form action="index.php?option=page&act=post-comment" method="post" enctype="multipart/form-data">
                     <div class="single-box comment-box">
                         <div class="best-title text-left">
                             <h2>Để lại bình luận của bạn</h2>
@@ -52,18 +52,13 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="fullname">Họ tên:</label>
-                                    <input id="fullname" name="fullname" type="text" class="form-control">
+                                    <input id="fullname" name="fullname" type="text" value="<?= $_SESSION['user']['fullname'] ?>" class="form-control">
                                     <input type="hidden" name="post_id" value="<?= $row['id'] ?>">
-                                    <input type="hidden" name="slug" value="<?= $row['slug'] ?>">
                                     <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id'] ?>">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="email">Email:</label>
-                                    <input id="email" name="email" type="text" class="form-control">
-                                </div>
-                                <div class="col-sm-12">
-                                    <label for="title">Tiêu đề:</label>
-                                    <input id="title" name="title" type="text" class="form-control">
+                                    <input id="email" name="email" type="text" class="form-control" value="<?= $_SESSION['user']['email'] ?>">
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="detail">Nội dung:</label>
@@ -94,7 +89,7 @@ if ($message && isset($message['type'])) {
 ?>
 <!-- Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="successModalLabel"> <?= $message['title'] ?>

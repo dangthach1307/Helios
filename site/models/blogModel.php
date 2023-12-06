@@ -25,10 +25,10 @@ function post_rowslug($slug)
     $sql = "SELECT * FROM db_post WHERE slug=?";
     return pdo_query_one($sql, $slug);
 }
-function post_insert_comment($post_id, $user_id, $fullname, $title, $detail, $created_at)
+function post_insert_comment($post_id, $user_id, $fullname, $email, $detail, $created_at)
 {
-    $sql = "INSERT INTO db_post_comment (post_id,user_id,fullname,title,detail,created_at) VALUES (?,?,?,?,?,?)";
-    return pdo_execute($sql, $post_id, $user_id, $fullname, $title, $detail, $created_at);
+    $sql = "INSERT INTO db_post_comment (post_id,user_id,fullname,email,detail,created_at) VALUES (?,?,?,?,?,?)";
+    return pdo_execute($sql, $post_id, $user_id, $fullname, $email, $detail, $created_at);
 }
 function post_list_comment($post_id)
 {

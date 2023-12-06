@@ -195,15 +195,6 @@
                                             <h3>Viết bình luận & đánh giá về sản phẩm của bạn</h3>
                                             <fieldset>
                                                 <h4>How do you rate this product? <em class="required">*</em></h4>
-                                                <span id="input-message-box">
-                                                    <?php if (has_flash('message')) : ?>
-                                                        <?php $error = get_flash('message'); ?>
-                                                        <div id="myAlert" style="margin: auto;" class="alert alert-<?= $error['type'] ?> " role="alert">
-                                                            <i class="fa fa-check"></i>
-                                                            <?= $error['msg']; ?>
-                                                        </div>
-                                                    <?php endif; ?>
-                                                </span>
                                                 <div class="review1">
                                                     <ul class="form-list">
                                                         <li>
@@ -216,9 +207,9 @@
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <label class="required" for="title">Tiêu đề<em>*</em></label>
+                                                            <label class="required" for="email">Email<em>*</em></label>
                                                             <div class="input-box">
-                                                                <input type="text" class="input-text" id="title" name="title">
+                                                                <input type="text" class="input-text" id="email" name="email" value="<?= $_SESSION['user']['email'] ?>">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -276,12 +267,12 @@
                                                         </td>
                                                     </tr>
                                                 </tbody>
-                                            </table>
-                                            <div class="review"> -->
-                                                <h6><?= $item['title'] ?></h6>
-                                                <small>Đánh giá bởi <span><?= $item['fullname'] ?> </span>ngày <?= $item['created_at'] ?> </small>
-                                                <div class="review-txt"><?= $item['detail'] ?></div>
-                                                <!-- </div> -->
+                                            </table> -->
+                                                <div class="review">
+                                                    <h6><?= $item['email'] ?></h6>
+                                                    <small>Đánh giá bởi <span><?= $item['fullname'] ?> </span>ngày <?= $item['created_at'] ?> </small>
+                                                    <div class="review-txt"><?= $item['detail'] ?></div>
+                                                </div>
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>
@@ -378,3 +369,33 @@
     </div>
 <?php endif; ?>
 <!-- Related Products Slider End -->
+<?php
+$message = get_flash('message');
+if ($message && isset($message['type'])) {
+    echo '<script>';
+    echo 'document.addEventListener("DOMContentLoaded", function() {';
+    echo '    $("#successModal").modal("show");'; // Chỉ định ID của modal của bạn
+    echo '});';
+    echo '</script>';
+}
+?>
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel"> <?= $message['title'] ?>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h5>
+            </div>
+            <div class="modal-body">
+                <?= $message['msg'] ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>

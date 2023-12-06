@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2023 at 01:59 PM
+-- Generation Time: Dec 06, 2023 at 05:44 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -141,7 +141,7 @@ CREATE TABLE `db_config` (
 --
 
 INSERT INTO `db_config` (`id`, `title`, `logo`, `icon`, `url`, `address`, `map`, `phone`, `email`) VALUES
-(1, 'Helios E-Commerece Jewelry Website', 'logo.png', 'icon.png', 'helios/site/index.php?option=page&act=home', 'Công viên phần mềm Quang Trung', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7836.930008892913!2d106.61396081150974!3d10.852193305047312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752b6c59ba4c97%3A0x535e784068f1558b!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1sen!2s!4v1699930374912!5m2!1sen!2s', '+84 123 456 98765', 'helios@gmail.com');
+(1, 'Helios E-Commerece Jewelry Website', 'logo.png', 'icon.png', 'helios/site/index.php?option=page&act=home', 'Công viên phần mềm Quang Trung', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7836.930008892913!2d106.61396081150974!3d10.852193305047312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752b6c59ba4c97%3A0x535e784068f1558b!2zVHLGsOG7nW5nIENhbyDEkeG6s25nIEZQVCBQb2x5dGVjaG5pYw!5e0!3m2!1sen!2s!4v1699930374912!5m2!1sen!2s', '+84 112314112', 'helios@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -452,7 +452,7 @@ CREATE TABLE `db_post_comment` (
   `post_id` int(11) NOT NULL COMMENT 'Mã bài viết',
   `user_id` int(11) NOT NULL COMMENT 'Mã người dùng',
   `fullname` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `detail` text NOT NULL COMMENT 'Nội dung',
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -461,8 +461,9 @@ CREATE TABLE `db_post_comment` (
 -- Dumping data for table `db_post_comment`
 --
 
-INSERT INTO `db_post_comment` (`id`, `post_id`, `user_id`, `fullname`, `title`, `detail`, `created_at`) VALUES
-(0, 8, 1, 'dang thach', 'Bình luận gì đó', 'Bình luận gì đó', '2023-12-05 12:52:43');
+INSERT INTO `db_post_comment` (`id`, `post_id`, `user_id`, `fullname`, `email`, `detail`, `created_at`) VALUES
+(1, 8, 1, 'dang thach', 'Bình luận gì đó', 'Bình luận gì đó', '2023-12-05 12:52:43'),
+(2, 11, 1, 'Thạch Thế Đăng', 'dangthach1307@gmail.com', 'zxczxc', '2023-12-06 05:43:11');
 
 -- --------------------------------------------------------
 
@@ -512,7 +513,7 @@ INSERT INTO `db_product` (`id`, `category_id`, `brand_id`, `name`, `slug`, `SKU`
 (21, 6, 2, 'thêm lại sản phẩm sửa', 'them-lai-san-pham-sua', 'PNJNHA021-THE', '<p>xzczxc</p>', '<p>zxczxc</p>', 1, 2000000, 30, 1, NULL, 138, 0, 2),
 (22, 6, 2, 'Test thêm sản phẩm mới', 'test-them-san-pham-moi', 'PNJNHA022-TES', '<p>zxczxc</p>', '<p>zxczxc</p>', 14, 2000000, 10, 1, NULL, 3, 6, 1),
 (23, 6, 2, 'Thêm sản phẩm lần một sửa material sửa size', 'them-san-pham-lan-mot-sua-material-sua-size', 'PNJNHA023-THE', '<p>Thêm sản phẩm lần một<br></p>', '<p>Thêm sản phẩm lần một<br></p>', 10, 2000000, 10, 1, NULL, 3, 0, 1),
-(24, 9, 3, 'Thêm sản phẩm lần hai test sửa', 'them-san-pham-lan-hai-test-sua', 'TIEBON024-THE', '<p>xzczx</p>', '<p>zxczxc</p>', 4, 2000000, 10, 3, NULL, 68, 6, 1);
+(24, 9, 3, 'Thêm sản phẩm lần hai test sửa', 'them-san-pham-lan-hai-test-sua', 'TIEBON024-THE', '<p>xzczx</p>', '<p>zxczxc</p>', 4, 2000000, 10, 3, NULL, 84, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -525,7 +526,7 @@ CREATE TABLE `db_product_comment` (
   `product_id` int(11) NOT NULL COMMENT 'Mã sản phẩm',
   `user_id` int(11) NOT NULL COMMENT 'Mã người dùng',
   `fullname` varchar(255) NOT NULL,
-  `title` text NOT NULL,
+  `email` varchar(255) NOT NULL,
   `detail` text NOT NULL COMMENT 'Nội dung',
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -534,8 +535,13 @@ CREATE TABLE `db_product_comment` (
 -- Dumping data for table `db_product_comment`
 --
 
-INSERT INTO `db_product_comment` (`id`, `product_id`, `user_id`, `fullname`, `title`, `detail`, `created_at`) VALUES
-(1, 24, 14, 'dang thach', 'Đánh giá sản phẩm', 'Đánh giá sản phẩm', '2023-12-03 09:08:23');
+INSERT INTO `db_product_comment` (`id`, `product_id`, `user_id`, `fullname`, `email`, `detail`, `created_at`) VALUES
+(3, 24, 1, 'Thạch Thế Đăng', 'dangthach1307@gmail.com', 'Test lại gửi bình luận', '2023-12-06 05:18:44'),
+(4, 24, 1, 'Thạch Thế Đăng', 'dangthach1307@gmail.com', 'Lần 2', '2023-12-06 05:23:36'),
+(5, 24, 1, 'Thạch Thế Đăng', 'dangthach1307@gmail.com', 'Bình luận 3', '2023-12-06 05:27:08'),
+(6, 24, 1, 'Thạch Thế Đăng', 'dangthach1307@gmail.com', 'BÌnh luận 4', '2023-12-06 05:28:10'),
+(7, 24, 1, 'Thạch Thế Đăng', 'dangthach1307@gmail.com', 'Bình luận 5', '2023-12-06 05:29:46'),
+(8, 24, 1, 'Thạch Thế Đăng', 'dangthach1307@gmail.com', 'Bình luận nè', '2023-12-06 05:31:31');
 
 -- --------------------------------------------------------
 
@@ -1066,6 +1072,12 @@ ALTER TABLE `db_post`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã bài viết', AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `db_post_comment`
+--
+ALTER TABLE `db_post_comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã bình luận', AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `db_product`
 --
 ALTER TABLE `db_product`
@@ -1075,7 +1087,7 @@ ALTER TABLE `db_product`
 -- AUTO_INCREMENT for table `db_product_comment`
 --
 ALTER TABLE `db_product_comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã bình luận', AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Mã bình luận', AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `db_product_img`

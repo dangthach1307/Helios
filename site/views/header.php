@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="../public/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     
     <link rel="stylesheet" type="text/css" href="../public/css/styles.css" media="all">
+
 </head>
 
 <body class="cms-index-index cms-home-page">

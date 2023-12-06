@@ -257,10 +257,10 @@ function product_other($list_catid, $id)
     return pdo_query_all($sql);
 }
 //Bình luận sản phẩm
-function product_insert_comment($product_id, $user_id, $fullname, $title, $detail, $created_at)
+function product_insert_comment($product_id, $user_id, $fullname, $email, $detail, $created_at)
 {
-    $sql = "INSERT INTO db_product_comment (product_id,user_id,fullname,title,detail,created_at) VALUES (?,?,?,?,?,?)";
-    return pdo_execute($sql, $product_id, $user_id, $fullname, $title, $detail, $created_at);
+    $sql = "INSERT INTO db_product_comment (product_id,user_id,fullname,email,detail,created_at) VALUES (?,?,?,?,?,?)";
+    return pdo_execute($sql, $product_id, $user_id, $fullname, $email, $detail, $created_at);
 }
 function product_list_comment($product_id)
 {

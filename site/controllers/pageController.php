@@ -148,14 +148,14 @@ if (isset($act)) {
                 $product_id = $_POST['product_id'];
                 $user_id = $_POST['user_id'];
                 $fullname = $_POST['fullname'];
-                $title =  $_POST['title'];
+                $email =  $_POST['email'];
                 $detail = $_POST['detail'];
                 $created_at = date('Y-m-d H:i:s');
-                $result = product_insert_comment($product_id, $user_id, $fullname, $title, $detail, $created_at);
+                $result = product_insert_comment($product_id, $user_id, $fullname, $email, $detail, $created_at);
                 if ($result) {
-                    set_flash('message', ['type' => 'success', 'msg' => 'Gửi đánh giá thành công!']);
+                    set_flash('message', ['type' => 'success', 'title' => 'Thao tác thành công', 'msg' => 'Gửi bình luận thành công!']);
                 } else {
-                    set_flash('message', ['type' => 'error', 'msg' => 'Gửi đánh giá thất bại!']);
+                    set_flash('message', ['type' => 'warning', 'title' => 'Thao tác không thành công', 'msg' => 'Gửi bình luận thất bại!']);
                 }
                 // Sau khi xử lý xong, sử dụng header để quay trở lại trang trước đó
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -194,10 +194,10 @@ if (isset($act)) {
                 $post_id = $_POST['post_id'];
                 $user_id = $_POST['user_id'];
                 $fullname = $_POST['fullname'];
-                $title =  $_POST['title'];
+                $email =  $_POST['email'];
                 $detail = $_POST['detail'];
                 $created_at = date('Y-m-d H:i:s');
-                $result = post_insert_comment($post_id, $user_id, $fullname, $title, $detail, $created_at);
+                $result = post_insert_comment($post_id, $user_id, $fullname, $email, $detail, $created_at);
                 if ($result) {
                     set_flash('message', ['type' => 'success', 'title' => 'Thao tác thành công', 'msg' => 'Gửi bình luận thành công!']);
                 } else {
