@@ -173,32 +173,33 @@ $_SESSION['source'] = 'productcategory';
                                             echo '<ul class="pagination">';
 
                                             if ($current > 1) {
-                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=1'>&lt;&lt;</a></li>";
-                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=" . ($current - 1) . "'>&lt;</a></li>";
+                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=1" . buildPriceFiltersQuery() . "'>&lt;&lt;</a></li>";
+                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=" . ($current - 1) . buildPriceFiltersQuery() . "'>&lt;</a></li>";
                                             } else {
                                                 echo "<li class='disabled'><span>&lt;&lt;</span></li>";
                                                 echo "<li class='disabled'><span>&lt;</span></li>";
                                             }
 
                                             for ($i = 1; $i <= $totalPages; $i++) {
+                                                $baseLink = '?option=page&act=category&cat=' . $row_cat['slug'] . "&pages=" . $i . buildPriceFiltersQuery();
                                                 if ($i == $current) {
                                                     echo "<li class='active'><span>$i</span></li>";
                                                 } else {
-                                                    echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=$i'>$i</a></li>";
+                                                    echo "<li><a href='$baseLink'>$i</a></li>";
                                                 }
                                             }
 
                                             if ($current < $totalPages) {
-                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=" . ($current + 1) . "'>&gt;</a></li>";
-                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=$totalPages'>&gt;&gt;</a></li>";
+                                                $baseLink = '?option=page&act=category&cat=' . $row_cat['slug'] . "&pages=" . ($current + 1) . buildPriceFiltersQuery();
+                                                echo "<li><a href='$baseLink'>&gt;</a></li>";
+                                                $baseLink = '?option=page&act=category&cat=' . $row_cat['slug'] . "&pages=" . $totalPages . buildPriceFiltersQuery();
+                                                echo "<li><a href='$baseLink'>&gt;&gt;</a></li>";
                                             } else {
                                                 echo "<li class='disabled'><span>&gt;</span></li>";
                                                 echo "<li class='disabled'><span>&gt;&gt;</span></li>";
                                             }
-
                                             echo '</ul>';
                                             ?>
-
                                         </div>
                                     </div>
                                 </div>

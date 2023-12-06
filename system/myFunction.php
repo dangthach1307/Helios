@@ -58,23 +58,34 @@ function get_duoi_file($file)
 
 function displayCategories($categories, $parentId = 0)
 {
+    $output = ''; // Khởi tạo biến để lưu trữ chuỗi HTML
     foreach ($categories as $category) {
         if ($category['parent_id'] == $parentId) {
-            echo '<li>';
-            echo '<a href="?option=page&act=category&cat=' . $category['slug'] . '">' . $category['name'] . '</a>';
+            $output .= '<li>';
+            $output .= '<a href="?option=page&act=category&cat=' . $category['slug'] . '">' . $category['name'] . '</a>';
             $subCategories = category_list($category['id']);
             if (!empty($subCategories)) {
-                echo '<span class="toggle-icon" style="cursor: pointer;margin-left:10px">▼</span>';
-                echo '<ol style="display: none; text-indent: 20px;">';
-                displayCategories($subCategories, $category['id']);
-                echo '</ol>';
+                $output .= '<span class="toggle-icon" style="cursor: pointer;margin-left:10px">▼</span>';
+                $output .= '<ol style="display: none; text-indent: 20px;">';
+                $output .= displayCategories($subCategories, $category['id']); // Gọi đệ quy và thêm kết quả vào chuỗi
+                $output .= '</ol>';
             }
-            echo '</li>';
+            $output .= '</li>';
         }
     }
+    return $output; // Trả về chuỗi HTML đã tạo
 }
 
 
+function displayBrands($brands)
+{
+    foreach ($brands as $brand) {
+        echo '<li>';
+        echo '<a href="?option=page&act=brand&slug=' . $brand['slug'] . '">' . $brand['name'] . '</a>';
+        // Bạn có thể thêm logic xử lý cho các thương hiệu con ở đây (nếu cần)
+        echo '</li>';
+    }
+}
 
 
 

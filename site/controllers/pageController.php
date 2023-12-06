@@ -12,14 +12,29 @@ if (isset($act)) {
     switch ($act) {
         case 'search':
             $keyword = $_REQUEST['keyword'];
-            $sp_search = product_search($keyword);
-            if (isset($sp_search)) {
+            $min_price = isset($_GET['min_price']) ? intval($_GET['min_price']) : 0;
+            $max_price = isset($_GET['max_price']) ? intval($_GET['max_price']) : 99999999999;
+            $priceFiltersQuery = buildPriceFiltersQuery();
+            $sp_search = product_search($keyword, 0, PHP_INT_MAX, $min_price, $max_price);
+            
+            if (!empty($sp_search) && isset($sp_search[0])) {
                 $list_size = product_by_size($sp_search[0]['id']);
+                $total = count($sp_search);
+
+                // Phân trang nếu cần
+                $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
+                $limit = 6;
+                $first = ($page - 1) * $limit;
+
+                $sp_search = array_slice($sp_search, $first, $limit);
+                $totalPages = ceil($total / $limit);
             } else {
                 $list_size = 0;
             }
-            $list_categories = category_list(0);
 
+            $list_categories = category_list(0);
+            $category = displayCategories($list_categories);
+            $list_brand = brand_list();
             require_once 'views/product-search.php';
             break;
         case 'product':
@@ -53,6 +68,8 @@ if (isset($act)) {
             }
 
             $list_categories = category_list(0);
+            $category = displayCategories($list_categories);
+            $list_brand = brand_list();
             require_once 'views/product.php';
             break;
         case 'add-wishlist':
@@ -130,6 +147,8 @@ if (isset($act)) {
                 $list_size = product_by_size($list_product[0]['id']);
             }
             $list_slider = slider_all($slug);
+            $category = displayCategories($list_categories);
+            $list_brand = brand_list();
             require_once 'views/product-category.php';
             break;
         case 'product-detail':

@@ -5,8 +5,8 @@
             <div class="col-xs-12">
                 <ul>
                     <li><a href="index.php" title="Quay lại trang chủ">Trang chủ</a><span>/</span></li>
-                    <li><a title="Men's Fashion" href="index.php?page=product"><strong>Tất cả sản phẩm</strong></a></li>
-                    <!-- <li><strong>All Product</strong></li> -->
+                    <li><a title="Sản phẩm" href="index.php?page=product">Sản phẩm</a><span>/</span></li>
+                    <li><strong>Tìm kiếm</strong></li>
                 </ul>
             </div>
         </div>
@@ -18,10 +18,10 @@
 <div class="main-container col2-left-layout">
     <div class="container">
         <div class="row">
-            <div class="col-sm-9 col-sm-push-3 main-inner">
+            <div class="col-sm-12 main-inner">
                 <article class="col-main">
                     <div class="page-title">
-                        <h2>All product</h2>
+                        <h2>Sản phẩm tìm kiếm: <?= $keyword ?></h2>
                     </div>
                     <div class="toolbar">
                         <!-- <div class="sorter">
@@ -124,15 +124,52 @@
                             <?php endif; ?>
                         </ul>
                     </div>
-                    <!-- <div class="toolbar bottom">
+                    <div class="toolbar bottom">
                         <div class="row">
-                            <div class="col-sm-6 text-center">
+                            <div class="col-sm-12 text-center">
                                 <div class="pages">
+                                    <?php if (isset($totalPages) > 0) : ?>
+                                        <?php
+                                        $current = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
 
+                                        echo '<ul class="pagination">';
+
+                                        if ($current > 1) {
+                                            $baseLink = '?option=page&act=product&pages=1' . buildPriceFiltersQuery();
+                                            echo "<li><a href='$baseLink'>&lt;&lt;</a></li>";
+                                            echo "<li><a href='?option=page&act=product&pages=" . ($current - 1) . buildPriceFiltersQuery() . "'>&lt;</a></li>";
+                                        } else {
+                                            echo "<li class='disabled'><span>&lt;&lt;</span></li>";
+                                            echo "<li class='disabled'><span>&lt;</span></li>";
+                                        }
+
+                                        for ($i = 1; $i <= $totalPages; $i++) {
+                                            $baseLink = '?option=page&act=product&pages=' . $i . buildPriceFiltersQuery();
+                                            if ($i == $current) {
+                                                echo "<li class='active'><span>$i</span></li>";
+                                            } else {
+                                                echo "<li><a href='$baseLink'>$i</a></li>";
+                                            }
+                                        }
+
+                                        if ($current < $totalPages) {
+                                            $baseLink = '?option=page&act=product&pages=' . ($current + 1) . buildPriceFiltersQuery();
+                                            echo "<li><a href='$baseLink'>&gt;</a></li>";
+                                            $baseLink = '?option=page&act=product&pages=' . $totalPages . buildPriceFiltersQuery();
+                                            echo "<li><a href='$baseLink'>&gt;&gt;</a></li>";
+                                        } else {
+                                            echo "<li class='disabled'><span>&gt;</span></li>";
+                                            echo "<li class='disabled'><span>&gt;&gt;</span></li>";
+                                        }
+                                        echo '</ul>';
+                                        ?>
+                                    <?php else : ?>
+                                        <p>Không có sản phẩm</p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </article>
             </div>
             <div class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">

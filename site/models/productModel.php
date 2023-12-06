@@ -155,7 +155,7 @@ function product_site_all($first, $limit, $minPrice = 0, $maxPrice = PHP_INT_MAX
 }
 
 //Hàm tìm kiếm sản phẩm theo tên
-function product_search($keyword)
+function product_search($keyword, $first, $limit, $minPrice = 0, $maxPrice = PHP_INT_MAX)
 {
     $sql = "SELECT p.*, i.img_id, i.product_id, i.img
     FROM db_product p
@@ -164,9 +164,11 @@ function product_search($keyword)
         FROM db_product_img
         GROUP BY product_id
     ) i ON p.id = i.product_id
-    WHERE p.status = 1 AND p.name LIKE '%$keyword%'
-    GROUP BY p.id";
-    return pdo_query_all($sql);
+    WHERE p.status!=0 
+    AND p.name LIKE '%$keyword%'
+    AND p.price >= ? 
+    AND p.price <= ? LIMIT $first,$limit";
+    return pdo_query_all($sql, $minPrice, $maxPrice);
 }
 
 //Các Function ở trang chi tiết sản phẩm
