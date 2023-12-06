@@ -5,6 +5,7 @@ require_once './models/categoryModel.php';
 require_once './models/productModel.php';
 require_once './models/contactModel.php';
 require_once './models/blogModel.php';
+require_once './models/slider_banner_Model.php';
 
 // require_once 'views/header.php';
 if (isset($act)) {
@@ -92,6 +93,7 @@ if (isset($act)) {
                 exit();
             }
         case 'category':
+
             // Lọc sản phẩm theo khoảng giá
             $min_price = isset($_GET['min_price']) ? intval($_GET['min_price']) : 0;
             $max_price = isset($_GET['max_price']) ? intval($_GET['max_price']) : 9999999;
@@ -127,7 +129,7 @@ if (isset($act)) {
             if (!empty($list_product) && isset($list_product[0])) {
                 $list_size = product_by_size($list_product[0]['id']);
             }
-
+            $list_slider = slider_all($slug);
             require_once 'views/product-category.php';
             break;
         case 'product-detail':
@@ -252,7 +254,8 @@ if (isset($act)) {
             $size_list_hotdeal = product_by_size($product_list_hotdeal[0]['id']);
             $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
 
-
+            $list_slider = slider_all('home');
+            $list_banner_slider = banner_all('slider');
             $list_blog = post_list_home();
             require_once 'views/home.php';
             break;
@@ -267,7 +270,8 @@ if (isset($act)) {
     $size_list_hotdeal = product_by_size($product_list_hotdeal[0]['id']);
     $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
 
-
+    $list_slider = slider_all('home');
+    $list_banner_slider = banner_all('slider');
     $list_blog = post_list_home();
     require_once 'views/home.php';
 }

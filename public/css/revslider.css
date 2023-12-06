@@ -23,20 +23,7 @@
   opacity: 1;
   transform: scale(1.05);
 }
-.text-des-container{
-bottom: 0;
-height: 80px;
-left: 0;
-margin: auto;
-padding: 0px;
-pointer-events: none;
-position: absolute;
-right: 0;
-text-align: center;
-top: 0;
-width: 100%;
-z-index: 1;
-}
+.text-des-container{bottom: 0;height: 240px;left: 0;margin: auto;padding: 0px;pointer-events: none;position: absolute;right: 0;text-align: center;top: 0;width: 100%;z-index: 1;}
 .text-des-container.pad-zero{
   padding: 0;
 }

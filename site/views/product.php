@@ -19,29 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-sm-push-3 main-inner">
-                <div class="category-description std">
-                    <div class="slider-items-products">
-                        <div id="category-desc-slider" class="product-flexslider hidden-buttons">
-                            <div class="slider-items slider-width-col1 owl-carousel owl-theme">
-                                <div class="item"> <a href="#">
-                                        <img alt="New Special Collection" src="../public/images/new-special.jpg"></a>
-                                    <div class="cat-img-title cat-bg cat-box">
-                                        <h2 class="cat-heading">New Special<br>
-                                            Collection</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                                    </div>
-                                </div>
-                                <div class="item"> <a href="#"><img alt="New Fashion" src="../public/images/new-fashion.jpg"></a>
-                                    <div class="cat-img-title cat-bg cat-box">
-                                        <h2 class="cat-heading">New Fashion</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <article class="col-main">
+                <article class="col-main" style="margin-top:0px">
                     <div class="page-title">
                         <h2>Tất cả sản phẩm</h2>
                     </div>

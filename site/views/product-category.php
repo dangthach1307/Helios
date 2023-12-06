@@ -20,36 +20,51 @@ $_SESSION['source'] = 'productcategory';
     <div class="container">
         <div class="row">
             <div class="col-sm-9 col-sm-push-3 main-inner">
-                <div class="category-description std">
-                    <div class="slider-items-products">
-                        <div id="category-desc-slider" class="product-flexslider hidden-buttons">
-                            <div class="slider-items slider-width-col1 owl-carousel owl-theme">
-                                <div class="item"> <a href="#"><img alt="New Special Collection" src="../public/images/new-special.jpg"></a>
-                                    <div class="cat-img-title cat-bg cat-box">
-                                        <h2 class="cat-heading">New Special<br>
-                                            Collection</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                                    </div>
-                                </div>
-                                <div class="item"> <a href="#"><img alt="New Fashion" src="../public/images/new-fashion.jpg"></a>
-                                    <div class="cat-img-title cat-bg cat-box">
-                                        <h2 class="cat-heading">New Fashion</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                                    </div>
+                <?php if (isset($list_slider)) : ?>
+                    <div class="category-description std">
+                        <div class="slider-items-products">
+                            <div id="category-desc-slider" class="product-flexslider hidden-buttons">
+                                <div class="slider-items slider-width-col1 owl-carousel owl-theme">
+                                    <?php foreach ($list_slider as $row_slider) : ?>
+                                        <div class="item">
+                                            <a href="#">
+                                                <img alt="New Special Collection" src="../public/images/slider/<?= $row_slider['img'] ?>" height="300px">
+                                            </a>
+                                            <div class="cat-img-title cat-bg cat-box">
+                                                <h2 class="cat-heading">
+                                                    <?php if (isset($row_slider['info1'])) : ?>
+                                                        <?= $row_slider['info1'] ?>
+                                                    <?php endif ?>
+                                                    <br>
+                                                    <?php if (isset($row_slider['info2'])) : ?>
+                                                        <?= $row_slider['info2'] ?>
+                                                    <?php endif ?>
+                                                </h2>
+                                                <p><?php if (isset($row_slider['info3'])) : ?>
+                                                        <?= $row_slider['info3'] ?>
+                                                    <?php endif ?> </p>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <article class="col-main">
-                    <div class="page-title">
-                        <h2>Sản phẩm thuộc: <?= $row_cat['name'] ?></h2>
-                    </div>
-                    <div class="toolbar">
-                        <!-- <div class="sorter">
+                <?php endif; ?>
+                <?php if (isset($list_slider)) : ?>
+                    <article class="col-main" style="margin-top:0px">
+                    <?php else : ?>
+                        <article class="col-main">
+                        <?php endif; ?>
+
+                        <div class="page-title">
+                            <h2>Sản phẩm thuộc: <?= $row_cat['name'] ?></h2>
+                        </div>
+                        <div class="toolbar">
+                            <!-- <div class="sorter">
                             <div class="view-mode"> <span title="Grid" class="button button-active button-grid">&nbsp;</span><a href="shop-list-sidebar.html" title="List" class="button-list">&nbsp;</a> </div>
                         </div> -->
-                        <!-- <div id="sort-by">
+                            <!-- <div id="sort-by">
                             <label class="left">Sort By: </label>
                             <ul>
                                 <li style="width:130px">
@@ -66,7 +81,7 @@ $_SESSION['source'] = 'productcategory';
                                 </li>
                             </ul>
                         </div> -->
-                        <!-- <div class="pager">
+                            <!-- <div class="pager">
                             <div id="limiter">
                                 <label>View: </label>
                                 <ul>
@@ -80,120 +95,120 @@ $_SESSION['source'] = 'productcategory';
                                 </ul>
                             </div>
                         </div> -->
-                    </div>
-                    <?php if (count($list_product)) : ?>
-                        <div class="category-products">
-                            <ul class="products-grid">
-                                <?php foreach ($list_product as $item) : ?>
-                                    <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                                        <div class="item-inner">
-                                            <div class="item-img">
-                                                <div class="item-img-info">
-                                                    <a class="product-image" title="<?= $item['name'] ?>" href="?option=page&act=product-detail&id=<?= $item['slug'] ?>">
-                                                        <img alt="<?= $item['name'] ?>" src="../public/images/product/<?= $item['img'] ?>" height="250px">
-                                                    </a>
-                                                    <div class="mask-shop-white"></div>
-                                                    <a href="index.php?option=cart&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
-                                                        <div class="mask-left-shop">
-                                                            <i class="fa fa-heart"></i>
-                                                        </div>
-                                                    </a>
-                                                    <a href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Thêm giỏ hàng">
-                                                        <div class="mask-right-shop">
-                                                            <i class="fa fa-shopping-cart"></i>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="item-info">
-                                                <div class="info-inner">
-                                                    <div class="item-title">
-                                                        <a title="<?= $item['name'] ?>" href="?option=page&act=product-detail&slug=<?= $item['slug'] ?>">
-                                                            <?= $item['name'] ?>
+                        </div>
+                        <?php if (count($list_product)) : ?>
+                            <div class="category-products">
+                                <ul class="products-grid">
+                                    <?php foreach ($list_product as $item) : ?>
+                                        <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                                            <div class="item-inner">
+                                                <div class="item-img">
+                                                    <div class="item-img-info">
+                                                        <a class="product-image" title="<?= $item['name'] ?>" href="?option=page&act=product-detail&id=<?= $item['slug'] ?>">
+                                                            <img alt="<?= $item['name'] ?>" src="../public/images/product/<?= $item['img'] ?>" height="250px">
+                                                        </a>
+                                                        <div class="mask-shop-white"></div>
+                                                        <a href="index.php?option=cart&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
+                                                            <div class="mask-left-shop">
+                                                                <i class="fa fa-heart"></i>
+                                                            </div>
+                                                        </a>
+                                                        <a href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Thêm giỏ hàng">
+                                                            <div class="mask-right-shop">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </div>
                                                         </a>
                                                     </div>
-                                                    <div class="item-content">
-                                                        <!-- <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div> -->
-                                                        <div class="item-price">
-                                                            <div class="price-box">
-                                                                <?php
-                                                                $firstSizePrinted = false;
-                                                                foreach ($list_size as $row) :
-                                                                    if (!$firstSizePrinted) :
-                                                                        $firstSizePrinted = true; // Đánh dấu là đã in ra giá tiền kích thước đầu tiên
-                                                                        $calculated_price = $item['promotion'] > 0 ? $row['temp_price'] - ($row['temp_price'] * $item['promotion'] / 100) : $row['temp_price'];
-                                                                ?>
-                                                                        <p class="regular-price">
-                                                                            <span class="price" id="displayedPrice">
-                                                                                <?= number_format($calculated_price) ?> VNĐ
-                                                                            </span>
-                                                                        </p>
-                                                                        <?php if ($item['promotion'] > 0) : ?>
-                                                                            <p class="old-price">
-                                                                                <span class="price">
-                                                                                    <span id="originalPrice"><?= number_format($row['temp_price']) ?></span> VNĐ
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="info-inner">
+                                                        <div class="item-title">
+                                                            <a title="<?= $item['name'] ?>" href="?option=page&act=product-detail&slug=<?= $item['slug'] ?>">
+                                                                <?= $item['name'] ?>
+                                                            </a>
+                                                        </div>
+                                                        <div class="item-content">
+                                                            <!-- <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div> -->
+                                                            <div class="item-price">
+                                                                <div class="price-box">
+                                                                    <?php
+                                                                    $firstSizePrinted = false;
+                                                                    foreach ($list_size as $row) :
+                                                                        if (!$firstSizePrinted) :
+                                                                            $firstSizePrinted = true; // Đánh dấu là đã in ra giá tiền kích thước đầu tiên
+                                                                            $calculated_price = $item['promotion'] > 0 ? $row['temp_price'] - ($row['temp_price'] * $item['promotion'] / 100) : $row['temp_price'];
+                                                                    ?>
+                                                                            <p class="regular-price">
+                                                                                <span class="price" id="displayedPrice">
+                                                                                    <?= number_format($calculated_price) ?> VNĐ
                                                                                 </span>
                                                                             </p>
+                                                                            <?php if ($item['promotion'] > 0) : ?>
+                                                                                <p class="old-price">
+                                                                                    <span class="price">
+                                                                                        <span id="originalPrice"><?= number_format($row['temp_price']) ?></span> VNĐ
+                                                                                    </span>
+                                                                                </p>
+                                                                            <?php endif; ?>
                                                                         <?php endif; ?>
-                                                                    <?php endif; ?>
-                                                                <?php endforeach; ?>
+                                                                    <?php endforeach; ?>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                        <div class="toolbar bottom">
-                            <div class="row">
-                                <div class="col-sm-12 text-center">
-                                    <div class="pages">
-                                        <?php
-                                        $current = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
-                                        $totalPages = ceil($total / $limit);
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                            <div class="toolbar bottom">
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <div class="pages">
+                                            <?php
+                                            $current = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
+                                            $totalPages = ceil($total / $limit);
 
-                                        echo '<ul class="pagination">';
+                                            echo '<ul class="pagination">';
 
-                                        if ($current > 1) {
-                                            echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=1'>&lt;&lt;</a></li>";
-                                            echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=" . ($current - 1) . "'>&lt;</a></li>";
-                                        } else {
-                                            echo "<li class='disabled'><span>&lt;&lt;</span></li>";
-                                            echo "<li class='disabled'><span>&lt;</span></li>";
-                                        }
-
-                                        for ($i = 1; $i <= $totalPages; $i++) {
-                                            if ($i == $current) {
-                                                echo "<li class='active'><span>$i</span></li>";
+                                            if ($current > 1) {
+                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=1'>&lt;&lt;</a></li>";
+                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=" . ($current - 1) . "'>&lt;</a></li>";
                                             } else {
-                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=$i'>$i</a></li>";
+                                                echo "<li class='disabled'><span>&lt;&lt;</span></li>";
+                                                echo "<li class='disabled'><span>&lt;</span></li>";
                                             }
-                                        }
 
-                                        if ($current < $totalPages) {
-                                            echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=" . ($current + 1) . "'>&gt;</a></li>";
-                                            echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=$totalPages'>&gt;&gt;</a></li>";
-                                        } else {
-                                            echo "<li class='disabled'><span>&gt;</span></li>";
-                                            echo "<li class='disabled'><span>&gt;&gt;</span></li>";
-                                        }
+                                            for ($i = 1; $i <= $totalPages; $i++) {
+                                                if ($i == $current) {
+                                                    echo "<li class='active'><span>$i</span></li>";
+                                                } else {
+                                                    echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=$i'>$i</a></li>";
+                                                }
+                                            }
 
-                                        echo '</ul>';
-                                        ?>
+                                            if ($current < $totalPages) {
+                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=" . ($current + 1) . "'>&gt;</a></li>";
+                                                echo "<li><a href='?option=page&act=category&cat=" . $row_cat['slug'] . "&pages=$totalPages'>&gt;&gt;</a></li>";
+                                            } else {
+                                                echo "<li class='disabled'><span>&gt;</span></li>";
+                                                echo "<li class='disabled'><span>&gt;&gt;</span></li>";
+                                            }
 
+                                            echo '</ul>';
+                                            ?>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php else : ?>
-                        <div class="no-result">
-                            <p>Xin lỗi danh mục này không tồn tại sản phẩm.</p>
-                        </div>
-                    <?php endif ?>
-                </article>
+                        <?php else : ?>
+                            <div class="no-result">
+                                <p>Xin lỗi danh mục này không tồn tại sản phẩm.</p>
+                            </div>
+                        <?php endif ?>
+                        </article>
             </div>
             <div class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">
                 <?php require_once 'modules/product_sidebar.php'; ?>

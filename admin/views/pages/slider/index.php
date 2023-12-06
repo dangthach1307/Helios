@@ -46,8 +46,8 @@
                                         <th class="text-center" width="100px">Ảnh đại diện</th>
                                         <th class="text-center">Thông tin slider</th>
                                         <th class="text-center">Đường dẫn</th>
-                                        <th class="text-center" width="100px">Vị trí</th>
-                                        <th class="text-center" width="150px">Chức năng</th>
+                                        <th class="text-center" width="50px">Vị trí</th>
+                                        <th class="text-center" width="100px">Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,18 +58,9 @@
                                                 <img src="../public/images/slider/<?= $row['img']; ?>" style="width: 100%;" class="img img-fuild img-thumbnail">
                                             </td>
                                             <td class="text-center">
-                                                + Name: <?= $row['name']; ?> <br>
-                                                <?php if (isset($row['info1'])) : ?>
-                                                    Thông tin 1: <?= $row['info1']; ?> <br>
-                                                <?php endif; ?>
-                                                <?php if (isset($row['info2'])) : ?>
-                                                    Thông tin 2: <?= $row['info2']; ?> <br>
-                                                <?php endif; ?>
-                                                <?php if (isset($row['info3'])) : ?>
-                                                    Thông tin 3: <?= $row['info3']; ?> <br>
-                                                <?php endif; ?>
+                                                + Name: <?= $row['name']; ?>
                                             </td>
-                                            <td class="text-center"><?= $row['link']; ?></td>
+                                            <td>+ Link: <?= $row['link']; ?></td>
                                             <td class="text-center"><?= $row['position']; ?></td>
                                             <td class="text-center">
                                                 <?php if ($row['status'] == 1) : ?>
