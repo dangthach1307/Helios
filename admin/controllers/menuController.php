@@ -17,7 +17,7 @@ if (isset($act)) {
                         $row = category_rowid($id);
                         $name = $row['name'];
                         $type = 'category';
-                        $link = 'index.php?option=page&act=category&slug=' . $row['slug'];
+                        $link = 'index.php?option=page&act=category&cat=' . $row['slug'];
                         $table_id = $row['id'];
                         $parent_id = 0;
                         $orders = 0;
@@ -40,7 +40,7 @@ if (isset($act)) {
                         $row = topic_rowid($id);
                         $name = $row['name'];
                         $type = 'topic';
-                        $link = 'index.php?option=page&act=topic&slug=' . $row['slug'];
+                        $link = 'index.php?option=page&act=topic&post-category=' . $row['slug'];
                         $table_id = $row['id'];
                         $parent_id = 0;
                         $orders = 0;
@@ -64,7 +64,7 @@ if (isset($act)) {
                         $type = 'singlepage';
                         $link = 'index.php?option=page&act=post&slug=' . $row['slug'];
                         $tableid = $row['id'];
-                        $parentid = 0;
+                        $parent_id = 0;
                         $orders = 0;
                         $position = $_POST['position'];
                         $status = 2;
@@ -97,13 +97,13 @@ if (isset($act)) {
             break;
         case 'update':
             $id = $_REQUEST['id'];
-            $list_menu = menu_all('index');
+            $list_menu = menu_all();
             $row = menu_rowid($id);
             if (isset($_POST['UPDATE'])) {
                 //Lấy data
                 $name = $_POST['name'];
                 $link = $_POST['link'];
-                $parentid = $_POST['parentid'];
+                $parent_id = $_POST['parent_id'];
                 $orders = ($_POST['orders'] + 1);
                 $status = $_POST['status'];
                 menu_update($name, $link, $parent_id, $orders, $status, $id);
@@ -117,35 +117,50 @@ if (isset($act)) {
             $row = menu_rowid($id);
             if ($row == NULL) {
                 set_flash('message', ['type' => 'error', 'msg' => 'Không có menu này']);
-                redirect('index.php?option=menu');
             } else {
-                $status = ($row['status'] == 1) ? 2 : 1;
-                //Cập nhật lại dữ liệu
-                menu_status($updated_at, $updated_by, $status, $id);
-                set_flash('message', ['type' => 'success', 'msg' => 'Cập nhật trạng thái Menu thànhh công']);
-                redirect('index.php?option=menu');
+                // Kiểm tra xem có menu con đang hoạt động hay không
+                $hasActiveChildren = check_active_children($id);
+
+                if ($hasActiveChildren) {
+                    // Nếu có menu con đang hoạt động, thông báo lỗi
+                    set_flash('message', ['type' => 'error', 'msg' => 'Menu có menu con đang hoạt động. Không thể thay đổi trạng thái.']);
+                    redirect('index.php?option=menu');
+                } else {
+                    // Nếu không có menu con đang hoạt động, cập nhật trạng thái
+                    $status = ($row['status'] == 1) ? 2 : 1;
+                    menu_status($status, $id);
+                    set_flash('message', ['type' => 'success', 'msg' => 'Cập nhật trạng thái Menu thành công']);
+                    redirect('index.php?option=menu');
+                }
             }
-            break;
-        case 'trash':
-            $list_menu = menu_all('trash');
-            require_once $path . 'trash.php';
             break;
         case 'delete':
             $id = $_REQUEST['id'];
             $row = menu_rowid($id);
+
             if ($row == NULL) {
                 set_flash('message', ['type' => 'error', 'msg' => 'Không có menu này']);
-                redirect('index.php?option=menu&act=trash');
             } else {
-                menu_delete($id);
-                set_flash('message', ['type' => 'success', 'msg' => 'Xoá Menu thànhh công']);
-                redirect('index.php?option=menu&act=trash');
+                // Kiểm tra xem có menu con đang hoạt động hay không
+                $hasActiveChildren = check_active_children($id);
+
+                if ($hasActiveChildren) {
+                    // Nếu có menu con đang hoạt động, thông báo lỗi
+                    set_flash('message', ['type' => 'error', 'msg' => 'Menu có menu con đang hoạt động. Không thể xoá.']);
+                } else {
+                    // Nếu không có menu con đang hoạt động, xoá menu
+                    menu_delete($id);
+                    set_flash('message', ['type' => 'success', 'msg' => 'Xoá Menu thành công']);
+                }
             }
+
+            redirect('index.php?option=menu');
             break;
+
         default:
-            $list_menu_header = menu_all('index', "header");
-            $list_menu_main = menu_all('index', "megamenu");
-            $list_menu_footer = menu_all('index', "footer");
+            $list_menu_header = menu_all("header");
+            $list_menu_main = menu_all("megamenu");
+            $list_menu_footer = menu_all("footer");
             $list_category = category_all('index');
             $list_topic = topic_all('index');
             $list_singlepage = singlepage_all('index');
@@ -153,10 +168,9 @@ if (isset($act)) {
             break;
     }
 } else {
-    $list_menu_header = menu_all('index', "headermenu");
-    $list_menu_main = menu_all('index', "megamenu");
-    $list_menu_footer = menu_all('index', "footermenu");
-    $list_menu_custom = menu_all('index');
+    $list_menu_header = menu_all("headermenu");
+    $list_menu_main = menu_all("megamenu");
+    $list_menu_footer = menu_all("footermenu");
     $list_category = category_all('index');
     $list_topic = topic_all('index');
     $list_singlepage = singlepage_all('index');

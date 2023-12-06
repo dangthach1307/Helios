@@ -2,7 +2,7 @@
 $html_parentid = '';
 $html_orders = '';
 foreach ($list_menu as $item) {
-    if ($item['id'] == $row['parentid']) {
+    if ($item['id'] == $row['parent_id']) {
         $html_parentid .= '<option selected value="' . $item['id'] . '">' . $item['name'] . '</option>';
     } else {
         $html_parentid .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
@@ -71,17 +71,17 @@ foreach ($list_menu as $item) {
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="parentid">Cấp cha menu</label>
-                                <select id="parentid" name="parentid" class="form-control custom-select">
+                                <label for="parent_id">Cấp cha menu</label>
+                                <select id="parent_id" name="parent_id" class="form-control custom-select">
                                     <option value="0">[--Cấp cha--]</option>
-                                    <?php echo $html_parentid; ?>
+                                    <?= $html_parentid; ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="orders">Sắp xếp</label>
                                 <select id="orders" name="orders" class="form-control custom-select">
                                     <option value="0">[--Mặc định--]</option>
-                                    <?php echo $html_orders; ?>
+                                    <?= $html_orders; ?>
                                 </select>
                             </div>
                             <div class="form-group">
