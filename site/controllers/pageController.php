@@ -6,8 +6,8 @@ require_once './models/productModel.php';
 require_once './models/contactModel.php';
 require_once './models/blogModel.php';
 require_once './models/slider_banner_Model.php';
+require_once './models/configModel.php';
 
-// require_once 'views/header.php';
 if (isset($act)) {
     switch ($act) {
         case 'search':
@@ -16,7 +16,7 @@ if (isset($act)) {
             $max_price = isset($_GET['max_price']) ? intval($_GET['max_price']) : 99999999999;
             $priceFiltersQuery = buildPriceFiltersQuery();
             $sp_search = product_search($keyword, 0, PHP_INT_MAX, $min_price, $max_price);
-            
+
             if (!empty($sp_search) && isset($sp_search[0])) {
                 $list_size = product_by_size($sp_search[0]['id']);
                 $total = count($sp_search);
@@ -92,12 +92,12 @@ if (isset($act)) {
         case 'wishlist':
             $itemsPerPage = 10; // Số lượng sản phẩm trên mỗi trang
             $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
-        
+
             $list_wishlist = list_wishlist($_SESSION['user']['id'], $currentPage, $itemsPerPage);
-        
+
             // Lấy tổng số sản phẩm trong danh sách yêu thích
             $totalItems = count_wishlist_items($_SESSION['user']['id']);
-        
+
             $totalPages = ceil($totalItems / $itemsPerPage);
             foreach ($list_wishlist as &$item) {
                 $item['product'] = product_rowid($item['product_id']);
@@ -296,6 +296,7 @@ if (isset($act)) {
     $size_list_topview = product_by_size($product_list_topview[0]['id']);
     $size_list_hotdeal = product_by_size($product_list_hotdeal[0]['id']);
     $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
+
 
     $list_slider = slider_all('home');
     $list_banner_slider = banner_all('slider');

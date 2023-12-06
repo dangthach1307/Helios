@@ -39,11 +39,22 @@
                                 <label for="name">Tên cấp bậc (*)</label>
                                 <input type="text" id="name" name="name" class="form-control" required>
                             </div>
+                            <div class="form-group">
+                                <label for="condition">Điều kiện thăng hạng => Tổng tiền đơn hàng: (*)</label>
+                                <input type="number" id="condition" name="condition" class="form-control" required>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="promotion">Mức giảm giá (*):</label>
-                                <input type="number" id="promotion" name="promotion" value="1" min="1" max="100" required>
+                                <input type="number" id="promotion" name="promotion" class="form-control" value="1" min="1" max="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="img">Hình ảnh đại diện (*):</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="img" name="img" onchange="updateFileNames()">
+                                    <label class="custom-file-label" for="img">Choose file</label>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="status">Trạng thái (*): </label>

@@ -67,7 +67,6 @@ foreach ($list_brand as $item) {
                                     <option selected>[--- Trạng thái ---]</option>
                                     <option value="1">Xuất bản</option>
                                     <option value="2">Không xuất bản</option>
-                                    <option value="0">Lưu trữ</option>
                                 </select>
                             </div>
 

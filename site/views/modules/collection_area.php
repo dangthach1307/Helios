@@ -72,7 +72,7 @@
     <div class="col-md-4 col-sm-6 col-xs-12 hidden-sm">
         <div class="sidebar-banner">
             <div class="jtv-top-banner"> <a href="#"> <img src="../public/images/banner3.jpg" alt="banner"> </a> </div>
-            <div class="jtv-top-banner"> <a href="#"> <img src="../public/images/banner4.jpg" alt="banner"> </a> </div>
+            <div class="jtv-top-banner"> <a href="index.php?option=page&act=product"> <img src="../public/images/banner4.jpg" alt="banner"> </a></div>
         </div>
     </div>
     <!-- Top Seller Slider -->

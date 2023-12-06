@@ -11,16 +11,16 @@ function rank_rowid($id)
     return pdo_query_one($sql, $id);
 }
 
-function rank_insert($name, $promotion, $info1, $info2, $status)
+function rank_insert($name, $img, $promotion, $condition, $status)
 {
-    $sql = "INSERT INTO db_member_rank (name,promotion,info1,info2,status) VALUES(?,?,?,?,?)";
-    $result = pdo_execute($sql, $name, $promotion, $info1, $info2, $status);
-    return  $result;
+    $sql = "INSERT INTO db_member_rank (name,img,promotion,condition_column,status) VALUES (?,?,?,?,?)";
+    $result = pdo_execute($sql, $name, $img, $promotion, $condition, $status);
+    return $result;
 }
-function rank_update($name, $promotion, $info1, $info2, $status, $id)
+function rank_update($name, $img, $promotion, $condition, $status, $id)
 {
-    $sql = "UPDATE db_member_rank SET name=?,promotion=?,info1=?,info2=?,status=? WHERE id=?";
-    $result = pdo_execute($sql, $name, $promotion, $info1, $info2, $status, $id);
+    $sql = "UPDATE db_member_rank SET name=?,img=?,promotion=?,condition_column=?,status=? WHERE id=?";
+    $result = pdo_execute($sql, $name, $img, $promotion, $condition, $status, $id);
     return $result;
 }
 function rank_update_status($status, $id)

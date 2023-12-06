@@ -7,7 +7,21 @@ if (isset($act)) {
     switch ($act) {
         case 'insert':
             if (isset($_POST['THEM'])) {
-                $result = rank_insert($name, $promotion, $info1, $info2, $status);
+                $slug = str_slug($_POST['name']);
+                if (!empty($_FILES['img']['name'])) {
+                    // Kiểm tra nếu file không rỗng
+                    $file_name = $_FILES['img']['name'];
+                    $file_tmp_name = $_FILES['img']['tmp_name'];
+                    $name_img = $slug . '.' . get_duoi_file($file_name);
+                    $upload_path = '../public/images/rank/' . $name_img;
+                    if (!move_uploaded_file($file_tmp_name, $upload_path)) {
+                        // Lỗi trong quá trình xử lý upload
+                        set_flash('message', ['type' => 'warning', 'msg' => 'Lỗi upload hình ảnh!']);
+                        redirect('index.php?option=rank&act=insert');
+                    }
+                    $img = $name_img;
+                }
+                $result = rank_insert($name, $img, $promotion, $condition, $status);
                 if ($result) {
                     set_flash('message', ['type' => 'success', 'msg' => 'Tạo cấp bậc mới thành công!']);
                     redirect('index.php?option=rank');
@@ -20,8 +34,29 @@ if (isset($act)) {
             break;
         case 'update':
             $id = $_REQUEST['id'];
+            $row = rank_rowid($id);
             if (isset($_POST['CAPNHAT'])) {
-                $result = rank_update($name, $promotion, $info1, $info2, $status, $id);
+                $slug = str_slug($_POST['name']);
+                if (isset($_FILES['img']) && !empty($_FILES['img']['name'])) {
+                    //Kiểm tra nếu có tồN tại hình cũ thì xoá hình cũ trong folder đi
+                    if (file_exists('../public/images/rank/' . $row['img'])) {
+                        unlink('../public/images/rank/' . $row['img']);
+                    }
+                    // Kiểm tra nếu file không rỗng thf cập nhật hình ảnh mới
+                    $file_name = $_FILES['img']['name'];
+                    $file_tmp_name = $_FILES['img']['tmp_name'];
+                    $name_img = $slug . '.' . get_duoi_file($file_name);
+                    $upload_path = '../public/images/rank/' . $name_img;
+                    if (!move_uploaded_file($file_tmp_name, $upload_path)) {
+                        //Lỗi trong quá trình xử lý upload
+                        set_flash('message', ['type' => 'warning', 'msg' => 'Lỗi upload hình ảnh!']);
+                        redirect('index.php?option=rank&act=update&id=' . $id);
+                    }
+                    $img = $name_img;
+                } else {
+                    $img = $row['img'];
+                }
+                $result = rank_update($name, $img, $promotion, $condition, $status, $id);
                 if ($result) {
                     set_flash('message', ['type' => 'success', 'msg' => 'Sửa thông tin cấp bậc thành công!']);
                     redirect('index.php?option=rank');

@@ -1,10 +1,12 @@
 <ul class="links pull-left">
-    <li><a title="Trang chủ" href="index.php?option=page&act=home">Trang chủ</a></li>
-    <li><a title="Sản phẩm" href="index.php?option=page&act=product">Sản phẩm</a></li>
+    <?php foreach ($header_menu as $menu) : ?>
+        <li><a title="<?= $menu['name'] ?>" href="<?= $menu['link'] ?>"><?= $menu['name'] ?></a></li>
+    <?php endforeach; ?>
+    <!-- <li><a title="Sản phẩm" href="index.php?option=page&act=product">Sản phẩm</a></li>
     <li><a title="Về chúng tôi" href="index.php?option=page&act=about">Về chúng tôi</a></li>
     <li><a title="Liên hệ" href="index.php?option=page&act=contact">Liên hệ</a></li>
     <li><a title="Tin tức" href="index.php?option=page&act=post">Tin tức</a></li>
-    <li><a title="faq" href="index.php?option=page&act=faq">Faq</a></li>
+    <li><a title="faq" href="index.php?option=page&act=faq">Faq</a></li> -->
 </ul>
 <ul class="links pull-right">
     <?php if (isset($_SESSION['user'])) : ?>

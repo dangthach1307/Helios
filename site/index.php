@@ -8,13 +8,7 @@ require_once '../system/Database.php';
 require_once '../system/myFunction.php';
 require_once '../system/form_control.php';
 require_once '../system/auth.php';
-require_once 'models/brandModel.php';
-require_once 'models/categoryModel.php';
-require_once 'models/productModel.php';
 require_once 'models/cartModel.php';
-require_once 'models/customerModel.php';
-require_once 'models/contactModel.php';
-require_once 'models/orderModel.php';
 require_once 'models/configModel.php';
 if (isset($_SESSION['cart'])) {
     $cart_count = cart_total();
@@ -29,6 +23,9 @@ if (isset($_SESSION['cart'])) {
 }
 $config = load_config();
 extract($config);
+$header_menu = load_menu('headermenu');
+$mega_menu = load_menu('megamenu');
+$footer_menu = load_menu('footermenu');
 require_once 'views/header.php';
 if (isset($option)) {
     switch ($option) {

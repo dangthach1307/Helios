@@ -121,7 +121,7 @@ if (isset($act)) {
                 // Kiểm tra xem có menu con đang hoạt động hay không
                 $hasActiveChildren = check_active_children($id);
 
-                if ($hasActiveChildren) {
+                if ($hasActiveChildren == TRUE) {
                     // Nếu có menu con đang hoạt động, thông báo lỗi
                     set_flash('message', ['type' => 'error', 'msg' => 'Menu có menu con đang hoạt động. Không thể thay đổi trạng thái.']);
                     redirect('index.php?option=menu');

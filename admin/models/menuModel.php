@@ -35,11 +35,16 @@ function menu_status($status, $id)
     $sql = "UPDATE db_menu SET status=? WHERE id=?";
     return pdo_execute($sql, $status, $id);
 }
-function check_active_children($parentId)
+function check_active_children($id)
 {
     // Kiểm tra xem có menu con đang hoạt động không
     $sql = "SELECT * FROM db_menu WHERE parent_id=? AND status=1";
-    return pdo_query_all($sql, $parentId) > 0;
+    $count = count(pdo_query_all($sql, $id));
+    if ($count > 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function menu_delete($id)
