@@ -227,7 +227,7 @@
                   // Loại bỏ nổi bật từ tất cả các kích thước khác
                   sizeLabels.forEach((otherLabel) => {
                       if (otherLabel !== label) {
-                          otherLabel.parentElement.style.border = '2px solid #ddd';
+                          otherLabel.parentElement.style.border = '1px solid #ddd';
                       }
                   });
                   // Làm nổi bật kích thước được chọn

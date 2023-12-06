@@ -99,7 +99,7 @@ foreach ($list_material as $item) {
                             </div>
                             <div class="form-group">
                                 <label for="price">Giá sản phẩm:</label>
-                                <input type="number" id="price" name="price" min="1000000" value="0" class="form-control">
+                                <input type="number" id="price" name="price" min="500000" value="0" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="promotion">Phần trăm khuyến mãi:</label>

@@ -82,7 +82,7 @@
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <label for="rate">Mức giảm giá (*)</label>
+                                                                        <label for="rate">Mức giá tăng thêm (*)</label>
                                                                         <input type="number" id="rate" name="rate" value="<?= $row['rate'] * 100 ?>" class="form-control" required>
                                                                     </div>
                                                                 </div>

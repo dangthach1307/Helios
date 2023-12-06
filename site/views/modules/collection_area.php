@@ -5,44 +5,49 @@
                 <h2 class="text-center">Hot deal</h2>
             </div>
             <ul class="products-grid">
-                <?php foreach ($product_list_hotdeal as $item) : ?>
+                <?php foreach ($product_list_hotdeal as $item_hotdeal) : ?>
                     <li class="right-space two-height item">
                         <div class="item-inner">
                             <div class="item-img">
                                 <div class="item-img-info">
-                                    <a href="index.php?option=page&act=product-detail&slug=<?= $item['slug'] ?>" title="<?= $item['name'] ?> " class="product-image">
-                                        <img src="../public/images/product/<?= $item['img'] ?>" alt="<?= $item['name'] ?> ">
+                                    <a href="index.php?option=page&act=product-detail&slug=<?= $item_hotdeal['slug'] ?>" title="<?= $item_hotdeal['name'] ?> " class="product-image">
+                                        <img src="../public/images/product/<?= $item_hotdeal['img'] ?>" alt="<?= $item_hotdeal['name'] ?> ">
                                     </a>
                                     <div class="hot-label hot-top-left">Hot Deal</div>
-                                    <div class="sale-label sale-top-right"><?= $item['promotion'] ?>%</div>
+                                    <div class="sale-label sale-top-right"><?= $item_hotdeal['promotion'] ?>%</div>
                                 </div>
                             </div>
 
                             <div class="item-info">
                                 <div class="info-inner">
                                     <div class="item-title">
-                                        <a title="<?= $item['name'] ?>" href="index.php?option=page&act=product-detail&slug=<?= $item['slug'] ?>"><?= $item['name'] ?> </a>
+                                        <a title="<?= $item_hotdeal['name'] ?>" href="index.php?option=page&act=product-detail&slug=<?= $item_hotdeal['slug'] ?>"><?= $item_hotdeal['name'] ?> </a>
                                     </div>
                                     <div class="item-content">
                                         <div class="item-price">
                                             <?php
                                             $firstSizePrinted = false;
-                                            foreach ($size_list_hotdeal as $row) :
+                                            foreach ($size_list_hotdeal as $row_hotdeal) :
                                                 if (!$firstSizePrinted) :
                                                     $firstSizePrinted = true; // Đánh dấu là đã in ra giá tiền kích thước đầu tiên
-                                                    $calculated_price = $item['promotion'] > 0 ? $row['temp_price'] - ($row['temp_price'] * $item['promotion'] / 100) : $row['temp_price'];
+                                                    $calculated_price = $item_hotdeal['promotion'] > 0 ? $row_hotdeal['temp_price'] - ($row_hotdeal['temp_price'] * $item_hotdeal['promotion'] / 100) : $row_hotdeal['temp_price'];
                                             ?>
-                                                    <p class="regular-price">
-                                                        <span class="price" id="displayedPrice">
-                                                            <?= number_format($calculated_price) ?> VNĐ
-                                                        </span>
-                                                    </p>
-                                                    <?php if ($item['promotion'] > 0) : ?>
-                                                        <p class="old-price">
+                                                    <?php if ($item_hotdeal['promotion'] > 0) : ?>
+                                                        <span class="regular-price" id="displayedPrice">
                                                             <span class="price">
-                                                                <span id="originalPrice"><?= number_format($row['temp_price']) ?></span> VNĐ
+                                                                <?= number_format($calculated_price) ?> VNĐ
                                                             </span>
+                                                        </span>
+                                                        <p class="old-price">
+                                                            <span class="price-label">Giá gốc:</span>
+                                                            <span class="price"> <?= number_format($row_hotdeal['temp_price']) ?> Vnđ </span>
                                                         </p>
+                                                    <?php else : ?>
+                                                        <span class="regular-price">
+                                                            <span class="price">
+                                                                <?= number_format($row_hotdeal['temp_price']) ?> Vnđ
+                                                            </span>
+                                                        </span>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
@@ -84,13 +89,13 @@
                 </div>
                 <div id="top-products-slider" class="product-flexslider hidden-buttons">
                     <div class="slider-items slider-width-col4 products-grid">
-                        <?php foreach ($product_list_topsold as $item) : ?>
+                        <?php foreach ($product_list_topsold as $item_topsold) : ?>
                             <div class="item">
                                 <div class="item-inner">
                                     <div class="item-img">
                                         <div class="item-img-info">
-                                            <a href="index.php?option=page&act=product-detail&slug=<?= $item['slug'] ?>" title="<?= $item['name'] ?> " class="product-image">
-                                                <img src="../public/images/product/<?= $item['img'] ?>" alt="<?= $item['name'] ?> ">
+                                            <a href="index.php?option=page&act=product-detail&slug=<?= $item_topsold['slug'] ?>" title="<?= $item_topsold['name'] ?> " class="product-image">
+                                                <img src="../public/images/product/<?= $item_topsold['img'] ?>" alt="<?= $item_topsold['name'] ?> ">
                                             </a>
                                         </div>
                                     </div>
@@ -98,28 +103,33 @@
                                     <div class="item-info">
                                         <div class="info-inner">
                                             <div class="item-title">
-                                                <a title="<?= $item['name'] ?>" href="index.php?option=page&act=product-detail&slug=<?= $item['slug'] ?>"><?= $item['name'] ?> </a>
+                                                <a title="<?= $item_topsold['name'] ?>" href="index.php?option=page&act=product-detail&slug=<?= $item_topsold['slug'] ?>"><?= $item_topsold['name'] ?> </a>
                                             </div>
                                             <div class="item-content">
                                                 <div class="item-price">
                                                     <?php
                                                     $firstSizePrinted = false;
-                                                    foreach ($size_list_hotdeal as $row) :
+                                                    foreach ($size_list_topview as $row_topsold) :
                                                         if (!$firstSizePrinted) :
                                                             $firstSizePrinted = true; // Đánh dấu là đã in ra giá tiền kích thước đầu tiên
-                                                            $calculated_price = $item['promotion'] > 0 ? $row['temp_price'] - ($row['temp_price'] * $item['promotion'] / 100) : $row['temp_price'];
+                                                            $calculated_price = $item_topsold['promotion'] > 0 ? $row_topsold['temp_price'] - ($row_topsold['temp_price'] * $item_topsold['promotion'] / 100) : $row_topsold['temp_price'];
                                                     ?>
-                                                            <p class="regular-price">
-                                                                <span class="price" id="displayedPrice">
-                                                                    <?= number_format($calculated_price) ?> VNĐ
-                                                                </span>
-                                                            </p>
-                                                            <?php if ($item['promotion'] > 0) : ?>
-                                                                <p class="old-price">
+                                                            <?php if ($item_topsold['promotion'] > 0) : ?>
+                                                                <span class="regular-price" id="displayedPrice">
                                                                     <span class="price">
-                                                                        <span id="originalPrice"><?= number_format($row['temp_price']) ?></span> VNĐ
+                                                                        <?= number_format($calculated_price) ?> VNĐ
                                                                     </span>
+                                                                </span>
+                                                                <p class="old-price">
+                                                                    <span class="price-label">Giá gốc:</span>
+                                                                    <span class="price"> <?= number_format($calculated_price) ?> Vnđ </span>
                                                                 </p>
+                                                            <?php else : ?>
+                                                                <span class="regular-price">
+                                                                    <span class="price">
+                                                                        <?= number_format($row_topsold['temp_price']) ?> Vnđ
+                                                                    </span>
+                                                                </span>
                                                             <?php endif; ?>
                                                         <?php endif; ?>
                                                     <?php endforeach; ?>

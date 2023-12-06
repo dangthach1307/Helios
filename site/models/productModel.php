@@ -14,7 +14,7 @@ function product_list_home($option = null)
         WHERE p.status = 1
         ORDER BY p.id DESC
         LIMIT 8";
-    } else if ($option == 'topview') {
+    } elseif ($option == 'topview') {
         $sql = "SELECT p.*, i.img_id, i.product_id, i.img
         FROM db_product p
         INNER JOIN (
