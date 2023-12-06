@@ -68,13 +68,25 @@
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
+
                             </table>
+                            <div class="cart-page-area">
+                                <div class="col-xs-12 text-center">
+                                    <div class="pages">
+                                        <div class="pagination">
+                                            <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                                                <a href="index.php?option=wishlist&page=<?= $i ?>" <?= ($currentPage == $i) ? 'class="active"' : '' ?>><?= $i ?></a>
+                                            <?php endfor; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     <?php else : ?>
                         <h3>Bạn chưa có sản phẩm yêu thích nào</h3>
                         <p>Quay lại <a href="index.php?option=page&act=home">Trang chủ</a></p>
                     <?php endif; ?>
-
                 </div>
             </section>
         </div>

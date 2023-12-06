@@ -15,6 +15,7 @@ require_once 'models/cartModel.php';
 require_once 'models/customerModel.php';
 require_once 'models/contactModel.php';
 require_once 'models/orderModel.php';
+require_once 'models/configModel.php';
 if (isset($_SESSION['cart'])) {
     $cart_count = cart_total();
     $cart_count_product = cart_total_product();
@@ -26,6 +27,8 @@ if (isset($_SESSION['cart'])) {
     $total_price = 0;
     // $cart_content = array();
 }
+$config = load_config();
+extract($config);
 require_once 'views/header.php';
 if (isset($option)) {
     switch ($option) {

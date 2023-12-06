@@ -90,7 +90,15 @@ if (isset($act)) {
             header('location: ' . $_SERVER['HTTP_REFERER']);
             exit();
         case 'wishlist':
-            $list_wishlist = list_wishlist($_SESSION['user']['id']);
+            $itemsPerPage = 10; // Số lượng sản phẩm trên mỗi trang
+            $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+        
+            $list_wishlist = list_wishlist($_SESSION['user']['id'], $currentPage, $itemsPerPage);
+        
+            // Lấy tổng số sản phẩm trong danh sách yêu thích
+            $totalItems = count_wishlist_items($_SESSION['user']['id']);
+        
+            $totalPages = ceil($totalItems / $itemsPerPage);
             foreach ($list_wishlist as &$item) {
                 $item['product'] = product_rowid($item['product_id']);
                 $item['size_list'] = product_by_size($item['product_id']);

@@ -281,11 +281,20 @@ function wishlist_insert($product_id, $user_id)
         return false;
     }
 }
-function list_wishlist($user_id)
+function list_wishlist($user_id, $page = 1, $itemsPerPage = 10)
 {
-    $sql = "SELECT * FROM db_wishlist WHERE customer_id=?";
+    $offset = ($page - 1) * $itemsPerPage;
+    $sql = "SELECT * FROM db_wishlist WHERE customer_id=? LIMIT $offset, $itemsPerPage";
     return pdo_query_all($sql, $user_id);
 }
+
+function count_wishlist_items($user_id)
+{
+    $sql = "SELECT COUNT(*) as count FROM db_wishlist WHERE customer_id=?";
+    $result = pdo_query_one($sql, $user_id);
+    return $result['count'];
+}
+
 function wishlist_delete($id)
 {
     $sql = "DELETE FROM db_wishlist WHERE id=?";

@@ -9,10 +9,11 @@
     <!-- <meta name="description" content="Fabulous is a creative, clean, fully responsive, powerful and multipurpose HTML Template with latest website trends. Perfect to all type of fashion stores.">
     <meta name="keywords" content="HTML,CSS,womens clothes,fashion,mens fashion,fashion show,fashion week">
     <meta name="author" content="JTV"> -->
-    <title>Helios E-Commerece Jewelry Website</title>
+    <!-- <title>Helios E-Commerece Jewelry Website</title> -->
+    <title><?=$config['title']?></title>
 
     <!-- Favicons Icon -->
-    <link rel="icon" href="../public/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="../public/images/<?=$config['icon']?>" type="image/x-icon" />
 
     <!-- Mobile Specific -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -39,8 +40,8 @@
                     <div class="row">
                         <div class="col-lg-3 col-sm-3 col-xs-12">
                             <div class="logo">
-                                <a title="Helios E-Commerece" href="index.php">
-                                    <img alt="Helios E-Commerece" src="../public/images/logo.png" style="position:absolute;top:10px;left:-5px">
+                                <a title="<?=$config['title']?>" href="index.php">
+                                    <img alt="<?=$config['title']?>" src="../public/images/<?=$config['logo']?>" style="position:absolute;top:10px;left:-5px">
                                 </a>
                             </div>
                             <div class="nav-icon" style="margin-top:40px">

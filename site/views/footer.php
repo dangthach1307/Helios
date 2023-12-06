@@ -7,15 +7,14 @@
           <div class="container">
               <div class="row">
                   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                      <h4>About</h4>
+                      <h4>Về chúng tôi</h4>
                       <div class="contacts-info">
-                          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                          <p>Nơi mua sắm trang sức đá quý đáng tin tưởng cho bạn</p>
                           <address>
-                              <i class="fa fa-location-arrow"></i> <span>Company, 12/34 - West 21st Street,<br>
-                                  New York, USA</span>
+                              <i class="fa fa-location-arrow"></i> <span><?= $config['address'] ?></span>
                           </address>
-                          <div class="phone-footer"><i class="fa fa-phone"></i> +1 123 456 98765</div>
-                          <div class="email-footer"><i class="fa fa-envelope"></i> <a href="mailto:support@example.com">support@example.com</a> </div>
+                          <div class="phone-footer"><i class="fa fa-phone"></i><?= $config['phone'] ?></div>
+                          <div class="email-footer"><i class="fa fa-envelope"></i> <a href="mailto:support@example.com"><?= $config['email'] ?></a> </div>
                       </div>
                   </div>
                   <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
@@ -67,7 +66,7 @@
       <div class="footer-bottom">
           <div class="container">
               <div class="row">
-                  <div class="col-sm-12 col-xs-12 coppyright text-center">© 2018 Fabulous, All rights reserved.</div>
+                  <div class="col-sm-12 col-xs-12 coppyright text-center">© 2018 <?= $config['title'] ?></div>
               </div>
           </div>
       </div>

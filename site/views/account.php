@@ -72,7 +72,7 @@
                             </a>
                         </div>
                         <div class="col-sm-12 col-md-12 col-xs-12">
-                            <a href="?option=user&act=account-detail">
+                            <a href="?option=page&act=wishlist">
                                 <div class="account-box">
                                     <div class="service-box">
                                         <div class="service-icon"> <i class="fa fa-heart"></i> </div>
@@ -100,7 +100,6 @@
                             </div>
                         <?php endif; ?>
                     </div>
-
                 </div>
             </div>
         </div>
