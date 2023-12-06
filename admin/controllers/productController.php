@@ -130,6 +130,18 @@ if (isset($act)) {
             $list_comment = product_comment_all($id);
             require_once $path . 'comment.php';
             break;
+        case 'delete_cmt':
+            $cid = $_REQUEST['cid'];
+            $result = product_comment_delete($cid);
+            if ($result) {
+                set_flash('message', ['type' => 'success', 'msg' => 'Xoá bình luận thành công!']);
+                redirect($_SERVER['HTTP_REFERER']);
+            } else {
+                set_flash('message', ['type' => 'error', 'msg' => 'Thao tác không thành công!']);
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+            require_once $path . 'comment.php';
+            break;
         case 'deltrash':
             $id = $_REQUEST['id'];
             $row = product_rowid($id);

@@ -58,7 +58,7 @@
                                                 <button class="btn btn-sm btn-info" style="margin:2%" data-toggle="modal" data-target="#myModal" data-fullname="<?= $row['fullname'] ?>" data-title="<?= $row['title'] ?>" data-createdat="<?= $row['created_at'] ?>" title="Xem chi tiết">
                                                     <i class="fa fa-eye"></i>
                                                 </button>
-                                                <!-- <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=delete_cmt&id=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a> -->
+                                                <a class="btn btn-sm btn-danger" style="margin:2%" href="index.php?option=product&act=delete_cmt&cid=<?= $row['id']; ?>" data-toggle="tooltip" title="Xoá"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                         <!-- Modal -->
