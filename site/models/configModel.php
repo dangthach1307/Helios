@@ -17,5 +17,10 @@ function load_menu($position)
 }
 
 //mega menu
+function menu_list_parentid($parentid)
+{
+    $sql = "SELECT * FROM db_menu WHERE parent_id=? AND status=1 AND position='megamenu' ORDER BY orders";
+    return pdo_query_all($sql, $parentid);
+}
 
 //footer menu

@@ -72,7 +72,7 @@
                         <li class="nav-item">
                             <a href="index.php?option=category" class="nav-link">
                                 <i class="fa fa-code-branch nav-icon"></i>
-                                <p>Loại sản phẩm</p>
+                                <p>Danh mục</p>
                             </a>
                         </li>
                         <li class="nav-item">

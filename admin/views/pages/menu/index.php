@@ -273,14 +273,14 @@
                                                                 Bạn có chắc chắn muốn xoá?
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form action="index.php?option=menu&act=delete&id=<?= $item['id']; ?>" method="post">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
-                                                                    <button type="submit" class="btn btn-danger">Xoá</button>
-                                                                </form>
+                                                                <!-- Thẻ a gọi đến liên kết xoá -->
+                                                                <a href="index.php?option=menu&act=delete&id=<?= $item['id']; ?>" class="btn btn-danger">Xoá</a>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Quay lại</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             <?php endforeach; ?>
                                         </tbody>
                                     </table>

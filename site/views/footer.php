@@ -18,25 +18,24 @@
                       </div>
                   </div>
                   <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
-                      <h4>Helpful Links</h4>
+                      <h4>Dịch vụ khách hàng</h4>
                       <ul class="links">
-                          <li><a href="#">Products</a></li>
-                          <li><a href="#">Find a Store</a></li>
-                          <li><a href="#">Features</a></li>
-                          <li><a href="#">Privacy Policy</a></li>
-                          <li><a href="blog.html">Blog</a></li>
-                          <li><a href="sitemap.html">Site Map</a></li>
+                          <li><a href="#">Hướng dẫn đo size trang sức</a></li>
+                          <li><a href="#">Mua hàng trả góp</a></li>
+                          <li><a href="#">Hướng dẫn mua hàng và thanh toán</a></li>
+                          <li><a href="#">Cẩm nang sử dụng trang sức</a></li>
+                          <li><a href="">Câu hỏi thường gặp</a></li>
                       </ul>
                   </div>
                   <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
-                      <h4>Shop</h4>
+                      <h4>Chính sách</h4>
                       <ul class="links">
-                          <li><a href="about-us.html">About Us</a></li>
-                          <li><a href="faq.html">FAQs</a></li>
-                          <li><a href="#">Shipping Methods</a></li>
-                          <li><a href="contact.html">Contact</a></li>
-                          <li><a href="#">Support</a></li>
-                          <li><a href="#">Retailer</a></li>
+                          <li><a href="#">Chính sách hoàn tiền</a></li>
+                          <li><a href="#">Chính sách giao hàng</a></li>
+                          <li><a href="#">Chính sách bảo hành thu đổi</a></li>
+                          <li><a href="#">Chính sách khách hàng thân thiết</a></li>
+                          <li><a href="#">Chính sách bảo mật thông tin khách hàng</a></li>
+                          <li><a href="#">Chính sách xử lý dữ liệu cá nhân</a></li>
                       </ul>
                   </div>
                   <div class="col-xs-12 col-lg-3 col-md-4 col-sm-6">

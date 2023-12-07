@@ -1,3 +1,9 @@
+<?php
+$html_topid = '';
+foreach ($list_topic as $item) {
+    $html_topid .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
+}
+?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -45,6 +51,13 @@
                             </div>
                         </div>
                         <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="topic_id">Chủ đề (*):</label>
+                                <select id="topic_id" name="topic_id" class="form-control custom-select">
+                                    <option value="0">[--- Chọn Chủ đề ---]</option>
+                                    <?= $html_topid ?>
+                                </select>
+                            </div>
                             <div class="form-group align-items-center">
                                 <label for="img">Hình ảnh trang đơn (*):</label>
                                 <div class="custom-file">

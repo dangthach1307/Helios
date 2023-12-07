@@ -24,7 +24,21 @@ if (isset($_SESSION['cart'])) {
 $config = load_config();
 extract($config);
 $header_menu = load_menu('headermenu');
-$mega_menu = load_menu('megamenu');
+$parent_menu = menu_list_parentid(0);
+foreach ($parent_menu as $key => $parent) {
+    $list_menu1 = menu_list_parentid($parent['id']);
+    $parent_menu[$key]['submenu'] = $list_menu1;
+
+    // Thêm cấp con thứ hai
+    foreach ($list_menu1 as $menu1_key => $menu1) {
+        $list_menu2 = menu_list_parentid($menu1['id']);
+        $parent_menu[$key]['submenu'][$menu1_key]['submenu'] = $list_menu2;
+    }
+}
+
+
+
+
 $footer_menu = load_menu('footermenu');
 require_once 'views/header.php';
 if (isset($option)) {

@@ -1,3 +1,13 @@
+<?php
+$html_topid = '';
+foreach ($list_topic as $item) {
+    if ($item['id'] == $row['topic_id']) {
+        $html_topid .= '<option selected value="' . $item['id'] . '">' . $item['name'] . '</option>';
+    } else {
+        $html_topid .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
+    }
+}
+?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -46,10 +56,17 @@
                             </div>
                         </div>
                         <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="topic_id">Chủ đề (*)</label>
+                                <select id="topic_id" name="topic_id" class="form-control custom-select">
+                                    <option selected>[--Chọn chủ đề--]</option>
+                                    <?= $html_topid ?>
+                                </select>
+                            </div>
                             <?php if (isset($row['img'])) : ?>
                                 <div class="form-group">
                                     <label for="img">Hình ảnh hiện tại:</label>
-                                    <img src="../public/images/singlepage/<?= $row['img'] ?>" class="img-responsive w-100">
+                                    <img src="../public/images/post/<?= $row['img'] ?>" class="img-responsive w-100">
                                 </div>
                             <?php endif; ?>
                             <div class="form-group align-items-center">

@@ -86,7 +86,7 @@ if (isset($act)) {
                     $parent_id = 0;
                     $orders = 0;
                     $position = $_POST['position'];
-                    $status = 2;
+                    $status = 1;
                     menu_insert($name, $type, $link, $table_id, $parent_id, $orders, $position, $status);
                     set_flash('message', ['type' => 'success', 'msg' => 'Tạo menu custom thành công!']);
                 } else {
@@ -117,6 +117,7 @@ if (isset($act)) {
             $row = menu_rowid($id);
             if ($row == NULL) {
                 set_flash('message', ['type' => 'error', 'msg' => 'Không có menu này']);
+                redirect('index.php?option=menu');
             } else {
                 // Kiểm tra xem có menu con đang hoạt động hay không
                 $hasActiveChildren = check_active_children($id);
@@ -137,14 +138,12 @@ if (isset($act)) {
         case 'delete':
             $id = $_REQUEST['id'];
             $row = menu_rowid($id);
-
             if ($row == NULL) {
                 set_flash('message', ['type' => 'error', 'msg' => 'Không có menu này']);
             } else {
                 // Kiểm tra xem có menu con đang hoạt động hay không
                 $hasActiveChildren = check_active_children($id);
-
-                if ($hasActiveChildren) {
+                if ($hasActiveChildren == TRUE) {
                     // Nếu có menu con đang hoạt động, thông báo lỗi
                     set_flash('message', ['type' => 'error', 'msg' => 'Menu có menu con đang hoạt động. Không thể xoá.']);
                 } else {
@@ -152,11 +151,9 @@ if (isset($act)) {
                     menu_delete($id);
                     set_flash('message', ['type' => 'success', 'msg' => 'Xoá Menu thành công']);
                 }
+                redirect('index.php?option=menu');
             }
-
-            redirect('index.php?option=menu');
             break;
-
         default:
             $list_menu_header = menu_all("header");
             $list_menu_main = menu_all("megamenu");

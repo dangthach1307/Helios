@@ -4,10 +4,10 @@
 function topic_all($page)
 {
     if ($page == 'index') {
-        $sql = "SELECT * FROM db_topic WHERE status!=0 AND id!=1 ORDER BY orders ASC";
+        $sql = "SELECT * FROM db_topic WHERE status!=0 ORDER BY orders ASC";
         return pdo_query_all($sql);
     } else {
-        $sql = "SELECT * FROM db_topic WHERE status=0 AND id!=1 ORDER BY orders ASC";
+        $sql = "SELECT * FROM db_topic WHERE status=0 ORDER BY orders ASC";
         return pdo_query_all($sql);
     }
 }

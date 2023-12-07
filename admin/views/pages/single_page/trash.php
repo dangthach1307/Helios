@@ -37,7 +37,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="datatable" style="width:100%" class="display table table-bordered table-striped table-hover">
+                            <table id="datatable" style="width:100%" class="datatable table table-bordered table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center" width="10px">#</th>
@@ -52,7 +52,7 @@
                                         <tr>
                                             <td class="text-center"><?= $row['id']; ?></td>
                                             <td class="text-center">
-                                                <img src="<?= '../public/images/singlepage/' . $row['img']; ?>" style="width: 100%;" class="img img-fuild img-thumbnail">
+                                                <img src="<?= '../public/images/post/' . $row['img']; ?>" style="width: 100%;" class="img img-fuild img-thumbnail">
                                             </td>
                                             <td class="text-center">
                                                 <?= $row['title']; ?>

@@ -1,11 +1,13 @@
 <?php
 extract($_REQUEST);
+require_once './models/topicModel.php';
 require_once './models/singlepageModel.php';
 //Lấy đường dẫn mặc định
 $path = 'views/pages/single_page/';
 if (isset($act)) {
     switch ($act) {
         case 'insert':
+            $list_topic = topic_all('index');
             if (isset($_POST['THEM'])) {
                 $slug = str_slug($title);
                 if (singlepage_slug_exists($slug) == FALSE) {
@@ -16,7 +18,7 @@ if (isset($act)) {
                         $file_name = $_FILES['img']['name'];
                         $file_tmp_name = $_FILES['img']['tmp_name'];
                         $name_img = $slug . '.' . get_duoi_file($file_name);
-                        $upload_path = '../public/images/singlepage/' . $name_img;
+                        $upload_path = '../public/images/post/' . $name_img;
                         if (!move_uploaded_file($file_tmp_name, $upload_path)) {
                             // Lỗi trong quá trình xử lý upload
                             set_flash('message', ['type' => 'warning', 'msg' => 'Lỗi upload hình ảnh!']);
@@ -37,19 +39,20 @@ if (isset($act)) {
         case 'update':
             $id = $_REQUEST['id'];
             $row = singlepage_rowid($id);
+            $list_topic = topic_all('index');
             if (isset($_POST['CAPNHAT'])) {
                 $slug = str_slug($_POST['title']);
                 if (singlepage_slug_exists($slug, $id) == FALSE) {
                     if (isset($_FILES['img']) && !empty($_FILES['img']['name'])) {
                         //Kiểm tra nếu có tồn tại hình cũ thì xoá hình cũ trong folder đi
-                        if (file_exists('../public/images/singlepage/' . $row['img'])) {
-                            unlink('../public/images/singlepage/' . $row['img']);
+                        if (file_exists('../public/images/post/' . $row['img'])) {
+                            unlink('../public/images/post/' . $row['img']);
                         }
                         // Kiểm tra nếu file không rỗng thf cập nhật hình ảnh mới
                         $file_name = $_FILES['img']['name'];
                         $file_tmp_name = $_FILES['img']['tmp_name'];
                         $name_img = $slug . '.' . get_duoi_file($file_name);
-                        $upload_path = '../public/images/singlepage/' . $name_img;
+                        $upload_path = '../public/images/post/' . $name_img;
                         if (!move_uploaded_file($file_tmp_name, $upload_path)) {
                             //Lỗi trong quá trình xử lý upload
                             set_flash('message', ['type' => 'warning', 'msg' => 'Lỗi upload hình ảnh!']);
