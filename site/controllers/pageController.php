@@ -7,7 +7,7 @@ require_once './models/contactModel.php';
 require_once './models/blogModel.php';
 require_once './models/slider_banner_Model.php';
 require_once './models/configModel.php';
-$promotion_price=0;
+$promotion_price = 0;
 if (isset($act)) {
     switch ($act) {
         case 'search':
@@ -31,7 +31,18 @@ if (isset($act)) {
             } else {
                 $list_size = 0;
             }
-
+            foreach ($sp_search as $key => $item) {
+                $size_list = product_by_size($item['id'])[0];
+                $sp_search[$key]['size_list'] = $size_list;
+                if ($item['promotion'] > 0) {
+                    $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item['promotion'] / 100);
+                    $sp_search[$key]['promotion_price'] = $promotion_price;
+                    $sp_search[$key]['old_price'] =  $size_list['temp_price'];
+                } else {
+                    $sp_search[$key]['old_price'] =  $size_list['temp_price'];
+                    $sp_search[$key]['promotion_price'] = $promotion_price;
+                }
+            }
             $list_categories = category_list(0);
             $category = displayCategories($list_categories);
             $list_brand = brand_list();
@@ -55,22 +66,93 @@ if (isset($act)) {
 
             // Kiểm tra xem mảng $list_product có tồn tại và có ít nhất một phần tử hay không
             if (!empty($list_product) && isset($list_product[0])) {
-                $list_size = product_by_size($list_product[0]['id']);
                 $total = count($list_product);
 
                 // Phân trang nếu cần
                 $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
-                $limit = 6;
+                $limit = 3;
                 $first = ($page - 1) * $limit;
 
                 $list_product = array_slice($list_product, $first, $limit);
                 $totalPages = ceil($total / $limit);
             }
-
+            foreach ($list_product as $key => $item) {
+                $size_list = product_by_size($item['id'])[0];
+                $list_product[$key]['size_list'] = $size_list;
+                if ($item['promotion'] > 0) {
+                    $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item['promotion'] / 100);
+                    $list_product[$key]['promotion_price'] = $promotion_price;
+                    $list_product[$key]['old_price'] =  $size_list['temp_price'];
+                } else {
+                    $list_product[$key]['old_price'] =  $size_list['temp_price'];
+                    $list_product[$key]['promotion_price'] = $promotion_price;
+                }
+            }
             $list_categories = category_list(0);
             $category = displayCategories($list_categories);
             $list_brand = brand_list();
             require_once 'views/product.php';
+            break;
+        case 'category':
+            // Lọc sản phẩm theo khoảng giá
+            $min_price = isset($_GET['min_price']) ? intval($_GET['min_price']) : 0;
+            $max_price = isset($_GET['max_price']) ? intval($_GET['max_price']) : 9999999;
+
+            // Sắp xếp sản phẩm
+            // $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default'; // Sắp xếp mặc định
+            // $validSorts = ['default', 'name_asc', 'name_desc', 'price_asc', 'price_desc', 'newest', 'oldest'];
+
+            // if (!in_array($sort, $validSorts)) {
+            //     $sort = 'default'; // Sắp xếp mặc định nếu giá trị sort không hợp lệ
+            // }
+
+            // Trang hiển thị sản phẩm theo danh mục
+            $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
+            $slug = $_REQUEST['cat'];
+            $limit = 3;
+            $first = ($page - 1) * $limit;
+
+            // Lấy danh sách danh mục sản phẩm.
+            $list_categories = category_list(0);
+
+            // Lấy thông tin danh mục dựa trên slug.
+            $row_cat = category_rowslug($slug);
+
+            // Lấy danh sách catid của danh mục này.
+            $list_catid = category_listcatid($row_cat['id']);
+            // Đếm tổng số sản phẩm thuộc danh mục.
+            $total = product_category_count($list_catid);
+
+            // Lấy danh sách sản phẩm thuộc danh mục với phân trang, lọc và sắp xếp.
+            $list_product = product_category($list_catid, $min_price, $max_price);
+            if (!empty($list_product) && isset($list_product[0])) {
+                $total = count($list_product);
+
+                // Phân trang nếu cần
+                $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
+                $limit = 3;
+                $first = ($page - 1) * $limit;
+
+                $list_product = array_slice($list_product, $first, $limit);
+                $totalPages = ceil($total / $limit);
+            }
+            foreach ($list_product as $key => $item) {
+                $size_list = product_by_size($item['id'])[0];
+                $list_product[$key]['size_list'] = $size_list;
+                if ($item['promotion'] > 0) {
+                    $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item['promotion'] / 100);
+                    $list_product[$key]['promotion_price'] = $promotion_price;
+                    $list_product[$key]['old_price'] =  $size_list['temp_price'];
+                } else {
+                    $list_product[$key]['old_price'] =  $size_list['temp_price'];
+                    $list_product[$key]['promotion_price'] = $promotion_price;
+                }
+            }
+
+            $list_slider = slider_all($slug);
+            $category = displayCategories($list_categories);
+            $list_brand = brand_list();
+            require_once 'views/product-category.php';
             break;
         case 'add-wishlist':
             $user_id = $_SESSION['user']['id'];
@@ -117,48 +199,7 @@ if (isset($act)) {
                 header('Location: index.php?option=page&act=wishlist');
                 exit();
             }
-        case 'category':
 
-            // Lọc sản phẩm theo khoảng giá
-            $min_price = isset($_GET['min_price']) ? intval($_GET['min_price']) : 0;
-            $max_price = isset($_GET['max_price']) ? intval($_GET['max_price']) : 9999999;
-
-            // Sắp xếp sản phẩm
-            // $sort = isset($_GET['sort']) ? $_GET['sort'] : 'default'; // Sắp xếp mặc định
-            // $validSorts = ['default', 'name_asc', 'name_desc', 'price_asc', 'price_desc', 'newest', 'oldest'];
-
-            // if (!in_array($sort, $validSorts)) {
-            //     $sort = 'default'; // Sắp xếp mặc định nếu giá trị sort không hợp lệ
-            // }
-
-            // Trang hiển thị sản phẩm theo danh mục
-            $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
-            $slug = $_REQUEST['cat'];
-            $limit = 9;
-            $first = ($page - 1) * $limit;
-
-            // Lấy danh sách danh mục sản phẩm.
-            $list_categories = category_list(0);
-
-            // Lấy thông tin danh mục dựa trên slug.
-            $row_cat = category_rowslug($slug);
-
-            // Lấy danh sách catid của danh mục này.
-            $list_catid = category_listcatid($row_cat['id']);
-
-            // Đếm tổng số sản phẩm thuộc danh mục.
-            $total = product_category_count($list_catid);
-
-            // Lấy danh sách sản phẩm thuộc danh mục với phân trang, lọc và sắp xếp.
-            $list_product = product_category($list_catid, $first, $limit, $min_price, $max_price);
-            if (!empty($list_product) && isset($list_product[0])) {
-                $list_size = product_by_size($list_product[0]['id']);
-            }
-            $list_slider = slider_all($slug);
-            $category = displayCategories($list_categories);
-            $list_brand = brand_list();
-            require_once 'views/product-category.php';
-            break;
         case 'product-detail':
             //Trang chi tiết sản phẩm
             $slug = $_REQUEST['slug'];
@@ -336,11 +377,12 @@ if (isset($act)) {
         $size_list = product_by_size($item_newest['id'])[0];
         $product_list_newest[$key]['size_list'] = $size_list;
         if ($item_newest['promotion'] > 0) {
-            $calculated_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_newest['promotion'] / 100);
-            $product_list_newest[$key]['calculated_price'] = $calculated_price;
+            $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_newest['promotion'] / 100);
+            $product_list_newest[$key]['promotion_price'] = $promotion_price;
+            $product_list_newest[$key]['old_price'] =  $size_list['temp_price'];
         } else {
-            $calculated_price = $size_list['temp_price'];
-            $product_list_newest[$key]['calculated_price'] = $calculated_price;
+            $product_list_newest[$key]['old_price'] =  $size_list['temp_price'];
+            $product_list_newest[$key]['promotion_price'] = $promotion_price;
         }
     }
     $product_list_topview = product_list_home('topview');
@@ -348,29 +390,40 @@ if (isset($act)) {
         $size_list = product_by_size($item_topview['id'])[0];
         $product_list_topview[$key]['size_list'] = $size_list;
         if ($item_topview['promotion'] > 0) {
-            $calculated_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_topview['promotion'] / 100);
-            $product_list_topview[$key]['calculated_price'] = $calculated_price;
+            $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_topview['promotion'] / 100);
+            $product_list_topview[$key]['promotion_price'] = $promotion_price;
+            $product_list_topview[$key]['old_price'] =  $size_list['temp_price'];
         } else {
-            $calculated_price = $size_list['temp_price'];
-            $product_list_topview[$key]['calculated_price'] = $calculated_price;
+            $product_list_topview[$key]['old_price'] =  $size_list['temp_price'];
+            $product_list_topview[$key]['promotion_price'] = $promotion_price;
         }
     }
-
-    // $product_list_hotdeal = product_list_home('hotdeal');
-    // foreach ($product_list_hotdeal as $key => $item_hotdeal) {
-    //     $size_list_hotdeal = product_by_size($item_hotdeal['id']);
-    //     $first_size_item_hotdeal = reset($size_list_hotdeal);
-    //     $calculated_price_hotdeal = $item_hotdeal['promotion'] > 0 ? $first_size_item_hotdeal['temp_price'] - ($first_size_item_hotdeal['temp_price'] * $item_hotdeal['promotion'] / 100) : $first_size_item_hotdeal['temp_price'];
-    //     $product_list_hotdeal[$key]['calculated_price'] = $calculated_price_hotdeal;
-    // }
-    // $product_list_topsold = product_list_home('topsold');
-    // foreach ($product_list_topsold as $key => $item_topsold) {
-    //     $size_list_topsold = product_by_size($item_topsold['id']);
-    //     $first_size_item_topsold = reset($size_list_topsold);
-    //     $calculated_price_topsold = $item_topsold['promotion'] > 0 ? $first_size_item_topsold['temp_price'] - ($first_size_item_topsold['temp_price'] * $item_topsold['promotion'] / 100) : $first_size_item_topsold['temp_price'];
-    //     $product_list_topsold[$key]['calculated_price'] = $calculated_price_topsold;
-    // }
-
+    $product_list_hotdeal = product_list_home('hotdeal');
+    foreach ($product_list_hotdeal as $key => $item_hotdeal) {
+        $size_list = product_by_size($item_hotdeal['id'])[0];
+        $product_list_hotdeal[$key]['size_list'] = $size_list;
+        if ($item_hotdeal['promotion'] > 0) {
+            $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_hotdeal['promotion'] / 100);
+            $product_list_hotdeal[$key]['promotion_price'] = $promotion_price;
+            $product_list_hotdeal[$key]['old_price'] =  $size_list['temp_price'];
+        } else {
+            $product_list_hotdeal[$key]['old_price'] =  $size_list['temp_price'];
+            $product_list_hotdeal[$key]['promotion_price'] = $promotion_price;
+        }
+    }
+    $product_list_topsold = product_list_home('topsold');
+    foreach ($product_list_topsold as $key => $item_topsold) {
+        $size_list = product_by_size($item_topsold['id'])[0];
+        $product_list_topsold[$key]['size_list'] = $size_list;
+        if ($item_topsold['promotion'] > 0) {
+            $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_topsold['promotion'] / 100);
+            $product_list_topsold[$key]['promotion_price'] = $promotion_price;
+            $product_list_topsold[$key]['old_price'] =  $size_list['temp_price'];
+        } else {
+            $product_list_topsold[$key]['old_price'] =  $size_list['temp_price'];
+            $product_list_topsold[$key]['promotion_price'] = $promotion_price;
+        }
+    }
 
 
     $list_slider = slider_all('home');

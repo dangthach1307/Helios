@@ -53,32 +53,6 @@ function product_list_home($option = null)
 function product_category($list_catid, $first, $limit, $minPrice = 0, $maxPrice = PHP_INT_MAX)
 {
     $strin = implode(',', $list_catid);
-    // $orderBy = '';
-
-    // switch ($sort) {
-    //     case 'name_asc':
-    //         $orderBy = 'ORDER BY p.name ASC';
-    //         break;
-    //     case 'name_desc':
-    //         $orderBy = 'ORDER BY p.name DESC';
-    //         break;
-    //     case 'price_asc':
-    //         $orderBy = 'ORDER BY p.price ASC';
-    //         break;
-    //     case 'price_desc':
-    //         $orderBy = 'ORDER BY p.price DESC';
-    //         break;
-    //     case 'newest':
-    //         $orderBy = 'ORDER BY p.id DESC';
-    //         break;
-    //     case 'oldest':
-    //         $orderBy = 'ORDER BY p.id ASC';
-    //         break;
-    //     default:
-    //         $orderBy = 'ORDER BY p.id DESC';
-    //         break;
-    // }
-
     $sql = "SELECT p.*, i.img_id, i.product_id, i.img
         FROM db_product p
         INNER JOIN (
@@ -114,32 +88,6 @@ function buildPriceFiltersQuery()
 //Hàm Show danh sách sản phẩm có điều kiện ở trang tất cả sản phẩm
 function product_site_all($first, $limit, $minPrice = 0, $maxPrice = PHP_INT_MAX)
 {
-    // $orderBy = '';
-
-    // switch ($sort) {
-    //     case 'name_asc':
-    //         $orderBy = 'ORDER BY p.name ASC';
-    //         break;
-    //     case 'name_desc':
-    //         $orderBy = 'ORDER BY p.name DESC';
-    //         break;
-    //     case 'price_asc':
-    //         $orderBy = 'ORDER BY p.price ASC';
-    //         break;
-    //     case 'price_desc':
-    //         $orderBy = 'ORDER BY p.price DESC';
-    //         break;
-    //     case 'newest':
-    //         $orderBy = 'ORDER BY p.id DESC';
-    //         break;
-    //     case 'oldest':
-    //         $orderBy = 'ORDER BY p.id ASC';
-    //         break;
-    //     default:
-    //         $orderBy = 'ORDER BY p.id DESC';
-    //         break;
-    // }
-
     $sql = "SELECT p.*, i.img_id, i.product_id, i.img
         FROM db_product p
         INNER JOIN (
