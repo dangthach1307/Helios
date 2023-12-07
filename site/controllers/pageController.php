@@ -204,6 +204,7 @@ if (isset($act)) {
             $slug = $_REQUEST['slug'];
             $row = product_rowslug($slug);
             $list_size = product_by_size($row['id']);
+            $material_name = get_material_name($row['material_id']);
             $list_comment = product_list_comment($row['id']);
             product_view_increase($slug);
 

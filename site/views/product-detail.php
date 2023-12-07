@@ -58,8 +58,7 @@
                                 </h1>
                             </div>
                             <div class="product-sku">
-                                Mã:
-                                <?= $row['SKU']; ?>
+                                Mã: <?= $row['SKU']; ?>
                             </div>
                             <div class="price-block">
                                 <div class="price-box">
@@ -94,9 +93,16 @@
                                             <span>Hết hàng</span>
                                         </p>
                                     <?php endif; ?>
+                                    <div class="product-shop form-group" style="display:flex">
+                                        <h4 class="mt-3">CHẤT LIỆU: </h4>
+                                        <!-- Thay thế class bằng id -->
+                                        <label class="text-center" id="material" for="material">
+                                            <span class="form-control  text-xl" style="border:none;padding-left:20px;font-size:large;padding-top:7px"><?= $material_name ?></span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="short-description">
+                            <div class="short-description" style="margin-top:-30px">
                                 <h2>Mô tả sản phẩm: </h2>
                                 <?= $row['smdetail'] ?>
                             </div>
