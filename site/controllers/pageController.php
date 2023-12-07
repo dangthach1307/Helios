@@ -20,7 +20,6 @@ if (isset($act)) {
             if (!empty($sp_search) && isset($sp_search[0])) {
                 $list_size = product_by_size($sp_search[0]['id']);
                 $total = count($sp_search);
-
                 // Phân trang nếu cần
                 $page = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
                 $limit = 6;
