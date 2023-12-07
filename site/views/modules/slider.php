@@ -48,8 +48,8 @@
                     </a>
                     <div class="text-des-container">
                         <div class="text-des">
-                            <p>Bộ sưu tập</p>
-                            <h2>Nhẫn độc đáo</h2>
+                            <p><?= isset($banner['info1']) ? $banner['info1'] : '' ?></p>
+                            <h2><?= isset($banner['info2']) ? $banner['info2'] : '' ?></h2>
                         </div>
                     </div>
                 </div>
