@@ -20,9 +20,9 @@
                   <?php foreach ($footer_menu as $footer) : ?>
                       <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
                           <h4><a href="<?= $footer['link'] ?>"><?= $footer['name'] ?></a></h4>
-                          <?php if (count($parent['submenu']) != 0) : ?>
+                          <?php if (count($footer['submenu']) != 0) : ?>
                               <ul class="links">
-                                  <?php foreach ($parent['submenu'] as $menu1) : ?>
+                                  <?php foreach ($footer['submenu'] as $menu1) : ?>
                                       <li><a href="<?= $menu1['link'] ?>"><?= $menu1['name'] ?></a></li>
                                       <!-- <li><a href="#">Mua hàng trả góp</a></li>
                                       <li><a href="#">Hướng dẫn mua hàng và thanh toán</a></li>

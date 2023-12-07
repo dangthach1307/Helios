@@ -40,7 +40,7 @@ if (isset($act)) {
                         $row = topic_rowid($id);
                         $name = $row['name'];
                         $type = 'topic';
-                        $link = 'index.php?option=page&act=topic&post-category=' . $row['slug'];
+                        $link = 'index.php?option=page&act=post-category&cat=' . $row['slug'];
                         $table_id = $row['id'];
                         $parent_id = 0;
                         $orders = 0;
@@ -62,7 +62,7 @@ if (isset($act)) {
                         $row = singlepage_rowid($id);
                         $name = $row['title'];
                         $type = 'singlepage';
-                        $link = 'index.php?option=page&act=post&slug=' . $row['slug'];
+                        $link = 'index.php?option=page&act=post-detail&slug=' . $row['slug'];
                         $tableid = $row['id'];
                         $parent_id = 0;
                         $orders = 0;

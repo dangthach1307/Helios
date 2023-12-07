@@ -11,7 +11,6 @@ if (isset($act)) {
             if (isset($_POST['THEM'])) {
                 $slug = str_slug($title);
                 if (singlepage_slug_exists($slug) == FALSE) {
-                    $topic_id = 1; //id mặc định cho các bài viết có type là trang đơn.
                     $type = 'singlepage';
                     if (!empty($_FILES['img']['name'])) {
                         // Kiểm tra nếu file không rỗng

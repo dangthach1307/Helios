@@ -22,10 +22,15 @@ function load_menu($position, $limit = null)
 }
 
 //mega menu
-function menu_list_parentid($parentid)
+function menu_list_parentid($parentid, $position = 'megamenu')
 {
-    $sql = "SELECT * FROM db_menu WHERE parent_id=? AND status=1 AND position='megamenu' ORDER BY orders";
-    return pdo_query_all($sql, $parentid);
+    if ($position == 'megamenu') {
+        $sql = "SELECT * FROM db_menu WHERE parent_id=? AND status=1 AND position=? ORDER BY orders";
+        return pdo_query_all($sql, $parentid, $position);
+    } else if ($position == 'footermenu') {
+        $sql = "SELECT * FROM db_menu WHERE parent_id=? AND status=1 AND position=? ORDER BY orders";
+        return pdo_query_all($sql, $parentid, $position);
+    }
 }
 
 //footer menu
