@@ -280,6 +280,7 @@ if (isset($act)) {
             break;
         case 'post-category':
             $cat = $_REQUEST['cat'];
+            $topic = topic_rowslug($cat);
             $limit = 3; // Số lượng bài viết trên mỗi trang
             $currentPage = isset($_GET['pages']) ? intval($_GET['pages']) : 1;
             $first = ($currentPage - 1) * $limit;
