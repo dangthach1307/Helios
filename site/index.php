@@ -39,7 +39,7 @@ foreach ($parent_menu as $key => $parent) {
 
 
 
-$footer_menu = load_menu('footermenu');
+$footer_menu = load_menu('footermenu',2);
 foreach ($footer_menu as $key => $footer) {
     $list_footer1 = menu_list_parentid($footer['id']);
     $footer_menu[$key]['submenu'] = $list_footer1;

@@ -10,10 +10,15 @@ function load_config()
 
 //Lấy ra menu
 //Menu ở header
-function load_menu($position)
+function load_menu($position, $limit = null)
 {
-    $sql = "SELECT * FROM db_menu WHERE position=? AND status =1";
-    return pdo_query_all($sql, $position);
+    if ($limit) {
+        $sql = "SELECT * FROM db_menu WHERE position=? AND parent_id=0 AND status =1 LIMIT $limit";
+        return pdo_query_all($sql, $position);
+    } else {
+        $sql = "SELECT * FROM db_menu WHERE position=? AND parent_id=0 AND status =1";
+        return pdo_query_all($sql, $position);
+    }
 }
 
 //mega menu
