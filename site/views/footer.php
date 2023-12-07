@@ -32,17 +32,6 @@
                               </ul>
                           <?php endif; ?>
                       </div>
-                      <!-- <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
-                      <h4>Chính sách</h4>
-                      <ul class="links">
-                          <li><a href="#">Chính sách hoàn tiền</a></li>
-                          <li><a href="#">Chính sách giao hàng</a></li>
-                          <li><a href="#">Chính sách bảo hành thu đổi</a></li>
-                          <li><a href="#">Chính sách khách hàng thân thiết</a></li>
-                          <li><a href="#">Chính sách bảo mật thông tin khách hàng</a></li>
-                          <li><a href="#">Chính sách xử lý dữ liệu cá nhân</a></li>
-                      </ul>
-                  </div> -->
                   <?php endforeach; ?>
                   <div class="col-xs-12 col-lg-3 col-md-4 col-sm-6">
                       <div class="social">

@@ -368,6 +368,7 @@ if (isset($act)) {
             $list_slider = slider_all('home');
             $list_banner_slider = banner_all('slider');
             $list_blog = post_list_home();
+            $list_brand = brand_list();
             require_once 'views/home.php';
             break;
     }
@@ -429,5 +430,6 @@ if (isset($act)) {
     $list_slider = slider_all('home');
     $list_banner_slider = banner_all('slider');
     $list_blog = post_list_home();
+    $list_brand = brand_list();
     require_once 'views/home.php';
 }
