@@ -17,17 +17,22 @@
                           <div class="email-footer"><i class="fa fa-envelope"></i> <a href="mailto:support@example.com"><?= $config['email'] ?></a> </div>
                       </div>
                   </div>
-                  <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
-                      <h4>Dịch vụ khách hàng</h4>
-                      <ul class="links">
-                          <li><a href="#">Hướng dẫn đo size trang sức</a></li>
-                          <li><a href="#">Mua hàng trả góp</a></li>
-                          <li><a href="#">Hướng dẫn mua hàng và thanh toán</a></li>
-                          <li><a href="#">Cẩm nang sử dụng trang sức</a></li>
-                          <li><a href="">Câu hỏi thường gặp</a></li>
-                      </ul>
-                  </div>
-                  <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
+                  <?php foreach ($footer_menu as $footer) : ?>
+                      <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
+                          <h4><a href="<?= $footer['link'] ?>"><?= $footer['name'] ?></a></h4>
+                          <?php if (count($parent['submenu']) != 0) : ?>
+                              <ul class="links">
+                                  <?php foreach ($parent['submenu'] as $menu1) : ?>
+                                      <li><a href="<?= $menu1['link'] ?>"><?= $menu1['name'] ?></a></li>
+                                      <!-- <li><a href="#">Mua hàng trả góp</a></li>
+                                      <li><a href="#">Hướng dẫn mua hàng và thanh toán</a></li>
+                                      <li><a href="#">Cẩm nang sử dụng trang sức</a></li>
+                                      <li><a href="">Câu hỏi thường gặp</a></li> -->
+                                  <?php endforeach; ?>
+                              </ul>
+                          <?php endif; ?>
+                      </div>
+                      <!-- <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
                       <h4>Chính sách</h4>
                       <ul class="links">
                           <li><a href="#">Chính sách hoàn tiền</a></li>
@@ -37,7 +42,8 @@
                           <li><a href="#">Chính sách bảo mật thông tin khách hàng</a></li>
                           <li><a href="#">Chính sách xử lý dữ liệu cá nhân</a></li>
                       </ul>
-                  </div>
+                  </div> -->
+                  <?php endforeach; ?>
                   <div class="col-xs-12 col-lg-3 col-md-4 col-sm-6">
                       <div class="social">
                           <h4>Follow Us</h4>

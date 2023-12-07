@@ -60,7 +60,7 @@ if (isset($act)) {
                     $list_pageid = $_POST['itempage'];
                     foreach ($list_pageid as $id) {
                         $row = singlepage_rowid($id);
-                        $name = $row['name'];
+                        $name = $row['title'];
                         $type = 'singlepage';
                         $link = 'index.php?option=page&act=post&slug=' . $row['slug'];
                         $tableid = $row['id'];
