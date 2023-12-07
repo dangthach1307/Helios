@@ -198,7 +198,7 @@ function product_rowslug($slug)
 
 function product_by_size($product_id)
 {
-    $sql = "SELECT *, db_size.name_size
+    $sql = "SELECT db_product_size.*, db_size.name_size
             FROM db_product_size
             JOIN db_size ON db_size.id = db_product_size.size_id
             WHERE db_product_size.product_id = ?";

@@ -7,7 +7,7 @@ require_once './models/contactModel.php';
 require_once './models/blogModel.php';
 require_once './models/slider_banner_Model.php';
 require_once './models/configModel.php';
-
+$promotion_price=0;
 if (isset($act)) {
     switch ($act) {
         case 'search':
@@ -273,14 +273,57 @@ if (isset($act)) {
             break;
         case 'home':
             $product_list_newest = product_list_home('newest');
+            foreach ($product_list_newest as $key => $item_newest) {
+                $size_list = product_by_size($item_newest['id'])[0];
+                $product_list_newest[$key]['size_list'] = $size_list;
+                if ($item_newest['promotion'] > 0) {
+                    $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_newest['promotion'] / 100);
+                    $product_list_newest[$key]['promotion_price'] = $promotion_price;
+                    $product_list_newest[$key]['old_price'] =  $size_list['temp_price'];
+                } else {
+                    $product_list_newest[$key]['old_price'] =  $size_list['temp_price'];
+                    $product_list_newest[$key]['promotion_price'] = $promotion_price;
+                }
+            }
             $product_list_topview = product_list_home('topview');
+            foreach ($product_list_topview as $key => $item_topview) {
+                $size_list = product_by_size($item_topview['id'])[0];
+                $product_list_topview[$key]['size_list'] = $size_list;
+                if ($item_topview['promotion'] > 0) {
+                    $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_topview['promotion'] / 100);
+                    $product_list_topview[$key]['promotion_price'] = $promotion_price;
+                    $product_list_topview[$key]['old_price'] =  $size_list['temp_price'];
+                } else {
+                    $product_list_topview[$key]['old_price'] =  $size_list['temp_price'];
+                    $product_list_topview[$key]['promotion_price'] = $promotion_price;
+                }
+            }
             $product_list_hotdeal = product_list_home('hotdeal');
+            foreach ($product_list_hotdeal as $key => $item_hotdeal) {
+                $size_list = product_by_size($item_hotdeal['id'])[0];
+                $product_list_hotdeal[$key]['size_list'] = $size_list;
+                if ($item_hotdeal['promotion'] > 0) {
+                    $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_hotdeal['promotion'] / 100);
+                    $product_list_hotdeal[$key]['promotion_price'] = $promotion_price;
+                    $product_list_hotdeal[$key]['old_price'] =  $size_list['temp_price'];
+                } else {
+                    $product_list_hotdeal[$key]['old_price'] =  $size_list['temp_price'];
+                    $product_list_hotdeal[$key]['promotion_price'] = $promotion_price;
+                }
+            }
             $product_list_topsold = product_list_home('topsold');
-            $size_list_newest = product_by_size($product_list_newest[0]['id']);
-            $size_list_topview = product_by_size($product_list_topview[0]['id']);
-            $size_list_hotdeal = product_by_size($product_list_hotdeal[0]['id']);
-            $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
-
+            foreach ($product_list_topsold as $key => $item_topsold) {
+                $size_list = product_by_size($item_topsold['id'])[0];
+                $product_list_topsold[$key]['size_list'] = $size_list;
+                if ($item_topsold['promotion'] > 0) {
+                    $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_topsold['promotion'] / 100);
+                    $product_list_topsold[$key]['promotion_price'] = $promotion_price;
+                    $product_list_topsold[$key]['old_price'] =  $size_list['temp_price'];
+                } else {
+                    $product_list_topsold[$key]['old_price'] =  $size_list['temp_price'];
+                    $product_list_topsold[$key]['promotion_price'] = $promotion_price;
+                }
+            }
             $list_slider = slider_all('home');
             $list_banner_slider = banner_all('slider');
             $list_blog = post_list_home();
@@ -289,13 +332,45 @@ if (isset($act)) {
     }
 } else {
     $product_list_newest = product_list_home('newest');
+    foreach ($product_list_newest as $key => $item_newest) {
+        $size_list = product_by_size($item_newest['id'])[0];
+        $product_list_newest[$key]['size_list'] = $size_list;
+        if ($item_newest['promotion'] > 0) {
+            $calculated_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_newest['promotion'] / 100);
+            $product_list_newest[$key]['calculated_price'] = $calculated_price;
+        } else {
+            $calculated_price = $size_list['temp_price'];
+            $product_list_newest[$key]['calculated_price'] = $calculated_price;
+        }
+    }
     $product_list_topview = product_list_home('topview');
-    $product_list_hotdeal = product_list_home('hotdeal');
-    $product_list_topsold = product_list_home('topsold');
-    $size_list_newest = product_by_size($product_list_newest[0]['id']);
-    $size_list_topview = product_by_size($product_list_topview[0]['id']);
-    $size_list_hotdeal = product_by_size($product_list_hotdeal[0]['id']);
-    $size_list_topsold = product_by_size($product_list_topsold[0]['id']);
+    foreach ($product_list_topview as $key => $item_topview) {
+        $size_list = product_by_size($item_topview['id'])[0];
+        $product_list_topview[$key]['size_list'] = $size_list;
+        if ($item_topview['promotion'] > 0) {
+            $calculated_price = $size_list['temp_price'] - ($size_list['temp_price'] * $item_topview['promotion'] / 100);
+            $product_list_topview[$key]['calculated_price'] = $calculated_price;
+        } else {
+            $calculated_price = $size_list['temp_price'];
+            $product_list_topview[$key]['calculated_price'] = $calculated_price;
+        }
+    }
+
+    // $product_list_hotdeal = product_list_home('hotdeal');
+    // foreach ($product_list_hotdeal as $key => $item_hotdeal) {
+    //     $size_list_hotdeal = product_by_size($item_hotdeal['id']);
+    //     $first_size_item_hotdeal = reset($size_list_hotdeal);
+    //     $calculated_price_hotdeal = $item_hotdeal['promotion'] > 0 ? $first_size_item_hotdeal['temp_price'] - ($first_size_item_hotdeal['temp_price'] * $item_hotdeal['promotion'] / 100) : $first_size_item_hotdeal['temp_price'];
+    //     $product_list_hotdeal[$key]['calculated_price'] = $calculated_price_hotdeal;
+    // }
+    // $product_list_topsold = product_list_home('topsold');
+    // foreach ($product_list_topsold as $key => $item_topsold) {
+    //     $size_list_topsold = product_by_size($item_topsold['id']);
+    //     $first_size_item_topsold = reset($size_list_topsold);
+    //     $calculated_price_topsold = $item_topsold['promotion'] > 0 ? $first_size_item_topsold['temp_price'] - ($first_size_item_topsold['temp_price'] * $item_topsold['promotion'] / 100) : $first_size_item_topsold['temp_price'];
+    //     $product_list_topsold[$key]['calculated_price'] = $calculated_price_topsold;
+    // }
+
 
 
     $list_slider = slider_all('home');

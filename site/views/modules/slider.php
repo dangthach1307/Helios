@@ -11,7 +11,7 @@
                                         <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-x='0' data-y='165' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;white-space:nowrap;'><span><?= $row['info1'] ?></span></div>
                                     <?php endif; ?>
                                     <?php if (isset($row['info2'])) : ?>
-                                        <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='0' data-y='220' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;white-space:nowrap;'><?= $row['info2'] ?>!</div>
+                                        <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-x='0' data-y='220' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;white-space:nowrap;'><?= $row['info2'] ?></div>
                                     <?php endif; ?>
                                     <?php if (isset($row['info3'])) : ?>
                                         <div class='tp-caption Title sft  tp-resizeme ' data-x='0' data-y='300' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;white-space:nowrap;'><?= $row['info3'] ?></div>

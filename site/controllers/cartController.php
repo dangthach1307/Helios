@@ -1,5 +1,12 @@
 <?php
 extract($_REQUEST);
+require_once './models/brandModel.php';
+require_once './models/categoryModel.php';
+require_once './models/productModel.php';
+require_once './models/contactModel.php';
+require_once './models/blogModel.php';
+require_once './models/slider_banner_Model.php';
+require_once './models/configModel.php';
 if (isset($act)) {
     switch ($act) {
         case 'add-cart':
