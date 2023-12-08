@@ -5,6 +5,7 @@ require_once './models/categoryModel.php';
 require_once './models/productModel.php';
 require_once './models/contactModel.php';
 require_once './models/blogModel.php';
+require_once './models/customerModel.php';
 require_once './models/slider_banner_Model.php';
 require_once './models/configModel.php';
 if (isset($act)) {
@@ -130,7 +131,7 @@ if (isset($act)) {
 
 
                         // Đặt flash message và chuyển hướng về trang chủ
-                        set_flash('message', ['type' => 'success', 'msg' => 'Đặt hàng thành công!']);
+                        set_flash('message', ['type' => 'success', 'title' => 'Thao tác thành công', 'msg' => 'Đặt hàng thành công!']);
                         unset($_SESSION['cart']);
                         header('location: ?option=cart&act=cart-checkout');
                         exit();
@@ -168,7 +169,7 @@ if (isset($act)) {
                     cart_insert_orders($user_id, $delivery_fullname, $delivery_address, $delivery_phone, $delivery_email, $created_at, $exported_at, $total_price, $payment_method, $note, $list);
 
                     // Đặt flash message và chuyển hướng về trang chủ
-                    set_flash('message', ['type' => 'success', 'msg' => 'Đặt hàng thành công!']);
+                    set_flash('message', ['type' => 'success', 'title' => 'Thao tác thành công', 'msg' => 'Đặt hàng thành công!']);
                     unset($_SESSION['cart']);
                     header('location: ?option=cart&act=cart-checkout');
                     exit();

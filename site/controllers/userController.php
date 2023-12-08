@@ -1,5 +1,7 @@
 <?php
 extract($_REQUEST);
+require_once './models/customerModel.php';
+require_once './models/orderModel.php';
 $email_error = $fullname_error = $phone_error = $gender_error = $address_error = $password_error = '';
 if (isset($act)) {
     switch ($act) {
@@ -132,8 +134,8 @@ if (isset($act)) {
             break;
         case 'account':
             //Trang tài khoản
-            $user_id = $_SESSION['user']['id'];
-            $rank = get_rank_user($user_id);
+            $rank_id = $_SESSION['user']['id'];
+            $rank = get_rank_user($rank_id);
             $rank_img = get_rank_img($rank['id']);
             require_once 'views/account.php';
             break;

@@ -2,7 +2,7 @@
     <div class="main container">
         <div class="account-login">
             <div class="page-title">
-                <h2>My Account</h2>
+                <h2>Quản lý tài khoản</h2>
             </div>
             <div class="my-account-page">
                 <div class="row">
