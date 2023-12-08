@@ -314,6 +314,17 @@
                                                 <a class="product-image" title="<?= $item['name'] ?>" href="?option=page&act=product-detail&slug=<?= $item['slug'] ?>">
                                                     <img alt="<?= $item['name'] ?>" src="../public/images/product/<?= $item['image'] ?>">
                                                 </a>
+                                                <div class="mask-shop-white"></div>
+                                                <a href="index.php?option=page&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
+                                                    <div class="mask-left-shop">
+                                                        <i class="fa fa-heart"></i>
+                                                    </div>
+                                                </a>
+                                                <a href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Thêm giỏ hàng">
+                                                    <div class="mask-right-shop">
+                                                        <i class="fa fa-shopping-cart"></i>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
                                         <div class="item-info">
@@ -346,19 +357,6 @@
                                                                     </span>
                                                                 </span>
                                                             <?php endif; ?>
-                                                        </div>
-                                                    </div>
-                                                    <div class="actions">
-                                                        <div class="add_cart">
-                                                            <form action="?option=cart&act=add-cart&pid=<?= $item['id'] ?>" method="post" enctype="multipart/form-data" class="product_addtocart_form">
-                                                                <input type="hidden" name="return_url" value="<?= htmlspecialchars($_SERVER['REQUEST_URI']); ?>">
-                                                                <button class="button btn-cart" type="submit">
-                                                                    <span>
-                                                                        <i class="fa fa-shopping-cart"></i>
-                                                                        Thêm giỏ hàng
-                                                                    </span>
-                                                                </button>
-                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>

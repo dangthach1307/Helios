@@ -68,7 +68,7 @@
                                                     </a>
 
                                                     <div class="mask-shop-white"></div>
-                                                    <a href="index.php?option=cart&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
+                                                    <a href="index.php?option=page&act=add-wishlist&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Yêu thích">
                                                         <div class="mask-left-shop">
                                                             <i class="fa fa-heart"></i>
                                                         </div>
