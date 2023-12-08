@@ -22,31 +22,33 @@
                                         <?php
                                         $firstImage = !empty($row['product']['more_images']) ? $row['product']['more_images'][0] : '';
                                         ?>
+
                                         <tr class="cart_item">
                                             <td class="item-img">
                                                 <a href="index.php?option=page&act=product-detail&slug=<?= $row['product']['slug'] ?>">
                                                     <img alt="Product title is here" src="../public/images/product/<?= $firstImage ?>">
                                                 </a>
                                             </td>
-                                            <td class="item-title"><a href="#"><?= $row['product']['name'] ?> </a></td>
+                                            <td class="item-title">
+                                                <a href="index.php?option=page&act=product-detail&slug=<?= $row['product']['slug'] ?>"><?= $row['product']['name'] ?> </a>
+                                            </td>
                                             <td class="item-price">
-                                                <?php
-                                                $firstSize = reset($row['size_list']); // Lấy size đầu tiên từ danh sách
-                                                $calculated_price = $row['product']['promotion'] > 0 ?
-                                                    $firstSize['temp_price'] - ($firstSize['temp_price'] * $row['product']['promotion'] / 100) :
-                                                    $firstSize['temp_price'];
-                                                ?>
-                                                <p class="regular-price">
-                                                    <span class="price" id="displayedPrice">
-                                                        <?= number_format($calculated_price) ?> VNĐ
-                                                    </span>
-                                                </p>
                                                 <?php if ($row['product']['promotion'] > 0) : ?>
-                                                    <p class="old-price">
+                                                    <span class="regular-price" id="displayedPrice">
                                                         <span class="price">
-                                                            <span id="originalPrice"><?= number_format($firstSize['temp_price']) ?></span> VNĐ
+                                                            <?= number_format($row['promotion_price']) ?> Vnđ
                                                         </span>
+                                                    </span>
+                                                    <p class="old-price">
+                                                        <span class="price-label">Giá gốc:</span>
+                                                        <span class="price"><?= number_format($row['old_price']) ?> Vnđ </span>
                                                     </p>
+                                                <?php else : ?>
+                                                    <span class="regular-price">
+                                                        <span class="price">
+                                                            <?= number_format($row['old_price']) ?> Vnđ
+                                                        </span>
+                                                    </span>
                                                 <?php endif; ?>
                                             </td>
 
@@ -54,7 +56,7 @@
                                                 <?= $row['product']['quantity'] ?>
                                             </td>
                                             <td class="total-price">
-                                                <a class="btn-def btn2" href="index.php?option=cart&act=add-cart&pid=<?= $item['id'] ?>" data-toggle="tooltip" title="Thêm giỏ hàng">
+                                                <a class="btn-def btn2" href="index.php?option=cart&act=add-cart&pid=<?= $row['product']['id'] ?>" data-toggle="tooltip" title="Thêm giỏ hàng">
                                                     <div class="mask-right-shop">
                                                         <i class="fa fa-shopping-cart"> Thêm giỏ hàng</i>
                                                     </div>
@@ -67,8 +69,8 @@
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
-                                </tbody>
 
+                                </tbody>
                             </table>
                             <div class="cart-page-area">
                                 <div class="col-xs-12 text-center">

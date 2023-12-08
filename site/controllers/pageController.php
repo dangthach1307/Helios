@@ -180,10 +180,23 @@ if (isset($act)) {
             $totalItems = count_wishlist_items($_SESSION['user']['id']);
 
             $totalPages = ceil($totalItems / $itemsPerPage);
-            foreach ($list_wishlist as &$item) {
-                $item['product'] = product_rowid($item['product_id']);
-                $item['size_list'] = product_by_size($item['product_id']);
+            foreach ($list_wishlist as $key => $item) {
+                $product = product_rowid($item['product_id']);
+                $size_list = product_by_size($item['product_id'])[0];
+
+                $list_wishlist[$key]['product'] = $product;
+                $list_wishlist[$key]['size_list'] = $size_list;
+
+                if ($product['promotion'] > 0) {
+                    $promotion_price = $size_list['temp_price'] - ($size_list['temp_price'] * $product['promotion'] / 100);
+                    $list_wishlist[$key]['promotion_price'] = $promotion_price;
+                    $list_wishlist[$key]['old_price'] = $size_list['temp_price'];
+                } else {
+                    $list_wishlist[$key]['old_price'] = $size_list['temp_price'];
+                    $list_wishlist[$key]['promotion_price'] = $promotion_price;
+                }
             }
+
             require_once 'views/wishlist.php';
             break;
         case 'del-wishlist':
